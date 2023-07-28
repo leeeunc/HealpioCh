@@ -11,6 +11,13 @@ test/market/.settings
 /healpio/target/m2e-wtp/web-resources/META-INF/maven/com.fire/project/pom.properties
 /healpio/target/m2e-wtp/web-resources/META-INF/maven/com.fire/project/
 
+lecture
+target
+pom.properties
+.classpath
+MANIFEST.MF
+
+
 # Compiled class file
 *.class
 # Log file
