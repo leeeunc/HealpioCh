@@ -1,3 +1,13 @@
+# ignore properties file
+test/core/target
+test/market/target
+test/target/
+
+.metadata
+test/.settings
+test/core/.settings
+test/market/.settings
+
 # Compiled class file
 *.class
 # Log file
