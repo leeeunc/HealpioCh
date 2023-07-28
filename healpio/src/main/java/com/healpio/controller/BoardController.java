@@ -25,6 +25,6 @@ public class BoardController {
 		boardService.exerciseList(model);
 		boardService.provinceList(model);
 		boardService.locationList(model);
-		
+		log.info("git Å×½ºÆ®!=================================");
 	}
 }
