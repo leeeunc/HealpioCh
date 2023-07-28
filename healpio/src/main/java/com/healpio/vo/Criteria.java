@@ -5,11 +5,11 @@ import lombok.Data;
 @Data
 public class Criteria {
 
-	private String searchField; // å¯ƒï¿½ï¿½ê¹‹è­°ê³Œêµ”
-	private String searchWord;	// å¯ƒï¿½ï¿½ê¹‹ï¿½ë¼±
+	private String searchField; // °Ë»öÁ¶°Ç
+	private String searchWord;	// °Ë»ö¾î
 	
-	private int pageNo = 1;		// ï¿½ìŠ‚ï§£ï¿½ ï¿½ëŸ¹ï¿½ì” ï§ï¿½ è¸°ëŠìƒ‡
-	private int amount = 10; 	// ï¿½ë¸³ï¿½ëŸ¹ï¿½ì” ï§ï¿½ï¿½ë–¦ å¯ƒëš¯ë–†è‡¾ì‡±ë‹”
+	private int pageNo = 1;		// ¿äÃ» ÆäÀÌÁö ¹øÈ£
+	private int amount = 10; 	// ÇÑÆäÀÌÁö´ç °Ô½Ã¹°¼ö
 	
 	private int startNo = 1;
 	private int endNo = 10;
@@ -24,6 +24,7 @@ public class Criteria {
 	}
 	
 }
+
 
 
 

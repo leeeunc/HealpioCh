@@ -6,108 +6,143 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-   <style>
-        body {
-        margin: 0;
-        padding: 0;
-        height: 100vh; /* 뷰포트 높이의 100%를 사용하여 화면을 꽉 채우도록 설정합니다. */
-        display: flex;
-        justify-content: center; /* 가로 방향으로 내용을 가운데 정렬합니다. */
-        align-items: center; /* 세로 방향으로 내용을 가운데 정렬합니다. */
-        }
+
+	<link href="/resources/css/list.css" rel="stylesheet"> 
+	 <script src="https://zelkun.tistory.com/attachment/cfile8.uf@99BB7A3D5D45C065343307.js"></script>
+	 
+		<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			
+	    	console.log(hangjungdong.sido);
+	    	  // sido option 추가
+	    	  hangjungdong.sido.forEach(function (code) {
+	    	    document.querySelector("#sido").appendChild(fn_option(code.codeNm, code.codeNm));
+	    	  });
+
+	    	  // sido 변경시 시군구 option 추가
+	    	  document.querySelector("#sido").addEventListener("change", function () {
+	    	    var sigugun = document.querySelector("#sigugun");
+	    	    sigugun.style.display = "block";
+	    	    sigugun.innerHTML = "";
+	    	    sigugun.appendChild(fn_option("", "선택"));
+
+	    	    hangjungdong.sigugun.forEach(function (code) {
+	    	      if (document.querySelector("#sido").value == code.sido) {
+	    	        sigugun.appendChild(fn_option(code.sigugun, code.codeNm));
+	    	      }
+	    	    });
+
+	    	    if (document.querySelector("#sido").value == "36") {
+	    	      sigugun.style.display = "none";
+	    	      sigugun.querySelector("option:nth-child(2)").selected = true;
+	    	      sigugun.dispatchEvent(new Event("change"));
+	    	    }
+	    	  });
+
+	    	  // 시군구 변경시 행정동 옵션추가
+	    	  document.querySelector("#sigugun").addEventListener("change", function () {
+	    	    var dong = document.querySelector("#dong");
+	    	    dong.innerHTML = "";
+
+	    	    hangjungdong.dong.forEach(function (code) {
+	    	      if (
+	    	        document.querySelector("#sido").value == code.sido &&
+	    	        document.querySelector("#sigugun").value == code.sigugun
+	    	      ) {
+	    	        dong.appendChild(fn_option(code.dong, code.codeNm));
+	    	      }
+	    	    });
+
+	    	    dong.insertBefore(fn_option("", "선택"), dong.firstChild);
+	    	    dong.querySelector("option[value='']").selected = true;
+	    	  });
+
+	    	  document.querySelector("#dong").addEventListener("change", function () {
+	    	    var sido = document.querySelector("#sido").value;
+	    	    var sigugun = document.querySelector("#sigugun").value;
+	    	    var dong = document.querySelector("#dong").value;
+	    	    var dongCode = sido + sigugun + dong + "00";
+	    	  });
+	    	  
+	    	  
+	    	    hangjungdong.sido.forEach(function (code) {
+	    	        document.querySelector("#sido").appendChild(fn_option(code.sido, code.codeNm)); // 여기서 code.codeNm 대신 code.sido를 사용합니다.
+	    	      });
+	    	  
+	    	});
+
+		
+		
+		
+		
+	    	  function fn_option(code, name) {
+	    		    var option = document.createElement("option");
+	    		    option.value = code;
+	    		    option.text = name; // 여기서 name으로 변경합니다.
+	    		    return option;
+	    		  }
+	    	
+	    	
+		
+		
+		  // '운동종류' select 요소를 변경할 때 호출되는 함수
+		  function filterByExercise() {
+		    const selectedExercise = document.querySelector('select[name="sports"]').value;
+		    console.log(selectedExercise);
+		    const contentBoxes = document.querySelectorAll('.contentbox');
+		
+		    for (const box of contentBoxes) {
+		      const exerciseText = box.querySelector('.exercise-text').textContent;
+		      box.style.display = (exerciseText.includes(selectedExercise)) ? 'block' : 'none';
+		    }
+		  }
+
+		  
+		  // 시도를 선택할 경우 해당 시도만 표시되는 함수
+          function filterBylocation(){
+        	
+              const selectedLocation = document.querySelector('select[name="sido"]').value;
+			  
+              console.log(selectedLocation);
+              const contentBoxes = document.querySelectorAll('.contentbox');
+
+              for(const box of contentBoxes){
+                  const locationText = box.querySelector('.location-text').textContent;
+                  box.style.display = (locationText.includes(selectedLocation)) ? 'block' : 'none';
+              }
+
+            }
 
 
-        .pull{
-            border: 1px solid black;
-            width: 95%;
-            height: 800px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-
-        }
-
-        .image-container{
-            max-width: 90%; /* 90% 너비로 설정하여 이미지 크기를 조정합니다. */
-            height: auto;
-            margin-bottom: 10px;
-            /* 이미지들을 동일한 높이로 조정 */
-        }
-
-        .img-concert{
-            max-width: 90%; /* 90% 너비로 설정하여 이미지 크기를 조정합니다. */
-            height: auto;
-            margin-bottom: 10px;
-            flex-grow: 1; /* 이미지들이 가용 공간을 균등하게 채우도록 설정 */
-        }
-
-        .header{
-            border: 1px solid;
-            width: 100%;
-            
-        }
-
-        .imgs{
-            border: 1px solid black;
-            height: 80%;
-            width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: stretch;
-            
-		  display: grid;
-	  	  grid-template-columns: repeat(3, 1fr);
-	  	  grid-gap: 10px;	
-            
-
-              overflow: auto;
-            /* 스크롤바의 스타일을 선택적으로 지정 */
-		    scrollbar-width: thin; /* 스크롤바의 너비 (thin, auto, 등) */
-		    scrollbar-color: red green; /* 스크롤바의 색상 (트랙, 썸네일) */
-              
-            
-        }
-
-        .imgs .img-concert img {
-		    width: 200px;
-		    height: 200px;
-            object-fit: cover;
-
-        }
-        .img-concert:nth-child(3n) {
-            margin-right: 0;
-        }
-		.contentbox{
-			width: 80%
-			height : 80%
-		}
-		.btnList{
-			align: right;
-		}
-		   /* 한국어 폰트 지정 */
-	    select, option {
-	      font-family: '나눔고딕', 'Nanum Gothic', 'Helvetica', sans-serif;
-	    }
-    </style>
-
-      
+		  
+		</script>
 </head>
 <body>
-
     <div  class='pull' >
         <div class='header'>
             <h3>스포츠 플랫폼</h3>
-            <select name='sports' >
-                <option value='x'>운동종류</option>
-                	<c:forEach items="${exerciseList }" var="exvo">
-		                <option value='ko'>${exvo.exercise_name}</option>
-					</c:forEach>
-            </select>
+			<!-- <select> 요소에 onchange 이벤트를 통해 filterByExercise 함수 호출 -->
+			<select name='sports' onchange="filterByExercise()">
+			  <option value='x'>운동종류</option>
+			  <c:forEach items="${exerciseList}" var="exvo">
+			    <option value='${exvo.exercise_name}'>${exvo.exercise_name}</option>
+			  </c:forEach>
+			</select>
             
-			<jsp:include page="/WEB-INF/views/common/location.jsp"/>
+<%-- 			<jsp:include page="/WEB-INF/views/common/location.jsp" onchange="filterByLocation()"/>
+ --%>
+
+   <select id="sido" name="sido" onchange="filterBylocation()">
+      <option value="">시도 선택</option>
+    </select>
+    <select id="sigugun">
+      <option value="">시군구 선택</option>
+    </select>
+    <select id="dong">
+      <option value="">읍면동 선택</option>
+    </select>
+
+
 
             <select name='search' >
                 <option value='x'>제목</option>
@@ -124,19 +159,26 @@
 
         <div class='imgs'>
 
-                <c:forEach var="index" begin="1" end="6">
-			<div class="contentbox">					                
-                <div class="imgbox">
-                    <img class="img-concert" src="/resources/images/필라테스${index }.jpg" />
+            <c:forEach var="index" begin="1" end="6">
+				<div class="contentbox">
+					  <div class="imgbox">
+					    <img class="img-concert" src="/resources/images/필라테스${index}.jpg" />
+					  </div>
+					  
+					  <c:forEach items="${list}" var="li" varStatus="status">
+					    <c:if test="${status.index + 1 == index}">
+					      ${li.class_title}<br>
+					    </c:if>
+					  </c:forEach>
+					  
+					 ==============
+					 <br>강사 <br>
+					 ==============
+					 <div class="exercise-text">요가</div>
+					 ==============
+					 <div class="location-text">서울특별시</div>
 				</div>
-				
-					<div>
-					         제목<br>
-				    	 강사 | 요가 | 주소<br>
-				    </div>
-			    
-           </div>
-                </c:forEach>
+            </c:forEach>
  		</div>
  			
 		<button type="submit" class="btnList" onclick="">등록하기</button>
