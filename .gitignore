@@ -8,6 +8,9 @@ test/.settings
 test/core/.settings
 test/market/.settings
 
+/healpio/target/m2e-wtp/web-resources/META-INF/maven/com.fire/project/pom.properties
+/healpio/target/m2e-wtp/web-resources/META-INF/maven/com.fire/project/
+
 # Compiled class file
 *.class
 # Log file
