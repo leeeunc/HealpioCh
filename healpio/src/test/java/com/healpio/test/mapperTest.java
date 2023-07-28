@@ -9,7 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.healpio.mapper.classMapper;
-import com.healpio.vo.classVO;
+import com.healpio.vo.ClassVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -22,7 +22,7 @@ public class mapperTest {
 	
 	@Test
 	public void getList() {
-		List<classVO> list = mapper.getList();
+		List<ClassVO> list = mapper.getList();
 		log.info(list);
 	};
 	

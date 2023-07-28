@@ -182,7 +182,12 @@
 		    <version>1.16</version>
 		</dependency>
 
-
+		<!-- 파일업로드 https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.5</version>
+		</dependency>
    
 	</dependencies>
 	

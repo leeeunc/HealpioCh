@@ -3,7 +3,7 @@ package com.healpio.vo;
 import lombok.Data;
 
 @Data
-public class classVO {
+public class ClassVO {
 	private int class_no;
 	private int location_no;
 	private int member_no;

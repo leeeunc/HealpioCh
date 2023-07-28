@@ -2,8 +2,8 @@ package com.healpio.mapper;
 
 import java.util.List;
 
-import com.healpio.vo.classVO;
+import com.healpio.vo.ClassVO;
 
 public interface classMapper {
-	public List<classVO> getList();
+	public List<ClassVO> getList();
 }
