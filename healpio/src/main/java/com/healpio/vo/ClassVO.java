@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class ClassVO {
-	private int class_no;
+	private String class_no;
 	private int location_no;
-	private int member_no;
+	private String member_no;
 	private String class_title;
 	private String class_content;
 	private String class_introduce;
