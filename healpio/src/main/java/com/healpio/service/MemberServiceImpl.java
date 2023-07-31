@@ -24,10 +24,6 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Autowired
 	MemberMapper memberMapper;
-
-	@Autowired
-	BCryptPasswordEncoder encoder;
-	
 	
 	@Override
 	public MemberVO login(MemberVO paramMember) {
@@ -39,21 +35,21 @@ public class MemberServiceImpl implements MemberService{
 			// 사용자가 입력한 비밀번호가 일치하는지 확인
 			// 사용자가 입력한 비밀번호, 데이터베이스에 암호화되어 저장된 비밀번호
 			// 파라메터로 넘어온 paramMember
-			boolean res = encoder.matches(paramMember.getMember_pw(), memberVO.getMember_pw());
+		//	boolean res = encoder.matches(paramMember.getMember_pw(), memberVO.getMember_pw());
 			
 			// 비밀번호 인증이 성공하면 member객체를 반환
-			if(res) {
+			if(paramMember.getMember_pw().equals(memberVO.getMember_pw())) {
 				// 사용자 권한을 조회
 				// ※ 아래 코드는 본래 수업시간에선 암호화 처리 때문에 주석처리 했습니다. 지금은 임시로 열어두었습니다.  
-				memberVO.setRole(memberMapper.getMemberRole(memberVO.getMember_id()));
+			//	memberVO.setRole(memberMapper.getMemberRole(memberVO.getMember_id()));
 				return memberVO;
 			} 
 		}
 	
 		// ※ 아래 코드는 본래 수업시간에선 암호화 처리 때문에 주석처리 했습니다. 지금은 임시로 열어두었습니다.  
-		return memberMapper.login(memberVO);
+		//return memberMapper.login(memberVO);
 		// ※ 본래 코드는 위 코드를 주석처리하고 return null; 을 넣습니다.
-	//	return null;
+		return null;
 	}
 
 	

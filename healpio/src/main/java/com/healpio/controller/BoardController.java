@@ -20,11 +20,12 @@ public class BoardController {
 	
 	@GetMapping("list")
 	public void getList(Model model) {
-		log.info("�׽�Ʈ!=================================");
+		log.info("�׽�Ʈ!=================================");
 		boardService.getList(model);
 		boardService.exerciseList(model);
 		boardService.provinceList(model);
 		boardService.locationList(model);
-		log.info("git �׽�Ʈ!=================================");
+		log.info("git �׽�Ʈ!=================================");
+		// test tset testcxzcz
 	}
 }

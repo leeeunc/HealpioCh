@@ -45,6 +45,9 @@
 	    <property name="maxInMemorySize" value="10485756"></property>
 	</bean> 
 
+	<!-- Spring Security에서 사용할 BCryptPasswordEncoder 빈 정의 -->
+	<bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 	
 	<tx:annotation-driven />
