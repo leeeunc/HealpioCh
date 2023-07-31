@@ -7,7 +7,16 @@
 
 	<select id="getList" resultType="com.healpio.vo.ClassVO">
 	
-	select * from class
+		SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (
+						SELECT * 
+						FROM class 
+						ORDER BY class_no DESC 
+						) A
+				)
+	WHERE RN BETWEEN #{startNo} AND #{endNo}
 	
 	</select>
 
@@ -28,5 +37,13 @@
 	select * from location
 	
 	</select>
+	
+	
+	<select id="getTotalCount" resultType="int">
+		select count(*) from class
+	</select>
+	
+	
+	
 	
 </mapper>

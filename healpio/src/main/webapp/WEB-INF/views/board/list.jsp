@@ -8,117 +8,12 @@
 <title>Insert title here</title>
 
 	<link href="/resources/css/list.css" rel="stylesheet"> 
-	 <script src="https://zelkun.tistory.com/attachment/cfile8.uf@99BB7A3D5D45C065343307.js"></script>
-	 
-		<script>
-		document.addEventListener("DOMContentLoaded", function () {
-			
-	    	console.log(hangjungdong.sido);
-	    	  // sido option 추가
-	    	  hangjungdong.sido.forEach(function (code) {
-	    	    document.querySelector("#sido").appendChild(fn_option(code.codeNm, code.codeNm));
-	    	  });
-
-	    	  // sido 변경시 시군구 option 추가
-	    	  document.querySelector("#sido").addEventListener("change", function () {
-	    	    var sigugun = document.querySelector("#sigugun");
-	    	    sigugun.style.display = "block";
-	    	    sigugun.innerHTML = "";
-	    	    sigugun.appendChild(fn_option("", "선택"));
-
-	    	    hangjungdong.sigugun.forEach(function (code) {
-	    	      if (document.querySelector("#sido").value == code.sido) {
-	    	        sigugun.appendChild(fn_option(code.sigugun, code.codeNm));
-	    	      }
-	    	    });
-
-	    	    if (document.querySelector("#sido").value == "36") {
-	    	      sigugun.style.display = "none";
-	    	      sigugun.querySelector("option:nth-child(2)").selected = true;
-	    	      sigugun.dispatchEvent(new Event("change"));
-	    	    }
-	    	  });
-
-	    	  // 시군구 변경시 행정동 옵션추가
-	    	  document.querySelector("#sigugun").addEventListener("change", function () {
-	    	    var dong = document.querySelector("#dong");
-	    	    dong.innerHTML = "";
-
-	    	    hangjungdong.dong.forEach(function (code) {
-	    	      if (
-	    	        document.querySelector("#sido").value == code.sido &&
-	    	        document.querySelector("#sigugun").value == code.sigugun
-	    	      ) {
-	    	        dong.appendChild(fn_option(code.dong, code.codeNm));
-	    	      }
-	    	    });
-
-	    	    dong.insertBefore(fn_option("", "선택"), dong.firstChild);
-	    	    dong.querySelector("option[value='']").selected = true;
-	    	  });
-
-	    	  document.querySelector("#dong").addEventListener("change", function () {
-	    	    var sido = document.querySelector("#sido").value;
-	    	    var sigugun = document.querySelector("#sigugun").value;
-	    	    var dong = document.querySelector("#dong").value;
-	    	    var dongCode = sido + sigugun + dong + "00";
-	    	  });
-	    	  
-	    	  
-	    	    hangjungdong.sido.forEach(function (code) {
-	    	        document.querySelector("#sido").appendChild(fn_option(code.sido, code.codeNm)); // 여기서 code.codeNm 대신 code.sido를 사용합니다.
-	    	      });
-	    	  
-	    	});
-
-		
-		
-		
-		
-	    	  function fn_option(code, name) {
-	    		    var option = document.createElement("option");
-	    		    option.value = code;
-	    		    option.text = name; // 여기서 name으로 변경합니다.
-	    		    return option;
-	    		  }
-	    	
-	    	
-		
-		
-		  // '운동종류' select 요소를 변경할 때 호출되는 함수
-		  function filterByExercise() {
-		    const selectedExercise = document.querySelector('select[name="sports"]').value;
-		    console.log(selectedExercise);
-		    const contentBoxes = document.querySelectorAll('.contentbox');
-		
-		    for (const box of contentBoxes) {
-		      const exerciseText = box.querySelector('.exercise-text').textContent;
-		      box.style.display = (exerciseText.includes(selectedExercise)) ? 'block' : 'none';
-		    }
-		  }
-
-		  
-		  // 시도를 선택할 경우 해당 시도만 표시되는 함수
-          function filterBylocation(){
-        	
-              const selectedLocation = document.querySelector('select[name="sido"]').value;
-			  
-              console.log(selectedLocation);
-              const contentBoxes = document.querySelectorAll('.contentbox');
-
-              for(const box of contentBoxes){
-                  const locationText = box.querySelector('.location-text').textContent;
-                  box.style.display = (locationText.includes(selectedLocation)) ? 'block' : 'none';
-              }
-
-            }
-
-
-		  
-		</script>
+	<script src="https://zelkun.tistory.com/attachment/cfile8.uf@99BB7A3D5D45C065343307.js"></script>
+	<script src="/resources/js/list.js"></script>
 </head>
 <body>
     <div  class='pull' >
+<%--     <jsp:include page="/WEB-INF/views/common/searchForm.jsp" /> --%>
         <div class='header'>
             <h3>스포츠 플랫폼</h3>
 			<!-- <select> 요소에 onchange 이벤트를 통해 filterByExercise 함수 호출 -->
@@ -129,7 +24,7 @@
 			  </c:forEach>
 			</select>
             
-<%-- 			<jsp:include page="/WEB-INF/views/common/location.jsp" onchange="filterByLocation()"/>
+<%--  			<jsp:include page="/WEB-INF/views/common/location.jsp" onchange="filterByLocation()"/>
  --%>
 
    <select id="sido" name="sido" onchange="filterBylocation()">
@@ -160,6 +55,7 @@
         <div class='imgs'>
 
             <c:forEach var="index" begin="1" end="6">
+            <c:if test="${index <= list.size()}"> <!-- 리스트 크기를 벗어나지 않도록 출력 -->
 				<div class="contentbox">
 					  <div class="imgbox">
 					    <img class="img-concert" src="/resources/images/필라테스${index}.jpg" />
@@ -176,31 +72,22 @@
 					 ==============
 					 <div class="exercise-text">요가</div>
 					 ==============
-					 <div class="location-text">서울특별시</div>
+					 <div class="location-text">서울특별시 서대문구 북가좌동</div>
 				</div>
+			</c:if>
             </c:forEach>
  		</div>
  			
-		<button type="submit" class="btnList" onclick="">등록하기</button>
-			
+ 		<!-- 숨겨진 폼 필드와 검색 폼 추가 -->
+        <form id="searchForm" method="GET" action="/test/test.jsp">
+            <input type="hidden" id="pageNo" name="pageNo" value="${cri.pageNo}" />
+        </form>
+
+        <!-- 페이지 번호 출력 -->
+        <jsp:include page="/WEB-INF/views/common/pageNavi.jsp" />
+        
      </div>
   
-
-<c:forEach items="${list }" var="vo">
-  ${vo.class_no } 
-  <!-- 	private int class_no ;
-	private int location_no ; 
-	private int member_no ;
-	private String class_title ;
-	private String class_content ;
-	private String class_introduce ;
-	private String class_regdate ;
-	private String teacher_content  ;
-	private String class_attach ;
-	private int class_maxcount ;
-	private String class_price ; -->
-</c:forEach>
-
  
 </body>
 </html>

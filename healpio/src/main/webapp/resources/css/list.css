@@ -2,10 +2,10 @@
         body {
         margin: 0;
         padding: 0;
-        height: 100vh; /* 뷰포트 높이의 100%를 사용하여 화면을 꽉 채우도록 설정합니다. */
+        height: 100vh; 
         display: flex;
-        justify-content: center; /* 가로 방향으로 내용을 가운데 정렬합니다. */
-        align-items: center; /* 세로 방향으로 내용을 가운데 정렬합니다. */
+        justify-content: center; 
+        align-items: center;
         }
 
 
@@ -20,25 +20,25 @@
             padding: 10px;
             
                           overflow: auto;
-            /* 스크롤바의 스타일을 선택적으로 지정 */
-		    scrollbar-width: thin; /* 스크롤바의 너비 (thin, auto, 등) */
-		    scrollbar-color: red green; /* 스크롤바의 색상 (트랙, 썸네일) */
+           
+		    scrollbar-width: thin; 
+		    scrollbar-color: red green; 
             
 
         }
 
         .image-container{
-            max-width: 90%; /* 90% 너비로 설정하여 이미지 크기를 조정합니다. */
+            max-width: 90%;
             height: auto;
             margin-bottom: 10px;
-            /* 이미지들을 동일한 높이로 조정 */
+          
         }
 
         .img-concert{
-            max-width: 90%; /* 90% 너비로 설정하여 이미지 크기를 조정합니다. */
+            max-width: 90%; 
             height: auto;
             margin-bottom: 10px;
-            flex-grow: 1; /* 이미지들이 가용 공간을 균등하게 채우도록 설정 */
+            flex-grow: 1; 
         }
 
         .header{
@@ -62,9 +62,9 @@
             
 
               overflow: auto;
-            /* 스크롤바의 스타일을 선택적으로 지정 */
-		    scrollbar-width: thin; /* 스크롤바의 너비 (thin, auto, 등) */
-		    scrollbar-color: red green; /* 스크롤바의 색상 (트랙, 썸네일) */
+            
+		    scrollbar-width: thin; 
+		    scrollbar-color: red green; 
               
             
         }
@@ -85,8 +85,5 @@
 		.btnList{
 			align: right;
 		}
-		   /* 한국어 폰트 지정 */
-	    select, option {
-	      font-family: '나눔고딕', 'Nanum Gothic', 'Helvetica', sans-serif;
-	    }
+
 

@@ -16,20 +16,22 @@ package com.healpio.vo;
 		int realEnd;			// 페이지 끝번호
 		
 		public PageDto(Criteria cri, int total){
-			this.cri = cri;
-			this.total = total;
-			
-			// 페이지 블럭의 끝번호
-			this.endNo = (int)(Math.ceil(cri.getPageNo()/5.0) * 5);
-			// 페이지 블럭의 시작번호
-			this.startNo = this.endNo - 4;
-			
-			// 총 게시물의 수를 페이지당 보여지는 게시물의 수로 나눠서 실제 끝페이지 번호를 구함
-			realEnd = (int)(Math.ceil((total*1.0)/cri.getAmount()));
-			endNo = endNo>realEnd ? realEnd : endNo;
-			
-			prev = startNo>1 ? true: false;
-			next = endNo==realEnd ? false: true;
+	        this.cri = cri;
+	        this.total = total;
+
+	        // 페이지 블럭의 끝번호
+	        this.endNo = (int) (Math.ceil(cri.getPageNo() / 5.0) * 5);
+	        // 페이지 블럭의 시작번호
+	        this.startNo = this.endNo - 4;
+
+	        // 총 게시물의 수를 페이지당 보여지는 게시물의 수로 나눠서 실제 끝페이지 번호를 구함
+	        realEnd = (int) (Math.ceil((total * 1.0) / cri.getAmount()));
+	        endNo = endNo > realEnd ? realEnd : endNo;
+
+	        // 이전 버튼 활성화 여부
+	        prev = startNo > 1 ? true : false;
+	        // 다음 버튼 활성화 여부
+	        next = endNo < realEnd ? true : false;
 		}
 		
 	}

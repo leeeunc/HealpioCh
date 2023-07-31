@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,40 +15,34 @@
 </script>
 </head>
 <body>
-	
-	<!-- 페이지 블럭 생성 -->
-	<nav aria-label="Page navigation example">
-	
-	
-	  <ul class="pagination justify-content-end">
-	    <li class="page-item ${pageDto.prev?'':'disabled' }">
-	      <a class="page-link"
-	      		<c:if test="${pageDto.prev}">
-	      		onclick="go(${pageDto.startNo-1 })"
-	      		</c:if>
-	      		href="#">Previous</a>
-	    </li>
-	    
-	    <c:forEach begin="${pageDto.startNo }" 
-	    			end="${pageDto.endNo }" 
-	    			var="i">
-	    
-		    <li class="page-item">
-		    	<a class="page-link ${pageDto.cri.pageNo==i ? 'active':'' }" 
-		    		onclick="go(${i})"
-		    		href="#">${i }</a>
-		    </li>
-	    
-	    </c:forEach>
-	    
-	    <li class="page-item ${pageDto.next?'':'disabled' }">
-	      <a class="page-link"
-	      		onclick="go(${pageDto.endNo + 1 })" 
-	      		href="#">Next</a>
-	    </li>
-	  </ul>
-	</nav>
+<%-- Criteria 객체 가져오기 --%>
+<c:set var="cri" value="${pageDto.cri}" />
 
+<%-- 총 페이지 수 계산 --%>
+<c:set var="totalPages" value="${(pageDto.realEnd > 0) ? pageDto.realEnd : 1}" />
 
+<%-- 현재 페이지 번호 가져오기 --%>
+<c:set var="currentPage" value="${cri.pageNo}" />
+
+<%-- 페이지 번호 출력 --%>
+<div class="pagination">
+    <c:if test="${pageDto.prev}">
+        <a href="#" onclick="go(${pageDto.startNo - 1})">이전</a>
+    </c:if>
+
+    <c:forEach begin="${pageDto.startNo}" end="${pageDto.endNo}" var="pageNum">
+        <c:choose>
+            <c:when test="${pageNum eq currentPage}">
+                <strong>${pageNum}</strong>
+            </c:when>
+            <c:otherwise>
+                <a href="#" onclick="go(${pageNum})">${pageNum}</a>
+            </c:otherwise>
+        </c:choose>
+    </c:forEach>
+
+    <c:if test="${pageDto.next}">
+        <a href="#" onclick="go(${pageDto.endNo + 1})">다음</a>
+    </c:if>
 </body>
 </html>

@@ -5,14 +5,14 @@ import lombok.Data;
 @Data
 public class Criteria {
 
-	private String searchField; // °Ë»öÁ¶°Ç
-	private String searchWord;	// °Ë»ö¾î
+	private String searchField; // ê²€ìƒ‰ì¡°ê±´
+	private String searchWord;	// ê²€ìƒ‰ì–´
 	
-	private int pageNo = 1;		// ¿äÃ» ÆäÀÌÁö ¹øÈ£
-	private int amount = 10; 	// ÇÑÆäÀÌÁö´ç °Ô½Ã¹°¼ö
+	private int pageNo = 1;		// ìš”ì²­ í˜ì´ì§€ ë²ˆí˜¸
+	private int amount = 6; 	// í•œí˜ì´ì§€ë‹¹ ê²Œì‹œë¬¼ìˆ˜
 	
 	private int startNo = 1;
-	private int endNo = 10;
+	private int endNo = 6;
 	
 	
 	public void setPageNo(int pageNo) {
