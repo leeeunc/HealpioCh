@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 
 import com.healpio.mapper.BoardMapper;
 import com.healpio.vo.ClassVO;
+import com.healpio.vo.Criteria;
 import com.healpio.vo.ExerciseVO;
 import com.healpio.vo.LocationVO;
 
@@ -23,9 +24,9 @@ import com.healpio.vo.LocationVO;
 	 private BoardMapper boardMapper;
 	  
 	 @Override
-	 public List<ClassVO> getList(Model model){
+	 public List<ClassVO> getList(Criteria cri, Model model){
 		 
-		  List<ClassVO> list = boardMapper.getList();
+		  List<ClassVO> list = boardMapper.getList(cri);
 		  model.addAttribute("list", list);
 		  
 		  return null;

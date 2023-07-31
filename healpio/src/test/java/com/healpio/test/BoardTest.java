@@ -1,5 +1,6 @@
 package com.healpio.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assume.assumeNotNull;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.healpio.mapper.BoardMapper;
 import com.healpio.vo.ClassVO;
+import com.healpio.vo.Criteria;
 import com.healpio.vo.ExerciseVO;
 import com.healpio.vo.LocationVO;
 
@@ -29,7 +31,7 @@ public class BoardTest {
 	public void test() {
 		
 		assumeNotNull(boardMapper);
-		List<ClassVO> list = boardMapper.getList();
+		List<ClassVO> list = boardMapper.getList(new Criteria());
 		
 		list.forEach(board ->{
 			log.info("ClassVO====================");
@@ -82,5 +84,18 @@ public class BoardTest {
 	  log.info(location.getDistrict()); log.info(location.getNeighborhood());
 	  
 	  }); }
+	  
+	  
+	  @Test
+	  public void getCountTest() {
+		  
+			int res = boardMapper.getTotalCount();
+			
+			log.info("totalCnt : " + res);
+		  
+	  }
 	 
+	  
+	  
+	  
 }
