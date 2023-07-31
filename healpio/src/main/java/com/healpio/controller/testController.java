@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/test/*")
 public class testController {
 	
+	// 페이지 테스트
 	@GetMapping("page")
 	public String test() {
 		return "/test/test";
