@@ -24,4 +24,7 @@ public class testController {
 	// 안깨져서 나오지요?
 	// utf-8 설정은 하셨나요?
 	// git config --global gui.encoding utf-8
+	
+	// Require approval of the most recent reviewable push
+	// 테스트입니다
 }	
