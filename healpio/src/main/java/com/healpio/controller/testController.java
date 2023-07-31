@@ -27,4 +27,7 @@ public class testController {
 	
 	// Require approval of the most recent reviewable push
 	// 테스트입니다
+	
+	// Include administrators
+	// 제한이 없어 원본 리포지토리는 검토 이후 push가 아니라 바로 merge가 됩니다
 }	
