@@ -14,7 +14,7 @@ public class testController {
 		return "/test/test";
 	}
 	
-	// ¼öÁ¤ Å×½ºÆ®
+	// ìˆ˜ì •í…ŒìŠ¤íŠ¸
 	@PostMapping("page")
 	public String test1() {
 		return "/test/test";

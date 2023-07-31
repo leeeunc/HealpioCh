@@ -5,26 +5,26 @@ package com.healpio.vo;
 	@Data
 	public class PageDto {
 
-		private Criteria cri;	// ÆäÀÌÁö¹øÈ£, ÆäÀÌÁö´ç °Ô½Ã¹°¼ö
-		private int total;		// ÃÑ °Ô½Ã¹°ÀÇ ¼ö
+		private Criteria cri;	// íŽ˜ì´ì§€ë²ˆí˜¸, íŽ˜ì´ì§€ë‹¹ ê²Œì‹œë¬¼ìˆ˜
+		private int total;		// ì´ ê²Œì‹œë¬¼ì˜ ìˆ˜
 		
-		private int startNo;	// ÆäÀÌÁö ºí·ÏÀÇ ½ÃÀÛ¹øÈ£
-		private int endNo;		// ÆäÀÌÁö ºí·ÏÀÇ ³¡¹øÈ£
+		private int startNo;	// íŽ˜ì´ì§€ ë¸”ë¡ì˜ ì‹œìž‘ë²ˆí˜¸
+		private int endNo;		// íŽ˜ì´ì§€ ë¸”ë¡ì˜ ëë²ˆí˜¸
 		
-		private boolean prev, next;	// ÀÌÀü, ´ÙÀ½ ¹öÆ° È°¼º(true)/ºñÈ°¼º(false) 
+		private boolean prev, next;	// ì´ì „, ë‹¤ìŒ ë²„íŠ¼ í™œì„±(true)/ë¹„í™œì„±(false) 
 		
-		int realEnd;			// ÆäÀÌÁö ³¡¹øÈ£
+		int realEnd;			// íŽ˜ì´ì§€ ëë²ˆí˜¸
 		
 		public PageDto(Criteria cri, int total){
 			this.cri = cri;
 			this.total = total;
 			
-			// ÆäÀÌÁö ºí·°ÀÇ ³¡¹øÈ£
+			// íŽ˜ì´ì§€ ë¸”ëŸ­ì˜ ëë²ˆí˜¸
 			this.endNo = (int)(Math.ceil(cri.getPageNo()/5.0) * 5);
-			// ÆäÀÌÁö ºí·°ÀÇ ½ÃÀÛ¹øÈ£
+			// íŽ˜ì´ì§€ ë¸”ëŸ­ì˜ ì‹œìž‘ë²ˆí˜¸
 			this.startNo = this.endNo - 4;
 			
-			// ÃÑ °Ô½Ã¹°ÀÇ ¼ö¸¦ ÆäÀÌÁö´ç º¸¿©Áö´Â °Ô½Ã¹°ÀÇ ¼ö·Î ³ª´²¼­ ½ÇÁ¦ ³¡ÆäÀÌÁö ¹øÈ£¸¦ ±¸ÇÔ
+			// ì´ ê²Œì‹œë¬¼ì˜ ìˆ˜ë¥¼ íŽ˜ì´ì§€ë‹¹ ë³´ì—¬ì§€ëŠ” ê²Œì‹œë¬¼ì˜ ìˆ˜ë¡œ ë‚˜ëˆ ì„œ ì‹¤ì œ ëíŽ˜ì´ì§€ ë²ˆí˜¸ë¥¼ êµ¬í•¨
 			realEnd = (int)(Math.ceil((total*1.0)/cri.getAmount()));
 			endNo = endNo>realEnd ? realEnd : endNo;
 			
@@ -33,5 +33,3 @@ package com.healpio.vo;
 		}
 		
 	}
-
-
