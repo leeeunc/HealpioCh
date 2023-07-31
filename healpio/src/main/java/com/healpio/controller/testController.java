@@ -34,6 +34,9 @@ public class testController {
 	// 새규칙생성
 	// feature_administrators Active 2 rules • targeting 3 branches
 	
+	// Do not allow bypassing the above settings
+	// The above settings will apply to administrators and custom roles with the "bypass branch protections" permission.
+	// Include administrators → Do not allow bypassing the above settings 로 변경되었습니다
 	
 
 }	
