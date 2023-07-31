@@ -26,6 +26,6 @@ public class BoardController {
 		boardService.provinceList(model);
 		boardService.locationList(model);
 		log.info("git �׽�Ʈ!=================================");
-		// test tset test
+		// test tset testcxzcz
 	}
 }
