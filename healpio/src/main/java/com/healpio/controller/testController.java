@@ -30,4 +30,10 @@ public class testController {
 	
 	// Include administrators
 	// 제한이 없어 원본 리포지토리는 검토 이후 push가 아니라 바로 merge가 됩니다
+	
+	// 새규칙생성
+	// feature_administrators Active 2 rules • targeting 3 branches
+	
+	
+
 }	
