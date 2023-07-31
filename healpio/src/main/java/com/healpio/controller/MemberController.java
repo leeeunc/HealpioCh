@@ -1,7 +1,5 @@
 package com.healpio.controller;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.healpio.service.MemberService;
 import com.healpio.vo.MemberVO;
@@ -35,6 +31,16 @@ public class MemberController{
     @GetMapping("/login")
     public String login() {
         return "login";
+    }
+    
+    @GetMapping("/signup")
+    public String signup() {
+    	return "signup";
+    }
+    
+    @GetMapping("/signtype")
+    public String signtype() {
+    	return "signtype";
     }
 
     

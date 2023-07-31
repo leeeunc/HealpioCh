@@ -13,8 +13,6 @@ public interface MemberMapper {
 	
 	public int idCheck(MemberVO memberVO);
 	
-	public List<String> getMemberRole(String id);
-
 	public int insert(MemberVO memberVo);
 
 }
