@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class ClassVO {
+	// class_no와 member_no는 String 타입
 	private String class_no;
 	private int location_no;
 	private String member_no;
