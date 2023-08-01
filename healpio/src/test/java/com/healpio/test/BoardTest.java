@@ -1,6 +1,5 @@
 package com.healpio.test;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assume.assumeNotNull;
 
 import java.util.List;
@@ -28,7 +27,7 @@ public class BoardTest {
 	BoardMapper boardMapper;
 	
 	@Test
-	public void test() {
+	public void Test() {
 		
 		assumeNotNull(boardMapper);
 		List<ClassVO> list = boardMapper.getList(new Criteria());
@@ -87,9 +86,9 @@ public class BoardTest {
 	  
 	  
 	  @Test
-	  public void getCountTest() {
+	  public void getTotalCntTest() {
 		  
-			int res = boardMapper.getTotalCount();
+			int res = boardMapper.getTotalCnt(new Criteria());
 			
 			log.info("totalCnt : " + res);
 		  
