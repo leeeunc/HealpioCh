@@ -1,24 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+
+
 </head>
 <body>
 	<form action="/board/list" 
-			method="get" name="searchForm">
+			method="get" name="searchForm" autocomplete="off">
 	
-	<input type="text" name="bno" value="">
+	<input type="text" name="class_no" value="">
 	<input type="text" name="pageNo" value="${pageDto.cri.pageNo }">
+	<input type="text" name="total" value="${pageDto.total }">
 	<div class="row g-3 justify-content-center">
 	  <div class="col-sm-3">
 	    <select name="searchField" class="form-select" 
 	    		aria-label="Default select example">
-		  <option value="title" <c:if test = "${pageDto.cri.searchField == 'class_title' }"/>>제목</option>
-<%-- 		  <option value="content" ${pageDto.cri.searchField == 'content' ? 'selected' : ''}>내용</option>
-		  <option value="writer" ${pageDto.cri.searchField == 'writer' ? 'selected' : ''}>작성자</option> --%>
+		  <option value="class_title"> <c:if test = "${pageDto.cri.searchField == 'class_title' }"/> 제목</option>
+<%--  		  <option value="content" ${pageDto.cri.searchField == 'content' ? 'selected' : ''}>내용</option>
+		  <option value="writer" ${pageDto.cri.searchField == 'writer' ? 'selected' : ''}>강사</option> --%>
 		</select>
 	  </div>
 	  <div class="col-sm-6">
@@ -32,5 +37,10 @@
 	  </div>
 	</div>
 	</form>
+	
+	
+
+    
+	
 </body>
 </html>

@@ -23,5 +23,7 @@ import com.healpio.vo.LocationVO;
   public List<LocationVO> provinceList(Model model);
   
   public List<LocationVO> locationList(Model model);
+  
+  public int getTotalCnt(Criteria cri);
   }
  

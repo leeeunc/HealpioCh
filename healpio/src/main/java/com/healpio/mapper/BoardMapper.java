@@ -19,5 +19,5 @@ public interface BoardMapper {
 
 	public List<LocationVO> locationList();
 	
-	public int getTotalCount();
+	public int getTotalCnt(Criteria cri);
 }

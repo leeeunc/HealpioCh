@@ -6,24 +6,27 @@
         display: flex;
         justify-content: center; 
         align-items: center;
+        
+            overflow: auto;
+           
+		    scrollbar-width: thin; 
+		    scrollbar-color: red green; 
+            
+        
         }
 
 
         .pull{
             border: 1px solid black;
-            width: 800px;
-            height: 800px;
+            width: 1200px;
+            height: 900px;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
             padding: 10px;
             
-                          overflow: auto;
-           
-		    scrollbar-width: thin; 
-		    scrollbar-color: red green; 
-            
+
 
         }
 

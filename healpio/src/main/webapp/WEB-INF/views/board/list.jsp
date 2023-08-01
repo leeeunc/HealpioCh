@@ -12,8 +12,13 @@
 	<script src="/resources/js/list.js"></script>
 </head>
 <body>
+
     <div  class='pull' >
-<%--     <jsp:include page="/WEB-INF/views/common/searchForm.jsp" /> --%>
+    
+<!-- 
+<form action="" name="searchForm">
+<input type="text" name="pageNo"> 
+ -->
         <div class='header'>
             <h3>스포츠 플랫폼</h3>
 			<!-- <select> 요소에 onchange 이벤트를 통해 filterByExercise 함수 호출 -->
@@ -39,18 +44,21 @@
 
 
 
-            <select name='search' >
+           <!--  <select name='search' >
                 <option value='x'>제목</option>
                 <option value='ko'>닉네임</option>
             </select>
             <input type='text'>
             <button type="submit" class="" onclick="go(1)">검색</button>
-
+ -->
+ <jsp:include page="/WEB-INF/views/common/searchForm.jsp" /> 
+ 
             <select name='array' >
                 <option value='x'>인기순</option>
                 <option value='ko'>최신순</option>
             </select>
         </div>
+      </form>
 
         <div class='imgs'>
 
@@ -77,17 +85,13 @@
 			</c:if>
             </c:forEach>
  		</div>
- 			
- 		<!-- 숨겨진 폼 필드와 검색 폼 추가 -->
-        <form id="searchForm" method="GET" action="/test/test.jsp">
-            <input type="hidden" id="pageNo" name="pageNo" value="${cri.pageNo}" />
-        </form>
+ 	
 
         <!-- 페이지 번호 출력 -->
         <jsp:include page="/WEB-INF/views/common/pageNavi.jsp" />
-        
      </div>
-  
+
+        
  
 </body>
 </html>
