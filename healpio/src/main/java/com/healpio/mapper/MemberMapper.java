@@ -1,7 +1,5 @@
 package com.healpio.mapper;
 
-import java.util.List;
-
 import com.healpio.vo.MemberVO;
 
 

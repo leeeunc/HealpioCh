@@ -1,5 +1,8 @@
 package com.healpio.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.healpio.service.MemberService;
 import com.healpio.vo.MemberVO;
@@ -33,18 +38,18 @@ public class MemberController{
         return "login";
     }
     
-    @GetMapping("/signup")
-    public String signup() {
-    	return "signup";
-    }
-    
+ // "signup.jsp" 페이지 요청을 처리하는 메서드를 추가합니다.
     @GetMapping("/signtype")
-    public String signtype() {
-    	return "signtype";
+    public String signtypePage() {
+        return "signtype"; 
     }
-
     
+    @PostMapping("/signup")
+    public String signupPage() {
+        return "signup";
+    }
     
+   
     	@PostMapping("/loginAction")
     	public String loginAction(@RequestParam("id") String member_id,
     	                           @RequestParam("pw") String member_pw,
@@ -65,18 +70,21 @@ public class MemberController{
         	    
            session.setAttribute("memberVo", memberVo);
            session.setAttribute("userId", memberVo.getMember_id());
-            return "redirect:/home";
+            return "redirect:/board/list";
         } else {
             // 로그인 실패
             model.addAttribute("errorMSG", "잘못된 아이디 또는 비밀번호 입니다.");
             return "login";
         }
     }
+    	
+    	
     
-    /*
+    
 	@PostMapping("/idCheck")
+	@ResponseBody
 	// 넘겨줄때도 JSON 문자열로 반환 할겁니다.
-	public @ResponseBody Map<String, Object> idCheck(@RequestBody MemberVO memberVO){
+	public  Map<String, Object> idCheck(@RequestBody MemberVO memberVO){
 		
 		int res = memberService.idCheck(memberVO);
 		
@@ -85,27 +93,43 @@ public class MemberController{
 		// insert, update, delete > 0  true
 		
 		// decode(count(*),0,1,0), 0 이면 메세지 나오도록 수정함
-		if(res == 0) {
-			return responseMapMessage( REST_SUCCESS , "사용가능한 아이디 입니다.");
-		} else {
-			return responseMapMessage( REST_FAIL , "이미 사용중인 아이디 입니다.");
-		}
+		Map<String, Object> response = new HashMap<>();
 		
+		if(res == 0) {
+			response.put("message", "사용 가능한 아이디 입니다.");
+			response.put("result", true);
+		} else {
+			response.put("message", "이미 사용 중인 아이디 입니다.");
+			response.put("result", false);
+		}
+		return response;
 	}
-	
 	
 	@PostMapping("/register")
-	public @ResponseBody Map<String, Object> register(@RequestBody MemberVO memberVO){
+	@ResponseBody
+	public Map<String, Object> register(@RequestBody MemberVO memberVO){
 		
 		try {
-			int res = memberService.signUp(memberVO);
-			return responseWriteMap(res);
+			int res = memberService.insert(memberVO);
+			if(res > 0) {
+				
+				return responseMapMessage("success", "회원가입이 완료되었습니다.");
+			} else {
+				return responseMapMessage("fail", "회원가입에 실패하였습니다. 다시 확인하세요.");
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return responseMapMessage(REST_FAIL, "등록중 예외사항이 발생 하였습니다.");
+			return responseMapMessage("fail", "등록중 예외사항이 발생 하였습니다.");
 		}
 	}
-	*/
+
+	private Map<String, Object> responseMapMessage(String result, String msg) {
+		Map<String, Object> response = new HashMap<>();
+		response.put("result", result);
+		response.put("msg", msg);
+		return response;
+	}
     
 }
 
