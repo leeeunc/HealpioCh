@@ -66,18 +66,35 @@
         }
         
     </style>
+    
+    <script>
+        // 페이지가 로드될 때 실행할 함수를 정의합니다.
+        window.onload = function() {
+            // 강사 가입하기 버튼 클릭 시 TEACHERYN 값을 'Y'로 변경합니다.
+            document.getElementById("t_login").onclick = function() {
+                document.getElementById("teacherYN").value = "Y";
+                document.getElementById("signupForm").submit(); // 폼을 서버로 전송합니다.
+            };
+
+            // 학생 가입하기 버튼 클릭 시 TEACHERYN 값을 'N'으로 변경합니다.
+            document.getElementById("s_login").onclick = function() {
+                document.getElementById("teacherYN").value = "N";
+                document.getElementById("signupForm").submit(); // 폼을 서버로 전송합니다.
+            };
+        };
+    </script>     
+    
 </head>
 <body>
     <div id='login_wrap'>
-        <form action='' method=''>
-<div id='login1'> 
-    <button id='t_login'>강사 <br><span id='test'>가입하기</span></button>   
-</div>
-
-<div id='login2'>
-    <button id='t_login'>학생 <br><span id='test'>가입하기</span></button>
-  </div>
-    </form>
+        <form action="/signup" method="post">
+            <div id='login1'> 
+                <button id='t_login'>강사 <br><span id='test'>가입하기</span></button>   
+            </div>
+            <div id='login2'>
+                <button id='s_login'>학생 <br><span id='test'>가입하기</span></button>
+            </div>
+        </form>
     </div>
 </body>
 </html>
