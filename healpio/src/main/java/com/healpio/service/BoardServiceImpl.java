@@ -1,7 +1,6 @@
 
   package com.healpio.service;
   
-  import java.io.Console;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +12,12 @@ import com.healpio.vo.ClassVO;
 import com.healpio.vo.Criteria;
 import com.healpio.vo.ExerciseVO;
 import com.healpio.vo.LocationVO;
+import com.healpio.vo.PageDto;
 
   
 
   @Service 
-  public class BoardSerivceImpl implements BoardService{
+  public class BoardServiceImpl implements BoardService{
 
 	  
 	 @Autowired
@@ -27,24 +27,25 @@ import com.healpio.vo.LocationVO;
 	 public List<ClassVO> getList(Criteria cri, Model model){
 		 
 		  List<ClassVO> list = boardMapper.getList(cri);
+		  int totalCnt = boardMapper.getTotalCnt(cri);
+		  PageDto pageDto = new PageDto(cri, totalCnt); 
+		  
 		  model.addAttribute("list", list);
+		  model.addAttribute("totalCnt", totalCnt);
+		  model.addAttribute("pageDto", pageDto);
+		  
 		  
 		  return null;
 	  }
+	 
+	 
 	 
 	 @Override
 	 public List<ExerciseVO> exerciseList(Model model){
 		 List<ExerciseVO> list = boardMapper.exerciseList();
 		 
 		 model.addAttribute("exerciseList", list);
-
-		 //			int totalCnt = boardMapper.getTotalCnt(cri);
-//			PageDto pageDto = new PageDto(cri, totalCnt);
-//			
-//			model.addAttribute("list", list);
-//			model.addAttribute("totalCnt", totalCnt);
-//			model.addAttribute("pageDto", pageDto);
-//		 
+ 
 		 
 		 return null;
 	 }
@@ -66,6 +67,11 @@ import com.healpio.vo.LocationVO;
 		 model.addAttribute("locationList", list);
 		 
 		 return null;
+	 }
+	 
+	 @Override
+	 public int getTotalCnt(Criteria cri) {
+		 return boardMapper.getTotalCnt(cri);
 	 }
 	 
   }
