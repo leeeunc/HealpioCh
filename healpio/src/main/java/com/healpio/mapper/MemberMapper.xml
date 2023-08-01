@@ -18,5 +18,11 @@
 			where member_id=#{member_id}
 	</select>
 	
+	<insert id="insert">
+		insert into member 
+		(member_id, member_pw, member_name, nickname, phonenumber, email)
+		values 
+		(#{member_id}, #{member_pw}, #{member_name}, #{nickname}, #{phonenumber}, #{email})		
+	</insert>
 	
 </mapper>

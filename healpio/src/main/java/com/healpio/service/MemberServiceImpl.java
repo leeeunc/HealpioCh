@@ -54,26 +54,22 @@ public class MemberServiceImpl implements MemberService{
 
 	
 	
-	
-	/*
 	@Override
-	public int signUp (MemberVO memberVO) {
+	public int insert(MemberVO memberVo) {
 		
-		// root-context.xml에 기입함.
-//		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		try {
+		int res = memberMapper.insert(memberVo);
+		return res > 0? 1 : 0; // 1: 회원가입 성공, 0: 회원가입 실패
 		
-		// 비밀번호 암호화
-		// 입력된 비밀번호를 암호화 하고 다시 비밀번호에 넣어줌
-		memberVO.setMember_pw(encoder.encode(memberVO.getMember_pw()));
-		System.out.println("pw : " + memberVO.getMember_pw());
-		return memberMapper.signUp(memberVO);
+	} catch (Exception e) {	
+			e.printStackTrace();
+			return 0;
+		}
 	}
 	
-	*/
-
+	
 	@Override
 	public int idCheck(MemberVO memberVO) {
-		// TODO Auto-generated method stub
 		return memberMapper.idCheck(memberVO);
 	}
 
@@ -180,9 +176,5 @@ public class MemberServiceImpl implements MemberService{
 		    }
 	}
 
-	@Override
-	public int insert(MemberVO memberVo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 }
