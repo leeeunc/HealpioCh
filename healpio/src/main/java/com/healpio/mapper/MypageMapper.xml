@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.healpio.mapper.MypageMapper">
+	
+	<select id="getScrapList" resultType="com.healpio.vo.ViewScrapVO">
+		SELECT E.EXERCISE_NAME ,c.CLASS_TITLE, M.NICKNAME , L.PROVINCE||L.CITY||L.DISTRICT  address, C.CLASS_ATTACH 
+		FROM SCRAP S, CLASS C, MEMBER M, LOCATION L, EXERCISE E
+		WHERE S.CLASS_NO = C.CLASS_NO
+		AND C.MEMBER_NO = M.MEMBER_NO
+		AND C.EXERCISE_NO = E.EXERCISE_NO
+        AND C.CLASS_NO = L.CLASS_NO
+		AND S.MEMBER_NO = #{member_no}
+	</select>
+	<resultMap type="com.healpio.vo.ViewScrapVO" id="getScrapList">
+        <result property="exercise_name" column="E.EXERCISE_NAME"/>
+        <result property="class_title" column="C.CLASS_TITLE"/>
+        <result property="nickname" column="M.NICKNAME"/>
+        <result property="address" column="address"/>
+        <result property="class_attach" column="C.CLASS_ATTACH"/>
+    </resultMap>
+	
+	
+	
+	
+    
+    <select id="getReservationList" resultType="com.healpio.vo.MyReservationVO" >
+    	<![CDATA[
+    	select R.reservation_no, c.class_title, to_char(reservation_date,'YYYY-MM-DD') reservation_date, R.reservation_time
+		from class c, reservation R
+		WHERE C.class_no = R.class_no
+		AND R.MEMBER_NO = #{member_no}
+		and to_char(sysdate,'YYYY-MM-DD') <= to_char(reservation_date,'YYYY-MM-DD') 
+	 	]]>	
+		
+		
+    </select>
+    <resultMap type="com.healpio.vo.MyReservationVO" id="getReservationList">
+    	<result property="reservation_no" column="R.reservation_no"/>	
+        <result property="class_title" column="c.class_title"/>
+        <result property="reservation_date" column="reservation_date"/>
+        <result property="reservation_time" column="R.reservation_time"/>
+    </resultMap>	
+    
+    
+    <delete id="reservationDelete">
+    	DELETE FROM RESERVATION WHERE reservation_no = #{reservation_no}
+    </delete>
+    
+    <select id="getHistory" resultType="com.healpio.vo.MyReservationVO">
+    	<![CDATA[
+    	select R.reservation_no,c.class_title, to_char(reservation_date,'yyyy-mm-dd') reservation_date , R.reservation_time
+		from class c, reservation R
+		WHERE C.class_no = R.class_no
+		AND R.MEMBER_NO = 'M000004'
+        and TO_CHAR(SYSDATE,'YYYY-MM-DD') >= TO_CHAR(reservation_date,'YYYY-MM-DD')
+        ]]>
+    </select>
+    
+    <resultMap type="com.healpio.vo.MyReservationVO" id="getHistory">
+    	<result property="reservation_no" column="R.reservation_no"/>	
+        <result property="class_title" column="c.class_title"/>
+        <result property="reservation_date" column="reservation_date"/>
+        <result property="reservation_time" column="R.reservation_time"/>
+    </resultMap>
+</mapper>
