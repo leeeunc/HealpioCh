@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class ScrapVO {
 
-	private int scrap_no;
-	private int class_no;
-	private int member_no;
+	private String scrap_no;
+	private String class_no;
+	private String member_no;
 	
 }
