@@ -1,0 +1,91 @@
+.container {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .nav-arrow {
+            cursor: pointer;
+            font-size: 2em;
+            color: #b8860b;
+            margin: 0 10px;
+        }
+
+        #calendar {
+            width: 40%;
+            text-align: center;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+
+        #calendar td {
+            border: 1px solid #000;
+            padding: 10px;
+        }
+
+        #calendar td.selected {
+            background-color: #eee;
+        }
+        
+		#time-selection {
+            width: 40%;
+        }
+
+        #time-selection button {
+            margin: 5px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #eee;
+            color: #333;
+        }
+
+        #time-selection button.selected {
+            background-color: #aaa;
+        }
+
+        #reserve {
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #0a0;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #confirmation-modal {
+            text-align: center;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 5px;
+            width: 30%;
+        }
+
+        #confirmation-modal p {
+            margin-bottom: 20px;
+        }
+
+        #confirmation-modal button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin: 5px;
+            display: none;
+        }
+
+        #confirmation-modal #confirm {
+            background-color: #0a0;
+            color: #fff;
+        }
+
+        #confirmation-modal #cancel {
+            background-color: #a00;
+            color: #fff;
+        }
+        
+        #confirm #cancel {
+        	display: none;
+        }
