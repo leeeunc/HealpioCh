@@ -35,7 +35,6 @@ public class BoardTest {
 		list.forEach(board ->{
 			log.info("ClassVO====================");
 			log.info(board.getClass_no());
-			log.info(board.getLocation_no());
 			log.info(board.getMember_no());
 			log.info(board.getClass_title());
 			log.info(board.getClass_content());
