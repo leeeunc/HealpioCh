@@ -1,0 +1,343 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0 auto;
+    color: #3f464d;
+    font-family: 'Spoqa Han Sans Neo', 'Sans-serif';
+}
+
+a {
+    /* a태그가 가진 프로퍼티를 리셋(예 : 링크를 걸면 폰트색과 글자 밑에 밑줄이 생김)*/
+    all: unset;
+}
+
+a:link {
+    text-decoration: none;
+    color: #3f464d;
+}
+
+a:visited {
+    text-decoration: none;
+    color: #3f464d;
+}
+
+a:active {
+    text-decoration: none;
+    color: #3f464d;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #3f464d;
+    cursor: pointer;
+}
+
+header {
+    width: 100%;
+    height: 120px;
+    background-color: #e4eaf6;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 1000;
+}
+
+#inner {
+    width: 100%;
+    height: 100%;
+    margin: 0px auto;
+    padding: 0 2rem;
+    /* 요소가 오버되면 오버된만큼만 숨김 또한 hidden은 padding영역에 영향을 받지 않는다.*/
+    overflow: hidden;
+}
+
+.header-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-container div {
+    margin: 0 2rem;
+}
+
+.header-container a {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+section {
+    width: 100%;
+    background-color: #fff;
+}
+
+.side-menu {
+    width: 300px;
+    height: 1124px;
+    margin-top: 120px;
+}
+
+.side-menu-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-logo-img {
+    width: 200px;
+}
+
+.side-menu-container a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.side-menu-container .user-logo {
+    margin-top: 50px;
+}
+
+.side-menu-container div {
+    margin-top: 50px;
+}
+
+.inner-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+
+    margin-top: 100px;
+}
+
+.content {
+    width: 100%;
+    min-height: calc(100% - 124px);
+    padding-top: 120px;
+    background-color: #fff;
+}
+
+footer {
+    width: 100%;
+    height: 124px;
+    padding-top: 120px;
+}
+
+.footer-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: #eee;
+}
+
+.footer-logo {
+    margin-left: 2rem;
+}
+
+.footer-box1 {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.footer-slogan {
+    margin-left: 2rem;
+}
+
+.footer-box2 {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.footer-box2 img {
+    display: inline-block;
+    margin: 0 1.5rem;
+}
+
+.footer-proposal {
+    width: 170px;
+    font-size: 20px;
+}
+
+/* 내 정보*/
+.content-info {
+    width: 100%;
+    height: 100%;
+}
+
+.info-back {
+    width: 700px;
+    height: 800px;
+    background-color: #eee;
+    margin: 100px auto 200px auto;
+    border-radius: 20px;
+}
+
+.info-back-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.mb-3 {
+    width: 500px;
+}
+
+.edit {
+    width: 500px;
+}
+
+/* scrap */
+.content-scrap-container {
+    width: 100%;
+    height: 100%;
+}
+
+.scrap-list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 1rem 0;
+    margin-left: 4rem;
+    overflow: hidden;
+}
+
+.scrap-list li {
+    margin: 5rem 1rem;
+}
+
+.scrap-card {
+    width: 350px;
+
+    box-shadow: 10px 10px 10px 0px rgba(25, 42, 70, 0.2);
+
+    /*
+    border: 1px solid #3f464d;
+    */
+    border-radius: 8px;
+}
+
+.scrap-img {
+    width: 100%;
+    height: 280px;
+    border-radius: 8px 8px 0px 0px;
+    background-image: url('/image/logo/KakaoTalk_20230727_145442348\ \(1\).png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.scrap-info-container {
+    width: 100%;
+    padding: 0.5rem 1rem 1rem 1rem;
+}
+
+.scrap-lecture-info {
+    width: 100%;
+    display: flex;
+}
+
+.scrap-title {
+    font-size: 1.3rem;
+    font-size: bold;
+    color: #545e6f;
+
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+.scrap-lecture-info {
+    width: 100%;
+    padding-top: 0.5rem;
+}
+
+.scrap-like {
+    width: 100%;
+    padding-top: 0.5rem;
+}
+
+.scrap-sports {
+    padding-left: 0.5rem;
+}
+
+.scrap-address {
+    padding-left: 0.5rem;
+}
+
+/* reservation */
+.content-reservation-container {
+    width: 100%;
+    height: 100%;
+    margin-top: 11rem;
+}
+
+.content-reservation {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.content-reservation div {
+    display: inline-block;
+}
+
+.content-reservation-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* prev */
+.content-prev-container {
+    width: 100%;
+    height: 100%;
+    margin-top: 9rem;
+}
+
+.content-prev {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.content-prev div {
+    display: inline-block;
+}
+
+.content-prev-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 1150px) {
+    .health-project {
+        display: none;
+    }
+
+    .health-search {
+        display: none;
+    }
+
+    .footer-slogan {
+        display: none;
+    }
+}
