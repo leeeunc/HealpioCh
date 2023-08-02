@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 
 	<link href="/resources/css/list.css" rel="stylesheet"> 
-	<script src="https://zelkun.tistory.com/attachment/cfile8.uf@99BB7A3D5D45C065343307.js"></script>
 	<script src="/resources/js/list.js"></script>
 <script>
 function classWirte() {
