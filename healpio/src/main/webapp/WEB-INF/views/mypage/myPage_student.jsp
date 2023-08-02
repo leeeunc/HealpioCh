@@ -225,11 +225,11 @@
             <div class="inner">
                 <div class="footer-container">
                     <div class="footer-box1">
-                        <div class="footer-logo"><img src="/resources/images/logo/logo_footer.png" alt="하단로고" /></div>
+                        <div class="footer-logo"><img src="/resources/imag/logo/logo_footer.png" alt="하단로고" /></div>
                         <div class="footer-slogan">
-                            건강한 삶을 위한<br />
-                            새로운 트랜드를 선도하는<br />
-                            당신의 운동 파트너
+				                            건강한 삶을 위한<br />
+				                            새로운 트랜드를 선도하는<br />
+				                            당신의 운동 파트너
                         </div>
                     </div>
 
