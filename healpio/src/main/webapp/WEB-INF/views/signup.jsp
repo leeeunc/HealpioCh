@@ -193,49 +193,58 @@ window.addEventListener('load', function() {
   }
   
 
-  document.getElementById('signUp').addEventListener('click', function(e){
-  	// 이벤트 초기화
-  	e.preventDefault();
-  	
-  	let id = signUpId.value;
-  	let pw = signUpPw.value;
-  	let name = signUpName.value;
-  	let nick = signUpNick.value;
-  	let phone = signUpPhone.value;
-  	let email = signUpEmail.value;
-  	
-  	 // 입력값 검사
-    if (!id || !pw || !name || !nick || !phone || !email) {
-        signupMsg.innerHTML = '모든 정보를 입력해주세요.';
-        return;
-    }
-  	
-  	// 아이디 중복체크 확인
-  	if(idCheckRes.value !== '1'){
-  		signupMsg.innerHTML = '아이디 중복체크를 해주세요';  		
-  		return;
-  	}
-  	 	
-  	        	
-  	obj = {
-  			id : id
-  			, pw : pw
-  			, name : name
-  			, nick : nick
-  			, phone : phone
-  			, email : email
-  	};
-  	console.log('회원가입 obj : ', obj);
-  	
-  	// 회원가입 요청
-  	fetchPost('/register', obj, function(map) {
-  		if(map.result === 'success'){
-  			location.href='/login';
-  		}else {
-  			signupMsg.innerHTML = map.msg;
-  		}
-  	});
-  })
+  document.getElementById('signUp').addEventListener('click', function(e) {
+      // 이벤트 초기화
+      e.preventDefault();
+
+      let signUpId = document.getElementById('signUpId').value;
+      let signUpPw = document.getElementById('signUpPw').value;
+      let signUpName = document.getElementById('signUpName').value;
+      let signUpNick = document.getElementById('signUpNick').value;
+      let signUpPhone = document.getElementById('signUpPhone').value;
+      let signUpEmail = document.getElementById('signUpEmail').value;
+
+      // 입력값 검사
+      if (!signUpId || !signUpPw || !signUpName || !signUpNick || !signUpPhone || !signUpEmail) {
+          signupMsg.innerHTML = '모든 정보를 입력해주세요.';
+          return;
+      }
+
+      // 아이디 중복체크 확인
+      if (idCheckRes.value !== '1') {
+          signupMsg.innerHTML = '아이디 중복체크를 해주세요';
+          return;
+      }
+
+      let data = {
+          member_id: signUpId,
+          member_pw: signUpPw,
+          member_name: signUpName,
+          nickname: signUpNick,
+          phonenumber: signUpPhone,
+          email: signUpEmail
+      };
+
+      // 회원가입 요청
+      fetch('/register', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+      })
+      .then((response) => response.json())
+      .then((result) => {
+          if (result.result === 'success') {
+              location.href = '/login';
+          } else {
+              signupMsg.innerHTML = result.msg;
+          }
+      })
+      .catch((error) => {
+          console.error('Error : ', error);
+      });
+  });
 
 });
 

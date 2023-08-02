@@ -19,10 +19,14 @@
 	</select>
 	
 	<insert id="insert">
-		insert into member 
-		(member_id, member_pw, member_name, nickname, phonenumber, email)
-		values 
-		(#{member_id}, #{member_pw}, #{member_name}, #{nickname}, #{phonenumber}, #{email})		
-	</insert>
+  <selectKey keyProperty="member_no" resultType="java.lang.String" order="BEFORE">
+    SELECT 'M' || LPAD(SEQ_MEMBER.NEXTVAL, 6, '0') as member_no FROM DUAL
+  </selectKey>
+  insert into member 
+  (member_no, member_id, member_pw, member_name, nickname, phonenumber, email)
+  values 
+  (#{member_no}, #{member_id}, #{member_pw}, #{member_name}, #{nickname}, #{phonenumber}, #{email})		
+</insert>
+
 	
 </mapper>

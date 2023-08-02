@@ -55,16 +55,18 @@ public class MemberServiceImpl implements MemberService{
 	
 	
 	@Override
-	public int insert(MemberVO memberVo) {
-		
-		try {
-		int res = memberMapper.insert(memberVo);
-		return res > 0? 1 : 0; // 1: 회원가입 성공, 0: 회원가입 실패
-		
-	} catch (Exception e) {	
-			e.printStackTrace();
-			return 0;
-		}
+    public int insert(MemberVO memberVo) {
+        try {
+            int res = memberMapper.insert(memberVo);
+            return res > 0 ? 1 : 0; // 1: 회원가입 성공, 0: 회원가입 실패
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+	
+	public void insertMember(MemberVO member) throws Exception {
+	    memberMapper.insert(member);
 	}
 	
 	
