@@ -139,7 +139,7 @@
 		<select id="sigugun"><option value="">시군구 선택</option></select>
 		<select id="dong"><option value="">읍면동 선택</option></select>
 		<div>
-			 <input type="text" id="locationBox">
+			 <input type="hidden" id="locationBox">
 			<!-- 코드: <span id="dongCode"></span> -->
 		</div>
 	</div>
