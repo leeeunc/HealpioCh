@@ -33,10 +33,16 @@ public class ReservationController {
         model.addAttribute("reservation", new ReservationVO());
         return "reservation/reservation";
     }
-
-    @PostMapping("/reservation/confirm")
-    public String reservationConfirm() {
-        // check reservation confirmation logic
-        return "reservation_confirm";
+    
+    @GetMapping("/confirm")
+    public String reservationConfirmForm(Model model) {
+        model.addAttribute("reservation", new ReservationVO());
+        return "reservation/confirm";
     }
+
+//    @PostMapping("/reservation/confirm")
+//    public String reservationConfirm() {
+//        // check reservation confirmation logic
+//        return "reservation_confirm";
+//    }
 }
