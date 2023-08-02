@@ -18,6 +18,10 @@ public class ClassVO {
 	private String class_price;
 	
 	// 추가
+	private String class_day;
+	private String class_time;
+	
+	// 추가
 	private String nickname;
 	private String exercise_name;
 	

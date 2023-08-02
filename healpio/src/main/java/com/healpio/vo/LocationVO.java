@@ -10,6 +10,6 @@ public class LocationVO {
 	private String province;
 	private String city;
 	private String district;
-	private String neighborhood;
+	
 	
 }

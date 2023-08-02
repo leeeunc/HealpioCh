@@ -79,7 +79,7 @@ public class BoardTest {
 	  
 	  list.forEach(location ->{ log.info(location.getLocation_no());
 	  log.info(location.getProvince()); log.info(location.getCity());
-	  log.info(location.getDistrict()); log.info(location.getNeighborhood());
+	  //log.info(location.getDistrict()); log.info(location.getNeighborhood());
 	  
 	  }); }
 	  
