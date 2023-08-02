@@ -3,6 +3,7 @@ package com.healpio.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +71,7 @@ public class MemberController{
         	    
            session.setAttribute("memberVo", memberVo);
            session.setAttribute("userId", memberVo.getMember_id());
-            return "redirect:/board/list";
+            return "redirect:/";
         } else {
             // 로그인 실패
             model.addAttribute("errorMSG", "잘못된 아이디 또는 비밀번호 입니다.");
@@ -130,6 +131,16 @@ public class MemberController{
 		response.put("msg", msg);
 		return response;
 	}
+	
+	
+	 @GetMapping("logout.do")
+	 public String logoutMainGET(HttpServletRequest request) throws Exception{
+	        
+        HttpSession session = request.getSession();
+        session.invalidate();
+        return "redirect:/";        
+        
+	    }
     
 }
 
