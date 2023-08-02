@@ -10,6 +10,14 @@
 	<link href="/resources/css/list.css" rel="stylesheet"> 
 	<script src="https://zelkun.tistory.com/attachment/cfile8.uf@99BB7A3D5D45C065343307.js"></script>
 	<script src="/resources/js/list.js"></script>
+<script>
+function classWirte() {
+  window.location.href = '/class/write';
+}
+
+
+
+</script>
 </head>
 <body>
 
@@ -29,18 +37,8 @@
 			  </c:forEach>
 			</select>
             
-<%--  			<jsp:include page="/WEB-INF/views/common/location.jsp" onchange="filterByLocation()"/>
- --%>
+	<jsp:include page="/WEB-INF/views/common/location.jsp"/>
 
-   <select id="sido" name="sido" onchange="filterBylocation()">
-      <option value="">시도 선택</option>
-    </select>
-    <select id="sigugun">
-      <option value="">시군구 선택</option>
-    </select>
-    <select id="dong">
-      <option value="">읍면동 선택</option>
-    </select>
 
 
 
@@ -84,6 +82,9 @@
 				</div>
 			</c:if>
             </c:forEach>
+            
+            <button onclick="classWirte()">등록하기</button>
+            
  		</div>
  	
 

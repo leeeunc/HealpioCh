@@ -14,9 +14,10 @@
 	<form action="/board/list" 
 			method="get" name="searchForm" autocomplete="off">
 	
-	<input type="text" name="class_no" value="">
-	<input type="text" name="pageNo" value="${pageDto.cri.pageNo }">
-	<input type="text" name="total" value="${pageDto.total }">
+	<input type="hidden" name="class_no" value="">
+	<input type="hidden" name="pageNo" value="${pageDto.cri.pageNo }">
+	<input type="hidden" name="total" value="${pageDto.total }">
+
 	<div class="row g-3 justify-content-center">
 	  <div class="col-sm-3">
 	    <select name="searchField" class="form-select" 
