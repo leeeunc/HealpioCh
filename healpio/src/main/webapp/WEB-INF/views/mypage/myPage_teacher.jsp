@@ -32,16 +32,16 @@
         <link href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css" rel="stylesheet" type="text/css" />
 
         <!--css가져오기-->
-        <link rel="stylesheet" href="css/style_teacher.css" />
+        <link rel="stylesheet" href="/resources/css/style_teacher.css" />
     </head>
     <body>
         <header>
             <div class="inner">
                 <div class="header-container">
-                    <div class="logo"><img src="image/logo/logo_header.png" alt="logo" /></div>
+                    <div class="logo"><img src="/resources/images/logo/logo_header.png" alt="logo" /></div>
                     <div class="health-project"><a href="http://www.naver.com">운동 프로젝트</a></div>
                     <div class="health-search"><a href="http://www.naver.com">운동 강사 찾기</a></div>
-                    <div class="user"><img src="image/header/icon_user.png" alt="user" /></div>
+                    <div class="user"><img src="/resources/images/icon/header/icon_user.png" alt="user" /></div>
                 </div>
             </div>
         </header>
@@ -53,7 +53,7 @@
                             <div class="user-logo">
                                 <img
                                     class="user-logo-img"
-                                    src="image/logo/KakaoTalk_20230727_145442348_01 (1).png"
+                                    src="/resources/images/icon/teacher.png"
                                     alt=""
                                 />
                             </div>
@@ -71,7 +71,7 @@
             <div class="inner">
                 <div class="footer-container">
                     <div class="footer-box1">
-                        <div class="footer-logo"><img src="image/logo/logo_footer.png" alt="하단로고" /></div>
+                        <div class="footer-logo"><img src="/resources/images/logo/logo_footer.png" alt="하단로고" /></div>
                         <div class="footer-slogan">
 				                            건강한 삶을 위한<br />
 				                            새로운 트랜드를 선도하는<br />
@@ -82,10 +82,10 @@
                     <div class="footer-box2">
                         <div class="footer-proposal">문의 및 건의 사항 :</div>
 
-                        <div><img src="image/footer/icon_mail.png" alt="mail" /></div>
-                        <div><img src="image/footer/icon_facebook.png" alt="facebook" /></div>
-                        <div><img src="image/footer/icon_twitter.png" alt="twitter" /></div>
-                        <div><img src="image/footer/icon_instagram.png" alt="instagram" /></div>
+                        <div><img src="/resources/images/icon/footer/icon_mail.png" alt="mail" /></div>
+                        <div><img src="/resources/images/icon/footer/icon_facebook.png" alt="facebook" /></div>
+                        <div><img src="/resources/images/icon/footer/icon_twitter.png" alt="twitter" /></div>
+                        <div><img src="/resources/images/icon/footer/icon_instagram.png" alt="instagram" /></div>
                     </div>
                 </div>
             </div>
