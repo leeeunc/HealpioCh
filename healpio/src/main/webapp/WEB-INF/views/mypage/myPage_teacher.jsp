@@ -6,67 +6,261 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
-        <!-- 웹사이트에 대한 정보를 기재해준다. -->
+
         <meta name="description" content="운동강사와 회원의 매칭서비스" />
         <meta name="keywords" content="matching service" />
-
-        <!-- user-scalable 을 사용하지 않는 디바이스를 위해, maximun-scale/minimum-scale 설정을 하는 것입니다-->
-        <!-- user-scalable : 유저가 확대, 축소할 권한을 설정하는 요소 -->
         <meta
             name="viewport"
             content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
         />
-
-        <!-- 인터넷 익스플로어가 최신 엔진으로 랜더링할 수 있게한다.-->
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-
-        <!-- css를 리셋해준다. -->
-        <!-- CSS Reset(1), style.css, 아이콘 폰트, 웹페이지 사용 폰트 -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-
-        <!-- https://fontawesome.com/start -->
         <script src="https://kit.fontawesome.com/43c3dfddba.js" crossorigin="anonymous"></script>
-
-        <!-- 무료 폰트 -->
-        <!-- Spoca Han Sans Neo: https://spoqa.github.io/spoqa-han-sans/ko-KR/ -->
         <link href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css" rel="stylesheet" type="text/css" />
-
-        <!--css가져오기-->
+        <link rel="stylesheet" href="/resources/css/style_teacher.css" />
+        <!-- 부트스트랩 css-->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+            crossorigin="anonymous"
+        />
         <link rel="stylesheet" href="/resources/css/style_teacher.css" />
     </head>
     <body>
-        <header>
-            <div class="inner">
-                <div class="header-container">
-                    <div class="logo"><img src="/resources/images/logo/logo_header.png" alt="logo" /></div>
-                    <div class="health-project"><a href="http://www.naver.com">운동 프로젝트</a></div>
-                    <div class="health-search"><a href="http://www.naver.com">운동 강사 찾기</a></div>
-                    <div class="user"><img src="/resources/images/icon/header/icon_user.png" alt="user" /></div>
+        <div id="wrap">
+            <header>
+                <div class="inner">
+                    <div class="header-container">
+                        <div class="logo"><img src="/resources/images/logo/logo_header.png" alt="logo" /></div>
+                        <div class="health-project"><a href="http://www.naver.com">운동 프로젝트</a></div>
+                        <div class="health-search"><a href="http://www.naver.com">운동 강사 찾기</a></div>
+                        <div class="user"><img src="/resources/images/icon/header/icon_user.png" alt="user" /></div>
+                    </div>
                 </div>
-            </div>
-        </header>
-        <section>
-            <div class="inner">
-                <div class="inner-container">
-                    <div class="side-menu">
-                        <div class="side-menu-container">
-                            <div class="user-logo">
-                                <img
-                                    class="user-logo-img"
-                                    src="/resources/images/icon/teacher.png"
-                                    alt=""
-                                />
+            </header>
+
+            <section>
+                <div class="inner">
+                    <div class="inner-container">
+                        <div class="side-menu">
+                            <div class="side-menu-container">
+                                <div class="user-logo">
+                                    <img
+                                        class="user-logo-img"
+                                        src="/resources/images/icon/teacher.png"
+                                        alt=""
+                                    />
+                                </div>
+                                <!-- onclick 속성 수정 -->
+                                <div class="myInformation"><a onclick="showContent('info')">내 정보</a></div>
+                                <div class="scrap"><a onclick="showContent('register')">등록 강의 목록</a></div>
+                                <div class="checkReservation">
+                                    <a onclick="showContent('reservation')">예약 확인</a>
+                                </div>
+                                <div class="history"><a onclick="showContent('prev')">이전 강의 내역</a></div>
                             </div>
-                            <div class="myInformation"><a>내 정보</a></div>
-                            <div class="registration"><a>등록 강의 목록</a></div>
-                            <div class="checkReservation"><a>예약 확인</a></div>
-                            <div class="history"><a>이전 강의 내역</a></div>
+                        </div>
+
+                        <div class="content">
+                            <!-- 이전 강의 내역 -->
+                            <div class="content-prev-container">
+                                <div class="content-prev">
+                                    <div class="content-prev-title"><a>하루 10분! 힐링요가</a></div>
+                                    <div class="content-prev-info">
+                                        <div class="content-prev-date">2023.07.24 (월) ｜ 오후 7:00</div>
+                                        <div class="content-prev-member">김건우 회원님 ｜ 010-1234-5678</div>
+                                    </div>
+                                    <div class="content-prev-review">
+                                        <button type="button" class="btn btn-primary">리뷰 확인</button>
+                                    </div>
+                                </div>
+                                <div class="content-prev">
+                                    <div class="content-prev-title"><a>하루 10분! 힐링요가</a></div>
+                                    <div class="content-prev-info">
+                                        <div class="content-prev-date">2023.07.24 (월) ｜ 오후 7:00</div>
+                                        <div class="content-prev-member">김건우 회원님 ｜ 010-1234-5678</div>
+                                    </div>
+                                    <div class="content-prev-review">
+                                        <button type="button" class="btn btn-primary">리뷰 확인</button>
+                                    </div>
+                                </div>
+                                <div class="content-prev">
+                                    <div class="content-prev-title"><a>하루 10분! 힐링요가</a></div>
+                                    <div class="content-prev-info">
+                                        <div class="content-prev-date">2023.07.24 (월) ｜ 오후 7:00</div>
+                                        <div class="content-prev-member">김건우 회원님 ｜ 010-1234-5678</div>
+                                    </div>
+                                    <div class="content-prev-review">
+                                        <button type="button" class="btn btn-primary">리뷰 확인</button>
+                                    </div>
+                                </div>
+                                <div class="content-prev">
+                                    <div class="content-prev-title"><a>하루 10분! 힐링요가</a></div>
+                                    <div class="content-prev-info">
+                                        <div class="content-prev-date">2023.07.24 (월) ｜ 오후 7:00</div>
+                                        <div class="content-prev-member">김건우 회원님 ｜ 010-1234-5678</div>
+                                    </div>
+                                    <div class="content-prev-review">
+                                        <button type="button" class="btn btn-primary">리뷰 확인</button>
+                                    </div>
+                                </div>
+                                <div class="content-prev">
+                                    <div class="content-prev-title"><a>하루 10분! 힐링요가</a></div>
+                                    <div class="content-prev-info">
+                                        <div class="content-prev-date">2023.07.24 (월) ｜ 오후 7:00</div>
+                                        <div class="content-prev-member">김건우 회원님 ｜ 010-1234-5678</div>
+                                    </div>
+                                    <div class="content-prev-review">
+                                        <button type="button" class="btn btn-primary">리뷰 확인</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 예약 확인 -->
+                            <div class="content-reservation-container">
+                                <div class="content-reservation">
+                                    <div class="content-reservation-title"><a>하루 10분! 힐링요가</a></div>
+                                    <div class="content-reservation-info">
+                                        <div class="content-reservation-date">2023.07.24 (월) ｜ 오후 7:00</div>
+                                        <div class="content-reservation-member">김건우 회원님 ｜ 010-1234-5678</div>
+                                    </div>
+                                    <div class="content-reservation-cancel">
+                                        <button type="button" class="btn btn-primary">예약취소</button>
+                                    </div>
+                                </div>
+
+                                <div class="content-reservation">
+                                    <div class="content-reservation-title"><a>하루 10분! 힐링요가</a></div>
+                                    <div class="content-reservation-info">
+                                        <div class="content-reservation-date">2023.07.24 ｜ (월) 오후 7:00</div>
+                                        <div class="content-reservation-member">김건우 회원님 ｜ 010-1234-5678</div>
+                                    </div>
+                                    <div class="content-reservation-cancel">
+                                        <button type="button" class="btn btn-primary">예약취소</button>
+                                    </div>
+                                </div>
+
+                                <div class="content-reservation">
+                                    <div class="content-reservation-title"><a>하루 10분! 힐링요가</a></div>
+                                    <div class="content-reservation-info">
+                                        <div class="content-reservation-date">2023.07.24 ｜ (월) 오후 7:00</div>
+                                        <div class="content-reservation-member">김건우 회원님 ｜ 010-1234-5678</div>
+                                    </div>
+                                    <div class="content-reservation-cancel">
+                                        <button type="button" class="btn btn-primary">예약취소</button>
+                                    </div>
+                                </div>
+
+                                <div class="content-reservation">
+                                    <div class="content-reservation-title"><a>하루 10분! 힐링요가</a></div>
+                                    <div class="content-reservation-info">
+                                        <div class="content-reservation-date">2023.07.24 ｜ (월) 오후 7:00</div>
+                                        <div class="content-reservation-member">김건우 회원님 ｜ 010-1234-5678</div>
+                                    </div>
+                                    <div class="content-reservation-cancel">
+                                        <button type="button" class="btn btn-primary">예약취소</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 등록강의목록 -->
+                            <div class="content-register-container">
+                                <ul class="register-list">
+                                    <li class="register-card">
+                                        <div class="register-img"></div>
+                                        <div class="register-info-container">
+                                            <div class="register-title">하루 10분 힐링 요가</div>
+                                            <div class="register-lecture-info">
+                                                <div class="register-teacher">김건우</div>
+                                                <div class="register-sports">요가</div>
+                                                <div class="register-address">서울시 마포구 대흥동</div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="register-card">
+                                        <div class="register-img"></div>
+                                        <div class="register-info-container">
+                                            <div class="register-title">하루 10분 힐링 요가</div>
+                                            <div class="register-lecture-info">
+                                                <div class="register-teacher">김건우</div>
+                                                <div class="register-sports">요가</div>
+                                                <div class="register-address">서울시 마포구 대흥동</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="register-card">
+                                        <div class="register-img"></div>
+                                        <div class="register-info-container">
+                                            <div class="register-title">하루 10분 힐링 요가</div>
+                                            <div class="register-lecture-info">
+                                                <div class="register-teacher">김건우</div>
+                                                <div class="register-sports">요가</div>
+                                                <div class="register-address">서울시 마포구 대흥동</div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="register-card">
+                                        <div class="register-img"></div>
+                                        <div class="register-info-container">
+                                            <div class="register-title">하루 10분 힐링 요가</div>
+                                            <div class="register-lecture-info">
+                                                <div class="register-teacher">김건우</div>
+                                                <div class="register-sports">요가</div>
+                                                <div class="register-address">서울시 마포구 대흥동</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="register-card">
+                                        <div class="register-img"></div>
+                                        <div class="register-info-container">
+                                            <div class="register-title">하루 10분 힐링 요가</div>
+                                            <div class="register-lecture-info">
+                                                <div class="register-teacher">김건우</div>
+                                                <div class="register-sports">요가</div>
+                                                <div class="register-address">서울시 마포구 대흥동</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- 내 정보 -->
+                            <div class="content-info">
+                                <form class="info-back">
+                                    <div class="info-back-container">
+                                        <div><h3>내 정보</h3></div>
+                                        <div class="mb-3">
+                                            <label class="form-label">닉네임</label>
+                                            <input type="text" class="form-control" id="exampleInputPassword1" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">비밀번호</label>
+                                            <input type="password" class="form-control" id="exampleInputPassword1" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">비밀번호 확인</label>
+                                            <input type="password" class="form-control" id="exampleInputPassword1" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">전화번호</label>
+                                            <input type="text" class="form-control" id="exampleInputPassword1" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">이메일</label>
+                                            <input type="email" class="form-control" id="exampleInputPassword1" />
+                                        </div>
+                                        <div><input class="btn btn-primary edit" type="submit" value="수정하기" /></div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                    <div class="content"></div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
         <footer>
             <div class="inner">
                 <div class="footer-container">
@@ -76,7 +270,7 @@
 				                            건강한 삶을 위한<br />
 				                            새로운 트랜드를 선도하는<br />
 				                            당신의 운동 파트너
-                        </div>
+				                        </div>
                     </div>
 
                     <div class="footer-box2">
@@ -90,5 +284,14 @@
                 </div>
             </div>
         </footer>
+        <script src="/resources/js/mypage_teacher.js"></script>
+        <!-- 부트스트랩js-->
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+            crossorigin="anonymous"
+        ></script>
     </body>
 </html>
+    

@@ -5,7 +5,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>마이페이지</title>
 
         <meta name="description" content="운동강사와 회원의 매칭서비스" />
         <meta name="keywords" content="matching service" />
@@ -27,7 +27,7 @@
         <link rel="stylesheet" href="/resources/css/style_student.css" />
     </head>
     <body>
-        <div id="wrap">
+    <div id="wrap">
             <header>
                 <div class="inner">
                     <div class="header-container">
@@ -51,49 +51,50 @@
                                         alt=""
                                     />
                                 </div>
-                                <div class="myInformation"><a>내 정보</a></div>
-                                <div class="scrap"><a>내가 찜한 강좌</a></div>
-                                <div class="checkReservation"><a>예약 확인</a></div>
-                                <div class="history"><a>이전 강의 내역</a></div>
+                                <!-- onclick 속성 수정 -->
+                                <div class="myInformation"><a onclick="showContent('info')">내 정보</a></div>
+                                <div class="scrap"><a onclick="showContent('scrap')">내가 찜한 강좌</a></div>
+                                <div class="checkReservation">
+                                    <a onclick="showContent('reservation')">예약 확인</a>
+                                </div>
+                                <div class="history"><a onclick="showContent('prev')">이전 강의 내역</a></div>
                             </div>
                         </div>
 
                         <div class="content">
-                            <!-- prev
-                                <div class="content-prev-container">
-                                    <div class="content-prev">
-                                        <div class="content-prev-title"><a>하루 10분! 힐링요가</a></div>
-                                        <div class="content-prev-date">2023.07.24 (월) 오후 7:00</div>
-                                        <div class="content-prev-cancel">
-                                            <button type="button" class="btn btn-primary">예약취소</button>
-                                        </div>
-                                    </div>
-                                    <div class="content-prev">
-                                        <div class="content-prev-title"><a>하루 10분! 힐링요가</a></div>
-                                        <div class="content-prev-date">2023.07.24 (월) 오후 7:00</div>
-                                        <div class="content-prev-cancel">
-                                            <button type="button" class="btn btn-primary">예약취소</button>
-                                        </div>
-                                    </div>
-                                    <div class="content-prev">
-                                        <div class="content-prev-title"><a>하루 10분! 힐링요가</a></div>
-                                        <div class="content-prev-date">2023.07.24 (월) 오후 7:00</div>
-                                        <div class="content-prev-cancel">
-                                            <button type="button" class="btn btn-primary">예약취소</button>
-                                        </div>
-                                    </div>
-                                    <div class="content-prev">
-                                        <div class="content-prev-title"><a>하루 10분! 힐링요가</a></div>
-                                        <div class="content-prev-date">2023.07.24 (월) 오후 7:00</div>
-                                        <div class="content-prev-cancel">
-                                            <button type="button" class="btn btn-primary">예약취소</button>
-                                        </div>
+                            <!-- 이전 강의 내역 -->
+                            <div class="content-prev-container">
+                                <div class="content-prev">
+                                    <div class="content-prev-title"><a>하루 10분! 힐링요가</a></div>
+                                    <div class="content-prev-date">2023.07.24 (월) 오후 7:00</div>
+                                    <div class="content-prev-cancel">
+                                        <button type="button" class="btn btn-primary">리뷰 작성</button>
                                     </div>
                                 </div>
+                                <div class="content-prev">
+                                    <div class="content-prev-title"><a>하루 10분! 힐링요가</a></div>
+                                    <div class="content-prev-date">2023.07.24 (월) 오후 7:00</div>
+                                    <div class="content-prev-cancel">
+                                        <button type="button" class="btn btn-primary">리뷰 작성</button>
+                                    </div>
+                                </div>
+                                <div class="content-prev">
+                                    <div class="content-prev-title"><a>하루 10분! 힐링요가</a></div>
+                                    <div class="content-prev-date">2023.07.24 (월) 오후 7:00</div>
+                                    <div class="content-prev-cancel">
+                                        <button type="button" class="btn btn-primary">리뷰작성</button>
+                                    </div>
+                                </div>
+                                <div class="content-prev">
+                                    <div class="content-prev-title"><a>하루 10분! 힐링요가</a></div>
+                                    <div class="content-prev-date">2023.07.24 (월) 오후 7:00</div>
+                                    <div class="content-prev-cancel">
+                                        <button type="button" class="btn btn-primary">리뷰작성</button>
+                                    </div>
+                                </div>
+                            </div>
 
-                            -->
-
-                            <!-- reservation 
+                            <!-- 예약 내역 -->
                             <div class="content-reservation-container">
                                 <div class="content-reservation">
                                     <div class="content-reservation-title"><a>하루 10분! 힐링요가</a></div>
@@ -124,9 +125,8 @@
                                     </div>
                                 </div>
                             </div>
-                            -->
 
-                            <!-- scrap
+                            <!-- 스크랩 -->
                             <div class="content-scrap-container">
                                 <ul class="scrap-list">
                                     <li class="scrap-card">
@@ -183,10 +183,8 @@
                                     </li>
                                 </ul>
                             </div>
-                            
-                            -->
 
-                            <!-- information
+                            <!-- 내 정보 -->
                             <div class="content-info">
                                 <form class="info-back">
                                     <div class="info-back-container">
@@ -215,7 +213,6 @@
                                     </div>
                                 </form>
                             </div>
-                            -->
                         </div>
                     </div>
                 </div>
@@ -225,12 +222,12 @@
             <div class="inner">
                 <div class="footer-container">
                     <div class="footer-box1">
-                        <div class="footer-logo"><img src="/resources/imag/logo/logo_footer.png" alt="하단로고" /></div>
+                        <div class="footer-logo"><img src="/resources/images/logo/logo_footer.png" alt="하단로고" /></div>
                         <div class="footer-slogan">
 				                            건강한 삶을 위한<br />
 				                            새로운 트랜드를 선도하는<br />
 				                            당신의 운동 파트너
-                        </div>
+				                        </div>
                     </div>
 
                     <div class="footer-box2">
@@ -244,7 +241,7 @@
                 </div>
             </div>
         </footer>
-        <script src="js/student.js"></script>
+        <script src="/resources/js/mypage_student.js"></script>
         <!-- 부트스트랩js-->
 
         <script
