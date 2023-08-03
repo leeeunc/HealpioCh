@@ -23,9 +23,10 @@
     SELECT 'M' || LPAD(SEQ_MEMBER.NEXTVAL, 6, '0') as member_no FROM DUAL
   </selectKey>
   insert into member 
-  (member_no, member_id, member_pw, member_name, nickname, phonenumber, email)
+  (member_no, member_id, member_pw, member_name, nickname, phonenumber, email, teacheryn)
   values 
-  (#{member_no}, #{member_id}, #{member_pw}, #{member_name}, #{nickname}, #{phonenumber}, #{email})		
+  (#{member_no}, #{member_id}, #{member_pw}, #{member_name}
+  , #{nickname}, #{phonenumber}, #{email}, #{teacheryn})		
 </insert>
 
 	

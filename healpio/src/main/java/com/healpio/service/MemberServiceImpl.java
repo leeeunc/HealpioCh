@@ -11,7 +11,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -57,6 +56,15 @@ public class MemberServiceImpl implements MemberService{
 	@Override
     public int insert(MemberVO memberVo) {
         try {
+        	
+        	// 'teacheryn' 값이 'Y'인 경우 'adminyn'을 'N'으로 설정합니다.
+            if ("Y".equals(memberVo.getTeacheryn())) {
+                memberVo.setAdminyn("N");
+            } else {
+                // 'teacheryn' 값이 'Y'가 아닌 경우 'adminyn'을 'Y'로 설정합니다.
+                memberVo.setAdminyn("Y");
+            }
+        	
             int res = memberMapper.insert(memberVo);
             return res > 0 ? 1 : 0; // 1: 회원가입 성공, 0: 회원가입 실패
         } catch (Exception e) {
@@ -66,6 +74,7 @@ public class MemberServiceImpl implements MemberService{
     }
 	
 	public void insertMember(MemberVO member) throws Exception {
+		member.setTeacheryn("Y");
 	    memberMapper.insert(member);
 	}
 	
