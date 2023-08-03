@@ -18,6 +18,12 @@
 			where member_id=#{member_id}
 	</select>
 	
+	<select id="nickCheck" resultType="int">
+		select count(*)
+			from member
+			where nickname=#{nickname}
+	</select>
+	
 	<insert id="insert">
   <selectKey keyProperty="member_no" resultType="java.lang.String" order="BEFORE">
     SELECT 'M' || LPAD(SEQ_MEMBER.NEXTVAL, 6, '0') as member_no FROM DUAL

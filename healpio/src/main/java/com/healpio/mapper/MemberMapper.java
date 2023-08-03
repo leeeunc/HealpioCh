@@ -8,7 +8,10 @@ public interface MemberMapper {
 	public MemberVO login(MemberVO memberVO);
 	
 	public int idCheck(MemberVO memberVO);
+
+	public int nickCheck(MemberVO memberVO);
 	
 	public int insert(MemberVO memberVo);
+
 
 }
