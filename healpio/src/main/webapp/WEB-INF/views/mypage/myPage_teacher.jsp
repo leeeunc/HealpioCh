@@ -25,17 +25,17 @@
             integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
             crossorigin="anonymous"
         />
-        <link rel="stylesheet" href="/resources/css/style_teacher.css" />
+        <link rel="stylesheet" href="../resources/css/style_teacher.css?after" />
     </head>
     <body>
         <div id="wrap">
             <header>
                 <div class="inner">
                     <div class="header-container">
-                        <div class="logo"><img src="/resources/images/logo/logo_header.png" alt="logo" /></div>
+                        <div class="logo"><img src="../resources/images/logo/logo_header.png" alt="logo" /></div>
                         <div class="health-project"><a href="http://www.naver.com">운동 프로젝트</a></div>
                         <div class="health-search"><a href="http://www.naver.com">운동 강사 찾기</a></div>
-                        <div class="user"><img src="/resources/images/icon/header/icon_user.png" alt="user" /></div>
+                        <div class="user"><img src="../resources/images/icon/header/icon_user.png" alt="user" /></div>
                     </div>
                 </div>
             </header>
@@ -48,7 +48,7 @@
                                 <div class="user-logo">
                                     <img
                                         class="user-logo-img"
-                                        src="/resources/images/icon/teacher.png"
+                                        src="../resources/images/icon/teacher.png"
                                         alt=""
                                     />
                                 </div>
@@ -234,25 +234,29 @@
                                         <div><h3>내 정보</h3></div>
                                         <div class="mb-3">
                                             <label class="form-label">닉네임</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1" />
+                                            <input type="text" class="form-control" id="exampleInputPassword1" readonly/>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">비밀번호</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1" />
+                                            <input type="password" class="form-control" id="exampleInputPassword1" readonly/>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">비밀번호 확인</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1" />
+                                            <input type="password" class="form-control" id="exampleInputPassword1" readonly/>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">전화번호</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1" />
+                                            <input type="text" class="form-control" id="exampleInputPassword1" readonly/>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">이메일</label>
-                                            <input type="email" class="form-control" id="exampleInputPassword1" />
+                                            <input type="email" class="form-control" id="exampleInputPassword1" readonly/>
                                         </div>
-                                        <div><input class="btn btn-primary edit" type="submit" value="수정하기" /></div>
+                                        <div id='editBox'>
+                                            <input id='btnEdit' class="btn btn-primary edit" type="button" value="수정하기" />
+                                            <input id='btnGoEdit' class="btn btn-primary goEdit" type="button" value="수정" />
+                                            <input id='btnGoDelete' class="btn btn-primary goDelete" onclick="location.href='/mypage/student'" type="button" value="삭제" />
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -284,7 +288,7 @@
                 </div>
             </div>
         </footer>
-        <script src="/resources/js/mypage_teacher.js"></script>
+        <script src="../resources/js/mypage_teacher.js?after"></script>
         <!-- 부트스트랩js-->
 
         <script

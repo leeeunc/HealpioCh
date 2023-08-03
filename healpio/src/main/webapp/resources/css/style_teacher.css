@@ -198,7 +198,15 @@ footer {
 }
 
 .edit {
-    width: 500px;
+    width: 400px;
+}
+
+.goEdit{
+    display: none;
+}
+
+.goDelete{
+    display: none;
 }
 
 /* register */
@@ -336,13 +344,16 @@ footer {
     display: block;
 }
 
+/*
 .content-info {
     display: none;
 }
+*/
 
 .content-register-container {
     display: none;
 }
+
 
 .content-reservation-container {
     display: none;

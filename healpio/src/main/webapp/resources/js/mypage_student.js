@@ -18,3 +18,9 @@ function showContent(contentType) {
         }
     });
 }
+
+btnEdit.addEventListener('click',function(){
+    document.querySelector('#btnEdit').style.display = 'none';
+    document.querySelector('#btnGoEdit').style.display = 'inline-block';
+    document.querySelector('#btnGoDelete').style.display = 'inline-block';
+});

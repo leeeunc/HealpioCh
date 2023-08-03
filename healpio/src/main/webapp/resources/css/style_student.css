@@ -198,7 +198,15 @@ footer {
 }
 
 .edit {
-    width: 500px;
+    width: 400px;
+}
+
+.goEdit{
+    display: none;
+}
+
+.goDelete{
+    display: none;
 }
 
 /* scrap */
@@ -332,9 +340,11 @@ footer {
     font-weight: bold;
 }
 
+/*
 .content-info {
     display: none;
 }
+*/
 
 .content-scrap-container {
     display: none;
@@ -347,6 +357,10 @@ footer {
 .content-prev-container {
     display: none;
 }
+
+
+/* read only*/
+
 
 @media screen and (max-width: 1150px) {
     .health-project {
