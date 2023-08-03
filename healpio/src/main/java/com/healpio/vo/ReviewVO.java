@@ -12,4 +12,7 @@ public class ReviewVO {
 	private String review_content;
 	private double review_star;
 	
+	// 추가
+	private String nickname;
+	
 }

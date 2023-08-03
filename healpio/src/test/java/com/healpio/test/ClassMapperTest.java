@@ -40,9 +40,9 @@ public class ClassMapperTest {
 //	
 	@Test
 	public void getOne() {
-		classMapper.getOne("C000013");
+		classMapper.getOne("C000012");
 	}
-	
+//	
 //	@Test
 //	public void update() {
 //		ClassVO classVO = new ClassVO();

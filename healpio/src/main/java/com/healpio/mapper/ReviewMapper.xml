@@ -9,44 +9,38 @@
   	<selectKey keyProperty="review_no" order="BEFORE" resultType="String">
   		select 'r'||lpad(seq_class.nextval, 6, '0') from dual
 	</selectKey>
-  	insert into review values
-  	(#{review_no}, #{member_no}, #{class_no}, sysdate, #{review_content}, #{review_star})
+  	insert into review 
+  	values (#{review_no}, #{member_no}, #{class_no}, sysdate, #{review_content}, #{review_star})
   </insert>
-  <!-- 
-  <select id="getOne" resultType="com.healpio.vo.ClassVO">
-  	select class_no, class_title, nickname, exercise_name, class_introduce, class_maxcount, class_content, class_price, teacher_content 
-  	from class, member, exercise 
-  	where class.member_no = member.member_no and class.exercise_no = exercise.exercise_no and class_no = #{class_no}
+  
+  <select id="getList" resultType="com.healpio.vo.ReviewVO">
+  	select nickname, review.*
+  	from review, member 
+  	where review.member_no = member.member_no and class_no = #{class_no}
+  	order by review_regdate desc
+  </select>
+  
+  <select id="getAvgScore" resultType="double">
+	select round(avg(review_star),1) from review where class_no = #{class_no}
+  </select>
+  
+  <select id="getCount" resultType="int">
+  	select count(*) from review where class_no = #{class_no}
+  </select>
+  
+  <select id="getOne" resultType="com.healpio.vo.ReviewVO">
+  	select nickname, review.*
+  	from review, member 
+  	where review.member_no = member.member_no and review_no = #{review_no}
   </select>
   
   <update id="update">
-  	update class 
-  	set exercise_no = #{exercise_no}, class_title = #{class_title}, class_content = #{class_content}, class_introduce = #{class_introduce}, teacher_content = #{teacher_content}, class_maxcount = #{class_maxcount}, class_price = #{class_price} 
-  	where class_no = #{class_no}
+  	update review 
+  	set review_content = #{review_content}, review_star = #{review_star} 
+  	where review_no = #{review_no}
   </update>
   
   <delete id="delete">
-  	delete from class where class_no = #{class_no}
+  	delete from review where review_no = #{review_no}
   </delete>
-  
-  <insert id="scrap">
-  	<selectKey keyProperty="scrap_no" order="BEFORE" resultType="String">
-  		select 'S'||lpad(seq_class.nextval, 6, '0') from dual
-	</selectKey>
-  	insert into scrap values 
-  	(#{scrap_no}, #{class_no}, #{member_no})
-  </insert>
-  
-  <delete id="cancelScrap">
-  	delete from scrap where class_no = #{class_no} and member_no = #{member_no}
-  </delete>
-  
-  <select id="scrapYN" resultType="int">
-  	select count(*) from scrap where class_no = #{class_no} and member_no = #{member_no}
-  </select>
-  
-  <delete id="deleteScrap">
-  	delete from scrap where class_no = #{class__no}
-  </delete>
-   -->
 </mapper>

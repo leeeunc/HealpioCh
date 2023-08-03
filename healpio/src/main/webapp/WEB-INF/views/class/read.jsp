@@ -14,14 +14,6 @@ function go(url){
 	location.href = url;
 }
 
-function scrap(class_no){
-	fetchGet('/class/scrap?class_no=' + class_no, getFullheart);
-}
-
-function cancelScrap(class_no){
-	fetchGet('/class/cancelScrap?class_no=' + class_no, getEmptyheart);
-}
-
 function fetchGet(url, callback){
 	try{
 		fetch(url)
@@ -38,9 +30,17 @@ function fetchGet(url, callback){
 	}
 }
 
+function scrap(class_no){
+	fetchGet('/class/scrap?class_no=' + class_no, getFullheart);
+}
+
+function cancelScrap(class_no){
+	fetchGet('/class/cancelScrap?class_no=' + class_no, getEmptyheart);
+}
+
 function getFullheart(map){
 	if(map.result=='success'){
-		scrapDiv.innerHTML = `<i class="fa-solid fa-heart" style="color: #ff6666" onclick="cancelScrap('${classVO.class_no}')"></i><br>`;
+		scrapDiv.innerHTML = `이 강의 찜하기 <i class="fa-solid fa-heart" style="color: #ff6666" onclick="cancelScrap('${classVO.class_no}')"></i><br>`;
 	} else {
 		alert(map.result);
 	}
@@ -48,13 +48,13 @@ function getFullheart(map){
 
 function getEmptyheart(map){
 	if(map.result=='success'){
-		scrapDiv.innerHTML = `<i class="fa-regular fa-heart" style="color: #ff6666" onclick="scrap('${classVO.class_no}')"></i><br>`;
+		scrapDiv.innerHTML = `이 강의 찜하기 <i class="fa-regular fa-heart" style="color: #ff6666" onclick="scrap('${classVO.class_no}')"></i><br>`;
 	} else {
 		alert(map.result);
 	}
 }
 
-$(function(){
+$(function(){	
     $('.score').score({
         starColor: "gold", //별 색상
         backgroundColor: "transparent", //배경 색상
@@ -67,15 +67,44 @@ $(function(){
         },
         display: {
             showNumber: true, //설정된 숫자 표시 가능 여부
-            placeLimit: 1, //소수점 자리수 표시 길이
+            placeLimit: 0, //소수점 자리수 표시 길이
             textColor:"black",//텍스트 색상
         },
         point: {
             max: 5,//최대 점수(data-max로 대체 가능)
-            rate: 3,//실제 점수(data-rate로 대체 가능)
+            rate: 4,//실제 점수(data-rate로 대체 가능)
         }
-    })
+    });
+    
+
+    $('.avgScore').score({
+        editable:false,
+        display:{
+            showNumber:true,
+            placeLimit:1
+        }    
+    });    
 });
+
+function showReview(class_no){
+	reviewDiv.style.display = '';
+	fetchGet('/review/list?class_no=' + class_no, getReviewList);
+}
+
+function getReviewList(map){
+	reviewDiv.innerHTML = ``;	
+	reviewDiv.innerHTML += `리뷰 <span style="color: gold">★</span>` + map.avgScore + ` (` + map.reviewCount + `명 참여)<hr>`;
+	map.reviewList.forEach(reviewVO => {
+		reviewDiv.innerHTML += reviewVO.nickname;
+		reviewDiv.innerHTML += ` <span style="color: gold">★</span>` + reviewVO.review_star + `<br>`;
+		reviewDiv.innerHTML += reviewVO.review_content;
+		if(member_no.value==reviewVO.member_no){
+			reviewDiv.innerHTML += ` <button type="button" onclick="go('/review/edit?review_no=` + reviewVO.review_no + `')">수정</button>`;
+			reviewDiv.innerHTML += ` <button type="button" onclick="go('/review/delete?review_no=` + reviewVO.review_no + `')">삭제</button>`;
+		}
+		reviewDiv.innerHTML += `<br><br>`;
+	})
+}
 </script>
 </head>
 <body>
@@ -87,6 +116,7 @@ ${classVO.nickname}<br>
 ${classVO.exercise_name}<br>
 ${classVO.class_introduce}<br>
 <div id="scrapDiv">
+	이 강의 찜하기
 	<c:if test="${scrapYN==0}">
 	<i class="fa-regular fa-heart" style="color: #ff6666" onclick="scrap('${classVO.class_no}')"></i>
 	</c:if>
@@ -102,21 +132,27 @@ ${classVO.class_content}<br>
 ${classVO.class_maxcount}<br>
 ${classVO.class_price}<br>
 
-<br><br><br><br>
+<br><br>
 
 <!-- 강사 소개 -->
 ${classVO.teacher_content}<br>
 
-<br><br><br><br>
+<br><br>
 
 <!-- 리뷰 -->
-리뷰 작성
-<form name="reviewForm" method="get" action="/review/write">
-	<div class='score' data-max='5'></div><br>
-	<input type="text" name="member_no" id="member_no" value="M000002">
+<button type="button" id="reviewBtn" onclick="showReview('${classVO.class_no}')">리뷰</button>
+<form action="/review/write">
+	<!-- 리뷰쓰기(삭제 예정) -->
+	<button type="submit" id="reviewWriteBtn">리뷰쓰기</button>
+	<!-- 리뷰 작성시 필요 -->	
 	<input type="text" name="class_no" id="class_no" value="${classVO.class_no}">
-	<input type="text" name="review_content" id="review_content">
-	<button type="submit">등록</button>
+	<!-- 리뷰 작성,수정,삭제시 필요 -->	
+	<input type="text" name="member_no" id="member_no" value="M000002">
 </form>
+<br>
+
+<div id="reviewDiv" style="display:none">
+
+</div>
 </body>
 </html>

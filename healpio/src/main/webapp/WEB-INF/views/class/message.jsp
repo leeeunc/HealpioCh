@@ -18,30 +18,30 @@
  -->
  
 <script>
-	let message = '${message}';
-	window.addEventListener('load', function(){
-		if(message!=''){
-			// 모달창 열기
-			document.querySelector(".modal-body").innerHTML = message;
-			const myModal = new bootstrap.Modal('#myModal', {
-				keyboard: false
-			})
-			myModal.show();
-			
-			// 모달창 닫기 후 뒤로가기
-			const myModalEl = document.getElementById('myModal')
-			myModalEl.addEventListener('hidden.bs.modal', event=>{
-				if(message.indexOf("오류")>-1){
-					history.go(-1);					
-				} else if(message.indexOf("삭제되었습니다.")>-1){
-					location.href='../class/#';
-				} else {
-					//location.href='../class/read?class_no=${class_no}&pageno=${pageno}&searchfield=${searchfield}&searchword=${searchword}';
-					location.href='../class/read?class_no=${class_no}';
-				}
-			})
-		}
-	})
+let message = '${message}';
+window.addEventListener('load', function(){
+	if(message!=''){
+		// 모달창 열기
+		document.querySelector(".modal-body").innerHTML = message;
+		const myModal = new bootstrap.Modal('#myModal', {
+			keyboard: false
+		})
+		myModal.show();
+		
+		// 모달창 닫기 후 뒤로가기
+		const myModalEl = document.getElementById('myModal')
+		myModalEl.addEventListener('hidden.bs.modal', event=>{
+			if(message.indexOf("오류")>-1){
+				history.go(-1);					
+			} else if(message.indexOf("게시글이 삭제되었습니다.")>-1){
+				location.href='../class/#';
+			} else {
+				//location.href='../class/read?class_no=${class_no}&pageno=${pageno}&searchfield=${searchfield}&searchword=${searchword}';
+				location.href='../class/read?class_no=${class_no}';
+			}
+		})
+	}
+})
 </script>
 
 <!-- CSS, JS 링크 추가 -->
