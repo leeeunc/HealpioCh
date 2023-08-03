@@ -25,20 +25,13 @@
             crossorigin="anonymous"
         />
         <link rel="stylesheet" href="../resources/css/style_student.css?after" />
+        
     </head>
     <body>
-    <div id="wrap">
-            <header>
-                <div class="inner">
-                    <div class="header-container">
-                        <div class="logo"><img src="../resources/images/logo/logo_header.png" alt="logo" /></div>
-                        <div class="health-project"><a href="http://www.naver.com">운동 프로젝트</a></div>
-                        <div class="health-search"><a href="http://www.naver.com">운동 강사 찾기</a></div>
-                        <div class="user"><img src="../resources/images/icon/header/icon_user.png" alt="user" /></div>
-                    </div>
-                </div>
-            </header>
-
+    
+			<%@ include file="../common/header.jsp" %>
+			
+			
             <section>
                 <div class="inner">
                     <div class="inner-container">
@@ -186,33 +179,33 @@
 
                             <!-- 내 정보 -->
                             <div class="content-info">
-                                <form class="info-back">
+                                <form class="info-back" method='post' >
                                     <div class="info-back-container">
                                         <div><h3>내 정보</h3></div>
                                         <div class="mb-3">
                                             <label class="form-label">닉네임</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1" readonly/>
+                                            <input type="text" class="form-control info-control" name="nickname" value="${memberVO.nickname}" readonly/>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">비밀번호</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1" readonly />
+                                            <input type="password" class="form-control info-control" name="member_pw"  value="${memberVO.member_pw }" readonly />
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">비밀번호 확인</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1" readonly/>
+                                            <input type="password" class="form-control info-control"  value="${memberVO.member_pw}" readonly/>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">전화번호</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1" readonly/>
+                                            <input type="text" class="form-control info-control" name="phonenumber"  value="${memberVO.phonenumber }" readonly/>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">이메일</label>
-                                            <input type="email" class="form-control" id="exampleInputPassword1" readonly/>
+                                            <input type="email" class="form-control info-control" name="email" value="${memberVO.email }" readonly/>
                                         </div>
                                         <div id='editBox'>
                                             <input id='btnEdit' class="btn btn-primary edit" type="button" value="수정하기" />
                                             <input id='btnGoEdit' class="btn btn-primary goEdit" type="button" value="수정" />
-                                            <input id='btnGoDelete' class="btn btn-primary goDelete" onclick="location.href='/mypage/student'" type="button" value="삭제" />
+                                            <input id='btnGoDelete' class="btn btn-primary goDelete" onclick="location.href='/mypage/student?member_no=M000002'" type="button" value="삭제" />
                                         </div>
                                     </div>
                                 </form>
@@ -221,7 +214,8 @@
                     </div>
                 </div>
             </section>
-        </div>
+        
+      <!--
         <footer>
             <div class="inner">
                 <div class="footer-container">
@@ -245,6 +239,8 @@
                 </div>
             </div>
         </footer>
+          --> 
+        <%@ include file="../common/footer.jsp" %>
         <script src="../resources/js/mypage_student.js?after"></script>
         <!-- 부트스트랩js-->
 

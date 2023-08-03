@@ -29,16 +29,7 @@
     </head>
     <body>
         <div id="wrap">
-            <header>
-                <div class="inner">
-                    <div class="header-container">
-                        <div class="logo"><img src="../resources/images/logo/logo_header.png" alt="logo" /></div>
-                        <div class="health-project"><a href="http://www.naver.com">운동 프로젝트</a></div>
-                        <div class="health-search"><a href="http://www.naver.com">운동 강사 찾기</a></div>
-                        <div class="user"><img src="../resources/images/icon/header/icon_user.png" alt="user" /></div>
-                    </div>
-                </div>
-            </header>
+            <%@ include file="../common/header.jsp" %>
 
             <section>
                 <div class="inner">
@@ -265,6 +256,7 @@
                 </div>
             </section>
         </div>
+        <!--  
         <footer>
             <div class="inner">
                 <div class="footer-container">
@@ -288,6 +280,9 @@
                 </div>
             </div>
         </footer>
+        -->
+        
+        <%@ include file="../common/footer.jsp" %>
         <script src="../resources/js/mypage_teacher.js?after"></script>
         <!-- 부트스트랩js-->
 

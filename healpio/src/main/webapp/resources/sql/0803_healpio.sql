@@ -8,6 +8,7 @@ drop table member;
 drop table location;
 drop table my_table;
 drop table ATTACH;
+drop table message;
 -- 시퀀스 삭제
 DROP SEQUENCE seq_member;
 DROP SEQUENCE seq_EXERCISE;
@@ -18,6 +19,9 @@ DROP SEQUENCE seq_scrap;
 DROP SEQUENCE SEQ_LOCATION;
 
   -- 시퀀스 생성
+  CREATE SEQUENCE SEQ_MESSAGE;
+  
+  
   CREATE SEQUENCE seq_location
   START WITH 1
   INCREMENT BY 1
@@ -66,6 +70,17 @@ DROP SEQUENCE SEQ_LOCATION;
   MAXVALUE 99999
   NOCACHE
   NOCYCLE;
+  
+CREATE TABLE message (
+    MESSAGE_NO varchar2(20) PRIMARY KEY,
+    MESSAGE_TITLE VARCHAR2(100),
+    MESSAGE_CONTENT VARCHAR2(2000),
+    SEND_NICK VARCHAR2(20) NOT NULL,
+    RECV_NICK VARCHAR2(20) NOT NULL,
+    SEND_TIME DATE DEFAULT SYSDATE NOT NULL,
+    READYN CHAR(1) DEFAULT 'N' NOT NULL
+);
+
   
 CREATE TABLE ATTACH(
     UUID VARCHAR2(100) PRIMARY KEY,
@@ -120,12 +135,11 @@ create table class(
 	, class_content	VARCHAR2(2000)		
 	, class_introduce	VARCHAR2(200)		
 	, class_regdate	DATE default sysdate		
-	, teacher_content	VARCHAR2(2000)		
-	, class_attach	VARCHAR2(1000)		
+	, teacher_content	VARCHAR2(2000)			
 	, class_maxCount	NUMBER
 	, class_price	VARCHAR2(50)
-    , class_day varchar2(20)
-    , class_time varchar2(20)
+    , class_day varchar2(100)
+    , class_time varchar2(100)
     , CONSTRAINT fk_class_exercise_no FOREIGN KEY (exercise_no) REFERENCES exercise(exercise_no)
     , CONSTRAINT fk_class_member_no FOREIGN KEY (member_no) REFERENCES member(member_no)
 );
@@ -152,8 +166,8 @@ create table reservation(
 	reservation_no	varchar2(20)	primary key		
 	, member_no	varchar2(20)	NOT NULL		
 	, class_no	varchar2(20)	NOT NULL		
-	, reservation_date	varchar2(20)
-	, reservation_time	VARCHAR2(20)
+	, reservation_date	varchar2(50)
+	, reservation_time	VARCHAR2(50)
     , reservation_regdate	DATE
     , CONSTRAINT fk_reservation_member_no FOREIGN KEY (member_no) REFERENCES member(member_no)
 	, CONSTRAINT fk_reservation_class_no FOREIGN KEY (class_no) REFERENCES class(class_no)
@@ -195,11 +209,11 @@ INSERT INTO EXERCISE (EXERCISE_NO, EXERCISE_NAME) VALUES ('E' || LPAD(SEQ_EXERCI
 
 
 --class 테이블 데이터
-INSERT INTO CLASS VALUES ('C' || LPAD(SEQ_CLASS.NEXTVAL, 6, '0'), 'M000003','E000002', '요가 수업', '기본적인 요가 동작을 배웁니다', '초급 요가', SYSDATE, '선생님에 대한 소개', NULL, 20, '무료', '2023-08-20', '14:00');
-INSERT INTO class VALUES ('C' || LPAD(SEQ_CLASS.NEXTVAL, 6, '0'), 'M000006','E000003', '필라테스 수업', '필라테스 운동을 배웁니다', '초급 필라테스', SYSDATE, '선생님에 대한 소개', NULL, 15, '1만원','2023-08-20', '15:00');
-INSERT INTO class VALUES ('C' || LPAD(SEQ_CLASS.NEXTVAL, 6, '0'), 'M000007','E000004', '명상 수업', '명상하는 방법을 배웁니다', '초보자를 위한 명상', SYSDATE, '선생님에 대한 소개', NULL, 10, '1.5만원','2023-08-20', '16:00');
-INSERT INTO class VALUES ('C' || LPAD(SEQ_CLASS.NEXTVAL, 6, '0'), 'M000007','E000006', '축구 수업', '월클이 가르치는 슛자세', '초보자를 위한 축구', SYSDATE, '선생님에 대한 소개', NULL, 10, '1.5만원','2023-08-20', '17:00');
-INSERT INTO CLASS VALUES ('C' || LPAD(SEQ_CLASS.NEXTVAL, 6, '0'), 'M000003','E000010', '크로스핏', '즐급게 운동합시다.', '크로스핏', SYSDATE, '선생님에 대한 소개', NULL, 20, '무료', '2023-08-01', '14:00');
+INSERT INTO CLASS VALUES ('C' || LPAD(SEQ_CLASS.NEXTVAL, 6, '0'), 'M000003','E000002', '요가 수업', '기본적인 요가 동작을 배웁니다', '초급 요가', SYSDATE, '선생님에 대한 소개', 20, '무료', '2023-08-20', '14:00');
+INSERT INTO class VALUES ('C' || LPAD(SEQ_CLASS.NEXTVAL, 6, '0'), 'M000006','E000003', '필라테스 수업', '필라테스 운동을 배웁니다', '초급 필라테스', SYSDATE, '선생님에 대한 소개', 15, '1만원','2023-08-20', '15:00');
+INSERT INTO class VALUES ('C' || LPAD(SEQ_CLASS.NEXTVAL, 6, '0'), 'M000007','E000004', '명상 수업', '명상하는 방법을 배웁니다', '초보자를 위한 명상', SYSDATE, '선생님에 대한 소개', 10, '1.5만원','2023-08-20', '16:00');
+INSERT INTO class VALUES ('C' || LPAD(SEQ_CLASS.NEXTVAL, 6, '0'), 'M000007','E000006', '축구 수업', '월클이 가르치는 슛자세', '초보자를 위한 축구', SYSDATE, '선생님에 대한 소개', 10, '1.5만원','2023-08-20', '17:00');
+INSERT INTO CLASS VALUES ('C' || LPAD(SEQ_CLASS.NEXTVAL, 6, '0'), 'M000003','E000010', '크로스핏', '즐급게 운동합시다.', '크로스핏', SYSDATE, '선생님에 대한 소개', 20, '무료', '2023-08-01', '14:00');
 
 --review 테이블 데이터
 INSERT INTO REVIEW VALUES ('r' || LPAD(SEQ_review.NEXTVAL, 6, '0'), 'M000002', 'C000002', SYSDATE, '수업이 아주 좋았습니다!', 5);
@@ -212,7 +226,6 @@ INSERT INTO REVIEW VALUES ('r' || LPAD(SEQ_review.NEXTVAL, 6, '0'), 'M000004', '
 INSERT INTO RESERVATION VALUES ('R' || LPAD(SEQ_RESERVATION.NEXTVAL, 6, '0'), 'M000002', 'C000002', '2023-08-20', '14:00', sysdate);
 INSERT INTO RESERVATION VALUES ('R' || LPAD(SEQ_RESERVATION.NEXTVAL, 6, '0'), 'M000003', 'C000002','2023-08-20', '14:00', sysdate);
 INSERT INTO RESERVATION VALUES ('R' || LPAD(SEQ_RESERVATION.NEXTVAL, 6, '0'), 'M000004', 'C000003', '2023-08-20', '15:00', sysdate);
-INSERT INTO RESERVATION VALUES ('R' || LPAD(SEQ_RESERVATION.NEXTVAL, 6, '0'), 'M000004', 'C000006', '2023-08-01', '12:00', sysdate);
 INSERT INTO RESERVATION VALUES ('R' || LPAD(SEQ_RESERVATION.NEXTVAL, 6, '0'), 'M000005', 'C000004','2023-08-20', '16:00', sysdate);
 INSERT INTO RESERVATION VALUES ('R' || LPAD(SEQ_RESERVATION.NEXTVAL, 6, '0'), 'M000006', 'C000005','2023-08-20', '17:00', sysdate);
 
@@ -234,6 +247,13 @@ INSERT INTO location VALUES ('L' || LPAD(SEQ_LOCATION.NEXTVAL, 6, '0'), 'C000004
 
 -- ATTACH 테이블 데이터
 INSERT INTO ATTACH VALUES ('UUID', 'C000002', 'PATH', 'image', 'I');
+
+-- MASSAGE 테이블 데이터
+INSERT INTO message (MESSAGE_NO, MESSAGE_TITLE, MESSAGE_CONTENT, SEND_NICK, RECV_NICK) 
+    VALUES ('MSG' || LPAD(SEQ_MEMBER.NEXTVAL, 6, '0'), 'kim to lee 쪽지 테스트', 'kim to lee 쪽지 테스트', 'kim', 'lee');
+    
+INSERT INTO message (MESSAGE_NO, MESSAGE_TITLE, MESSAGE_CONTENT, SEND_NICK, RECV_NICK) 
+    VALUES ('MSG' || LPAD(SEQ_MEMBER.NEXTVAL, 6, '0'), 'lee to kim 쪽지 테스트', 'lee to kim 쪽지 테스트', 'lee', 'kim');
 
 
 commit;
