@@ -53,7 +53,7 @@ public class MemberController{
    
     	@PostMapping("/loginAction")
     	public String loginAction(@RequestParam("id") String member_id,
-    	                           @RequestParam("pw") String member_pw,
+    	                          @RequestParam("pw") String member_pw,
     	                           Model model,
     	                           HttpSession session) {
 
@@ -71,7 +71,7 @@ public class MemberController{
         	    
            session.setAttribute("memberVo", memberVo);
            session.setAttribute("userId", memberVo.getMember_id());
-            return "redirect:/";
+           return "redirect:/";
         } else {
             // 로그인 실패
             model.addAttribute("errorMSG", "잘못된 아이디 또는 비밀번호 입니다.");
