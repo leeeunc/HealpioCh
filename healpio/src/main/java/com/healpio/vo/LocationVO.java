@@ -9,7 +9,6 @@ public class LocationVO {
 	private String class_no;
 	private String province;
 	private String city;
-	private String district;
-	
+	private String district;	
 	
 }

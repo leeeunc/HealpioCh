@@ -15,21 +15,6 @@ window.addEventListener('load', function(){
 		keyboard: false
 	})
 	myModal.show();
-	
-	// 모달창 닫기 후 뒤로가기
-	/*
-	const myModalEl = document.getElementById('myModal')
-	myModalEl.addEventListener('hidden.bs.modal', event=>{
-		if(message.indexOf("오류")>-1){
-			history.go(-1);					
-		} else if(message.indexOf("삭제되었습니다.")>-1){
-			location.href='../class/#';
-		} else {
-			//location.href='../class/read?class_no=${class_no}&pageno=${pageno}&searchfield=${searchfield}&searchword=${searchword}';
-			location.href='../class/read?class_no=${class_no}';
-		}
-	})
-	*/
 })
 
 $(function(){	
@@ -63,7 +48,7 @@ $(function(){
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">리뷰쓰기</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="history.go(-1)"></button>
       </div>
       <div class="modal-body">
       	만족도를 별점으로 나타내 주세요.<br>

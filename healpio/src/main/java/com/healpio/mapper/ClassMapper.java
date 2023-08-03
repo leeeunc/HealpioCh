@@ -6,11 +6,13 @@ import org.apache.ibatis.annotations.Param;
 
 import com.healpio.vo.ClassVO;
 import com.healpio.vo.ExerciseVO;
+import com.healpio.vo.LocationVO;
 
 public interface ClassMapper {
 
 	public List<ExerciseVO> getExerciseList();
 	public int insert(ClassVO classVO);
+	public int insertLocation(@Param("class_no") String class_no, @Param("province") String province, @Param("city") String city, @Param("district") String district);
 	public ClassVO getOne(String class_no);
 	public int update(ClassVO classVO);
 	public int delete(String class_no);
