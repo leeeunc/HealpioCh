@@ -46,11 +46,9 @@
 }
 
 .header .user{
-    width: 20%;
-    /* text-align: right;
-    line-height: 100px; */
+    width: 10%;
     padding-top: 30px;
-    padding-right: 30px;
+    /* padding-right: 30px; */
     display: inline-block;
     position: relative;
     text-align: center;
@@ -65,6 +63,11 @@
 #user_options{
     position: absolute;
     z-index:1;
+    margin: 0 auto;
+    /* margin-left: 30px; */
+    /* margin-top: 140px; */
+    left: 50%;
+    transform: translateX(-60%);
 }
 #user_options a{
     display:block;
@@ -80,5 +83,52 @@
 }
 
 #user_options a:hover{
+    background-color: #cecece;
+}
+
+
+.header .message{
+    width: 10%;
+    padding-top: 10px;
+    padding-right: 30px;
+    margin-right: 20px;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+}
+
+#message_btn{
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    width: 45px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    /* margin-top: 10px; */
+}
+
+#message_options{
+    position: absolute;
+    z-index:1;
+    margin: 0 auto;
+    /* margin-left: 30px; */
+    /* margin-top: 10px; */
+    left: 50%;
+    transform: translateX(-60%);
+}
+#message_options a{
+    display:block;
+    font-size: 16px;
+    background-color: #dfdfdf;
+    border-radius: 3px;
+    color: black;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 3px 0px 0px 0px;
+    width: 130px;
+    text-align: center;
+}
+
+#message_options a:hover{
     background-color: #cecece;
 }

@@ -8,13 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-    <link rel='stylesheet' href='resources/css/header.css'>
-    <script src='resources/js/header.js'></script>
+    <link rel='stylesheet' href='../resources/css/header.css'>
+    <script src='../resources/js/header.js'></script>
 </head>
 <body>
     <div class='header'>
         <div class='headerLogo'>
-            <a href='/'><img src='resources/images/logo/logo_header.png'></a>
+            <a href='/'><img src='../resources/images/logo/logo_header.png'></a>
         </div>
         <div class='nav'>
             <ul>
@@ -35,20 +35,35 @@
         		</c:if>
         	</c:if>
         </div> --%>
+        <input type="hidden" value="${memberVo.nickname }" id="nickname">
         <div class='user'>
         	<c:if test="${memberVo == null}">
-            	<a href="/login"><img src='resources/images/icon/header/icon_user.png'></a>
+            	<a href="/login/login"><img src='../resources/images/icon/header/icon_user.png'></a>
         	</c:if>
         	<c:if test="${memberVo != null}">
         		<c:if test="${memberVo.teacheryn == 'Y'}">
-            		<img id='user_btn' onclick='user_open()' src='resources/images/icon/header/icon_user.png'>
+	        		<div class='message'>
+			            <img id='message_btn' tabindex="-1" src='../resources/images/icon/header/icon_message.png'>
+			            <div class='message_options' id='message_options' style="display: none;">
+			                <a href='#' onclick="go_recv()">받은 쪽지함</a>
+			                <a href='#' onclick="go_send()">보낸 쪽지함</a>
+			            </div>
+			        </div>
+            		<img id='user_btn' tabindex="4" src='../resources/images/icon/header/icon_user.png'>
 		            <div class='user_options' id='user_options' style="display: none;">
 		                    <a href='/mypage/teacher'>마이페이지</a>
 		                    <a href='/logout.do'>로그아웃</a>
 		            </div>
         		</c:if>
         		<c:if test="${memberVo.teacheryn == 'N'}">
-            		<img id='user_btn' onclick='user_open()' src='resources/images/icon/header/icon_user.png'>
+        			<div class='message'>
+			            <img id='message_btn' tabindex="-1" src='../resources/images/icon/header/icon_message.png'>
+			            <div class='message_options' id='message_options' style="display: none;">
+			                <a href='#' onclick="go_recv()">받은 쪽지함</a>
+			                <a href='#' onclick="go_send()">보낸 쪽지함</a>
+			            </div>
+			        </div>
+            		<img id='user_btn' tabindex="4" src='../resources/images/icon/header/icon_user.png'>
 		            <div class='user_options' id='user_options' style="display: none;">
 		                    <a href='/mypage/student'>마이페이지</a>
 		                    <a href='/logout.do'>로그아웃</a>
