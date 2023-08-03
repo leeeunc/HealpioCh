@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.healpio.mapper.MessageMapper">
+
+	<select id="getRecvList" resultType="com.healpio.vo.MessageVO">
+		SELECT * FROM
+		(SELECT T.*, ROWNUM RN FROM 
+		(SELECT * FROM message, member WHERE RECV_NICK = NICKNAME 
+		AND RECV_NICK = #{memberVo.nickname} ORDER BY MESSAGE_NO DESC) T)
+		WHERE RN BETWEEN #{cri.startNo} AND #{cri.endNo}
+	</select>
+
+	<select id="getSendList" resultType="com.healpio.vo.MessageVO">
+		SELECT * FROM
+		(SELECT T.*, ROWNUM RN FROM 
+		(SELECT * FROM message, member WHERE SEND_NICK = NICKNAME 
+		AND SEND_NICK = #{memberVo.nickname} ORDER BY MESSAGE_NO DESC) T)
+		WHERE RN BETWEEN #{cri.startNo} AND #{cri.endNo}
+	</select>
+	
+	<select id="getRecvTotalCnt" resultType="int">
+		SELECT count(*) FROM message, member WHERE RECV_NICK = NICKNAME AND RECV_NICK = #{nickname}
+	</select>
+	
+	<select id="getSendTotalCnt" resultType="int">
+		SELECT count(*) FROM message, member WHERE SEND_NICK = NICKNAME AND SEND_NICK = #{nickname}
+	</select>
+	
+	<select id="getUnreadCnt" resultType="int">
+		SELECT count(*) FROM message, member WHERE RECV_NICK = NICKNAME AND RECV_NICK = #{nickname} AND READYN = 'N'
+	</select>
+	
+	<select id="getRecvOne" resultType="com.healpio.vo.MessageVO">
+		SELECT * FROM message WHERE MESSAGE_NO = #{message_no}
+	</select>
+	
+	<select id="getSendOne" resultType="com.healpio.vo.MessageVO">
+		SELECT * FROM message WHERE MESSAGE_NO = #{message_no}
+	</select>
+	
+	<insert id="send">
+    	INSERT INTO message (MESSAGE_NO, MESSAGE_TITLE, MESSAGE_CONTENT, SEND_NICK, RECV_NICK) 
+   			VALUES ('MSG' || LPAD(SEQ_MEMBER.NEXTVAL, 6, '0'),  #{message_title}, #{message_content}, #{send_nick}, #{recv_nick})
+	</insert>
+	
+	<insert id="reply">
+		INSERT INTO message (MESSAGE_NO, MESSAGE_TITLE, MESSAGE_CONTENT, SEND_NICK, RECV_NICK) 
+   			VALUES ('MSG' || LPAD(SEQ_MEMBER.NEXTVAL, 6, '0'),  #{message_title}, #{message_content}, #{recv_nick}, #{send_nick})
+	</insert>
+	
+	<update id="readCheck">
+		UPDATE message SET READYN = 'Y' WHERE MESSAGE_NO = #{message_no}
+	</update>
+
+</mapper>
