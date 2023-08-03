@@ -88,6 +88,9 @@ public class ClassServiceImpl implements ClassService {
 		// 스크랩 삭제
 		classMapper.deleteScrap(class_no);
 		
+		// 장소 삭제
+		classMapper.deleteLocation(class_no);
+		
 		// 리뷰 삭제
 		List<ReviewVO> reviewList = reviewMapper.getList(class_no);
 		for(ReviewVO reivewVO:reviewList) {
