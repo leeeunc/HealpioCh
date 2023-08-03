@@ -104,6 +104,26 @@ public class MemberController{
 		return response;
 	}
 	
+	@PostMapping("/nickCheck")
+	@ResponseBody
+	// 넘겨줄때도 JSON 문자열로 반환 할겁니다.
+	public  Map<String, Object> nickCheck(@RequestBody MemberVO memberVO){
+		
+		int res = memberService.nickCheck(memberVO);
+		
+	
+		Map<String, Object> response = new HashMap<>();
+		
+		if(res == 0) {
+			response.put("message", "사용 가능한 닉네임 입니다.");
+			response.put("result", true);
+		} else {
+			response.put("message", "이미 사용 중인 닉네임 입니다.");
+			response.put("result", false);
+		}
+		return response;
+	}
+	
 	@PostMapping("/register")
 	@ResponseBody
 	public Map<String, Object> register(@RequestBody MemberVO memberVO) {
@@ -143,18 +163,4 @@ public class MemberController{
 	    }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

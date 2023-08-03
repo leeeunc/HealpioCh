@@ -83,6 +83,11 @@ public class MemberServiceImpl implements MemberService{
 	public int idCheck(MemberVO memberVO) {
 		return memberMapper.idCheck(memberVO);
 	}
+	
+	@Override
+	public int nickCheck(MemberVO memberVO) {
+		return memberMapper.nickCheck(memberVO);
+	}
 
 	@Autowired
 	ApiExamMemberProfile apiExam;

@@ -16,7 +16,10 @@ public MemberVO login(MemberVO memberVo);
 	
 	public int idCheck (MemberVO memberVo);
 	
+	public int nickCheck(MemberVO memberVO);
+	
 	public void naverLogin(HttpServletRequest request, Model model);
+
 	
 	
 }

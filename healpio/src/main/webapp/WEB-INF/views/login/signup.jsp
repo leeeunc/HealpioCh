@@ -13,8 +13,8 @@
 
 </head>
 <body>
-<%@ include file="../common/header.jsp" %>
 
+<%@ include file="../common/header.jsp" %>
   <div id='login_wrap'>
     <h1>회원가입</h1>
     <br><br>
@@ -38,6 +38,7 @@
         <div id='signup_nick'>
             <h5>닉네임</h5>
             <input type="text" name="signUpNick" id="signUpNick" value="짠돌이">
+            <div id="signupMsg_nick"></div> <!-- 중복확인 메시지를 표시할 div -->
         </div> 
         <div id='signup_email'>
             <h5>이메일</h5>
@@ -62,8 +63,7 @@
   </form>
   
  </div>
- 
  <%@ include file="../common/footer.jsp" %>
-
+ 
 </body>
 </html>

@@ -1,4 +1,45 @@
 window.addEventListener('load', function() {
+	const signUpNickInput = document.getElementById('signUpNick');
+	const signupMsgNick = document.getElementById('signupMsg_nick');
+	
+	// 닉네임 입력란에 입력 내용이 변경될 때 이벤트 처리
+	  signUpNickInput.addEventListener('input', function() {
+	    const signUpNick = signUpNickInput.value;
+
+	    // 입력 체크
+	    if (!signUpNick) {
+	      signupMsgNick.innerHTML = '';
+	      return;
+	    }
+
+	    // AJAX 요청을 보낼 데이터 준비
+	    const data = { nickname: signUpNick };
+
+	    // AJAX 요청
+	    fetch('/nickCheck', {
+	      method: 'POST',
+	      headers: {
+	        'Content-Type': 'application/json',
+	      },
+	      body: JSON.stringify(data),
+	    })
+	      .then((response) => response.json())
+	      .then((result) => {
+	        // 응답 데이터 처리
+	        if (result.result) {
+	          // 닉네임 사용 가능한 경우
+	          signupMsgNick.innerHTML = '사용 가능한 닉네임입니다.';
+	        } else {
+	          // 닉네임 사용 불가능한 경우
+	          signupMsgNick.innerHTML = '중복된 닉네임입니다.';
+	        }
+	      })
+	      .catch((error) => {
+	        console.error('에러:', error);
+	      });
+	  });
+
+	
   // 중복확인 버튼 클릭 이벤트 리스너 등록
   document.getElementById('idCheck').addEventListener('click', function() {
     checkIdDuplicate();
@@ -44,6 +85,7 @@ window.addEventListener('load', function() {
       });
   }
   
+  
   // fetch를 이용한 AJAX POST 요청을 처리하는 함수 정의
   function fetchPost(url, data, callback){
 	  fetch(url, {
@@ -74,9 +116,10 @@ window.addEventListener('load', function() {
 	  // 폼을 제출하기 전에 전화번호에 하이픈을 추가합니다.
 	  addHyphenToPhoneNumber();
 
+	  
   document.getElementById('signUp').addEventListener('click', function(e) {
       // 이벤트 초기화
-      e.preventDefault();
+      e.preventDefault();    
       
 
       let signUpId = document.getElementById('signUpId').value;
@@ -89,7 +132,7 @@ window.addEventListener('load', function() {
 	
       // 입력값 검사
       if (!signUpId || !signUpPw || !signUpName || !signUpNick || !signUpPhone || !signUpEmail) {
-          signupMsg.innerHTML = '모든 정보를 입력해주세요.';
+    	  showAlert('모든 정보를 입력해주세요.');
           return;
       }
 
@@ -97,6 +140,12 @@ window.addEventListener('load', function() {
       if (idCheckRes.value !== '1') {
           signupMsg.innerHTML = '아이디 중복체크를 해주세요';
           return;
+      }
+      
+   // 닉네임 중복체크 확인
+      if (signupMsgNick.innerHTML === '중복된 닉네임입니다.') {
+        showAlert('닉네임이 중복되었습니다. 다시 확인해주세요.');
+        return;
       }
 
       let data = {
@@ -121,6 +170,8 @@ window.addEventListener('load', function() {
       .then((response) => response.json())
       .then((result) => {
           if (result.result === 'success') {
+        	  // 회원가입이 성공한 경우 알림창 띄우기
+        	  showAlert('회원가입이 완료되었습니다.');
               location.href = '/login/login';
           } else {
               signupMsg.innerHTML = result.msg;
@@ -130,6 +181,11 @@ window.addEventListener('load', function() {
           console.error('Error : ', error);
       });
   });
+  
+//서버로부터 받은 메시지를 이용하여 알림창을 띄우는 함수
+  function showAlert(message) {
+    alert(message);
+  }
   
 	//'teacheryn' 값을 설정하는 함수를 추가합니다.
   function setTeacherynValue(value) {
