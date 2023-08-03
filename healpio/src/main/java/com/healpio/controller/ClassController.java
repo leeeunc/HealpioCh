@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.healpio.service.ClassService;
 import com.healpio.vo.ClassVO;
+import com.healpio.vo.LocationVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -32,9 +33,9 @@ public class ClassController {
 	}
 	
 	@PostMapping("write")
-	public String insert(ClassVO classVO, List<MultipartFile> files, Model model) {
+	public String insert(ClassVO classVO, LocationVO locationVO, List<MultipartFile> files, Model model) {
 		try {
-			if(classService.insert(classVO, files)>0) {
+			if(classService.insert(classVO, locationVO, files)>0) {
 				model.addAttribute("class_no", classVO.getClass_no());
 				model.addAttribute("message", "등록되었습니다.");
 				return "/class/message";
@@ -93,7 +94,7 @@ public class ClassController {
 	@GetMapping("delete")
 	public String delete(String class_no, Model model) {
 		if(classService.delete(class_no, model)>0) {
-			model.addAttribute("message", "삭제되었습니다.");			
+			model.addAttribute("message", "게시글이 삭제되었습니다.");			
 		} else {
 			model.addAttribute("message", "삭제 중 오류가 발생하였습니다.");
 		}			

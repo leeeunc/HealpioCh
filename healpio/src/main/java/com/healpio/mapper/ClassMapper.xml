@@ -13,10 +13,19 @@
   	<selectKey keyProperty="class_no" order="BEFORE" resultType="String">
   		select 'C'||lpad(seq_class.nextval, 6, '0') from dual
 	</selectKey>
-  	insert into class values
-  	(#{class_no}, #{member_no}, #{exercise_no}, #{class_title}, #{class_content}, #{class_introduce}, sysdate, #{teacher_content}, #{class_maxcount}, #{class_price})
+  	insert into class 
+  	values (#{class_no}, #{member_no}, #{exercise_no}, #{class_title}, #{class_content}, #{class_introduce}, sysdate, #{teacher_content}, #{class_maxcount}, #{class_price})
   </insert>
-  
+ 
+  <insert id="insertLocation">
+  	<selectKey keyProperty="location_no" order="BEFORE" resultType="String">
+  		select 'L'||lpad(seq_class.nextval, 6, '0') from dual
+	</selectKey>
+	insert into location
+	(location_no, class_no, province, city, district) 
+	values (#{location_no}, #{class_no}, #{province}, #{city}, #{district})
+  </insert>   
+   
   <select id="getOne" resultType="com.healpio.vo.ClassVO">
   	select class_no, class_title, nickname, exercise_name, class_introduce, class_maxcount, class_content, class_price, teacher_content 
   	from class, member, exercise 

@@ -92,18 +92,22 @@ function showReview(class_no){
 }
 
 function getReviewList(map){
-	reviewDiv.innerHTML = ``;	
+	reviewDiv.innerHTML = ``;
 	reviewDiv.innerHTML += `리뷰 <span style="color: gold">★</span>` + map.avgScore + ` (` + map.reviewCount + `명 참여)<hr>`;
-	map.reviewList.forEach(reviewVO => {
-		reviewDiv.innerHTML += reviewVO.nickname;
-		reviewDiv.innerHTML += ` <span style="color: gold">★</span>` + reviewVO.review_star + `<br>`;
-		reviewDiv.innerHTML += reviewVO.review_content;
-		if(member_no.value==reviewVO.member_no){
-			reviewDiv.innerHTML += ` <button type="button" onclick="go('/review/edit?review_no=` + reviewVO.review_no + `')">수정</button>`;
-			reviewDiv.innerHTML += ` <button type="button" onclick="go('/review/delete?review_no=` + reviewVO.review_no + `')">삭제</button>`;
-		}
-		reviewDiv.innerHTML += `<br><br>`;
-	})
+	if(map.reviewList.length!=0){		
+		map.reviewList.forEach(reviewVO => {
+			reviewDiv.innerHTML += reviewVO.nickname;
+			reviewDiv.innerHTML += ` <span style="color: gold">★</span>` + reviewVO.review_star + `<br>`;
+			reviewDiv.innerHTML += reviewVO.review_content;
+			if(member_no.value==reviewVO.member_no){
+				reviewDiv.innerHTML += ` <button type="button" onclick="go('/review/edit?review_no=` + reviewVO.review_no + `')">수정</button>`;
+				reviewDiv.innerHTML += ` <button type="button" onclick="go('/review/delete?review_no=` + reviewVO.review_no + `')">삭제</button>`;
+			}
+			reviewDiv.innerHTML += `<br><br>`;
+		})
+	} else {
+		reviewDiv.innerHTML += `등록된 리뷰가 없습니다.`;
+	}
 }
 </script>
 </head>
