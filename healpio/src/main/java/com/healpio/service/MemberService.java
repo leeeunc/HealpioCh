@@ -18,5 +18,5 @@ public MemberVO login(MemberVO memberVo);
 	
 	public void naverLogin(HttpServletRequest request, Model model);
 	
-
+	
 }
