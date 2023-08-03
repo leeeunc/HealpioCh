@@ -1,7 +1,11 @@
 package com.healpio.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.healpio.mapper.ReviewMapper;
 import com.healpio.vo.ReviewVO;
@@ -15,6 +19,30 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public int insert(ReviewVO reviewVO) {
 		return reviewMapper.insert(reviewVO);
+	}
+
+	@Override
+	public Map<String, Object> getList(String class_no) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("reviewList", reviewMapper.getList(class_no));
+		map.put("avgScore", reviewMapper.getAvgScore(class_no));
+		map.put("reviewCount", reviewMapper.getCount(class_no));
+		return map;		
+	}
+
+	@Override
+	public ReviewVO getOne(String review_no) {
+		return reviewMapper.getOne(review_no);
+	}
+	
+	@Override
+	public int update(ReviewVO reviewVO) {
+		return reviewMapper.update(reviewVO);
+	}
+
+	@Override
+	public int delete(String review_no) {
+		return reviewMapper.delete(review_no);
 	}
 
 }
