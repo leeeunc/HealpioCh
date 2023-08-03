@@ -87,7 +87,9 @@ $(function(){
 });
 
 function showReview(class_no){
+	class_contentDiv.style.display = 'none';
 	reviewDiv.style.display = '';
+	reservationDiv.style.display = 'none';
 	fetchGet('/review/list?class_no=' + class_no, getReviewList);
 }
 
@@ -108,6 +110,18 @@ function getReviewList(map){
 	} else {
 		reviewDiv.innerHTML += `등록된 리뷰가 없습니다.`;
 	}
+}
+
+function showReservation(){
+	class_contentDiv.style.display = 'none';
+	reviewDiv.style.display = 'none';
+	reservationDiv.style.display = '';
+}
+
+function showClass_content(class_no){
+	class_contentDiv.style.display = '';
+	reviewDiv.style.display = 'none';
+	reservationDiv.style.display = 'none';
 }
 </script>
 </head>
@@ -131,20 +145,9 @@ ${classVO.class_introduce}<br>
 <button type="button" onclick="go('/class/edit?class_no=${classVO.class_no}')">수정</button>
 <button type="button" onclick="go('/class/delete?class_no=${classVO.class_no}')">삭제</button><br>
 
-<!-- 강의 소개 -->
-${classVO.class_content}<br>
-${classVO.class_maxcount}<br>
-${classVO.class_price}<br>
-
-<br><br>
-
-<!-- 강사 소개 -->
-${classVO.teacher_content}<br>
-
-<br><br>
-
-<!-- 리뷰 -->
+<button type="button" id="class_contentBtn" onclick="showClass_content('${classVO.class_no}')">강의소개</button>
 <button type="button" id="reviewBtn" onclick="showReview('${classVO.class_no}')">리뷰</button>
+<button type="button" id="reservationBtn" onclick="showReservation()">예약</button>
 <form action="/review/write">
 	<!-- 리뷰쓰기(삭제 예정) -->
 	<button type="submit" id="reviewWriteBtn">리뷰쓰기</button>
@@ -153,10 +156,26 @@ ${classVO.teacher_content}<br>
 	<!-- 리뷰 작성,수정,삭제시 필요 -->	
 	<input type="text" name="member_no" id="member_no" value="M000002">
 </form>
-<br>
 
+<!-- 강의 소개 -->
+<div id="class_contentDiv">
+	강의 소개<br>
+	${classVO.class_content}<br><br>
+	최대 수강 인원<br>
+	${classVO.class_maxcount}<br><br>
+	수강료<br>
+	${classVO.class_price}<br><br>
+	강사 소개<br>
+	${classVO.teacher_content}<br><br>
+</div>
+
+<!-- 리뷰 -->
 <div id="reviewDiv" style="display:none">
 
+</div>
+
+<div id="reservationDiv" style="display:none">
+	<jsp:include page="../reservation/reservation.jsp"/>
 </div>
 </body>
 </html>

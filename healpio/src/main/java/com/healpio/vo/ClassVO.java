@@ -13,7 +13,6 @@ public class ClassVO {
 	private String class_introduce;
 	private String class_regdate;
 	private String teacher_content;
-	private String class_attach;
 	private int class_maxcount;
 	private String class_price;
 	

@@ -14,7 +14,7 @@
   		select 'C'||lpad(seq_class.nextval, 6, '0') from dual
 	</selectKey>
   	insert into class 
-  	values (#{class_no}, #{member_no}, #{exercise_no}, #{class_title}, #{class_content}, #{class_introduce}, sysdate, #{teacher_content}, #{class_maxcount}, #{class_price})
+  	values (#{class_no}, #{member_no}, #{exercise_no}, #{class_title}, #{class_content}, #{class_introduce}, sysdate, #{teacher_content}, #{class_maxcount}, #{class_price}, #{class_day}, #{class_time})
   </insert>
  
   <insert id="insertLocation">
@@ -60,5 +60,9 @@
   
   <delete id="deleteScrap">
   	delete from scrap where class_no = #{class_no}
+  </delete>
+  
+  <delete id="deleteLocation">
+  	delete from location where class_no = #{class_no}
   </delete>
 </mapper>

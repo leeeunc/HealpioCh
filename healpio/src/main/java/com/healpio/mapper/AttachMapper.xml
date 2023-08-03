@@ -7,6 +7,7 @@
 <mapper namespace="com.healpio.mapper.AttachMapper">
   <insert id="insert">
   	insert into attach
+  	(uuid, uploadpath, filename, filetype, class_no)
   	values (#{uuid}, #{uploadpath}, #{filename}, #{filetype}, #{class_no})
   </insert>
   

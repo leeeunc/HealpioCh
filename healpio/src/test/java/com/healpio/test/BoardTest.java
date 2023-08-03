@@ -41,7 +41,6 @@ public class BoardTest {
 			log.info(board.getClass_introduce());
 			log.info(board.getClass_regdate());
 			log.info(board.getTeacher_content());
-			log.info(board.getClass_attach());
 			log.info(board.getClass_maxcount());
 			log.info(board.getClass_price());
 		});
