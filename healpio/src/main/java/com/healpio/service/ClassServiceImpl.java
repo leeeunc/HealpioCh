@@ -10,7 +10,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.healpio.mapper.AttachMapper;
 import com.healpio.mapper.ClassMapper;
+import com.healpio.mapper.ReviewMapper;
 import com.healpio.vo.ClassVO;
+import com.healpio.vo.LocationVO;
+import com.healpio.vo.ReviewVO;
 import com.healpio.service.AttachService;
 
 @Service
@@ -24,6 +27,9 @@ public class ClassServiceImpl implements ClassService {
 	
 	@Autowired
 	AttachMapper attachMapper;
+	
+	@Autowired
+	ReviewMapper reviewMapper;
 
 	@Override
 	public void getExerciseList(Model model) {
@@ -41,8 +47,9 @@ public class ClassServiceImpl implements ClassService {
 	 */
 	@Transactional(rollbackFor = Exception.class)
 	// throws Exception : 해당 메서드를 호출한 메서드(컨트롤러의 메서드)가 예외를 처리하도록 던진다.
-	public int insert(ClassVO classVO, List<MultipartFile> files) throws Exception {
+	public int insert(ClassVO classVO, LocationVO locationVO, List<MultipartFile> files) throws Exception {
 		int res = classMapper.insert(classVO);
+		classMapper.insertLocation(classVO.getClass_no(), locationVO.getProvince(), locationVO.getCity(), locationVO.getDistrict());
 		if(files!=null) {
 			attachService.fileupload(files, classVO.getClass_no());				
 		}		
@@ -80,6 +87,12 @@ public class ClassServiceImpl implements ClassService {
 		
 		// 스크랩 삭제
 		classMapper.deleteScrap(class_no);
+		
+		// 리뷰 삭제
+		List<ReviewVO> reviewList = reviewMapper.getList(class_no);
+		for(ReviewVO reivewVO:reviewList) {
+			reviewMapper.delete(reivewVO.getReview_no());			
+		}
 		
 		// 글 삭제
 		return classMapper.delete(class_no);

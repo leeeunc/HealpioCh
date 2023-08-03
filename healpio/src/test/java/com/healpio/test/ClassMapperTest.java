@@ -37,11 +37,16 @@ public class ClassMapperTest {
 //		classVO.setClass_price("22,000원/1회");		
 //		classMapper.insert(classVO);
 //	}
-//	
+	
 	@Test
-	public void getOne() {
-		classMapper.getOne("C000012");
+	public void insertLocation() {
+		classMapper.insertLocation("C000129", "경기도", "고양시 일산서구", "주엽1동");
 	}
+//	
+//	@Test
+//	public void getOne() {
+//		classMapper.getOne("C000012");
+//	}
 //	
 //	@Test
 //	public void update() {

@@ -21,7 +21,7 @@
   </select>
   
   <select id="getAvgScore" resultType="double">
-	select round(avg(review_star),1) from review where class_no = #{class_no}
+	select nvl(round(avg(review_star),1),0) from review where class_no = #{class_no}
   </select>
   
   <select id="getCount" resultType="int">

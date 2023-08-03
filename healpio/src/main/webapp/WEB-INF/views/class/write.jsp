@@ -16,14 +16,14 @@ function go(url){
 <body>
 <form name="writeForm" method="post" enctype="multipart/form-data">
 	강사 이름 <input type="text" name="member_no" id="member_no" value="M000003"><br>
-	강의 지역 <br>
 	강의 이름 <input type="text" name="class_title" id="class_title" value="">
 	<select name="exercise_no" id="exercise_no">
-		<option>--운동 선택--</option>
+		<option>운동종목 선택</option>
 		<c:forEach items="${exerciseList}" var="exercise">
 		<option value="${exercise.exercise_no}">${exercise.exercise_name}</option>
 		</c:forEach>
 	</select><br>
+	강의 지역 <jsp:include page="../common/location.jsp"/>
 	대표 사진 <input type="file" name="files" id="files" multiple><br>
 	최대 수강 인원 <input type="number" name="class_maxcount" id="class_maxcount"><br>
 	한 줄 소개 <input type="text" name="class_introduce" id="class_introduce"><br>

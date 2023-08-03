@@ -48,7 +48,7 @@ $(function(){
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">리뷰쓰기</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="history.go(-1)"></button>
       </div>
       <div class="modal-body">
       	만족도를 별점으로 나타내 주세요.<br>
