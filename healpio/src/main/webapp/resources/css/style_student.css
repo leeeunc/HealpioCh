@@ -33,7 +33,7 @@ a:hover {
     color: #3f464d;
     cursor: pointer;
 }
-
+/*
 header {
     width: 100%;
     height: 120px;
@@ -43,6 +43,7 @@ header {
     left: 0px;
     z-index: 1000;
 }
+*/
 
 #inner {
     width: 100%;
@@ -53,6 +54,7 @@ header {
     overflow: hidden;
 }
 
+/*
 .header-container {
     width: 100%;
     height: 100%;
@@ -69,6 +71,7 @@ header {
     font-size: 20px;
     font-weight: bold;
 }
+*/
 
 section {
     width: 100%;
@@ -78,7 +81,7 @@ section {
 .side-menu {
     width: 300px;
     height: 1124px;
-    margin-top: 120px;
+    margin-top: 90px;
 }
 
 .side-menu-container {
@@ -111,17 +114,19 @@ section {
     width: 100%;
     height: 100%;
     display: flex;
-
+	/*
     margin-top: 100px;
+    */
 }
 
 .content {
     width: 100%;
-    min-height: calc(100% - 124px);
-    padding-top: 120px;
+    min-height: calc(100% - 100px);
+    padding-top: 100px;
     background-color: #fff;
 }
 
+/*
 footer {
     width: 100%;
     height: 124px;
@@ -169,6 +174,7 @@ footer {
     width: 170px;
     font-size: 20px;
 }
+*/
 
 /* 내 정보*/
 .content-info {
@@ -359,10 +365,14 @@ footer {
 }
 
 
-/* read only*/
+.nav ul li a {
+	padding: 0px 60px;
+}
+
 
 
 @media screen and (max-width: 1150px) {
+	/*
     .health-project {
         display: none;
     }
@@ -370,6 +380,7 @@ footer {
     .health-search {
         display: none;
     }
+    */
 
     .footer-slogan {
         display: none;

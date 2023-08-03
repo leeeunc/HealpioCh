@@ -23,4 +23,15 @@ btnEdit.addEventListener('click',function(){
     document.querySelector('#btnEdit').style.display = 'none';
     document.querySelector('#btnGoEdit').style.display = 'inline-block';
     document.querySelector('#btnGoDelete').style.display = 'inline-block';
+    
+    let inputs = document.getElementsByClassName('info-control');
+    
+    console.log(inputs);
+
+    for(let i = 0; i < inputs.length; i++){
+        inputs[i].readOnly = false;
+        
+    }
+    
 });
+

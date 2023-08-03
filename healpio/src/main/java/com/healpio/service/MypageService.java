@@ -4,11 +4,14 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.healpio.vo.MemberVO;
 import com.healpio.vo.MyReservationVO;
 import com.healpio.vo.ViewScrapVO;
 
 @Service
 public interface MypageService {
+	
+	public MemberVO getInfoList(String member_no);
 	
 	public List<ViewScrapVO> getScrapList(String member_no);
 	
