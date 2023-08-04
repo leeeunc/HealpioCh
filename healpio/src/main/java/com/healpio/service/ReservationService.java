@@ -6,5 +6,6 @@ import com.healpio.vo.ReservationVO;
 
 @Service
 public interface ReservationService {
-    void reserve(ReservationVO reservation);
+	
+    public void reserve(ReservationVO reservation);
 }

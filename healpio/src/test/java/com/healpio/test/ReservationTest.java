@@ -27,9 +27,9 @@ public class ReservationTest {
 		ReservationVO reservation = new ReservationVO();
 
 		// Setting the required information in the object
-		reservation.setReservation_no(6);
-		reservation.setMember_no(5);
-		reservation.setClass_no(5);
+		reservation.setReservation_no("R000010");
+		reservation.setMember_no("M000005");
+		reservation.setClass_no("C000004");
 		reservation.setReservation_date("2023-07-31");
 		reservation.setReservation_time("13:00");
 		// reservation.setReservation_regdate("2023-07-31"); - usually, the registration date is set in the database.
@@ -38,7 +38,7 @@ public class ReservationTest {
 		reservationMapper.insert(reservation);
 		
 		// Get the list
-		List<ReservationVO> list = reservationMapper.getList();
+		List<ReservationVO> list = reservationMapper.getReservationList();
 		log.info(list);
 	};
 	

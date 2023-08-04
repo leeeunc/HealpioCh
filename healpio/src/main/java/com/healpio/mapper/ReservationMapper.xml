@@ -4,14 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.healpio.mapper.ReservationMapper">
 
-    <insert id="insert" parameterType="com.healpio.vo.ReservationVO">
+    <insert id="insert">
 	    INSERT INTO RESERVATION
 	    (reservation_no, member_no, class_no, reservation_date, reservation_time, reservation_regdate)
 	    VALUES
 	    (#{reservation_no}, #{member_no}, #{class_no}, #{reservation_date}, #{reservation_time}, SYSDATE)
 	</insert>
     
-    <select id="getList" resultType="com.healpio.vo.ReservationVO">
+    <select id="getReservationList" resultType="com.healpio.vo.ReservationVO">
     	SELECT * FROM Reservation
 	</select>
     

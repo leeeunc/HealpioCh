@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ReservationMapper {
 	
-    void insert(ReservationVO reservation);
+    public void insert(ReservationVO reservation);
     
-    List<ReservationVO> getList();
+    public List<ReservationVO> getReservationList();
 }

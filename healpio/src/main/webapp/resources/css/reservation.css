@@ -1,91 +1,233 @@
-.container {
-            display: flex;
-            justify-content: space-around;
-            padding: 20px;
-        }
+	/* 컨테이너 설정 */
+	.container {
+	    display: flex; /* flexbox 레이아웃 사용으로 아이템들을 행 또는 열로 배치할 수 있습니다. */
+	    /* justify-content: space-around; */ /* 컨테이너 내의 아이템들 사이에 공간 균등하게 배분 */
+	    justify-content: center; /* flex 아이템들이 컨테이너의 시작 부분(왼쪽)에서 시작되도록 합니다. */
+	    padding: 20px; /* 컨테이너의 패딩 */
+	}
+	
+	/* 달력 이동 화살표 스타일 */
+	.nav-arrow {
+	    cursor: pointer; /* 마우스 커서 모양을 손가락 모양으로 설정 */
+	    font-size: 2em; /* 폰트 사이즈 설정 */
+	    color: #b8860b; /* 폰트 색상 설정 */
+	    margin: 0 10px; /* 마진 설정 */
+	}
+	
+	/* 달력 스타일 */
+	#calendar {
+	    width: 40%; /* 달력 너비 */
+	    text-align: center; /* 텍스트 중앙 정렬 */
+	    margin: 0 auto; /* 상하 마진 없음, 좌우 마진은 자동으로 설정하여 가운데 정렬 */
+	    border-collapse: collapse; /* 테이블 셀 경계선 병합 */
+	}
+	
+	/* 달력의 날짜 셀 스타일 */
+	#calendar td {
+	    border: 1px solid #000; /* 테두리 스타일 */
+	    padding: 10px; /* 패딩 */
+	    background-color: #0080c0; /* 배경색 */
+	}
+	
+	/* 달력에서 선택된 날짜 셀 스타일 */
+	#calendar td.selected {
+	    background-color: #808000; /* 배경색 */
+	}
+	
+	/* 시간 선택 영역 스타일 */
+	#time-selection {
+	    /* width: 40%;*/ /* 너비 설정 */
+	}
+	
+	/* 시간 선택 영역 내 div 스타일 */
+	#time-selection div {
+		display: flex; /* flexbox 레이아웃 사용 */
+		justify-content: space-between; /* 컨테이너 내의 아이템들 사이에 공간 균등하게 배분 */
+		width: 350px;   /* 너비를 350px로 설정 */
+		height: 60px;  /* 높이를 60px로 설정 */
+		overflow: auto; /* 내용이 넘치면 스크롤바 표시 */
+		background-color: #c0c0c0; /* 배경색 */
+	}
+	
+	/* 시간 선택 버튼 스타일 */
+	#time-selection button {
+	    padding: 10px; /* 패딩 설정 */
+	    border: none; /* 테두리 없음 */
+	    border-radius: 5px; /* 테두리 둥글게 */
+	    background-color: #eee; /* 배경색 */
+	    color: #333; /* 글씨색 */
+		flex: 1 0 auto; /* flex 요소의 성장, 수축, 기본크기 설정 */
+		margin: 0.5em; /* 버튼의 마진 */
+		width: 60px;   /* 버튼의 너비 */
+		height: 40px;  /* 버튼의 높이 */
+  	  	overflow: hidden; /* 컨텐츠가 버튼 크기를 넘어갈 경우, 넘어간 부분 숨김 */
+		text-overflow: ellipsis; /* 컨텐츠가 버튼 크기를 넘어갈 경우, 넘어간 부분을 "..."로 표시 */
+	}
+	
+	/* 시간 선택 영역에서 선택된 버튼 스타일 */
+	#time-selection button.selected {
+	    background-color: #aaa; /* 배경색 설정 */
+	}
+	
+	/* 예약 버튼 스타일 */
+	#reserve {
+	    display: block; /* 블록 요소로 설정 */
+	    margin: 20px auto; /* 상하 마진 20px, 좌우 마진은 자동 */
+	    padding: 10px; /* 패딩 설정 */
+	    background-color: #0a0; /* 배경색 설정 */
+	    color: #fff; /* 텍스트색 설정 */
+	    border: none; /* 테두리 없음 */
+	    border-radius: 5px; /* 테두리 둥글게 설정 */
+	}
+	
+	/* 모달 스타일 */
+	#confirmation-modal {
+	    text-align: center; /* 텍스트 중앙 정렬 */
+	    background-color: #f9f9f9; /* 배경색 설정 */
+	    border: 1px solid #ddd; /* 테두리 스타일 */
+	    padding: 20px; /* 패딩 설정 */
+	    margin: 20px auto; /* 상하 마진 20px, 좌우 마진은 자동 */
+	    border-radius: 10px; /* 테두리 둥글게 설정 */
+	    width: 30%; /* 너비 설정 */
+	}
+	
+	/* 모달 내의 문장 스타일 */
+	#confirmation-modal p {
+	    margin-bottom: 20px; /* 문장 아래쪽 마진 설정 */
+	}
+	
+	/* 모달 내의 버튼 스타일 */
+	#confirmation-modal button {
+	    padding: 10px; /* 버튼 패딩 설정 */
+	    border: none; /* 테두리 없음 */
+	    border-radius: 5px; /* 테두리 둥글게 설정 */
+	    margin: 5px; /* 마진 설정 */
+	    display: none; /* 기본적으로 버튼을 보이지 않도록 설정 */
+	}
+	
+	/* 예약 확인 버튼 스타일 */
+	#confirmation-modal #confirm {
+	    background-color: #0a0; /* 배경색 설정 */
+	    color: #fff; /* 텍스트색 설정 */
+	}
+	
+	/* 예약 취소 버튼 스타일 */
+	#confirmation-modal #cancel {
+	    background-color: #a00; /* 배경색 설정 */
+	    color: #fff; /* 텍스트색 설정 */
+	}
+	
+	/* 모달 버튼  */
+	#modal {
+    	display: none; /* 기본적으로 버튼을 보이지 않도록 설정 */
+	}
+	
+	/* 모달창의 배경 */
+	.modal {
+	  display: none; /* 기본적으로 숨겨져 있음 */
+	  position: fixed; /* 위치 고정 */
+	  z-index: 1; /* 가장 앞쪽에 위치 */
+	  left: 0;
+	  top: 0;
+	  width: 100%; /* 전체 너비 */
+	  height: 100%; /* 전체 높이 */
+	  overflow: auto; /* 필요한 경우 스크롤 허용 */
+	  background-color: rgb(0,0,0); /* 배경색 */
+	  background-color: rgba(0,0,0,0.4); /* 투명도가 있는 배경색 */
+	}
+	
+	/* 모달 내용 */
+	.modal-content {
+	  background-color: #fefefe; /* 배경색을 흰색으로 변경 */
+	  margin: 15% auto; /* 15% from the top and centered */
+	  padding: 20px; /* 패딩을 추가해서 내용물과의 간격을 띄움 */
+	  border: 1px solid #888; /* 경계선을 추가 */
+	  border-radius: 10px; /* 둥근 모서리 효과 */
+	  width: 30%; /* 폭을 30%로 설정 (작게 만들기 위해) */
+	}
+	
+	/* 닫기 버튼 */
+	.close {
+	  color: #aaa; /* 색을 연한 회색으로 변경 */
+	  float: right; /* 우측 상단에 위치 */
+	  font-size: 28px; /* 크기 조절 */
+	  font-weight: bold; /* 글씨를 두껍게 */
+	}
+	
+	/* 닫기 버튼에 마우스를 올렸을 때 */
+	.close:hover,
+	.close:focus {
+	  color: black; /* 마우스를 올리거나 포커스되면 색이 검은색으로 변경 */
+	  text-decoration: none;
+	  cursor: pointer;
+	}
+	
+	.modal-content {
+	  position: relative; /* .close 요소의 상대적 위치를 설정하기 위해 필요함 */
+	  color: blue; /* 추가된 코드: 텍스트 색상을 파란색으로 설정 */
+	  background-color: #5eff50; /* 배경색 변경 */
+	  margin: 15% auto; /* 15% from the top and centered */
+	  padding: 20px; /* 패딩을 추가해서 내용물과의 간격을 띄움 */
+	  border: 1px solid #888; /* 경계선을 추가 */
+	  border-radius: 20px; /* 둥근 모서리 효과 */
+	  /* width: 20%; */ /* 폭을 20%로 설정 (작게 만들기 위해) */
+	  width: 350px; /* 폭을 20%로 설정 (작게 만들기 위해) */
+	  height: 170px; /* 폭을 20%로 설정 (작게 만들기 위해) */
+	  text-align: center; /* 추가된 코드: 텍스트를 센터로 정렬 */
+	}
+	
+	.close {
+	    color: #000000; /* 닫기 버튼 색상 설정 */
+	    position: absolute; /* 부모 요소 (.modal-content) 대비 절대 위치를 설정 */
+	    top: 0; /* 부모 요소의 상단에 위치 */
+	    right: 0; /* 부모 요소의 우측에 위치 */
+	    font-size: 28px; /* 폰트 크기 설정 */
+	    font-weight: bold; /* 폰트 두께 설정 */
+	    cursor: pointer; /* 마우스를 올렸을 때 포인터로 보이게 함 */
+	    /* float: right; */ /* 오른쪽에 위치시키기 위해 float 설정 */
+	    font-size: 28px; /* 폰트 크기 설정 */
+	    font-weight: bold; /* 폰트 두께 설정 */
+	    margin-right: 10px; /* 닫기버튼 위치조정 */
+	    margin-bottom: 10px; /* 닫기버튼 위치조정 */
+	}
+	
+	.close:hover,
+	.close:focus {
+	    color: black; /* 닫기 버튼 위에 마우스를 올렸거나 초점이 맞출 때 색상 변경 */
+	    text-decoration: none; /* 텍스트 밑줄 제거 */
+	    cursor: pointer; /* 마우스 커서를 포인터로 변경 */
+	}
+	
+	/* 예 버튼을 크게 만드는 스타일 */
+	#confirm {
+	    padding: 10px 20px; /* 패딩을 통해 버튼 크기 조절 */
+	    font-size: 18px; /* 폰트 크기 설정 */
+	    color: white; /* 폰트 색상 */
+	    background-color: #17e895; /* 배경색 변경 */
+	    border-radius: 10px; /* 둥근 모서리 효과 */
+	}
+	/* 아니오 버튼을 크게 만드는 스타일 */
+	#cancel {
+		padding: 10px 20px; /* 패딩을 통해 버튼 크기 조절 */
+	    font-size: 18px; /* 폰트 크기 설정 */
+	    color: white; /* 폰트 색상 */
+	    background-color: #8aecf7; /* 배경색 변경 */
+	    border-radius: 10px; /* 둥근 모서리 효과 */
+	}
+	
+	button {
+	  width: 100px; /* 버튼 폭을 100px로 조절 */
+	  height: 50px; /* 버튼 높이를 50px로 조절 */
+	  display: inline-block; /* 추가된 코드: 인라인 블록 요소로 변경 */
+	  margin: 10px; /* 추가된 코드: 마진을 추가하여 버튼 사이에 간격을 줌 */
+	}
+	
+	#confirmation-text {
+    	color: blue;
+	}
+	
+	
+	
+	
+	
 
-        .nav-arrow {
-            cursor: pointer;
-            font-size: 2em;
-            color: #b8860b;
-            margin: 0 10px;
-        }
-
-        #calendar {
-            width: 40%;
-            text-align: center;
-            margin: 0 auto;
-            border-collapse: collapse;
-        }
-
-        #calendar td {
-            border: 1px solid #000;
-            padding: 10px;
-        }
-
-        #calendar td.selected {
-            background-color: #eee;
-        }
-        
-		#time-selection {
-            width: 40%;
-        }
-
-        #time-selection button {
-            margin: 5px;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #eee;
-            color: #333;
-        }
-
-        #time-selection button.selected {
-            background-color: #aaa;
-        }
-
-        #reserve {
-            display: block;
-            margin: 20px auto;
-            padding: 10px;
-            background-color: #0a0;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-        }
-
-        #confirmation-modal {
-            text-align: center;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            padding: 20px;
-            margin: 20px auto;
-            border-radius: 5px;
-            width: 30%;
-        }
-
-        #confirmation-modal p {
-            margin-bottom: 20px;
-        }
-
-        #confirmation-modal button {
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            margin: 5px;
-            display: none;
-        }
-
-        #confirmation-modal #confirm {
-            background-color: #0a0;
-            color: #fff;
-        }
-
-        #confirmation-modal #cancel {
-            background-color: #a00;
-            color: #fff;
-        }
-        
-        #confirm #cancel {
-        	display: none;
-        }
