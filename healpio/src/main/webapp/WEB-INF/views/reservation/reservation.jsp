@@ -6,26 +6,40 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="/resources/css/reservation.css" rel="stylesheet"> 
-	<script src="/resources/js/reservation.js"></script>
+    <link href="../resources/css/reservation.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+
+<%@ include file="../common/header.jsp" %>
+
     <div class="container">
         <div>
             <table id="calendar"></table>
         </div>
-        <div id="time-selection"></div>
-    </div>
-    <div>
-        <button id="reserve" disabled>예약하기</button>
-    </div>
-    <div id="modal"> <!-- 모달 창을 감싸는 부모 요소 -->
-        <div id="modal-content"> <!-- 모달 내용을 담는 요소 -->
-            <p id="confirmation-text"></p>
-            <button id="confirm">예</button>
-            <button id="cancel">아니오</button>
+        <div id="time-selection">
         </div>
     </div>
+    <form id="reservationForm" action="/reservation/confirm/" method="POST">
+	    <input type="text" id="date" name="date">
+	    <input type="text" id="time" name="time">
+	    <div>
+	        <button id="reserve" type="submit" disabled>예약하기</button>
+	    </div>
+    </form>
+    
+    <div id="myModal" class="modal">
+  		<div id="modal"> <!-- 모달 창을 감싸는 부모 요소 -->
+			<div id="modal-content" class="modal-content">
+			    <span class="close">&times;</span> <!-- 닫기 버튼 -->
+	    		<p id="confirmation-text"></p>
+	            <button id="confirm">예</button>
+	            <button id="cancel">아니오</button>
+			</div>
+		</div>
+	</div>
+    
+<%@ include file="../common/footer.jsp" %>
+<script src="../resources/js/reservation.js"></script>
 </body>
-
 </html>

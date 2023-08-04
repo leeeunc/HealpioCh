@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class ReservationServiceImpl implements ReservationService {
     
     @Autowired
-    private ReservationMapper reservationMapper;
+    ReservationMapper reservationMapper;
 
     @Override
     public void reserve(ReservationVO reservation) {
