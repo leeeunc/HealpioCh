@@ -13,73 +13,224 @@ function go(url){
 	writeForm.submit();
 }
 </script>
+<style>
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+#container{
+    width: 100%;
+	height: 963px; 
+    margin: auto;
+}
+#form{
+	position: relative;
+	width: 1280px;
+	heigth: 840px;
+	margin: auto;
+	top: 60px;
+}
+#form-img{
+	position: relative;
+	float: left;
+	width: 15.625%;
+	height: 840px;
+}
+.form-img-radius{
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+#form-main{
+	position: relative;
+	float: left;
+	padding: 50px;
+	width: 84.375%;
+	height: 840px;
+	background-color: #EFEFEF;
+}
+.form-main-radius{
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+#form-main-title{
+	position: relative;
+}
+#form-main-content1{
+	border-right: 1px solid #ccc;
+	position: relative;
+	float: left;
+	padding: 20px;
+	padding-top:5px;
+	width: 70%;
+}
+#form-main-content2{
+	position: relative;
+	float: left;
+	padding-left: 35px;
+	padding-top: 5px;
+	width: 30%;
+}
+.margin{
+	margin-bottom: 3px;
+}
+</style>
 </head>
 <body>
-<form name="writeForm" method="post" enctype="multipart/form-data">
-	강사 이름 <input type="text" name="member_no" id="member_no" value="M000003"><br>
-	강의 이름 <input type="text" name="class_title" id="class_title" value="">
-	<select name="exercise_no" id="exercise_no">
-		<option>운동종목 선택</option>
-		<c:forEach items="${exerciseList}" var="exercise">
-		<option value="${exercise.exercise_no}">${exercise.exercise_name}</option>
-		</c:forEach>
-	</select><br>
-	강의 지역 <jsp:include page="../common/location.jsp"/>
-	대표 사진 <input type="file" name="files" id="files" multiple><br>
-	최대 수강 인원 <input type="number" name="class_maxcount" id="class_maxcount"><br>
-	한 줄 소개 <input type="text" name="class_introduce" id="class_introduce"><br>
-	상세 소개 <input type="text" name="class_content" id="class_content"><br>
-	수강료 <input type="text" name="class_price" id="class_price"><br>
-	강사 소개 <input type="text" name="teacher_content" id="teacher_content"><br>
-	강의 요일<br>
-	<input type="checkbox" class="btn-check" name="class_day" id="sunday" value="일" autocomplete="off">
-	<label class="btn btn-outline-primary" for="sunday">일</label>
-	<input type="checkbox" class="btn-check" name="class_day" id="monday" value="월" autocomplete="off">
-	<label class="btn btn-outline-primary" for="monday">월</label>
-	<input type="checkbox" class="btn-check" name="class_day" id="tuesday" value="화"  autocomplete="off">
-	<label class="btn btn-outline-primary" for="tuesday">화</label>
-	<input type="checkbox" class="btn-check" name="class_day" id="wednesday" value="수" autocomplete="off">
-	<label class="btn btn-outline-primary" for="wednesday">수</label>
-	<input type="checkbox" class="btn-check" name="class_day" id="thursday" value="목" autocomplete="off">
-	<label class="btn btn-outline-primary" for="thursday">목</label>
-	<input type="checkbox" class="btn-check" name="class_day" id="friday" value="금" autocomplete="off">
-	<label class="btn btn-outline-primary" for="friday">금</label>
-	<input type="checkbox" class="btn-check" name="class_day" id="saturday" value="토" autocomplete="off">
-	<label class="btn btn-outline-primary" for="saturday">토</label><br>
-	강의 시간<br>
-	<input type="checkbox" class="btn-check" name="class_time" id="t08" value="08:00" autocomplete="off">
-	<label class="btn btn-outline-primary" for="t08">08:00</label>
-	<input type="checkbox" class="btn-check" name="class_time" id="t09" value="09:00" autocomplete="off">
-	<label class="btn btn-outline-primary" for="t09">09:00</label>
-	<input type="checkbox" class="btn-check" name="class_time" id="t10" value="10:00" autocomplete="off">
-	<label class="btn btn-outline-primary" for="t10">10:00</label>
-	<input type="checkbox" class="btn-check" name="class_time" id="t11" value="11:00" autocomplete="off">
-	<label class="btn btn-outline-primary" for="t11">11:00</label><br>
-	<input type="checkbox" class="btn-check" name="class_time" id="t12" value="12:00" autocomplete="off">
-	<label class="btn btn-outline-primary" for="t12">12:00</label>
-	<input type="checkbox" class="btn-check" name="class_time" id="t13" value="13:00" autocomplete="off">
-	<label class="btn btn-outline-primary" for="t13">13:00</label>
-	<input type="checkbox" class="btn-check" name="class_time" id="t14" value="14:00" autocomplete="off">
-	<label class="btn btn-outline-primary" for="t14">14:00</label>
-	<input type="checkbox" class="btn-check" name="class_time" id="t15" value="15:00" autocomplete="off">
-	<label class="btn btn-outline-primary" for="t15">15:00</label><br>
-	<input type="checkbox" class="btn-check" name="class_time" id="t16" value="16:00" autocomplete="off">
-	<label class="btn btn-outline-primary" for="t16">16:00</label>
-	<input type="checkbox" class="btn-check" name="class_time" id="t17" value="17:00" autocomplete="off">
-	<label class="btn btn-outline-primary" for="t17">17:00</label>
-	<input type="checkbox" class="btn-check" name="class_time" id="t18" value="18:00" autocomplete="off">
-	<label class="btn btn-outline-primary" for="t18">18:00</label>
-	<input type="checkbox" class="btn-check" name="class_time" id="t19" value="19:00" autocomplete="off">
-	<label class="btn btn-outline-primary" for="t19">19:00</label><br>
-	<input type="checkbox" class="btn-check" name="class_time" id="t20" value="20:00" autocomplete="off">
-	<label class="btn btn-outline-primary" for="t20">20:00</label>
-	<input type="checkbox" class="btn-check" name="class_time" id="t21" value="21:00" autocomplete="off">
-	<label class="btn btn-outline-primary" for="t21">21:00</label>
-	<input type="checkbox" class="btn-check" name="class_time" id="t22" value="22:00" autocomplete="off">
-	<label class="btn btn-outline-primary" for="t22">22:00</label><br>
-	<button type="submit" onclick="go('/class/write')">등록하기</button>
-	<button type="button" onclick="#">취소</button>
-</form>
+<%@ include file="../common/header.jsp" %>
+<div id="container">
+<div id="form">
+	<div id="form-img">
+	<img src="/resources/images/man-5886576_1280.jpg" class="form-img-radius">
+	</div>
+	<div id="form-main" class="form-main-radius">
+		<div id="form-main-title">
+		  <h1>강의 등록</h1><hr>
+		</div>
+		<form name="writeForm" method="post" enctype="multipart/form-data">
+		
+		<!-- member_no 받아와야 함!!!!!!!!! -->
+		<input type="hidden" name="member_no" id="member_no" value="M000004">
+		
+		<div class="row g-3" id="form-main-content1">		  
+		  <div class="col-md-8">
+		    <label for="class_title" class="form-label">강의명</label>
+		    <input type="text" class="form-control form-control-sm" name="class_title" id="class_title">
+		  </div>
+		  
+		  <div class="col-md-4">
+		    <label for="exercise_no" class="form-label">강의 종목</label>
+		    <select class="form-select form-select-sm" name="exercise_no" id="exercise_no">
+				<option></option>
+				<c:forEach items="${exerciseList}" var="exercise">
+				<option value="${exercise.exercise_no}">${exercise.exercise_name}</option>
+				</c:forEach>
+			</select>
+		  </div>
+
+		  <jsp:include page="./location.jsp"/>
+		  <div class="contents col-md-5">
+		  	<label for="sido" class="form-label">강의 지역</label>
+			<select class="form-select form-select-sm" id="sido"><option value=""></option></select>
+		  </div>
+		  <div class="contents col-md-3">
+		  	<label for="sigugun" class="form-label">　</label>
+			<select class="form-select form-select-sm" id="sigugun"><option value=""></option></select>
+		  </div>
+		  <div class="contents col-md-4">
+		  	<label for="dong" class="form-label">　</label>
+			<select class="form-select form-select-sm" id="dong"><option value=""></option></select>
+		  </div>
+		  <input type="hidden" name="province" id="locationBox1">
+		  <input type="hidden" name="city" id="locationBox2">
+		  <input type="hidden" name="district" id="locationBox3">
+		  		  		  
+		  <div class="col-md-3">
+		    <label for="class_maxcount" class="form-label">최대 수강 인원</label>
+		    <input type="number" class="form-control form-control-sm" name="class_maxcount" id="class_maxcount" min="1">
+		  </div>
+		  		  
+		  <div class="col-md-9">
+			<label for="files" class="form-label">대표 사진</label>
+			<input class="form-control form-control-sm" type="file" name="files" id="files" multiple>
+		  </div>
+		  
+		  <div class="col-md-12">
+			<label for="class_introduce" class="form-label">강의 소개 (한줄)</label>
+			<input type="text" class="form-control form-control-sm" name="class_introduce" id="class_introduce">
+		  </div>
+		  
+		  <div class="col-md-12">
+			<label for="class_content" class="form-label">강의 소개 (상세)</label>
+			<textarea class="form-control form-control-sm" name="class_content" id="class_content" rows="4" style="resize:none;"></textarea>
+		  </div>		  
+		  		  		  
+		  <div class="col-md-12">
+			<label for="class_price" class="form-label">수강료</label>
+			<input type="text" class="form-control form-control-sm" name="class_price" id="class_price">
+		  </div>
+		  
+		  <div class="col-md-12">
+			<label for="teacher_content" class="form-label">강사 소개</label>
+			<textarea class="form-control form-control-sm" name="teacher_content" id="teacher_content" rows="4" style="resize:none;"></textarea>
+		  </div>
+		</div>
+		
+		<div id="form-main-content2">
+			<label class="form-label">강의 요일</label><br>
+			<input type="checkbox" class="btn-check" name="class_day" id="sunday" value="일" autocomplete="off">
+			<label class="btn btn-sm bg-white" for="sunday">일</label>
+			<input type="checkbox" class="btn-check" name="class_day" id="monday" value="월" autocomplete="off">
+			<label class="btn btn-sm bg-white" for="monday">월</label>
+			<input type="checkbox" class="btn-check" name="class_day" id="tuesday" value="화"  autocomplete="off">
+			<label class="btn btn-sm bg-white" for="tuesday">화</label>
+			<input type="checkbox" class="btn-check" name="class_day" id="wednesday" value="수" autocomplete="off">
+			<label class="btn btn-sm bg-white" for="wednesday">수</label>
+			<input type="checkbox" class="btn-check" name="class_day" id="thursday" value="목" autocomplete="off">
+			<label class="btn btn-sm bg-white" for="thursday">목</label>
+			<input type="checkbox" class="btn-check" name="class_day" id="friday" value="금" autocomplete="off">
+			<label class="btn btn-sm bg-white" for="friday">금</label>
+			<input type="checkbox" class="btn-check" name="class_day" id="saturday" value="토" autocomplete="off">
+			<label class="btn btn-sm bg-white" for="saturday">토</label><br>
+			<p></p>
+			<label class="form-label">강의 시간</label><br>
+			<input type="checkbox" class="btn-check" name="class_time" id="t08" value="08:00" autocomplete="off">
+			<label class="btn btn-sm bg-white margin" for="t08">08:00</label>
+			<input type="checkbox" class="btn-check" name="class_time" id="t09" value="09:00" autocomplete="off">
+			<label class="btn btn-sm bg-white margin" for="t09">09:00</label>
+			<input type="checkbox" class="btn-check" name="class_time" id="t10" value="10:00" autocomplete="off">
+			<label class="btn btn-sm bg-white margin" for="t10">10:00</label>
+			<input type="checkbox" class="btn-check" name="class_time" id="t11" value="11:00" autocomplete="off">
+			<label class="btn btn-sm bg-white margin" for="t11">11:00</label><br>
+			<input type="checkbox" class="btn-check" name="class_time" id="t12" value="12:00" autocomplete="off">
+			<label class="btn btn-sm bg-white margin" for="t12">12:00</label>
+			<input type="checkbox" class="btn-check" name="class_time" id="t13" value="13:00" autocomplete="off">
+			<label class="btn btn-sm bg-white margin" for="t13">13:00</label>
+			<input type="checkbox" class="btn-check" name="class_time" id="t14" value="14:00" autocomplete="off">
+			<label class="btn btn-sm bg-white margin" for="t14">14:00</label>
+			<input type="checkbox" class="btn-check" name="class_time" id="t15" value="15:00" autocomplete="off">
+			<label class="btn btn-sm bg-white margin" for="t15">15:00</label><br>
+			<input type="checkbox" class="btn-check" name="class_time" id="t16" value="16:00" autocomplete="off">
+			<label class="btn btn-sm bg-white margin" for="t16">16:00</label>
+			<input type="checkbox" class="btn-check" name="class_time" id="t17" value="17:00" autocomplete="off">
+			<label class="btn btn-sm bg-white margin" for="t17">17:00</label>
+			<input type="checkbox" class="btn-check" name="class_time" id="t18" value="18:00" autocomplete="off">
+			<label class="btn btn-sm bg-white margin" for="t18">18:00</label>
+			<input type="checkbox" class="btn-check" name="class_time" id="t19" value="19:00" autocomplete="off">
+			<label class="btn btn-sm bg-white margin" for="t19">19:00</label><br>
+			<input type="checkbox" class="btn-check" name="class_time" id="t20" value="20:00" autocomplete="off">
+			<label class="btn btn-sm bg-white margin" for="t20">20:00</label>
+			<input type="checkbox" class="btn-check" name="class_time" id="t21" value="21:00" autocomplete="off">
+			<label class="btn btn-sm bg-white margin" for="t21">21:00</label>
+			<input type="checkbox" class="btn-check" name="class_time" id="t22" value="22:00" autocomplete="off">
+			<label class="btn btn-sm bg-white margin" for="t22">22:00</label><br>
+			
+			<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			<div class="d-grid gap-2">
+			<button type="submit" class="btn btn-danger btn-lg" style="height:80px;" onclick="go('/class/write')">강의 등록</button>
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</form>
+	</div>
+</div>
+</div>
+<%@ include file="../common/footer.jsp" %>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
 </html>
