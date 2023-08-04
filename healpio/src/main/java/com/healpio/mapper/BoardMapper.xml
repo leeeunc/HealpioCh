@@ -5,23 +5,27 @@
 
 <mapper namespace="com.healpio.mapper.BoardMapper">
 
-	<select id="getList" resultType="com.healpio.vo.ClassVO">
+	
+	<select id="getList" resultType="com.healpio.vo.BoardScrapVO">
 		<![CDATA[
     		SELECT * 
 		FROM (
 			SELECT ROWNUM RN, A.* 
 				FROM (
-						SELECT b.* 
-						FROM class b
-                        where 1 = 1
-        ]]>
-        				<include refid="criteria"></include>
-						ORDER BY class_no DESC 
+						select c.class_title, m.nickname, e.exercise_name, l.PROVINCE, l.CITY, l.DISTRICT
+                        from class c, member m, exercise e, location l
+                            where c.class_no = l.class_no
+                            and m.member_no = c.member_no
+                            and e.exercise_no = c.exercise_no
+		]]>
+						<include refid="location"></include>
+						<include refid="criteria"></include>
+						ORDER BY c.class_no DESC 
 						) A
 				)
-	WHERE RN BETWEEN #{startNo} AND #{endNo}
-	
+		 WHERE RN BETWEEN #{startNo} AND #{endNo} 
 	</select>
+
 
 	<select id="exerciseList" resultType="com.healpio.vo.ExerciseVO">
 	
@@ -43,29 +47,84 @@
 	
 	
 	<select id="getTotalCnt" resultType="int">
-		select count(*) 
-		from class
-		where 1=1
-		<include refid="criteria"></include>
+		<![CDATA[
+    		SELECT count(*) 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (
+						select c.class_title, m.nickname, e.exercise_name, l.PROVINCE, l.CITY, l.DISTRICT
+                        from class c, member m, exercise e, location l
+                            where c.class_no = l.class_no
+                            and m.member_no = c.member_no
+                            and e.exercise_no = c.exercise_no
+
+		]]>
+						<include refid="location"></include>
+						<include refid="criteria"></include>
+						ORDER BY c.class_no DESC 
+						) A
+				)
 	</select>
-	
+
 	<sql id="criteria">
 		<choose>
-			<when test="searchField == 'class_title'">
-				and class_title like '%'||#{searchWord}||'%'
+			<when test="searchField == 'c.class_title' and searchWord != null">
+				and c.class_title like '%'||#{searchWord}||'%'
 			</when>
-			<when test="searchField == 'content'">
-				and class_content like '%'||#{searchWord}||'%'
+			<when test="searchField == 'm.nickname' and searchWord != null">
+				and m.nickname like '%'||#{searchWord}||'%'
 			</when>
 		</choose>
+		
+		<choose>
+			<when test="exercise_name != null and exercise_name != ''">
+				and e.exercise_name like '%'||#{exercise_name}||'%'
+			</when>
+		</choose>
+
 	</sql>
 	
 	
-</mapper>
+	
+	<sql id="location">
+		<choose>
+   			<when test="city != null and city!= ''">
+		      	and city like '%'||#{city}||'%'
+		    </when>
+			<when test="province != null and province != ''">
+		      	and province like '%'||#{province}||'%'
+		    </when>
+		</choose>
+		<choose>
+			<when test="district != null and district != ''">
+		      	and district like '%'||#{district}||'%'
+		    </when>
+		</choose>
+		
+	</sql>
+	
+	
+	
+ </mapper>
 
 
+<!-- 		<choose>
+			<when test="province != null and province != ''">
+				and province like '%'||#{province}||'%'
+			</when>
+		</choose>
+		
+		
+				
+	<where>
+	    <if test="province != null and province != ''">
+	      	and province like '%'||#{province}||'%'
+	    </if>
 
-
+ 	 </where>
+		
+		
+ -->
 
 
 

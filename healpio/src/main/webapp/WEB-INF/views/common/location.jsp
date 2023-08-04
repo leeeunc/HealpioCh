@@ -63,42 +63,29 @@
 				jQuery('#sido').change(function () {
 					
 					var sido = jQuery('#sido option:selected');
-					var sigugun = jQuery('#sigugun option:selected');
-					var dong = jQuery('#dong option:selected');
 	
 					var locationName = sido.text(); // 시도 이름
-					jQuery('#locationBox1').val(locationName);
-					
-					// 주소 찾기 기능
-					checkAndShowContentBox(locationName);
-		
+					jQuery('#province').val(locationName);
+
 				});
 			
 				jQuery('#sigugun').change(function () {
 		
-					var sido = jQuery('#sido option:selected');
 					var sigugun = jQuery('#sigugun option:selected');
-					var dong = jQuery('#dong option:selected');
 					
 					var locationName = sigugun.text(); // 시도 시군구 이름
-					jQuery('#locationBox2').val(locationName);
-					
-					// 주소 찾기 기능
-					checkAndShowContentBox(locationName);
+					jQuery('#city').val(locationName);
+
 		
 				});
 				
 				jQuery('#dong').change(function () {
 		
-					var sido = jQuery('#sido option:selected');
-					var sigugun = jQuery('#sigugun option:selected');
 					var dong = jQuery('#dong option:selected');	
 					
 					var locationName = dong.text(); // 시도/시군구/읍면동 이름
-					jQuery('#locationBox3').val(locationName);
-					
-					// 주소 찾기 기능
-					checkAndShowContentBox(locationName);
+					jQuery('#district').val(locationName);
+
 		
 			/* 		var dongCode = sido.val() + sigugun.val() + dong.val() + '00'; // 숫자코드
 					jQuery('#dongCode').text(dongCode);
@@ -106,15 +93,7 @@
 				});
 				
 
-					// 주소 찾기 기능
-			      function checkAndShowContentBox(address) {
-			          var locationText = getLocationText();
-			          if (locationText.includes(address)) {
-			            $('.contentbox').show();
-			          } else {
-			            $('.contentbox').hide();
-			          }
-			        }
+
 
 			        function getLocationText() {
 			          return $('.location-text').text().trim();
@@ -129,22 +108,34 @@
 		jQuery('#iframe').attr('src', url);
 	}	 
 	 
+	function filterByLocation(){
+		// 지역 초기화 함수
+	    document.querySelector('#city').value = "";
+	    document.querySelector('#district').value = "";
+	}
+	
+
     </script>
   
 </head>
 <body>
 
-	<div class="contents">
-		<select id="sido"><option value="">시도 선택</option></select>
-		<select id="sigugun"><option value="">시군구 선택</option></select>
-		<select id="dong"><option value="">읍면동 선택</option></select>
+	<input type="hidden" name="class_no" value="">
+	<input type="hidden" name="pageNo" value="${pageDto.cri.pageNo }">
+	<input type="hidden" name="total" value="${pageDto.total }">
+
+	<div>
+		<select name="province" id="sido" onchange="filterByLocation()"><option value="">시도 선택</option></select>
+		<select name="city" id="sigugun"><option value="">시군구 선택</option></select>
+		<select name="district" id="dong"><option value="">읍면동 선택</option></select>
 		<div>
-			 <input type="text" name="province" id="locationBox1">
-			 <input type="text" name="city" id="locationBox2">
-			 <input type="text" name="district" id="locationBox3">
+<!-- 			 <input type="text" name="province" id="province">
+			 <input type="text" name="city" id="city">
+			 <input type="text" name="district" id="district"> -->
 			<!-- 코드: <span id="dongCode"></span> -->
 		</div>
 	</div>
+
 
 
 

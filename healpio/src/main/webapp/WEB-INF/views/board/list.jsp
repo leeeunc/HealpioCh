@@ -1,97 +1,81 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
+	    pageEncoding="UTF-8"%>
+	    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<!DOCTYPE html>
+	<html lang="ko">
+	<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	
+		<link href="../resources/css/list.css" rel="stylesheet"> 
+		<script src="../resources/js/list.js"></script>
+	<script>
+	function classWirte() {
+	  window.location.href = '/class/write';
+	}
+	
+	
+	
+	</script>
+	</head>
+	<body>
+	<input type="hidden" name="class_no" value="">
+	<input type="hidden" name="pageNo" value="${pageDto.cri.pageNo }">
+	<input type="hidden" name="total" value="${pageDto.total }">
+	
+	    <%@ include file="../common/header.jsp" %>
+	
+	    <div  class='pull' >
+	
 
-	<link href="/resources/css/list.css" rel="stylesheet"> 
-	<script src="/resources/js/list.js"></script>
-<script>
-function classWirte() {
-  window.location.href = '/class/write';
-}
+	        <div class='header'>
 
+	            <h3>스포츠 플랫폼</h3>
+	            <input type="text" value="${pageDto.total}">
+				<!-- <select> 요소에 onchange 이벤트를 통해 filterByExercise 함수 호출 -->
+				<select name='sports' onchange="filterByExercise()">
+				  <option value='x'>운동종류</option>
+				  <c:forEach items="${exerciseList}" var="ex">
+				  <option value='${ex.exercise_name}' >${ex.exercise_name}</option>
+				  </c:forEach>
+				</select>
 
-
-</script>
-</head>
-<body>
-
-    <div  class='pull' >
-    
-<!-- 
-<form action="" name="searchForm">
-<input type="text" name="pageNo"> 
- -->
-        <div class='header'>
-            <h3>스포츠 플랫폼</h3>
-			<!-- <select> 요소에 onchange 이벤트를 통해 filterByExercise 함수 호출 -->
-			<select name='sports' onchange="filterByExercise()">
-			  <option value='x'>운동종류</option>
-			  <c:forEach items="${exerciseList}" var="exvo">
-			    <option value='${exvo.exercise_name}'>${exvo.exercise_name}</option>
-			  </c:forEach>
-			</select>
-            
-	<jsp:include page="/WEB-INF/views/common/location.jsp"/>
-
-
-
-
-           <!--  <select name='search' >
-                <option value='x'>제목</option>
-                <option value='ko'>닉네임</option>
-            </select>
-            <input type='text'>
-            <button type="submit" class="" onclick="go(1)">검색</button>
- -->
- <jsp:include page="/WEB-INF/views/common/searchForm.jsp" /> 
- 
-            <select name='array' >
-                <option value='x'>인기순</option>
-                <option value='ko'>최신순</option>
-            </select>
-        </div>
-      </form>
-
-        <div class='imgs'>
-
-            <c:forEach var="index" begin="1" end="6">
-            <c:if test="${index <= list.size()}"> <!-- 리스트 크기를 벗어나지 않도록 출력 -->
+	            
+	            <jsp:include page="/WEB-INF/views/common/location.jsp" />
+				<jsp:include page="/WEB-INF/views/common/searchForm.jsp" />
+	 			
+	            <select name='array' >
+	                <option value='x'>인기순</option>
+	                <option value='ko'>최신순</option>
+	            </select>
+	        </div>
+	
+	        <div class='main'>
+	
+			  <c:forEach items="${list}" var="li" varStatus="status">
 				<div class="contentbox">
-					  <div class="imgbox">
-					    <img class="img-concert" src="/resources/images/필라테스${index}.jpg" />
-					  </div>
+				  <img class="img-concert" src="/resources/images/필라테스1.jpg" /> <br>
 					  
-					  <c:forEach items="${list}" var="li" varStatus="status">
-					    <c:if test="${status.index + 1 == index}">
-					      ${li.class_title}<br>
-					    </c:if>
-					  </c:forEach>
-					  
-					 ==============
-					 <br>강사 <br>
-					 ==============
-					 <div class="exercise-text">요가</div>
-					 ==============
-					 <div class="location-text">서울특별시 서대문구 북가좌동</div>
+				      ${li.class_title}<br>
+					  ------------------------------------------<br>
+					 ${li.nickname } |
+					 <a class="exercise-text">${li.exercise_name }</a> |
+					 <a class="province-text">${li.province }</a> <a class="city-text">${li.city }</a> <a class="district-text">${li.district }</a>
 				</div>
-			</c:if>
-            </c:forEach>
-            
-            <button onclick="classWirte()">등록하기</button>
-            
- 		</div>
- 	
-
-        <!-- 페이지 번호 출력 -->
-        <jsp:include page="/WEB-INF/views/common/pageNavi.jsp" />
-     </div>
-
-        
- 
-</body>
-</html>
+			  </c:forEach>
+	
+	 		</div>
+	 	
+			<div class="footer">
+	            <button class="regBtn" onclick="classWirte()">등록하기</button>
+		        <!-- 페이지 번호 출력 -->
+		        <%-- <jsp:include page="/WEB-INF/views/common/pageNavi.jsp" /> --%>
+		        <%@ include file="../common/pageNavi.jsp" %>
+			</div>
+			
+	     </div>
+	
+	        
+	     <%@ include file="../common/footer.jsp" %>
+	</body>
+	</html>
