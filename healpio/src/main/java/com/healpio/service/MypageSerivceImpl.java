@@ -46,4 +46,10 @@ public class MypageSerivceImpl implements MypageService{
 		return mypageMapper.getInfoList(member_no);
 	}
 
+	@Override
+	public int myInfoEdit(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return mypageMapper.myInfoEdit(vo);
+	}
+
 }

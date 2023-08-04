@@ -179,7 +179,7 @@
 
                             <!-- 내 정보 -->
                             <div class="content-info">
-                                <form class="info-back" method='post' >
+                                <form class="info-back" method='post' action="/mypage/edit">
                                     <div class="info-back-container">
                                         <div><h3>내 정보</h3></div>
                                         <div class="mb-3">
@@ -203,10 +203,14 @@
                                             <input type="email" class="form-control info-control" name="email" value="${memberVO.email }" readonly/>
                                         </div>
                                         <div id='editBox'>
+                                        	<button id='test'>모달테스트</button>
                                             <input id='btnEdit' class="btn btn-primary edit" type="button" value="수정하기" />
-                                            <input id='btnGoEdit' class="btn btn-primary goEdit" type="button" value="수정" />
-                                            <input id='btnGoDelete' class="btn btn-primary goDelete" onclick="location.href='/mypage/student?member_no=M000002'" type="button" value="삭제" />
+                                            <input id='btnGoEdit' class="btn btn-primary goEdit" type="submit" value="수정" />
+                                            <input id='btnGoDelete' class="btn btn-primary goDelete" onclick="location.href='/mypage/student?member_no=M000002'" type="button" value="취소" />
                                         </div>
+                                        <input type="hidden" name="member_no" value="M000002">
+                                        <input type="hidden" name="teacheryn" value="N">
+                         
                                     </div>
                                 </form>
                             </div>
@@ -214,6 +218,8 @@
                     </div>
                 </div>
             </section>
+            
+	
         
       <!--
         <footer>

@@ -10,6 +10,8 @@ public interface MypageMapper {
 	
 	public MemberVO getInfoList(String member_no);
 	
+	public int myInfoEdit(MemberVO vo);
+	
 	public List<ViewScrapVO> getScrapList(String member_no);
 	
 	public List<MyReservationVO> getReservationList(String member_no);
