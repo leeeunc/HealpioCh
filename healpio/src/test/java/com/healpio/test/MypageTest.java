@@ -39,7 +39,7 @@ public class MypageTest {
 	
 	@Test
 	public void getScrapList() {
-		List<ViewScrapVO> scrapVO = mapper.getScrapList("M000002");
+		List<ViewScrapVO> scrapVO = mapper.getScrapList("M000004");
 		log.info(scrapVO);
 	}
 	
@@ -54,6 +54,12 @@ public class MypageTest {
 		
 		int res = mapper.myInfoEdit(vo);
 		log.info(res);
+	}
+	
+	@Test
+	public void getRegisterList() {
+		List<ViewScrapVO> scrapVO = mapper.getResisterList("M000007");
+		log.info(scrapVO);
 	}
 	
 	

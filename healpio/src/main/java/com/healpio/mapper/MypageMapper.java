@@ -14,6 +14,8 @@ public interface MypageMapper {
 	
 	public List<ViewScrapVO> getScrapList(String member_no);
 	
+	public List<ViewScrapVO> getResisterList(String member_no);
+	
 	public List<MyReservationVO> getReservationList(String member_no);
 	
 	public int reservationDelete(String reservation_no);

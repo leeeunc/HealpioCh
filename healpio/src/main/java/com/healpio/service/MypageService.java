@@ -17,6 +17,8 @@ public interface MypageService {
 	
 	public List<ViewScrapVO> getScrapList(String member_no);
 	
+	public List<ViewScrapVO> getRegisterList(String member_no);
+	
 	public List<MyReservationVO> getReservationList(String member_no);
 	
 	public int reservationDelete(String reservation_no);

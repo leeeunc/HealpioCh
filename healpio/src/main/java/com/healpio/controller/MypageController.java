@@ -32,6 +32,7 @@ public class MypageController {
 	
 		model.addAttribute("memberVO", memberVO );
 		model.addAttribute("member_no", vo.getMember_no());
+		model.addAttribute("scrapList", scrapList);
 		//model.addAttribute("scrapList", scrapList);
 		
 		
@@ -41,10 +42,11 @@ public class MypageController {
 	@GetMapping("teacher")
 	public String teacher(MemberVO vo, Model model) {
 		MemberVO memberVO = mypageService.getInfoList(vo.getMember_no());
-		List<ViewScrapVO> scrapList = mypageService.getScrapList(vo.getMember_no());
+		List<ViewScrapVO> registerList = mypageService.getRegisterList(vo.getMember_no());
 	
 		model.addAttribute("memberVO", memberVO );
 		model.addAttribute("member_no", vo.getMember_no());
+		model.addAttribute("registerList", registerList);
 		//model.addAttribute("scrapList", scrapList);
 	
 		return "/mypage/myPage_teacher";

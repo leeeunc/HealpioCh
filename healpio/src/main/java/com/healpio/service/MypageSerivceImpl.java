@@ -52,4 +52,10 @@ public class MypageSerivceImpl implements MypageService{
 		return mypageMapper.myInfoEdit(vo);
 	}
 
+	@Override
+	public List<ViewScrapVO> getRegisterList(String member_no) {
+		// TODO Auto-generated method stub
+		return mypageMapper.getResisterList(member_no);
+	}
+
 }
