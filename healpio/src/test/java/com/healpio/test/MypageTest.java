@@ -43,6 +43,19 @@ public class MypageTest {
 		log.info(scrapVO);
 	}
 	
+	@Test
+	public void myInfoEdit() {
+		MemberVO vo = new MemberVO();
+		vo.setMember_no("M000002");
+		vo.setMember_pw("1234");
+		vo.setNickname("kim min jae");
+		vo.setEmail("rrr@naver.com");
+		vo.setPhonenumber("010-1111-1111");
+		
+		int res = mapper.myInfoEdit(vo);
+		log.info(res);
+	}
+	
 	
 	
 }
