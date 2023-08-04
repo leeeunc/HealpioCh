@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
     <head>
@@ -122,58 +123,21 @@
                             <!-- 스크랩 -->
                             <div class="content-scrap-container">
                                 <ul class="scrap-list">
-                                    <li class="scrap-card">
-                                        <div class="scrap-img"></div>
-                                        <div class="scrap-info-container">
-                                            <div class="scrap-title">하루 10분 힐링 요가</div>
-                                            <div class="scrap-lecture-info">
-                                                <div class="scrap-teacher">김건우</div>
-                                                <div class="scrap-sports">요가</div>
-                                                <div class="scrap-address">서울시 마포구 대흥동</div>
-                                            </div>
-
-                                            <div class="scrap-like">하트</div>
-                                        </div>
-                                    </li>
-                                    <li class="scrap-card">
-                                        <div class="scrap-img"></div>
-                                        <div class="scrap-info-container">
-                                            <div class="scrap-title">하루 10분 힐링 요가</div>
-                                            <div class="scrap-lecture-info">
-                                                <div class="scrap-teacher">김건우</div>
-                                                <div class="scrap-sports">요가</div>
-                                                <div class="scrap-address">서울시 마포구 대흥동</div>
-                                            </div>
-
-                                            <div class="scrap-like">하트</div>
-                                        </div>
-                                    </li>
-                                    <li class="scrap-card">
-                                        <div class="scrap-img"></div>
-                                        <div class="scrap-info-container">
-                                            <div class="scrap-title">하루 10분 힐링 요가</div>
-                                            <div class="scrap-lecture-info">
-                                                <div class="scrap-teacher">김건우</div>
-                                                <div class="scrap-sports">요가</div>
-                                                <div class="scrap-address">서울시 마포구 대흥동</div>
-                                            </div>
-
-                                            <div class="scrap-like">하트</div>
-                                        </div>
-                                    </li>
-                                    <li class="scrap-card">
-                                        <div class="scrap-img"></div>
-                                        <div class="scrap-info-container">
-                                            <div class="scrap-title">하루 10분 힐링 요가</div>
-                                            <div class="scrap-lecture-info">
-                                                <div class="scrap-teacher">김건우</div>
-                                                <div class="scrap-sports">요가</div>
-                                                <div class="scrap-address">서울시 마포구 대흥동</div>
-                                            </div>
-
-                                            <div class="scrap-like">하트</div>
-                                        </div>
-                                    </li>
+                                	<c:forEach items="${scrapList }" var="scrapVo">
+	                                    <li class="scrap-card">
+	                                        <div class="scrap-img"><img alt="필라테스" src="../resources/images/logo/필라테스1.jpg"></div>
+	                                        <div class="scrap-info-container">
+	                                            <div class="scrap-title">${scrapVo.class_title}</div>
+	                                            <div class="scrap-lecture-info">
+	                                                <div class="scrap-teacher">${scrapVo.nickname} </div>
+	                                                <div class="scrap-sports">${scrapVo.exercise_name} </div>
+	                                                <div class="scrap-address">${scrapVo.address} </div>
+	                                            </div>
+	
+	                                            <div class="scrap-like">하트</div>
+	                                        </div>
+	                                    </li>
+                                    </c:forEach>
                                 </ul>
                             </div>
 
@@ -203,7 +167,7 @@
                                             <input type="email" class="form-control info-control" name="email" value="${memberVO.email }" readonly/>
                                         </div>
                                         <div id='editBox'>
-                                        	<button id='test'>모달테스트</button>
+                                        	
                                             <input id='btnEdit' class="btn btn-primary edit" type="button" value="수정하기" />
                                             <input id='btnGoEdit' class="btn btn-primary goEdit" type="submit" value="수정" />
                                             <input id='btnGoDelete' class="btn btn-primary goDelete" onclick="location.href='/mypage/student?member_no=M000002'" type="button" value="취소" />

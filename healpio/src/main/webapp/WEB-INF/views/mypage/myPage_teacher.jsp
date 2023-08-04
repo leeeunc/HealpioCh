@@ -158,63 +158,21 @@
                             <!-- 등록강의목록 -->
                             <div class="content-register-container">
                                 <ul class="register-list">
-                                    <li class="register-card">
-                                        <div class="register-img"></div>
-                                        <div class="register-info-container">
-                                            <div class="register-title">하루 10분 힐링 요가</div>
-                                            <div class="register-lecture-info">
-                                                <div class="register-teacher">김건우</div>
-                                                <div class="register-sports">요가</div>
-                                                <div class="register-address">서울시 마포구 대흥동</div>
-                                            </div>
-                                        </div>
-                                    </li>
+                                	<c:forEach items="${registerList }" var="registerVo">
+	                                    <li class="register-card">
+	                                        <div class="register-img"></div>
+	                                        <div class="register-info-container">
+	                                            <div class="register-title">${registerVo.class_title}</div>
+	                                            <div class="register-lecture-info">
+	                                                <div class="register-teacher">${registerVo.nickname}</div>
+	                                                <div class="register-sports">${registerVo.exercise_name}</div>
+	                                                <div class="register-address">${registerVo.address}</div>
+	                                            </div>
+	                                        </div>
+	                                    </li>
+	                                 </c:forEach>
 
-                                    <li class="register-card">
-                                        <div class="register-img"></div>
-                                        <div class="register-info-container">
-                                            <div class="register-title">하루 10분 힐링 요가</div>
-                                            <div class="register-lecture-info">
-                                                <div class="register-teacher">김건우</div>
-                                                <div class="register-sports">요가</div>
-                                                <div class="register-address">서울시 마포구 대흥동</div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="register-card">
-                                        <div class="register-img"></div>
-                                        <div class="register-info-container">
-                                            <div class="register-title">하루 10분 힐링 요가</div>
-                                            <div class="register-lecture-info">
-                                                <div class="register-teacher">김건우</div>
-                                                <div class="register-sports">요가</div>
-                                                <div class="register-address">서울시 마포구 대흥동</div>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                    <li class="register-card">
-                                        <div class="register-img"></div>
-                                        <div class="register-info-container">
-                                            <div class="register-title">하루 10분 힐링 요가</div>
-                                            <div class="register-lecture-info">
-                                                <div class="register-teacher">김건우</div>
-                                                <div class="register-sports">요가</div>
-                                                <div class="register-address">서울시 마포구 대흥동</div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="register-card">
-                                        <div class="register-img"></div>
-                                        <div class="register-info-container">
-                                            <div class="register-title">하루 10분 힐링 요가</div>
-                                            <div class="register-lecture-info">
-                                                <div class="register-teacher">김건우</div>
-                                                <div class="register-sports">요가</div>
-                                                <div class="register-address">서울시 마포구 대흥동</div>
-                                            </div>
-                                        </div>
-                                    </li>
+                                   
                                 </ul>
                             </div>
 
