@@ -58,7 +58,9 @@
  %>
   	<ul id="login_sns">
             <li><a href="<%=apiURL%>" class="sns_btn naver"><span>네이버로 로그인 하기</span></a></li>
-            <li><a href="#" class="sns_btn kakao"><span>카카오로 로그인 하기</span></a></li>
+            <li>
+            <a href="https://kauth.kakao.com/oauth/authorize?client_id=d62ab48f876ef850c35965d93e291a4f&redirect_uri=http://localhost:8080/login/kakao&response_type=code" class="sns_btn kakao"><span>카카오로 로그인 하기</span></a>
+    		</li>
     </ul>
   </div><!-- //#login_container --->
     <script>
