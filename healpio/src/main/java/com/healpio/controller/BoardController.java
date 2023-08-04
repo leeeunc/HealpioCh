@@ -21,11 +21,11 @@ public class BoardController {
 	
 	@GetMapping("list")
 	public void getList(Criteria cri,Model model) {
-		log.info("테스트!=================================");
-		boardService.getList(cri ,model);
-		boardService.exerciseList(model);
+		
+		System.out.println(cri);
+		boardService.getList(cri, model);
+		boardService.exerciseList(cri, model);
 		boardService.provinceList(model);
 		boardService.locationList(model);
-		log.info("git 테스트!=================================");
 	}
 }

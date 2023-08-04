@@ -8,6 +8,13 @@ public class Criteria {
 	private String searchField; // 검색조건
 	private String searchWord;	// 검색어
 	
+	private String exercise_name; // 운동 이름
+
+	private String province;
+	private String city;
+	private String district;
+	
+	
 	private int pageNo = 1;		// 요청 페이지 번호
 	private int amount = 6; 	// 한페이지당 게시물수
 	

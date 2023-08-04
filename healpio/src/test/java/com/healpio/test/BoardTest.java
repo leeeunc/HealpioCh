@@ -3,6 +3,7 @@ package com.healpio.test;
 import static org.junit.Assume.assumeNotNull;
 
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.healpio.mapper.BoardMapper;
+import com.healpio.vo.BoardScrapVO;
 import com.healpio.vo.ClassVO;
 import com.healpio.vo.Criteria;
 import com.healpio.vo.ExerciseVO;
@@ -30,19 +32,25 @@ public class BoardTest {
 	public void Test() {
 		
 		assumeNotNull(boardMapper);
-		List<ClassVO> list = boardMapper.getList(new Criteria());
+		Criteria cri =  new Criteria();
+		 cri.setSearchField("c.class_title"); 
+		/*
+		 * cri.setExercise_name("필라테스");
+		 */		
+		 cri.setProvince("서울특별시");
+		 
+		List<BoardScrapVO> list = boardMapper.getList(cri);
+
 		
 		list.forEach(board ->{
-			log.info("ClassVO====================");
-			log.info(board.getClass_no());
-			log.info(board.getMember_no());
+			log.info("BoardScrapVO====================");
 			log.info(board.getClass_title());
-			log.info(board.getClass_content());
-			log.info(board.getClass_introduce());
-			log.info(board.getClass_regdate());
-			log.info(board.getTeacher_content());
-			log.info(board.getClass_maxcount());
-			log.info(board.getClass_price());
+			log.info(board.getNickname());
+			log.info(board.getExercise_name());
+			log.info(board.getProvince());
+			log.info(board.getCity());
+			log.info(board.getDistrict());
+			
 		});
 		
 		
@@ -52,7 +60,7 @@ public class BoardTest {
 	  public void exerciseTest() {
 		  assumeNotNull(boardMapper);
 	  
-	  List<ExerciseVO> list = boardMapper.exerciseList();
+	  List<ExerciseVO> list = boardMapper.exerciseList(new Criteria());
 	  
 	  list.forEach(exercise ->{
 	  log.info(exercise.getExercise_name());
