@@ -30,6 +30,17 @@ public class MemberController{
 	 * @return
 	 */
 
+	@GetMapping("/login/naver")
+	public void naverLogin() {
+
+	}
+
+	@GetMapping("/login/naver_callback")
+	public String naverLogin_callback(HttpServletRequest request, Model model) {
+		memberService.naverLogin(request, model);
+
+		return "redirect:/";
+	}
 
     @GetMapping("/login/login")
     public String login() {

@@ -107,12 +107,10 @@ public class MemberServiceImpl implements MemberService{
 			
 			System.out.println("==================naverLogin");
 			System.out.println("name : " + response.get("name"));
-			System.out.println("gender : " + response.get("gender"));
 			System.out.println("email : " + response.get("email"));
 			System.out.println("nickname : " + response.get("nickname"));
 			System.out.println("mobile : " + response.get("mobile"));
 			System.out.println("birthday : " + response.get("birthday"));
-			System.out.println("birthyear : " + response.get("birthyear"));
 			System.out.println("==================naverLogin");
 			
 			// 세션에 저장 member를
@@ -136,8 +134,8 @@ public class MemberServiceImpl implements MemberService{
 	
 	// jsp에서 하는일을 메서드로 호출하려고 하나 만들어놓음
 	public Map<String, String> callback(HttpServletRequest request) throws Exception {
-		 String clientId = "mHMIV3Pl48fvMu199eMZ";//애플리케이션 클라이언트 아이디값";
-		    String clientSecret = "jMrJ8keVHf";//애플리케이션 클라이언트 시크릿값";
+		 String clientId = "gBAN0Ls0yFaJzDGPwVOR";//애플리케이션 클라이언트 아이디값";
+		    String clientSecret = "_UkusFzRPo";//애플리케이션 클라이언트 시크릿값";
 		    String code = request.getParameter("code");
 		    String state = request.getParameter("state");
 		    try {
