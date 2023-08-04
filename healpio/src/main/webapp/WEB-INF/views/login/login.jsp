@@ -11,7 +11,7 @@
 	
 </head>
 <body>
-
+<!-- test -->
 <%@ include file="../common/header.jsp" %>
 
     <div id="login_container">
