@@ -37,13 +37,30 @@
             <li><a href="/login/signtype" class="find_btn join">회원가입</a></li>
         </ul>
 
-        <ul id="login_sns">
-            <li><a href="#" class="sns_btn naver"><span>네이버로 로그인 하기</span></a></li>
+
+    
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
+
+  <%
+    String clientId = "gBAN0Ls0yFaJzDGPwVOR";//애플리케이션 클라이언트 아이디값";
+    String redirectURI = URLEncoder.encode("http://localhost:8080/login/naver_callback", "UTF-8");
+    SecureRandom random = new SecureRandom();
+    String state = new BigInteger(130, random).toString();
+    
+    // 요청URL -> 네이버로그인 및 사용자정보제공 동의 -> 콜백으로 코드를 제공
+    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+    apiURL += "&client_id=" + clientId;
+    apiURL += "&redirect_uri=" + redirectURI;
+    apiURL += "&state=" + state;
+    session.setAttribute("state", state);
+ %>
+  	<ul id="login_sns">
+            <li><a href="<%=apiURL%>" class="sns_btn naver"><span>네이버로 로그인 하기</span></a></li>
             <li><a href="#" class="sns_btn kakao"><span>카카오로 로그인 하기</span></a></li>
-        </ul>
-
-    </div><!-- //#login_container --->
-
+    </ul>
+  </div><!-- //#login_container --->
     <script>
         <%-- 로그인 실패 시 메시지가 있는 경우에만 alert 창을 띄웁니다. --%>
         <% if (request.getAttribute("errorMSG") != null) { %>
@@ -51,7 +68,7 @@
             alert(errorMessage);
         <% } %>
     </script>
-    
+     
    <%@ include file="../common/footer.jsp" %>
 </body>
 </html>

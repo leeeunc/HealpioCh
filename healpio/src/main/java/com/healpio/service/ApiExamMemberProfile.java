@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ApiExamMemberProfile {
 // 네이버 API 예제 - 회원프로필 조회
 
-
+	
 //    public static void main(String[] args) {
     public Map<String, Object> getMemberProfile(String access_token) throws IOException {
 //        String token = "-"; // 네이버 로그인 접근 토큰;
@@ -49,7 +49,7 @@ public class ApiExamMemberProfile {
         try {
         	// responseBody 읽어서 map 반환
 			map = objectMapper.readValue(responseBody, Map.class);
-			System.out.println("responseBody" + responseBody);
+			System.out.println("responseBody : " + responseBody);
 			System.out.println("resultcode : " + map.get("resultcode"));
 			System.out.println("message : " + map.get("message"));
 			// Map 안에 또다른 Map이 들어가있어서 오류가 납니다.
@@ -70,10 +70,8 @@ public class ApiExamMemberProfile {
 			return map;
 			
 		} catch (JsonMappingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         return map;
