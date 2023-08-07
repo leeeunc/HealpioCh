@@ -8,15 +8,25 @@ import com.healpio.vo.ViewScrapVO;
 
 public interface MypageMapper {
 	
+	// 내정보
 	public MemberVO getInfoList(String member_no);
 	
 	public int myInfoEdit(MemberVO vo);
 	
+	// 내가 찜한 강의(student)
 	public List<ViewScrapVO> getScrapList(String member_no);
 	
-	public List<ViewScrapVO> getResisterList(String member_no);
 	
-	public List<MyReservationVO> getReservationList(String member_no);
+	// 내가 등록한 강의(teacher)
+	public List<ViewScrapVO> getRegisterList(String member_no);
+	
+	// 예약확인(student, teacher)
+	public List<MyReservationVO> getReservationList(String member_no); 
+	public List<MyReservationVO> resCheckList(String member_no);
+	
+	// 예약확인(teacher)
+	
+	
 	
 	public int reservationDelete(String reservation_no);
 	

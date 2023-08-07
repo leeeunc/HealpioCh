@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.healpio.mapper.MypageMapper;
 import com.healpio.service.MypageService;
 import com.healpio.vo.MemberVO;
+import com.healpio.vo.MyReservationVO;
 import com.healpio.vo.ViewScrapVO;
 
 import lombok.extern.log4j.Log4j;
@@ -58,8 +59,20 @@ public class MypageTest {
 	
 	@Test
 	public void getRegisterList() {
-		List<ViewScrapVO> scrapVO = mapper.getResisterList("M000007");
+		List<ViewScrapVO> scrapVO = mapper.getRegisterList("M000007");
 		log.info(scrapVO);
+	}
+	
+	@Test
+	public void getResList() {
+		List<MyReservationVO> list = mapper.getReservationList("M000004");
+		log.info(list);
+	}
+	
+	@Test
+	public void ResCheckList() {
+		List<MyReservationVO> list = mapper.resCheckList("M000003");
+		log.info(list);
 	}
 	
 	

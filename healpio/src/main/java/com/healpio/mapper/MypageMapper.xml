@@ -41,7 +41,7 @@
         <result property="class_attach" column="class_attach"/>
     </resultMap>
     
-    <select id="getResisterList" resultType="com.healpio.vo.ViewScrapVO">
+    <select id="getRegisterList" resultType="com.healpio.vo.ViewScrapVO">
 		select M.NICKNAME, C.CLASS_TITLE, E.EXERCISE_NAME, L.PROVINCE|| ' ' ||L.CITY || ' ' ||L.DISTRICT address, A.uploadpath class_attach
 		from CLASS C
 		INNER JOIN MEMBER M ON C.MEMBER_NO = M.MEMBER_NO
@@ -58,17 +58,13 @@
         <result property="class_attach" column="class_attach"/>
     </resultMap>
 	
-	
-	
-	
-    
-    <select id="getReservationList" resultType="com.healpio.vo.MyReservationVO" >
+	<select id="getReservationList" resultType="com.healpio.vo.MyReservationVO" >
     	<![CDATA[
-    	select R.reservation_no, c.class_title, to_char(reservation_date,'YYYY-MM-DD') reservation_date, R.reservation_time
+    	select R.reservation_no, c.class_title, reservation_date, reservation_time
 		from class c, reservation R
 		WHERE C.class_no = R.class_no
 		AND R.MEMBER_NO = #{member_no}
-		and to_char(sysdate,'YYYY-MM-DD') <= to_char(reservation_date,'YYYY-MM-DD') 
+		and to_char(sysdate,'YYYY-MM-DD') <= reservation_date
 	 	]]>	
 		
 		
@@ -77,8 +73,28 @@
     	<result property="reservation_no" column="R.reservation_no"/>	
         <result property="class_title" column="c.class_title"/>
         <result property="reservation_date" column="reservation_date"/>
-        <result property="reservation_time" column="R.reservation_time"/>
+        <result property="reservation_time" column="reservation_time"/>
     </resultMap>	
+    
+    <select resultType="com.healpio.vo.MyReservationVO" id="resCheckList" >
+    <![CDATA[
+    SELECT R.reservation_no, c.class_title, m.nickname, m.phonenumber, reservation_date, reservation_time
+	FROM CLASS C
+	INNER JOIN RESERVATION R ON C.CLASS_NO = R.CLASS_NO
+	INNER JOIN MEMBER M ON R.MEMBER_NO = M.MEMBER_NO
+	WHERE C.MEMBER_NO = #{member_no}
+	and to_char(sysdate,'YYYY-MM-DD') <= reservation_date
+	]]>	
+    </select>
+    
+    <resultMap type="com.healpio.vo.MyReservationVO" id="resCheckList">
+    	<result property="reservation_no" column="R.reservation_no"/>	
+        <result property="class_title" column="c.class_title"/>
+        <result property="nickname" column="m.nickname"/>
+        <result property="phonenumber" column="m.phonenumber"/>
+        <result property="reservation_date" column="reservation_date"/>
+        <result property="reservation_time" column="reservation_time"/>
+    </resultMap>
     
     
     <delete id="reservationDelete">
