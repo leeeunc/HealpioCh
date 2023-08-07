@@ -55,7 +55,13 @@ public class MypageSerivceImpl implements MypageService{
 	@Override
 	public List<ViewScrapVO> getRegisterList(String member_no) {
 		// TODO Auto-generated method stub
-		return mypageMapper.getResisterList(member_no);
+		return mypageMapper.getRegisterList(member_no);
+	}
+
+	@Override
+	public List<MyReservationVO> resCheckList(String member_no) {
+		// TODO Auto-generated method stub
+		return mypageMapper.resCheckList(member_no);
 	}
 
 }

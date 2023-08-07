@@ -1,17 +1,22 @@
 package com.healpio.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.healpio.service.MypageService;
 import com.healpio.vo.MemberVO;
+import com.healpio.vo.MyReservationVO;
 import com.healpio.vo.ScrapVO;
 import com.healpio.vo.ViewScrapVO;
 
@@ -74,6 +79,29 @@ public class MypageController {
 		
 	}
 	
+	@ResponseBody
+	@GetMapping("student/reservation/{member_no}")
+	public Map<String, Object> studentReservation(@PathVariable("member_no") String member_no) {
+		List<MyReservationVO> student_resList = mypageService.getReservationList(member_no);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("student_resList", student_resList);
+		
+		return map;
+		
+		
+	}
+	
+	@ResponseBody
+	@GetMapping("teacher/reservation/{member_no}")
+	public Map<String, Object> teacherReservation(@PathVariable("member_no") String member_no) {
+		List<MyReservationVO> teacher_resList = mypageService.resCheckList(member_no);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("teacher_resList", teacher_resList);
+		
+		return map;
+		
+		
+	}
 	
 	
 	

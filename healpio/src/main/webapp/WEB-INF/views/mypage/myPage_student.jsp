@@ -97,27 +97,7 @@
                                         <button type="button" class="btn btn-primary">예약취소</button>
                                     </div>
                                 </div>
-                                <div class="content-reservation">
-                                    <div class="content-reservation-title"><a>하루 10분! 힐링요가</a></div>
-                                    <div class="content-reservation-date">2023.07.24 (월) 오후 7:00</div>
-                                    <div class="content-reservation-cancel">
-                                        <button type="button" class="btn btn-primary">예약취소</button>
-                                    </div>
-                                </div>
-                                <div class="content-reservation">
-                                    <div class="content-reservation-title"><a>하루 10분! 힐링요가</a></div>
-                                    <div class="content-reservation-date">2023.07.24 (월) 오후 7:00</div>
-                                    <div class="content-reservation-cancel">
-                                        <button type="button" class="btn btn-primary">예약취소</button>
-                                    </div>
-                                </div>
-                                <div class="content-reservation">
-                                    <div class="content-reservation-title"><a>하루 10분! 힐링요가</a></div>
-                                    <div class="content-reservation-date">2023.07.24 (월) 오후 7:00</div>
-                                    <div class="content-reservation-cancel">
-                                        <button type="button" class="btn btn-primary">예약취소</button>
-                                    </div>
-                                </div>
+                                
                             </div>
 
                             <!-- 스크랩 -->
@@ -172,7 +152,7 @@
                                             <input id='btnGoEdit' class="btn btn-primary goEdit" type="submit" value="수정" />
                                             <input id='btnGoDelete' class="btn btn-primary goDelete" onclick="location.href='/mypage/student?member_no=M000002'" type="button" value="취소" />
                                         </div>
-                                        <input type="hidden" name="member_no" value="M000002">
+                                        <input type="hidden" id="member_no" name="member_no" value="M000004">
                                         <input type="hidden" name="teacheryn" value="N">
                          
                                     </div>

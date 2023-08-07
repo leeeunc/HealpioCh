@@ -121,38 +121,7 @@
                                     </div>
                                 </div>
 
-                                <div class="content-reservation">
-                                    <div class="content-reservation-title"><a>하루 10분! 힐링요가</a></div>
-                                    <div class="content-reservation-info">
-                                        <div class="content-reservation-date">2023.07.24 ｜ (월) 오후 7:00</div>
-                                        <div class="content-reservation-member">김건우 회원님 ｜ 010-1234-5678</div>
-                                    </div>
-                                    <div class="content-reservation-cancel">
-                                        <button type="button" class="btn btn-primary">예약취소</button>
-                                    </div>
-                                </div>
-
-                                <div class="content-reservation">
-                                    <div class="content-reservation-title"><a>하루 10분! 힐링요가</a></div>
-                                    <div class="content-reservation-info">
-                                        <div class="content-reservation-date">2023.07.24 ｜ (월) 오후 7:00</div>
-                                        <div class="content-reservation-member">김건우 회원님 ｜ 010-1234-5678</div>
-                                    </div>
-                                    <div class="content-reservation-cancel">
-                                        <button type="button" class="btn btn-primary">예약취소</button>
-                                    </div>
-                                </div>
-
-                                <div class="content-reservation">
-                                    <div class="content-reservation-title"><a>하루 10분! 힐링요가</a></div>
-                                    <div class="content-reservation-info">
-                                        <div class="content-reservation-date">2023.07.24 ｜ (월) 오후 7:00</div>
-                                        <div class="content-reservation-member">김건우 회원님 ｜ 010-1234-5678</div>
-                                    </div>
-                                    <div class="content-reservation-cancel">
-                                        <button type="button" class="btn btn-primary">예약취소</button>
-                                    </div>
-                                </div>
+                         
                             </div>
 
                             <!-- 등록강의목록 -->
@@ -206,7 +175,7 @@
                                             <input id='btnGoEdit' class="btn btn-primary goEdit" type="submit" value="수정" />
                                             <input id='btnGoDelete' class="btn btn-primary goDelete" onclick="location.href='/mypage/teacher?member_no=M000003'" type="button" value="삭제" />
                                         </div>
-                                        <input type="hidden" name="member_no" value="M000003">
+                                        <input type="hidden" id="member_no" name="member_no" value="M000007">
                                         <input type="hidden" name="teacheryn" value="Y">
                                     </div>
                                 </form>
