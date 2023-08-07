@@ -1,5 +1,7 @@
 package com.healpio.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
@@ -20,6 +22,6 @@ public MemberVO login(MemberVO memberVo);
 	
 	public void naverLogin(HttpServletRequest request, Model model);
 
-	
+	public List<MemberVO> findId(String email);
 	
 }

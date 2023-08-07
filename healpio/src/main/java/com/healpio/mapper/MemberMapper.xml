@@ -5,11 +5,27 @@
 
 <mapper namespace="com.healpio.mapper.MemberMapper">
 
-	<!-- preparedstatement는 $로 받아오면 안되고 #으로받아와야 합니다. -->
 	<select id="login" resultType="com.healpio.vo.MemberVO">
 		select *
 		from member
 		where member_id=#{member_id} and member_pw = #{member_pw}
+	</select>
+	
+	<!-- 추가된 resultMap -->
+    <resultMap type="com.healpio.vo.MemberVO" id="MemberVOResultMap">
+        <id property="member_no" column="member_no" />
+        <result property="member_id" column="member_id" />
+        <result property="member_pw" column="member_pw" />
+        <result property="member_name" column="member_name" />
+        <result property="email" column="email" />
+        <result property="nickname" column="nickname" />
+        <result property="teacheryn" column="teacheryn" />
+        <result property="adminyn" column="adminyn" />
+        <result property="phonenumber" column="phonenumber" />
+    </resultMap>
+	
+	<select id="findId" resultMap="MemberVOResultMap">
+		select * from member where email = #{email}
 	</select>
 	
 	<select id="idCheck" resultType="int">

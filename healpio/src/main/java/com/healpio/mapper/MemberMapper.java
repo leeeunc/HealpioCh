@@ -1,5 +1,7 @@
 package com.healpio.mapper;
 
+import java.util.List;
+
 import com.healpio.vo.MemberVO;
 
 
@@ -12,6 +14,7 @@ public interface MemberMapper {
 	public int nickCheck(MemberVO memberVO);
 	
 	public int insert(MemberVO memberVo);
-
+	
+	public List<MemberVO> findId(String email);
 
 }
