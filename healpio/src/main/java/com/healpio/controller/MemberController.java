@@ -1,6 +1,7 @@
 package com.healpio.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -66,10 +69,13 @@ public class MemberController{
     	                           Model model,
     	                           HttpSession session) {
 
+    		
         MemberVO memberVo = new MemberVO();
         memberVo.setMember_id(member_id);
         memberVo.setMember_pw(member_pw);
 
+        System.out.println("member_id  : " + member_id);
+        System.out.println("member_pw  : " + member_pw);
         // 사용자가 입력한 아이디와 비밀번호를 검증하기 위해 MemberService의 메서드를 호출합니다.
          memberVo = memberService.login(memberVo);
          
@@ -172,6 +178,18 @@ public class MemberController{
         return "redirect:/";        
         
 	    }
+	 
+	 @GetMapping("/login/findIdView")
+	    public String findIdView() {
+	        return "/login/findIdView";
+	    }
     
+	 @PostMapping("/login/findId")
+	    public String findId(@RequestParam("email") String email, Model model) {
+	        List<MemberVO> members = memberService.findId(email);
+	        model.addAttribute("memberList", members);
+	        return "/login/findId";
+	    }
+	 
 }
 

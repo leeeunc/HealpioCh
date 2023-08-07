@@ -6,6 +6,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -189,6 +190,15 @@ public class MemberServiceImpl implements MemberService{
 		      throw new Exception("callback 처리중 예외사항이 발생 하였습니다.");
 		    }
 	}
+
+
+
+	@Override
+	public List<MemberVO> findId(String email) {
+		
+		return memberMapper.findId(email);
+	}
+
 
 	
 }

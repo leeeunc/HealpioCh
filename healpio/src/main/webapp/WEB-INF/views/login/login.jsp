@@ -33,7 +33,7 @@
         </form>
 
         <ul id="login_find">
-            <li><a href="/login/signtype" class="find_btn find">아이디/비밀번호 찾기</a></li>
+            <li><a href="/login/findIdView" class="find_btn find">아이디/비밀번호 찾기</a></li>
             <li><a href="/login/signtype" class="find_btn join">회원가입</a></li>
         </ul>
 
@@ -57,9 +57,13 @@
     session.setAttribute("state", state);
  %>
   	<ul id="login_sns">
-            <li><a href="<%=apiURL%>" class="sns_btn naver"><span>네이버로 로그인 하기</span></a></li>
+            <li><a href="<%=apiURL%>" class="sns_btn naver">
+            <img src='../resources/images/button/btnG_완성형.png' 
+            style="display: block; margin: 0 auto; width:300px; height:60px;"></a></li>
             <li>
-            <a href="https://kauth.kakao.com/oauth/authorize?client_id=d62ab48f876ef850c35965d93e291a4f&redirect_uri=http://localhost:8080/login/kakao&response_type=code" class="sns_btn kakao"><span>카카오로 로그인 하기</span></a>
+            <a href="https://kauth.kakao.com/oauth/authorize?client_id=d62ab48f876ef850c35965d93e291a4f&redirect_uri=http://localhost:8080/login/kakao&response_type=code" 
+            class="sns_btn kakao"><img src='../resources/images/button/kakao_login_large_narrow.png' 
+            style="display: block; margin: 0 auto; width:300px; height:60px;"></a>
     		</li>
     </ul>
   </div><!-- //#login_container --->

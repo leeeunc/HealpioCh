@@ -9,7 +9,10 @@
 			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
 		</layout>
 	</appender>
-	
+		<!-- Application Loggers -->
+	<logger name="com.healpio">
+		<level value="debug" />
+	</logger>
 	<!-- Application Loggers -->
 	<logger name="com.fire.project">
 		<level value="info" />
