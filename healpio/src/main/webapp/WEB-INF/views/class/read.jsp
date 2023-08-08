@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link rel="stylesheet" href="/resources/css/read.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.js"></script>
 <script src="https://kit.fontawesome.com/0aadd0de21.js" crossorigin="anonymous"></script>
@@ -40,7 +42,7 @@ function cancelScrap(class_no){
 
 function getFullheart(map){
 	if(map.result=='success'){
-		scrapDiv.innerHTML = `이 강의 찜하기 <i class="fa-solid fa-heart" style="color: #ff6666" onclick="cancelScrap('${classVO.class_no}')"></i><br>`;
+		scrapDiv.innerHTML = `이 강의 찜하기 <i class="fa-solid fa-heart" style="color: #ff6666" onclick="cancelScrap('${classVO.class_no}')"></i>`;
 	} else {
 		alert(map.result);
 	}
@@ -48,7 +50,7 @@ function getFullheart(map){
 
 function getEmptyheart(map){
 	if(map.result=='success'){
-		scrapDiv.innerHTML = `이 강의 찜하기 <i class="fa-regular fa-heart" style="color: #ff6666" onclick="scrap('${classVO.class_no}')"></i><br>`;
+		scrapDiv.innerHTML = `이 강의 찜하기 <i class="fa-regular fa-heart" style="color: #ff6666" onclick="scrap('${classVO.class_no}')"></i>`;
 	} else {
 		alert(map.result);
 	}
@@ -86,68 +88,161 @@ $(function(){
     });    
 });
 
-function showReview(class_no){
+function showTeacher_content(class_no){
+	class_contentBtn.classList.remove('form-menu-button-clicked');
+	teacher_contentBtn.classList.add('form-menu-button-clicked');
+	reviewBtn.classList.remove('form-menu-button-clicked');
+	reservationBtn.classList.remove('form-menu-button-clicked');
 	class_contentDiv.style.display = 'none';
+	teacher_contentDiv.style.display = '';
+	reviewDiv.style.display = 'none';
+	reservationDiv.style.display = 'none';
+}
+
+function showReview(class_no){
+	class_contentBtn.classList.remove('form-menu-button-clicked');
+	teacher_contentBtn.classList.remove('form-menu-button-clicked');
+	reviewBtn.classList.add('form-menu-button-clicked');
+	reservationBtn.classList.remove('form-menu-button-clicked');
+	class_contentDiv.style.display = 'none';
+	teacher_contentDiv.style.display = 'none';
 	reviewDiv.style.display = '';
 	reservationDiv.style.display = 'none';
 	fetchGet('/review/list?class_no=' + class_no, getReviewList);
 }
 
+function sorting(sortingCriteria, class_no){
+	fetchGet('/review/sorting?sortingCriteria=' + sortingCriteria + '&class_no=' + class_no, getReviewList);
+}
+
 function getReviewList(map){
 	reviewDiv.innerHTML = ``;
-	reviewDiv.innerHTML += `리뷰 <span style="color: gold">★</span>` + map.avgScore + ` (` + map.reviewCount + `명 참여)<hr>`;
+	reviewDiv.innerHTML += `<h5 style="display:inline"><b>리뷰 <span style="color: gold">★</span>` +  map.avgScore + `</b></h5> (` + map.reviewCount + `명 참여)`;
+	console.log(map.sortingCriteria);
+	let sortingCriteria1 = "";
+	let sortingCriteria2 = "";
+	let sortingCriteria3 = "";
+	if("highest"===map.sortingCriteria){
+		sortingCriteria2 = "selected";
+	} else if("lowest"===map.sortingCriteria){
+		sortingCriteria3 = "selected";
+	} else{
+		sortingCriteria1 = "selected";
+	}
+	let reviewSort = 
+		`<select class="form-select form-select-sm" style="width:120px; float:right;" id="sortingCriteria" name="sortingCriteria" onchange="sorting(this.value, '${classVO.class_no}');">
+		  <option value="latest"` + sortingCriteria1 + `>최신순</option>
+		  <option value="highest"` + sortingCriteria2 + `>별점높은순</option>
+		  <option value="lowest"` + sortingCriteria3 + `>별점낮은순</option>
+		</select><br><br>`;
+	reviewDiv.innerHTML += reviewSort;
 	if(map.reviewList.length!=0){		
 		map.reviewList.forEach(reviewVO => {
-			reviewDiv.innerHTML += reviewVO.nickname;
-			reviewDiv.innerHTML += ` <span style="color: gold">★</span>` + reviewVO.review_star + `<br>`;
-			reviewDiv.innerHTML += reviewVO.review_content;
+			let review = `<table style="width:100%"><tr><td style="width: 85%">`;
+			review += reviewVO.nickname;
+			review += ` <span style="color: gold"> ★</span>` + reviewVO.review_star;
+			review += `<br>` + reviewVO.review_content + `</td>`;
 			if(member_no.value==reviewVO.member_no){
-				reviewDiv.innerHTML += ` <button type="button" onclick="go('/review/edit?review_no=` + reviewVO.review_no + `')">수정</button>`;
-				reviewDiv.innerHTML += ` <button type="button" onclick="go('/review/delete?review_no=` + reviewVO.review_no + `')">삭제</button>`;
+				review += `<td>`;
+				review += `<button type="button" class="btn btn-secondary btn-sm" style="float:right; margin:1px;" onclick="go('/review/delete?review_no=` + reviewVO.review_no + `')">삭제</button>`;
+				review += `<button type="button" class="btn btn-danger btn-sm" style="float:right; margin:1px;" onclick="go('/review/edit?review_no=` + reviewVO.review_no + `')">수정</button>`;
+				review += `</td>`;
 			}
-			reviewDiv.innerHTML += `<br><br>`;
+			review += `</tr></table><br><br>`;
+			reviewDiv.innerHTML += review;
 		})
+		
+		let pageblock = ``;
 	} else {
-		reviewDiv.innerHTML += `등록된 리뷰가 없습니다.`;
+		reviewDiv.innerHTML += `등록된 리뷰가 없습니다.<br><br><br>`;
 	}
 }
 
 function showReservation(){
+	class_contentBtn.classList.remove('form-menu-button-clicked');
+	teacher_contentBtn.classList.remove('form-menu-button-clicked');
+	reviewBtn.classList.remove('form-menu-button-clicked');
+	reservationBtn.classList.add('form-menu-button-clicked');
 	class_contentDiv.style.display = 'none';
+	teacher_contentDiv.style.display = 'none';
 	reviewDiv.style.display = 'none';
 	reservationDiv.style.display = '';
 }
 
 function showClass_content(class_no){
+	class_contentBtn.classList.add('form-menu-button-clicked');
+	teacher_contentBtn.classList.remove('form-menu-button-clicked');
+	reviewBtn.classList.remove('form-menu-button-clicked');
+	reservationBtn.classList.remove('form-menu-button-clicked');
 	class_contentDiv.style.display = '';
+	teacher_contentDiv.style.display = 'none';
 	reviewDiv.style.display = 'none';
 	reservationDiv.style.display = 'none';
 }
 </script>
 </head>
 <body>
-<c:forEach items="${attachList}" var="attachVO">
-<img src='/resources/images/${attachVO.filepath}' alt='${classVO.class_title}' width='300px'><br>
-</c:forEach>
-${classVO.class_title}<br>
-${classVO.nickname}<br>
-${classVO.exercise_name}<br>
-${classVO.class_introduce}<br>
-<div id="scrapDiv">
-	이 강의 찜하기
-	<c:if test="${scrapYN==0}">
-	<i class="fa-regular fa-heart" style="color: #ff6666" onclick="scrap('${classVO.class_no}')"></i>
-	</c:if>
-	<c:if test="${scrapYN>0}">
-	<i class="fa-solid fa-heart" style="color: #ff6666" onclick="cancelScrap('${classVO.class_no}')"></i>
-	</c:if>
+<%@ include file="../common/header.jsp" %>
+<div id="container">
+<div id="form">
+<div id="form-intro">
+	<div id="form-intro-img">
+		<c:forEach items="${attachList}" var="attachVO">
+		<img src='/resources/images/${attachVO.filepath}' alt='${classVO.class_title}' class="form-intro-img"><br>
+		</c:forEach>
+	</div>
+	<div id="form-intro-content">
+		<h2><b>${classVO.class_title}</b></h2>
+		${classVO.nickname} | ${classVO.exercise_name}<br><br>
+		<h6><i class="fa-solid fa-quote-left" style="color:#aaa"></i> <i>${classVO.class_introduce}</i> <i class="fa-solid fa-quote-right" style="color:#aaa"></i></h6><br>
+		<hr>
+		<div id="scrapDiv" style="display:inline;">
+			이 강의 찜하기
+			<c:if test="${scrapYN==0}">
+			<i class="fa-regular fa-heart" style="color: #ff6666" onclick="scrap('${classVO.class_no}')"></i>
+			</c:if>
+			<c:if test="${scrapYN>0}">
+			<i class="fa-solid fa-heart" style="color: #ff6666" onclick="cancelScrap('${classVO.class_no}')"></i>
+			</c:if>			
+		</div>
+	　　문의하기
+	<i class="fa-regular fa-envelope" style="color: #588ce0" onclick="window.open('/message/send?=${classVO.member_no}', ' ','width=500, height=570'); return false"></i><br><br><br>
+	<div id="onlyWriter">
+		<button type="button" class="btn btn-danger" onclick="go('/class/edit?class_no=${classVO.class_no}')">수정</button>
+		<button type="button" class="btn btn-secondary" onclick="go('/class/delete?class_no=${classVO.class_no}')">삭제</button>
+	</div>
+	</div>
 </div>
-<button type="button" onclick="go('/class/edit?class_no=${classVO.class_no}')">수정</button>
-<button type="button" onclick="go('/class/delete?class_no=${classVO.class_no}')">삭제</button><br>
 
-<button type="button" id="class_contentBtn" onclick="showClass_content('${classVO.class_no}')">강의소개</button>
-<button type="button" id="reviewBtn" onclick="showReview('${classVO.class_no}')">리뷰</button>
-<button type="button" id="reservationBtn" onclick="showReservation()">예약</button>
+<div id="form-menu">
+	<button type="button" class="form-menu-button form-menu-button-clicked" id="class_contentBtn" onclick="showClass_content('${classVO.class_no}')">강의 소개</button>
+	<button type="button" class="form-menu-button" id="teacher_contentBtn" onclick="showTeacher_content('${classVO.class_no}')">강사 소개</button>
+	<button type="button" class="form-menu-button" id="reviewBtn" onclick="showReview('${classVO.class_no}')">리뷰</button>
+	<button type="button" class="form-menu-button" id="reservationBtn" onclick="showReservation()">예약</button>
+</div>
+
+<!-- 강의 소개 -->
+<div id="class_contentDiv" style="white-space: pre-line;">
+	<h5 style="margin: 0px"><b>강의 내용</b></h5>
+	${classVO.class_content}<br><br><br>
+	<h5 style="margin: 0px"><b>최대 수강 인원</b></h5>
+	${classVO.class_maxcount}명<br><br><br>
+	<h5 style="margin: 0px"><b>수강료</b></h5>
+	${classVO.class_price}
+</div>
+
+<!-- 강사 소개 -->
+<div id="teacher_contentDiv" style="display:none; white-space: pre-line;">
+	<h5 style="margin: 0px"><b>강사 소개</b></h5>
+	${classVO.teacher_content}
+</div>
+
+<!-- 리뷰 -->
+<div id="reviewDiv" style="display:none;">
+	<!-- 리뷰 페이지 유지시 필요 -->
+	<input type="text" id="page" name="page">
+
+</div>
 <form action="/review/write">
 	<!-- 리뷰쓰기(삭제 예정) -->
 	<button type="submit" id="reviewWriteBtn">리뷰쓰기</button>
@@ -157,25 +252,27 @@ ${classVO.class_introduce}<br>
 	<input type="text" name="member_no" id="member_no" value="M000002">
 </form>
 
-<!-- 강의 소개 -->
-<div id="class_contentDiv">
-	강의 소개<br>
-	${classVO.class_content}<br><br>
-	최대 수강 인원<br>
-	${classVO.class_maxcount}<br><br>
-	수강료<br>
-	${classVO.class_price}<br><br>
-	강사 소개<br>
-	${classVO.teacher_content}<br><br>
-</div>
-
-<!-- 리뷰 -->
-<div id="reviewDiv" style="display:none">
-
-</div>
-
 <div id="reservationDiv" style="display:none">
-	<jsp:include page="../reservation/reservation.jsp"/>
+<nav>
+  <ul class="pagination pagination-sm justify-content-center">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item"><a class="page-link" style="color: black;" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" style="color: black;" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" style="color: black;" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
 </div>
+</div>
+</div>
+<%@ include file="../common/footer.jsp" %>
 </body>
 </html>

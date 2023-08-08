@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.healpio.mapper.ReviewMapper;
+import com.healpio.vo.Criteria_review;
 import com.healpio.vo.ReviewVO;
 
 import lombok.extern.log4j.Log4j;
@@ -28,10 +29,23 @@ public class ReviewMapperTest {
 //		reviewVO.setReview_star(5);
 //		reviewMapper.insert(reviewVO);
 //	}
+	
+	@Test
+	public void getList() {
+		Criteria_review criteria = new Criteria_review();
+		reviewMapper.getList("C000029", criteria);
+	}
 //	
 //	@Test
-//	public void getList() {
-//		reviewMapper.getList("C000072");
+//	public void getListHighest() {
+//		Criteria_review criteria = new Criteria_review();
+//		reviewMapper.getListHighest("C000029", criteria);
+//	}
+//	
+//	@Test
+//	public void getListLowest() {
+//		Criteria_review criteria = new Criteria_review();
+//		reviewMapper.getListLowest("C000029", criteria);
 //	}
 //	
 //	@Test
@@ -57,10 +71,10 @@ public class ReviewMapperTest {
 //		reviewVO.setReview_star(5);
 //		reviewMapper.update(reviewVO);
 //	}
-	
-	@Test
-	public void delete() {
-		reviewMapper.delete("r000005");
-	}
+//	
+//	@Test
+//	public void delete() {
+//		reviewMapper.delete("r000005");
+//	}
 
 }

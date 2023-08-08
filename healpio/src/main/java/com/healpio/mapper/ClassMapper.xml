@@ -27,14 +27,26 @@
   </insert>   
    
   <select id="getOne" resultType="com.healpio.vo.ClassVO">
-  	select class_no, class_title, nickname, exercise_name, class_introduce, class_maxcount, class_content, class_price, teacher_content 
+  	select class_no, class_title, class.member_no, nickname, exercise_name, class_introduce, class_maxcount, class_content, class_price, teacher_content, class_day, class_time  
   	from class, member, exercise 
   	where class.member_no = member.member_no and class.exercise_no = exercise.exercise_no and class_no = #{class_no}
   </select>
   
+  <select id="getLocation" resultType="com.healpio.vo.LocationVO">
+  	select province, city, district
+  	from location
+  	where class_no = #{class_no}
+  </select>
+  
   <update id="update">
   	update class 
-  	set exercise_no = #{exercise_no}, class_title = #{class_title}, class_content = #{class_content}, class_introduce = #{class_introduce}, teacher_content = #{teacher_content}, class_maxcount = #{class_maxcount}, class_price = #{class_price} 
+  	set exercise_no = #{exercise_no}, class_title = #{class_title}, class_content = #{class_content}, class_introduce = #{class_introduce}, teacher_content = #{teacher_content}, class_maxcount = #{class_maxcount}, class_price = #{class_price}, class_day = #{class_day}, class_time = #{class_time} 
+  	where class_no = #{class_no}
+  </update>
+  
+  <update id="updateLocation">
+    update location 
+  	set province = #{province}, city = #{city}, district = #{district}
   	where class_no = #{class_no}
   </update>
   

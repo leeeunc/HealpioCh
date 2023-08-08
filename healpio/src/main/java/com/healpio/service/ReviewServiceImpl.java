@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.healpio.mapper.ReviewMapper;
+import com.healpio.vo.Criteria_review;
 import com.healpio.vo.ReviewVO;
 
 @Service
@@ -22,14 +23,35 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public Map<String, Object> getList(String class_no) {
+	public Map<String, Object> getList(String class_no, Criteria_review criteria) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("reviewList", reviewMapper.getList(class_no));
+		map.put("reviewList", reviewMapper.getList(class_no, criteria));
+		map.put("sortingCriteria", "latest");
 		map.put("avgScore", reviewMapper.getAvgScore(class_no));
 		map.put("reviewCount", reviewMapper.getCount(class_no));
 		return map;		
 	}
 
+	@Override
+	public Map<String, Object> getListHighest(String class_no, Criteria_review criteria) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("reviewList", reviewMapper.getListHighest(class_no, criteria));
+		map.put("sortingCriteria", "highest");
+		map.put("avgScore", reviewMapper.getAvgScore(class_no));
+		map.put("reviewCount", reviewMapper.getCount(class_no));
+		return map;	
+	}
+
+	@Override
+	public Map<String, Object> getListLowest(String class_no, Criteria_review criteria) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("reviewList", reviewMapper.getListLowest(class_no, criteria));
+		map.put("sortingCriteria", "lowest");
+		map.put("avgScore", reviewMapper.getAvgScore(class_no));
+		map.put("reviewCount", reviewMapper.getCount(class_no));
+		return map;	
+	}
+	
 	@Override
 	public ReviewVO getOne(String review_no) {
 		return reviewMapper.getOne(review_no);

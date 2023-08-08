@@ -14,10 +14,36 @@
   </insert>
   
   <select id="getList" resultType="com.healpio.vo.ReviewVO">
-  	select nickname, review.*
-  	from review, member 
-  	where review.member_no = member.member_no and class_no = #{class_no}
-  	order by review_regdate desc
+  	select * from (
+	  	select t.*, rownum rnum from (
+		  	select nickname, review.*
+		  	from review, member 
+		  	where review.member_no = member.member_no and class_no = #{class_no}
+		  	order by review_regdate desc
+	  	) t
+	) where rnum between #{criteria.startnum} and #{criteria.endnum}
+  </select>
+  
+  <select id="getListHighest" resultType="com.healpio.vo.ReviewVO">
+  	select * from (
+	  	select t.*, rownum rnum from (
+		  	select nickname, review.*
+		  	from review, member 
+		  	where review.member_no = member.member_no and class_no = #{class_no}
+		  	order by review_star desc, review_regdate desc
+	  	) t
+	) where rnum between #{criteria.startnum} and #{criteria.endnum}
+  </select>
+  
+  <select id="getListLowest" resultType="com.healpio.vo.ReviewVO">
+  	select * from (
+	  	select t.*, rownum rnum from (
+		  	select nickname, review.*
+		  	from review, member 
+		  	where review.member_no = member.member_no and class_no = #{class_no}
+		  	order by review_star, review_regdate desc
+	  	) t
+	) where rnum between #{criteria.startnum} and #{criteria.endnum}
   </select>
   
   <select id="getAvgScore" resultType="double">
