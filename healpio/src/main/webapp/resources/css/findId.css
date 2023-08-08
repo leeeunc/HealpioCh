@@ -1,0 +1,118 @@
+	*{
+    		margin: 0px auto;  
+    		 		
+   			padding: 0px;   			
+    		box-sizing: border-box;
+    		text-decoration: none;
+      }
+
+
+       #login_container{
+         /* border : 1px solid black; */
+          width: 300px;
+          height: 400px; 
+          margin: auto;         
+          background-color: rgba(128, 128, 128, 0.068);
+          justify-content: center; /* 수평 가운데 정렬 */
+          align-items: center; /* 수직 가운데 정렬 */
+          padding : 20px;
+          margin-top : 30px; 
+        }
+        
+        #id_answer{
+        	font-size : 20px;
+        }
+        
+        #login_btn2 {
+          width : 100%;
+          height : 50px;
+		  display: flex;
+		  justify-content: center; /* Horizontally center align */
+		  margin-top: 10px;
+		 }
+        
+        .btn_login{
+        	width : 80%;
+        	heigth : 40px;
+        	font-size : 20px;
+        	color : white;
+        	background-color: #4285f4;
+        	border-radius: 10px;
+        	display: flex;
+        	justify-content: center; /* 수평 가운데 정렬 */
+            align-items: center; /* 수직 가운데 정렬 */
+        }
+        
+        #title{
+        	display: flex;
+        	justify-content: center; /* 수평 가운데 정렬 */
+            align-items: center; /* 수직 가운데 정렬 */
+         /*   border : 1px solid black; */
+            height : 60px;
+        }
+        
+        .mb-4 {
+        	display: flex;
+        	justify-content: center; /* 수평 가운데 정렬 */
+           
+        }
+        
+        #form-group{
+        	display: flex;
+        	justify-content: center; /* 수평 가운데 정렬 */
+            align-items: center; /* 수직 가운데 정렬 */
+            border : 1px solid black;
+        }
+        
+        #email {
+        	
+            height : 30px;
+            width : 90%;
+        }
+        
+        #findId_login{
+        /*	border : 1px solid black; */
+        	height : 40px;
+        	width : 90%;
+        }
+        
+        .btn_findId{
+        	width : 50%;
+        	height : 100%;
+        	font-size : 20px;
+        	color : white;
+        	background-color: #229964;
+        	border-radius: 10px;
+        	padding-left : 10px;
+        	
+        }
+        
+        .login_btn1 {
+            width : 48%;
+        	height : 100%;
+        	font-size : 20px;
+        	color : white;
+        	background-color: #229964;
+        	border-radius: 10px;
+		 }
+		 
+		 #btn_findPw {
+		 	width : 100%;
+		 	height : 50px;
+		 /*	border : 1px solid black; */
+		 }
+        
+        .btn_findPw{
+        	width : 90%;
+        	height : 100%;
+        	font-size : 20px;
+        	color : white;
+        	background-color: #4285f4;
+        	border-radius: 10px;
+        	display: flex;
+        	justify-content: center; /* 수평 가운데 정렬 */
+            align-items: center; /* 수직 가운데 정렬 */
+        
+        }
+
+        

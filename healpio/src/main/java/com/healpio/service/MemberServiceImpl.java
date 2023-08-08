@@ -8,10 +8,15 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -25,69 +30,61 @@ public class MemberServiceImpl implements MemberService{
 	@Autowired
 	MemberMapper memberMapper;
 	
+	@Autowired
+	BCryptPasswordEncoder encoder;
+	
+	@Autowired
+	JavaMailSender mailSender;
+	
 	@Override
 	public MemberVO login(MemberVO paramMember) {
-		
-		// 사용자 정보 조회
-		MemberVO memberVO = memberMapper.login(paramMember);
-		
-		if(memberVO != null) {
-			// 사용자가 입력한 비밀번호가 일치하는지 확인
-			// 사용자가 입력한 비밀번호, 데이터베이스에 암호화되어 저장된 비밀번호
-			// 파라메터로 넘어온 paramMember
-		//	boolean res = encoder.matches(paramMember.getMember_pw(), memberVO.getMember_pw());
-			
-			// 비밀번호 인증이 성공하면 member객체를 반환
-			if(paramMember.getMember_pw().equals(memberVO.getMember_pw())) {
-				// 사용자 권한을 조회
-				// ※ 아래 코드는 본래 수업시간에선 암호화 처리 때문에 주석처리 했습니다. 지금은 임시로 열어두었습니다.  
-			//	memberVO.setRole(memberMapper.getMemberRole(memberVO.getMember_id()));
-				return memberVO;
-			} 
-		}
-	
-		// ※ 아래 코드는 본래 수업시간에선 암호화 처리 때문에 주석처리 했습니다. 지금은 임시로 열어두었습니다.  
-		//return memberMapper.login(memberVO);
-		// ※ 본래 코드는 위 코드를 주석처리하고 return null; 을 넣습니다.
-		return null;
+	    // 사용자 정보 조회
+	    MemberVO memberVo = memberMapper.login(paramMember);
+
+	    if (memberVo != null) {
+	        // 사용자가 입력한 비밀번호와 데이터베이스에 저장된 비밀번호 비교
+	        // 암호화된 비밀번호와 사용자가 입력한 비밀번호를 비교
+	    	boolean res = 
+					encoder.matches(paramMember.getMember_pw(), memberVo.getMember_pw());	
+			         // 비밀번호가 일치하면 로그인 성공
+	    	if(res) {
+			 return memberVo;
+	        }
+	    }
+	   
+
+	    // 비밀번호가 일치하지 않으면 로그인 실패
+	    return null;
 	}
 
-	
-	
+
+
 	@Override
-    public int insert(MemberVO memberVo) {
-        try {
-        	
-        	// 'teacheryn' 값이 'Y'인 경우 'adminyn'을 'N'으로 설정합니다.
-            if ("Y".equals(memberVo.getTeacheryn())) {
-                memberVo.setAdminyn("N");
-            } else {
-                // 'teacheryn' 값이 'Y'가 아닌 경우 'adminyn'을 'Y'로 설정합니다.
-                memberVo.setAdminyn("Y");
-            }
-        	
-            int res = memberMapper.insert(memberVo);
-            return res > 0 ? 1 : 0; // 1: 회원가입 성공, 0: 회원가입 실패
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 0;
-        }
-    }
+	public int insert(MemberVO memberVo) {
+	    // 비밀번호 암호화
+	    memberVo.setMember_pw(encoder.encode(memberVo.getMember_pw()));
+
+	    // 회원 정보를 DB에 저장
+	    int res = memberMapper.insert(memberVo);
+	    return res > 0 ? 1 : 0; // 1: 회원가입 성공, 0: 회원가입 실패
+	}
+
+
 	
-	public void insertMember(MemberVO member) throws Exception {
-		member.setTeacheryn("Y");
-	    memberMapper.insert(member);
+	public void insertMember(MemberVO memberVo) throws Exception {
+		memberVo.setTeacheryn("Y");
+	    memberMapper.insert(memberVo);
 	}
 	
 	
 	@Override
-	public int idCheck(MemberVO memberVO) {
-		return memberMapper.idCheck(memberVO);
+	public int idCheck(MemberVO memberVo) {
+		return memberMapper.idCheck(memberVo);
 	}
 	
 	@Override
-	public int nickCheck(MemberVO memberVO) {
-		return memberMapper.nickCheck(memberVO);
+	public int nickCheck(MemberVO memberVo) {
+		return memberMapper.nickCheck(memberVo);
 	}
 
 	@Autowired
@@ -200,5 +197,26 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 
+
+	@Override
+    public void sendTemporaryPasswordByEmail(String userEmail, String userName, String temporaryPassword) {
+        // 이메일 전송 설정
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(userEmail); // 수신자 이메일 주소
+        message.setSubject("임시 비밀번호 발송"); // 이메일 제목
+        message.setText("안녕하세요, " + userName 
+                + "님!\n입력하신 정보로 임시 비밀번호가 발송되었습니다.\n임시 비밀번호: " + temporaryPassword);
+
+        // 이메일 전송
+        mailSender.send(message);
+    }
 	
+
+	@Override
+    public boolean checkUser(String userEmail, String userName) {
+        MemberVO member = memberMapper.findPw(userEmail, userName);
+        return member != null; // 회원 정보가 존재하면 true, 존재하지 않으면 false를 반환
+    }
+
+
 }

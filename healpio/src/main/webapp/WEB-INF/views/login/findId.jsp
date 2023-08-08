@@ -1,23 +1,32 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="EUC-KR">
-    <title>¾ÆÀÌµð Ã£±â °á°ú</title>
+    <title>ì•„ì´ë”” ì°¾ê¸° ê²°ê³¼</title>
+    <link rel='stylesheet' href='../resources/css/findId.css'>
+	
+    
 </head>
 <body>
-    <div class="card o-hidden border-0 shadow-lg my-5">
+<%@ include file="../common/header.jsp" %>
+
+    <div id="login_container">
         <div class="jumbotron">
-            <h2>¾ÆÀÌµð´Â :</h2>
+            <h2>ì•„ì´ë””ëŠ” :</h2>
+            <br>
             <ul>
                 <c:forEach items="${memberList}" var="member" varStatus="status">
-                    <li>${member.member_id }</li><br />
+                    <li id='id_answer'>${member.member_id } </li><br>
                 </c:forEach>
             </ul>
-            <h2>ÀÔ´Ï´Ù</h2>
-            <button type="button" class="btn btn-primary" onclick="location.href='/login/login'">·Î±×ÀÎÆäÀÌÁö</button>
+            <h2>ìž…ë‹ˆë‹¤</h2> <br>
+           <div id="login_btn2">
+            <button type="button" class="btn_login" onclick="location.href='/login/login'">ë¡œê·¸ì¸íŽ˜ì´ì§€</button>
+           </div>
         </div>
     </div>
+    <%@ include file="../common/footer.jsp" %>
 </body>
 </html>

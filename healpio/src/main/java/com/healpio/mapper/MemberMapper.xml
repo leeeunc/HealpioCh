@@ -8,7 +8,7 @@
 	<select id="login" resultType="com.healpio.vo.MemberVO">
 		select *
 		from member
-		where member_id=#{member_id} and member_pw = #{member_pw}
+		where member_id=#{member_id} 
 	</select>
 	
 	<!-- 추가된 resultMap -->
@@ -28,6 +28,10 @@
 		select * from member where email = #{email}
 	</select>
 	
+	<select id="findPw" resultMap="MemberVOResultMap">
+    	select * from member where email = #{email} and member_name = #{member_name}
+	</select>
+
 	<select id="idCheck" resultType="int">
 		select count(*)
 			from member
@@ -50,6 +54,7 @@
   (#{member_no}, #{member_id}, #{member_pw}, #{member_name}
   , #{nickname}, #{phonenumber}, #{email}, #{teacheryn})		
 </insert>
+
 
 	
 </mapper>

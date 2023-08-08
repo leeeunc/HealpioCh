@@ -1,4 +1,13 @@
 window.addEventListener('load', function() {
+	
+	// 아이디와 비밀번호의 정규식을 설정합니다.
+	  const idRegex = /^[a-zA-Z0-9]{6,12}$/; // 6~12 글자의 영문 소문자와 숫자 조합
+	  const pwRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{6,12}$/; // 6~12 글자의 영문과 숫자 조합
+	  
+	  const signUpIdInput = document.getElementById('signUpId'); // 아이디 입력 요소 가져오기
+	  const signUpPwInput = document.getElementById('signUpPw'); // 비밀번호 입력 요소 가져오기
+
+
 	const signUpNickInput = document.getElementById('signUpNick');
 	const signupMsgNick = document.getElementById('signupMsg_nick');
 	
@@ -192,5 +201,30 @@ window.addEventListener('load', function() {
       document.getElementById("teacheryn").value = value;
   }
 
+  
+  
+  // 아이디 입력란에 입력 내용이 변경될 때 이벤트 처리
+  signUpIdInput.addEventListener('input', function() {
+    const signUpId = signUpIdInput.value;
+
+    // 아이디 형식 체크
+    if (!idRegex.test(signUpId)) {
+      signupMsg.innerHTML = '아이디는 영문과 숫자 조합으로 6~12글자여야 합니다.';
+    } else {
+      signupMsg.innerHTML = '';
+    }
+  });
+
+  // 비밀번호 입력란에 입력 내용이 변경될 때 이벤트 처리
+  signUpPwInput.addEventListener('input', function() {
+    const signUpPw = signUpPwInput.value;
+
+    // 비밀번호 형식 체크
+    if (!pwRegex.test(signUpPw)) {
+      signupMsg_pw.innerHTML = '비밀번호는 영문과 숫자 조합으로 6~12글자여야 합니다.';
+    } else {
+      signupMsg_pw.innerHTML = '';
+    }
+  });
 
 });
