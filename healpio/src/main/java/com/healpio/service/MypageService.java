@@ -25,5 +25,7 @@ public interface MypageService {
 	
 	public int reservationDelete(String reservation_no);
 	
-	public List<MyReservationVO> getHistory(String member_no);
+	public List<MyReservationVO> getPreviousCourses(String member_no);
+	
+	public List<MyReservationVO> getPreviousBookings(String member_no);
 }

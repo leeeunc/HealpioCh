@@ -33,7 +33,7 @@ public class StudentController {
 	@GetMapping("/reservation/list/{member_no}")
 	public Map<String, Object> reservationList(@PathVariable("member_no") String member_no){
 		List<MyReservationVO> reservation_list = mypageService.getReservationList(member_no);
-		List<MyReservationVO> history_list = mypageService.getHistory(member_no);
+		List<MyReservationVO> history_list = mypageService.getPreviousCourses(member_no);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("reservation_list", reservation_list);
 		map.put("history_list", history_list);

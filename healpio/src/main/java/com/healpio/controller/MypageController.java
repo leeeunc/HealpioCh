@@ -99,8 +99,43 @@ public class MypageController {
 		map.put("teacher_resList", teacher_resList);
 		
 		return map;
+	}
+	
+	@ResponseBody
+	@GetMapping("deleteReservation/{reservation_no}")
+	public Map<String, Object> deleteReservation(@PathVariable("reservation_no") String reservation_no) {
+		int res = mypageService.reservationDelete(reservation_no);
+		Map<String, Object> map = new HashMap<String, Object>();
+		String msg = "";
+		if(res > 0) {
+			msg = "예약이 취소되었습니다.";
+			
+		}else {
+			msg = "예약 취소 중 에러가 발생하였습니다. 관리자에게 문의해주세요.";
+			
+		}
+		map.put("msg", msg);
+		return map;
+	}
+	
+	@ResponseBody
+	@GetMapping("student/history/{member_no}")
+	public Map<String, Object> gePreviousCourse(@PathVariable("member_no") String member_no) {
+		List<MyReservationVO> preCourseList = mypageService.getPreviousCourses(member_no);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("preCourseList", preCourseList);
 		
+		return map;
+	}
+	
+	@ResponseBody
+	@GetMapping("teacher/history/{member_no}")
+	public Map<String, Object> getPreviousBookings(@PathVariable("member_no") String member_no) {
+		List<MyReservationVO> preBooksList = mypageService.getPreviousBookings(member_no);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("preBooksList", preBooksList);
 		
+		return map;
 	}
 	
 	
