@@ -43,7 +43,8 @@
 	
 	<insert id="send">
     	INSERT INTO message (MESSAGE_NO, MESSAGE_TITLE, MESSAGE_CONTENT, SEND_NICK, RECV_NICK) 
-   			VALUES ('MSG' || LPAD(SEQ_MEMBER.NEXTVAL, 6, '0'),  #{message_title}, #{message_content}, #{send_nick}, #{recv_nick})
+		    VALUES ('MSG' || LPAD(SEQ_MEMBER.NEXTVAL, 6, '0'), #{message_title}, #{message_content}, #{memberVo.nickname},
+            (SELECT DISTINCT MEMBER_NAME FROM CLASS JOIN MEMBER USING (MEMBER_NO) WHERE MEMBER_NO = #{classVO.member_no}))
 	</insert>
 	
 	<insert id="reply">

@@ -37,8 +37,8 @@ public class MessageController {
 	}
 	
 	@GetMapping("view_recv")
-	public void getRecvOne(String message_no, Model model) {
-		messageService.getRecvOne(message_no, model);
+	public void getRecvOne(String message_no, MemberVO member, Model model) {
+		messageService.getRecvOne(message_no, member, model);
 		messageService.readCheck(message_no);
 	}
 	

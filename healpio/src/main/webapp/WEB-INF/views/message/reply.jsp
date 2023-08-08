@@ -20,7 +20,8 @@
 	}
 	
 	function goBack(){
-		let url = '/message/view_recv?message_no=' + ${param.message_no };
+		//history.back(-1);
+		let url = '/message/view_recv?message_no=${param.message_no }';
 
 		replyForm.setAttribute('method', 'get'); // 전송 방식 결정 (get or post)
 		replyForm.setAttribute('action', url); // 전송할 url 지정
@@ -64,7 +65,7 @@
 <div class="viewWrap">
 <form method="post" action="reply" name="replyForm">
     <input type="hidden" name="message_no" id="message_no" class="form-control" value="${param.message_no}">
-    
+    <input type="hidden" name="nickname" id="nickname" value="${memberVo.nickname}">
     
 	<div class="mb-3">
 	  <label for="message_title" class="viewLabel">제목</label>
@@ -86,7 +87,7 @@
 
 	<div class="btnWrap">
 		<button type="submit" class="btnReply btnSm" onclick="reply('/message/reply'); alert('전송이 완료되었습니다.')">전송</button>	
-		<button class="btnSm" onclick="goBack()">뒤로</button>	
+		<button class="btnSm" onclick="goBack()">이전</button>	
 		<button class="btnSm" onclick="window.close()">닫기</button>
 	</div>
 </form>

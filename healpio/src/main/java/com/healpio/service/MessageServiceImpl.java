@@ -71,10 +71,14 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public MessageVO getRecvOne(String message_no, Model model) {
+	public MessageVO getRecvOne(String message_no, MemberVO member, Model model) {
 		MessageVO message = messageMapper.getRecvOne(message_no);
 		
 		model.addAttribute("msg", message);
+		
+		int newUnreadCnt = messageMapper.getUnreadCnt(member);
+		model.addAttribute("newUnreadCnt", newUnreadCnt);
+		
 		return messageMapper.getRecvOne(message_no);
 	}
 

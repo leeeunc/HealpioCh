@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.healpio.service.MemberService;
+import com.healpio.service.MessageService;
 import com.healpio.vo.MemberVO;
 
 @Controller
@@ -27,6 +28,9 @@ public class MemberController{
 	
 	@Autowired
     MemberService memberService;
+	
+	@Autowired
+	MessageService messageService;
 
 	/**
 	 *  home.jsp는 로그인 후 다음페이지로 넘어가는 테스트용 입니다.
@@ -86,6 +90,10 @@ public class MemberController{
         	    
            session.setAttribute("memberVo", memberVo);
            session.setAttribute("userId", memberVo.getMember_id());
+           
+           int unreadCnt = messageService.getUnreadCnt(memberVo);
+           session.setAttribute("unreadCnt", unreadCnt);
+           
             return "redirect:/";
         } else {
             // 로그인 실패
