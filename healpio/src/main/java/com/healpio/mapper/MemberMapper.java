@@ -10,11 +10,13 @@ public interface MemberMapper {
 	public MemberVO login(MemberVO memberVO);
 	
 	public int idCheck(MemberVO memberVO);
-
+	
 	public int nickCheck(MemberVO memberVO);
 	
 	public int insert(MemberVO memberVo);
 	
 	public List<MemberVO> findId(String email);
+	
+	public MemberVO findPw(String email, String member_name);
 
 }

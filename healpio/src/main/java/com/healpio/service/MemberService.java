@@ -23,5 +23,9 @@ public MemberVO login(MemberVO memberVo);
 	public void naverLogin(HttpServletRequest request, Model model);
 
 	public List<MemberVO> findId(String email);
-	
+
+	public void sendTemporaryPasswordByEmail(String email, String member_name, String temporaryPassword);
+
+	public boolean checkUser(String email, String member_name);
+
 }

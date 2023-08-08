@@ -22,18 +22,18 @@
                 <legend>로그인</legend>
                 <div class="line id">
                     <label for="id" class="sound">아이디</label>
-                    <input type="text" id="id" name="id" class="input_txt" placeholder="아이디" value="member1" />
+                    <input type="text" id="id" name="id" class="input_txt" placeholder="아이디" value="min2580" />
                 </div>
                 <div class="line pw">
                     <label for="pw" class="sound">비밀번호</label>
-                    <input type="password" id="pw" name="pw" class="input_txt" placeholder="비밀번호" value="password" />
+                    <input type="password" id="pw" name="pw" class="input_txt" placeholder="비밀번호" value="1234" />
                 </div>
                 <button type="submit" class="login_btn">로그인</button> 
             </fieldset>
         </form>
 
         <ul id="login_find">
-            <li><a href="/login/findIdView" class="find_btn find">아이디/비밀번호 찾기</a></li>
+            <li><a href="/login/findIdView" class="find_btn find" >아이디/비밀번호 찾기</a></li>
             <li><a href="/login/signtype" class="find_btn join">회원가입</a></li>
         </ul>
 

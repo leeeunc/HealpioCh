@@ -3,6 +3,7 @@ package com.healpio.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -32,11 +33,6 @@ public class MemberController{
 	@Autowired
 	MessageService messageService;
 
-	/**
-	 *  home.jsp는 로그인 후 다음페이지로 넘어가는 테스트용 입니다.
-	 * @return
-	 */
-
 	@GetMapping("/login/naver")
 	public void naverLogin() {
 
@@ -64,6 +60,12 @@ public class MemberController{
     public String signupPage() {
         
             return "login/signup";    
+    }
+    
+    @PostMapping("/login/findPw")
+    public String findPwPage() {
+        
+            return "login/findPw";    
     }
     
    
@@ -198,6 +200,48 @@ public class MemberController{
 	        model.addAttribute("memberList", members);
 	        return "/login/findId";
 	    }
+	 
+	 @PostMapping("/login/findPwAction")
+	 @ResponseBody
+	 public Map<String, Object> findPwAction(@RequestBody MemberVO memberVo) {
+	     // userEmail과 userName을 사용하여 회원 정보를 조회하여 유효성을 검사하고, 회원 정보가 맞으면 이메일로 임시 비밀번호를 전송
+	     // 회원 정보가 맞지 않다면 에러 메시지를 반환
+
+	     // 사용자 정보를 확인하는 로직은 데이터베이스에서 이메일과 이름으로 회원 정보를 조회하여 확인합니다.
+	     // 이 부분은 MemberService의 메서드를 호출하여 처리하도록 합니다.
+	     boolean isUserInfoValid = memberService.checkUser(memberVo.getEmail(), memberVo.getMember_name());
+	     
+	     if (isUserInfoValid) {
+	         // 사용자 정보가 맞으면 이메일로 임시 비밀번호 전송
+	         String temporaryPassword = RandomPassword(8); // 8자리 임시 비밀번호 생성
+	         memberService.sendTemporaryPasswordByEmail(memberVo.getEmail(), memberVo.getMember_name(),temporaryPassword);
+	         System.out.println(memberVo);
+		     
+	         Map<String, Object> response = new HashMap<>();
+	         response.put("check", true);
+	         return response;
+	     } else {
+	         // 사용자 정보가 맞지 않으면 에러 메시지 반환
+	         Map<String, Object> response = new HashMap<>();
+	         response.put("check", false);
+	         return response;
+	     }
+	 }
+
+	 private String RandomPassword(int length) {
+	     String chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+	     StringBuilder randomPassword = new StringBuilder(length);
+	     ThreadLocalRandom random = ThreadLocalRandom.current();
+
+	     for (int i = 0; i < length; i++) {
+	         int randomIndex = random.nextInt(chars.length());
+	         randomPassword.append(chars.charAt(randomIndex));
+	     }
+
+	     return randomPassword.toString();
+	 }
+
+	
 	 
 }
 
