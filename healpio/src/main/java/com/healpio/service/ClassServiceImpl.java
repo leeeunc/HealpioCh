@@ -12,6 +12,7 @@ import com.healpio.mapper.AttachMapper;
 import com.healpio.mapper.ClassMapper;
 import com.healpio.mapper.ReviewMapper;
 import com.healpio.vo.ClassVO;
+import com.healpio.vo.Criteria_review;
 import com.healpio.vo.LocationVO;
 import com.healpio.vo.ReviewVO;
 import com.healpio.service.AttachService;
@@ -64,10 +65,15 @@ public class ClassServiceImpl implements ClassService {
 	}
 
 	@Override
+	public void getLocation(String class_no, Model model) {
+		model.addAttribute("LocationVO", classMapper.getLocation(class_no));		
+	}
+
+	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public int update(ClassVO classVO, List<MultipartFile> files) throws Exception {
+	public int update(ClassVO classVO, LocationVO locationVO, List<MultipartFile> files) throws Exception {
 		int res = classMapper.update(classVO);
-		
+		classMapper.updateLocation(locationVO);		
 		String msg = attachService.fileupload(files, classVO.getClass_no());
 		if("".equals(msg)) {
 			return res;
@@ -81,7 +87,7 @@ public class ClassServiceImpl implements ClassService {
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public int delete(String class_no, Model model) {
+	public int delete(String class_no, Criteria_review criteria, Model model) {
 		// 첨부파일 삭제
 		attachService.delete(class_no);
 		
@@ -92,7 +98,7 @@ public class ClassServiceImpl implements ClassService {
 		classMapper.deleteLocation(class_no);
 		
 		// 리뷰 삭제
-		List<ReviewVO> reviewList = reviewMapper.getList(class_no);
+		List<ReviewVO> reviewList = reviewMapper.getList(class_no, criteria);
 		for(ReviewVO reivewVO:reviewList) {
 			reviewMapper.delete(reivewVO.getReview_no());			
 		}

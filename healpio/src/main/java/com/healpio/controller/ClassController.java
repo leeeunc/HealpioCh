@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.healpio.service.ClassService;
 import com.healpio.vo.ClassVO;
+import com.healpio.vo.Criteria_review;
 import com.healpio.vo.LocationVO;
 
 import lombok.extern.log4j.Log4j;
@@ -65,13 +66,14 @@ public class ClassController {
 	@GetMapping("edit")
 	public void edit(String class_no, String member_no, Model model) {
 		classService.getOne(class_no, "M000002", model);
+		classService.getLocation(class_no, model);
 		classService.getExerciseList(model);
 	}
 	
 	@PostMapping("edit")
-	public String edit(ClassVO classVO, List<MultipartFile> files, Model model) {		
+	public String edit(ClassVO classVO, LocationVO locationVO, List<MultipartFile> files, Model model) {		
 		try {
-			if(classService.update(classVO, files)>0) {
+			if(classService.update(classVO, locationVO, files)>0) {
 				model.addAttribute("class_no", classVO.getClass_no());	
 				model.addAttribute("message", "수정되었습니다.");
 				return "/class/message";
@@ -92,8 +94,8 @@ public class ClassController {
 	}
 	
 	@GetMapping("delete")
-	public String delete(String class_no, Model model) {
-		if(classService.delete(class_no, model)>0) {
+	public String delete(String class_no, Criteria_review criteria, Model model) {
+		if(classService.delete(class_no, criteria, model)>0) {
 			model.addAttribute("message", "게시글이 삭제되었습니다.");			
 		} else {
 			model.addAttribute("message", "삭제 중 오류가 발생하였습니다.");

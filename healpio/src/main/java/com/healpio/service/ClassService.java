@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.healpio.vo.ClassVO;
+import com.healpio.vo.Criteria_review;
 import com.healpio.vo.LocationVO;
 
 @Service
@@ -15,8 +16,9 @@ public interface ClassService {
 	public void getExerciseList(Model model);
 	public int insert(ClassVO classVO, LocationVO locationVO, List<MultipartFile> files) throws Exception;
 	public void getOne(String class_no, String member_no, Model model);
-	public int update(ClassVO classVO, List<MultipartFile> files) throws Exception;
-	public int delete(String class_no, Model model);
+	public void getLocation(String class_no, Model model);
+	public int update(ClassVO classVO, LocationVO locationVO, List<MultipartFile> files) throws Exception;
+	public int delete(String class_no, Criteria_review criteria, Model model);
 	public int scrap(String class_no, String member_no);
 	public int cancelScrap(String class_no, String member_no);
 	

@@ -54,15 +54,15 @@ $(function(){
       	만족도를 별점으로 나타내 주세요.<br>
       	<div class="score" data-max="5" data-rate="${reviewVO.review_star}"></div><br><br>
       	<div class="mb-3">
-		  <label for="exampleFormControlTextarea1" class="form-label">수강 후기를 구체적으로 작성해 주세요.</label>
-		  <textarea class="form-control" name="review_content" id="review_content" rows="3">${reviewVO.review_content}</textarea>
+		  <label for="exampleFormControlTextarea1" class="form-label">수강 후기를 구체적으로 작성해 주세요. (100자 이내)</label>
+		  <textarea class="form-control" name="review_content" id="review_content" rows="3" maxlength="100" style="resize:none;">${reviewVO.review_content}</textarea>
 		  <input type="text" name="member_no" id="member_no" value="${reviewVO.member_no}">
 		  <input type="text" name="class_no" id="class_no" value="${reviewVO.class_no}">
 		  <input type="text" name="review_no" id="review_no" value="${reviewVO.review_no}">
 		</div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">등록</button>
+        <button type="submit" class="btn btn-danger">등록</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="history.go(-1)">취소</button>
       </div>
     </div>

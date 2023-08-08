@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.healpio.service.ClassService;
 import com.healpio.service.ReviewService;
+import com.healpio.vo.Criteria_review;
 import com.healpio.vo.ReviewVO;
 
 import lombok.extern.log4j.Log4j;
@@ -47,7 +48,21 @@ public class ReviewController {
 	@GetMapping("list")
 	@ResponseBody
 	public Map<String, Object> getList(String class_no, Model model) {
-		return reviewService.getList(class_no);
+		Criteria_review criteria = new Criteria_review();
+		return reviewService.getList(class_no, criteria);
+	}
+	
+	@GetMapping("sorting")
+	@ResponseBody
+	public Map<String, Object> getSortingCriteria(String sortingCriteria, String class_no, Model model) {
+		Criteria_review criteria = new Criteria_review();
+		if("highest".equals(sortingCriteria)){
+			return reviewService.getListHighest(class_no, criteria);
+		} else if("lowest".equals(sortingCriteria)) {
+			return reviewService.getListLowest(class_no, criteria);
+		} else {			
+			return reviewService.getList(class_no, criteria);
+		}
 	}
 	
 	@GetMapping("edit")

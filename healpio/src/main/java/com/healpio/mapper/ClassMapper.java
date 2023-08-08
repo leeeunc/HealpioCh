@@ -14,7 +14,9 @@ public interface ClassMapper {
 	public int insert(ClassVO classVO);
 	public int insertLocation(@Param("class_no") String class_no, @Param("province") String province, @Param("city") String city, @Param("district") String district);
 	public ClassVO getOne(String class_no);
+	public LocationVO getLocation(String class_no);
 	public int update(ClassVO classVO);
+	public int updateLocation(LocationVO locationVO);
 	public int delete(String class_no);
 	public int scrap(@Param("class_no") String class_no, @Param("member_no") String member_no);
 	public int cancelScrap(@Param("class_no") String class_no, @Param("member_no") String member_no);

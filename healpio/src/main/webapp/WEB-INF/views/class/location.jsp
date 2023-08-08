@@ -67,7 +67,7 @@
 					var dong = jQuery('#dong option:selected');
 	
 					var locationName = sido.text(); // 시도 이름
-					jQuery('#locationBox1').val(locationName);
+					jQuery('#province').val(locationName);
 					
 					// 주소 찾기 기능
 					checkAndShowContentBox(locationName);
@@ -81,7 +81,7 @@
 					var dong = jQuery('#dong option:selected');
 					
 					var locationName = sigugun.text(); // 시도 시군구 이름
-					jQuery('#locationBox2').val(locationName);
+					jQuery('#city').val(locationName);
 					
 					// 주소 찾기 기능
 					checkAndShowContentBox(locationName);
@@ -95,7 +95,7 @@
 					var dong = jQuery('#dong option:selected');	
 					
 					var locationName = dong.text(); // 시도/시군구/읍면동 이름
-					jQuery('#locationBox3').val(locationName);
+					jQuery('#district').val(locationName);
 					
 					// 주소 찾기 기능
 					checkAndShowContentBox(locationName);
@@ -140,9 +140,9 @@
 		<select id="sigugun"><option value=""></option></select>
 		<select id="dong"><option value=""></option></select>
 		<div>
-			 <input type="hidden" name="province" id="locationBox1">
-			 <input type="hidden" name="city" id="locationBox2">
-			 <input type="hidden" name="district" id="locationBox3">
+			 <input type="hidden" name="province" id="province">
+			 <input type="hidden" name="city" id="city">
+			 <input type="hidden" name="district" id="district">
 			<!-- 코드: <span id="dongCode"></span> -->
 		</div>
 	</div>
