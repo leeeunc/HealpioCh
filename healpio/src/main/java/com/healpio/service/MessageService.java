@@ -23,7 +23,7 @@ public interface MessageService {
 	
 	public int getUnreadCnt(MemberVO member);
 	
-	public MessageVO getRecvOne(String message_no, Model model);
+	public MessageVO getRecvOne(String message_no, MemberVO member, Model model);
 
 	public MessageVO getSendOne(String message_no, Model model);
 	

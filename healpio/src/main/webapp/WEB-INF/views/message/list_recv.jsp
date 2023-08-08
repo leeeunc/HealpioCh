@@ -26,12 +26,13 @@
 	<%-- pageDto : ${pageDto } --%>
 <form name="list_recv" method="post">
 	<input type="hidden" name="pageNo" value="${pageDto.cri.pageNo }">
-	<input type="hidden" name="name" value="${memberVo.nickname }">
+	<input type="hidden" name="nickname" value="${memberVo.nickname }">
+	<input type="hidden" name="newUnreadCnt" id="newUnreadCnt" value="${newUnreadCnt }">
 	
 	<div class="listWrap">
 		<div class="list-group w-auto">
 		<c:forEach items="${list}" var="recv">
-	    	<a onclick="location.href='/message/view_recv?message_no=${recv.message_no}'" href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+	    	<a onclick="location.href='/message/view_recv?message_no=${recv.message_no}&nickname=${memberVo.nickname }'" href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
 	      	<div class="d-flex gap-2 w-100 justify-content-between">
 	        	<div>
 	         	 <h6 class="mb-0">${recv.message_title }</h6>

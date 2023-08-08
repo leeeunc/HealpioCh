@@ -58,6 +58,7 @@ public class MessageTest {
 	
 	@Test
 	public void getRecvOne() {
+		MemberVO member = new MemberVO();
 		MessageVO message = messageMapper.getRecvOne("MSG000022");
 		log.info(message);
 	}

@@ -12,8 +12,13 @@
 	function goBack(url){
 		viewForm.setAttribute('method', 'post'); // 전송 방식 결정 (get or post)
 		viewForm.setAttribute('action', url); // 전송할 url 지정
+		
 		viewForm.submit();
 	
+	}
+	
+	window.onload = function(){
+		opener.document.querySelector('.unreadCnt').innerHTML = document.getElementById('newUnreadCnt').value;
 	}
 </script>
 <style>
@@ -50,8 +55,10 @@
 	    <form action="reply" name="viewForm">
 			  <input type="hidden" name="message_no" id="message_no" value="${msg.message_no}">
 			  <input type="hidden" name="send_time" id="send_time" value="${msg.send_time}">
-			  <input type="hidden" name="nickname" id="nickname" value="${memverVo.nickname}">
+			  <input type="hidden" name="nickname" id="nickname" value="${memberVo.nickname}">
 			  <input type="hidden" id="recv_nick" name="recv_nick" value="${msg.recv_nick}">
+			  <input type="hidden" id="send_nick" name="send_nick" value="${msg.send_nick}">
+			  <input type="hidden" name="newUnreadCnt" id="newUnreadCnt" value="${newUnreadCnt }">	
 			  
 			  
 	    	<div class="mb-3">
