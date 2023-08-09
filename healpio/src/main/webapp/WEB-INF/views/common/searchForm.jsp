@@ -9,12 +9,13 @@
 
 </head>
 <body>
-	<input type="hidden" name="class_no" value="">
-	<input type="text" name="pageNo" id="pageNo" value="${pageDto.cri.pageNo }">
-	<input type="text" name="total" value="${pageDto.total }">
 
 	<form action="/board/list" 
 			method="get" name="searchForm" autocomplete="off" >
+
+	<input type="hidden" name="class_no" value="">
+	<input type="text" name="pageNo" id="pageNo" value="${pageDto.cri.pageNo }">
+	<input type="text" name="total" value="${pageDto.total }">
 			
  <jsp:include page="/WEB-INF/views/common/location.jsp" />
 

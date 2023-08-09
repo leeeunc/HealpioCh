@@ -19,7 +19,10 @@ import com.healpio.vo.MemberVO;
   public interface BoardService {
   
   public List<BoardScrapVO> getList(Criteria cri,Model model);
-	  
+
+	/*
+	 * public List<BoardScrapVO> scrapList(Criteria cri, Model model);
+	 */	  
   public List<ExerciseVO> exerciseList(Criteria cri,Model model);
   
   public List<LocationVO> provinceList(Model model);
