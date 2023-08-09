@@ -9,6 +9,12 @@
  <script src="https://code.jquery.com/jquery-latest.min.js" type="application/javascript"></script>
  <script type="application/javascript" src="https://zelkun.tistory.com/attachment/cfile8.uf@99BB7A3D5D45C065343307.js"></script>
  
+ <style type="text/css">
+ .location-select {
+    display: flex;
+    gap: 10px; /* 선택 옵션 사이 간격 설정 */
+}
+ </style>
  
    <script>
 
@@ -201,12 +207,11 @@
 <body>
 
 
-	<div>
+    <div class="location-select">
 		<select name="sel_province" id="sido" onclick="filterByProvince()"><option value="" >시도 선택</option></select>
 		<select name="sel_city" id="sigugun" onclick="filterByCity()"><option value="">시군구 선택</option></select>
 		<select name="sel_district" id="dong"><option value="">읍면동 선택</option></select>
-
-	</div>
+    </div>
 
 
 

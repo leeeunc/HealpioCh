@@ -17,20 +17,18 @@
 		<script src="../resources/js/list.js"></script>
 	</head>
 	<body>
-	
 
 	
   	    <%@ include file="../common/header.jsp" %> 
 	
 	    <div  class='pull' >
-		<input type="text" name="member_no" value="${memberVo.member_no }">
-		<input type="text" name="teacheryn" class="teacheryn" value="${memberVo.teacheryn }">
+		<input type="hidden" name="member_no" value="${memberVo.member_no }">
+		<input type="hidden" name="teacheryn" class="teacheryn" value="${memberVo.teacheryn }">
 		
 
 	        <div class='header'>
 
-	            <h3>스포츠 플랫폼</h3>
-	            <input type="text" value="${pageDto.total}">
+	            <input type="hidden" value="${pageDto.total}">
 				<!-- <select> 요소에 onchange 이벤트를 통해 filterByExercise 함수 호출 -->
 				<select name='sports' onchange="filterByExercise()">
 				  <option value='x'>운동종류</option>
@@ -56,21 +54,22 @@
 				<a href="/class/read?class_no=${li.class_no}">
  				<img src=
 					"<c:url value="/display">
-					<c:param name="fileName" value="${li.uuid }"/>
+					<c:param name="fileName" value="${li.boardFile }"/>
 					</c:url>" 
 				alt="${li.class_title}" class="form-intro-img"/> 
-				
+				 
 				<br>
-				</a >	  
-				      ${li.class_title}<br>
+				</a >	  				
+				     <a class="class_title-text"> ${li.class_title} </a><br>
 					  ------------------------------------------<br>
-					 ${li.nickname } |
+					 ${li.nickname } | 
 					 <a class="exercise-text">${li.exercise_name }</a> |
-					 <a class="province-text">${li.province }</a> <a class="city-text">${li.city }</a> <a class="district-text">${li.district }</a>
+					 <a class="province-text">${li.province }</a><a class="city-text">${li.city }</a><a class="district-text">${li.district }</a>
 				</div>
+		        
 			  </c:forEach>
 	 		</div>
-	 	
+
 			<div class="footer">
 	            <button class="regBtn"   onclick="classWirte()">등록하기</button>
 		        <!-- 페이지 번호 출력 -->

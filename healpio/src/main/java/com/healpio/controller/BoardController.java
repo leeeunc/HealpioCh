@@ -23,15 +23,14 @@ public class BoardController {
 	BoardService boardService;
 	
 	@GetMapping("list")
-	public void getList(Criteria cri, Model model) {
+	public void getList(Criteria cri, Model model, String class_no) {
 		
 		System.out.println(cri);
 		boardService.getList(cri, model);
 		boardService.exerciseList(cri, model);
 		boardService.provinceList(model);
 		boardService.locationList(model);
-		/*
-		 * boardService.scrapList(cri, model);
-		 */
+
+		/* boardService.scrapList(class_no); */
 	}
 }

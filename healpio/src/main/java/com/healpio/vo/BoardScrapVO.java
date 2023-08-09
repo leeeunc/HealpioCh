@@ -14,4 +14,7 @@ public class BoardScrapVO {
 	private String uuid;
 	private String teacheryn;
 	private String class_no;
+	private String uploadpath;
+	private String filename;
+	private String boardFile;
 }
