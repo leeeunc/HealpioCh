@@ -210,12 +210,20 @@ footer {
     width: 400px;
 }
 
-.goEdit{
+#btnGoEdit{
     display: none;
 }
 
-.goDelete{
+#btnGoDelete{
     display: none;
+}
+
+.password{
+	display: none;
+}
+
+.passwordCheck{
+	display: none;
 }
 
 /* register */

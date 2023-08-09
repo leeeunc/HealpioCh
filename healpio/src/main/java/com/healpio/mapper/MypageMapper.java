@@ -31,5 +31,7 @@ public interface MypageMapper {
 	
 	public List<MyReservationVO> getPreviousBookings(String member_no);
 	
+	// 비밀번호 확인
+	public String getPassword(String member_no);
 	
 }

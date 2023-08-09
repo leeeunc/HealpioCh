@@ -5,14 +5,15 @@
 <mapper namespace="com.healpio.mapper.MypageMapper">
 
 	<select id="getInfoList" resultType="com.healpio.vo.MemberVO">
-		SELECT nickname, member_pw, phonenumber, email, TEACHERYN
+		SELECT member_name, nickname, member_pw, phonenumber, email, TEACHERYN
 		FROM MEMBER WHERE MEMBER_NO = #{member_no}
-	</select>
+	</select>	
 	
 	
 	<update id="myInfoEdit">
 		UPDATE member
-		SET 
+		SET
+		member_name = #{member_name},
 		NICKNAME = #{nickname},
 		member_pw = #{member_pw},
 		phonenumber = #{phonenumber},
@@ -137,4 +138,10 @@
         <result property="reservation_date" column="reservation_date"/>
         <result property="reservation_time" column="reservation_time"/>
     </resultMap>
+    
+    <select id='getPassword' resultType="String">
+    	select member_pw
+		from member
+		where member_no= #{member_no}
+    </select>
 </mapper>
