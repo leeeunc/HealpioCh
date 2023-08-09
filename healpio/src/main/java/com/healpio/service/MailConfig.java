@@ -1,5 +1,4 @@
 package com.healpio.service;
-import java.util.Properties;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,15 +11,20 @@ public class MailConfig {
     @Bean
     public JavaMailSender javaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost("smtp.naver.com");
-        mailSender.setPort(465);
-        mailSender.setUsername("wed478@naver.com");
-        mailSender.setPassword("toeic990!!");
+        // Set your mail sender properties here
+        mailSender.setHost("your-mail-host");
+        mailSender.setPort(587);
+        mailSender.setUsername("your-username");
+        mailSender.setPassword("your-password");
         
-        Properties props = mailSender.getJavaMailProperties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.ssl.enable", "true");
-        
+        // Other properties...
+
         return mailSender;
     }
 }
+
+
+
+
+
+

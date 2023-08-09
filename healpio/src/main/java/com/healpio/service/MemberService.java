@@ -26,6 +26,9 @@ public MemberVO login(MemberVO memberVo);
 
 	public void sendTemporaryPasswordByEmail(String email, String member_name, String temporaryPassword);
 
-	public boolean checkUser(String email, String member_name);
+	public boolean checkUser(MemberVO memberVo);
+		
+	public int updatePw(MemberVO memverVo);
+
 
 }

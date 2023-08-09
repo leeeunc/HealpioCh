@@ -29,7 +29,7 @@
 	</select>
 	
 	<select id="findPw" resultMap="MemberVOResultMap">
-    	select * from member where email = #{email} and member_name = #{member_name}
+    	select * from member where email = #{email} and member_name = #{member_name} and member_id = #{member_id}
 	</select>
 
 	<select id="idCheck" resultType="int">
@@ -55,6 +55,10 @@
   , #{nickname}, #{phonenumber}, #{email}, #{teacheryn})		
 </insert>
 
-
+	<update id="updatePw">
+		update member
+		set member_pw = #{member_pw}
+		where member_id = #{member_id}
+	</update>
 	
 </mapper>
