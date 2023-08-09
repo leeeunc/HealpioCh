@@ -27,9 +27,9 @@
   </insert>   
    
   <select id="getOne" resultType="com.healpio.vo.ClassVO">
-  	select class_no, class_title, class.member_no, nickname, exercise_name, class_introduce, class_maxcount, class_content, class_price, teacher_content, class_day, class_time  
-  	from class, member, exercise 
-  	where class.member_no = member.member_no and class.exercise_no = exercise.exercise_no and class_no = #{class_no}
+  	select class.class_no, class_title, class.member_no, nickname, exercise_name, class_introduce, class_maxcount, class_content, class_price, teacher_content, class_day, class_time, province, city, district 
+  	from class, member, exercise, location 
+  	where class.member_no = member.member_no and class.exercise_no = exercise.exercise_no and class.class_no = location.class_no and class.class_no = #{class_no}
   </select>
   
   <select id="getLocation" resultType="com.healpio.vo.LocationVO">
