@@ -7,16 +7,17 @@
 }
 #container{
     width: 100%;
-	height: 1200px;
+	height: 1280px;
 	background-color: #EFEFEF; 
     margin: auto;
 }
 #form{
 	position: relative;
 	width: 1200px;
+	height: 1200px;
 	background-color: #ffffff;
 	margin: auto;
-	top: 60px;
+	top: 40px;
 	border-radius: 30px;
 }
 #form-intro{
@@ -74,17 +75,14 @@
 #class_contentDiv{
 	padding: 70px;
 	padding-top: 10px;
-	padding-bottom: 55px;
 }
 #teacher_contentDiv{
 	padding: 70px;
 	padding-top: 10px;
-	padding-bottom: 55px;
 }
 #reviewDiv{
 	padding: 70px;
 	padding-top: 33px;
-	padding-bottom: 55px;
 }
 #reservationDiv{
 	padding: 70px;

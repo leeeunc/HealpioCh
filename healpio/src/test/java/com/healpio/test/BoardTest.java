@@ -17,6 +17,7 @@ import com.healpio.vo.ClassVO;
 import com.healpio.vo.Criteria;
 import com.healpio.vo.ExerciseVO;
 import com.healpio.vo.LocationVO;
+import com.healpio.vo.MemberVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -37,7 +38,6 @@ public class BoardTest {
 		/*
 		 * cri.setExercise_name("필라테스");
 		 */		
-		 cri.setProvince("서울특별시");
 		 
 		List<BoardScrapVO> list = boardMapper.getList(cri);
 
@@ -50,6 +50,9 @@ public class BoardTest {
 			log.info(board.getProvince());
 			log.info(board.getCity());
 			log.info(board.getDistrict());
+			log.info(board.getUuid());
+			log.info(board.getTeacheryn());
+			log.info(board.getClass_no());
 			
 		});
 		
@@ -100,7 +103,22 @@ public class BoardTest {
 		  
 	  }
 	 
-	  
-	  
+	/*
+	 * @Test public void memberCheck() { assumeNotNull(boardMapper);
+	 * 
+	 * 
+	 * List<MemberVO> list = boardMapper.memberCheck("M000002");
+	 * 
+	 * 
+	 * list.forEach(board ->{ log.info("MemberVO====================");
+	 * log.info(board.getMember_no()); log.info(board.getMember_id());
+	 * log.info(board.getMember_pw()); log.info(board.getMember_name());
+	 * log.info(board.getEmail()); log.info(board.getNickname());
+	 * log.info(board.getTeacheryn()); log.info(board.getAdminyn());
+	 * log.info(board.getPhonenumber());
+	 * 
+	 * 
+	 * }); }
+	 */
 	  
 }

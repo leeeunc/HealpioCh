@@ -20,6 +20,7 @@
 <script>
 let message = '${message}';
 window.addEventListener('load', function(){
+	console.log(message);
 	if(message!=''){
 		// 모달창 열기
 		document.querySelector(".modal-body").innerHTML = message;
@@ -34,7 +35,7 @@ window.addEventListener('load', function(){
 			if(message.indexOf("오류")>-1){
 				history.go(-1);					
 			} else if(message.indexOf("게시글이 삭제되었습니다.")>-1){
-				location.href='../class/#';
+				location.href='../board/list';
 			} else {
 				//location.href='../class/read?class_no=${class_no}&pageno=${pageno}&searchfield=${searchfield}&searchword=${searchword}';
 				location.href='../class/read?class_no=${class_no}';

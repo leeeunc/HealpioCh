@@ -11,4 +11,7 @@ public class BoardScrapVO {
 	private String province;
 	private String city;
 	private String district;
+	private String uuid;
+	private String teacheryn;
+	private String class_no;
 }

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import com.healpio.service.ClassService;
 import com.healpio.vo.ClassVO;
 import com.healpio.vo.Criteria_review;
 import com.healpio.vo.LocationVO;
+import com.healpio.vo.MemberVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -59,13 +62,18 @@ public class ClassController {
 	}
 	
 	@GetMapping("read")
-	public void read(String class_no, String member_no, Model model) {
-		classService.getOne(class_no, "M000002", model);
+	public void read(String class_no, HttpSession session, Model model) {
+		MemberVO memberVo = (MemberVO)session.getAttribute("memberVo");
+		if(memberVo!=null) {
+			classService.getOne(class_no, memberVo.getMember_no(), model);			
+		} else {
+			classService.getOne(class_no, "", model);
+		}
 	}
 	
 	@GetMapping("edit")
 	public void edit(String class_no, String member_no, Model model) {
-		classService.getOne(class_no, "M000002", model);
+		classService.getOne(class_no, member_no, model);
 		classService.getLocation(class_no, model);
 		classService.getExerciseList(model);
 	}
@@ -107,7 +115,7 @@ public class ClassController {
 	@ResponseBody
 	public Map<String, Object> scrap(String class_no, String member_no) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		if(classService.scrap(class_no, "M000002")>0) {
+		if(classService.scrap(class_no, member_no)>0) {
 			map.put("result", "success");
 		} else {
 			map.put("result", "fail");
@@ -119,7 +127,7 @@ public class ClassController {
 	@ResponseBody
 	public Map<String, Object> cancelScrap(String class_no, String member_no) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		if(classService.cancelScrap(class_no, "M000002")>0) {
+		if(classService.cancelScrap(class_no, member_no)>0) {
 			map.put("result", "success");
 		} else {
 			map.put("result", "fail");

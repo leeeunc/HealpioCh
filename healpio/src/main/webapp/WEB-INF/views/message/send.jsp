@@ -58,23 +58,23 @@
 <div class="viewWrap">
 <form method="post" action="send" name="sendForm">
     
+	<div class="mb-3">
+	  <input type="hidden" class="form-control" id="member_no" name="member_no" readonly value="${param.member_no}">
+	</div>
     
+	<div class="mb-3">
+	  <input type="hidden" class="form-control" id="send_nick" name="send_nick" value="${memberVo.nickname}">
+	</div>
+
+
 	<div class="mb-3">
 	  <label for="title" class="viewLabel">제목</label>
 	  <input name="message_title" id="message_title" 
 	  type="text" class="form-control">
 	</div>
 	<div class="mb-3">
-	  <label for="writer" class="viewLabel">받는 사람</label>
-	  <input type="text" class="form-control" id="recv_nick" name="recv_nick" readonly value="${param.writer}">
-	</div>
-
-	<div class="mb-3">
-	  <input type="hidden" class="form-control" id="send_nick" name="send_nick" value="${memberVo.nickname}">
-	</div>
-	<div class="mb-3">
 	  <label for="content" class="form-label">내용</label>
-	  <textarea class="form-control" id="message_content" name="message_content" rows="10"></textarea>
+	  <textarea class="form-control" id="message_content" name="message_content" rows="12"></textarea>
 	</div>
 
 	<div class="btnWrap">

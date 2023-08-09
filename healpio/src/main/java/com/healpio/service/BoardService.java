@@ -11,6 +11,7 @@ import com.healpio.vo.ClassVO;
 import com.healpio.vo.Criteria;
 import com.healpio.vo.ExerciseVO;
 import com.healpio.vo.LocationVO;
+import com.healpio.vo.MemberVO;
 
   
   
@@ -26,6 +27,6 @@ import com.healpio.vo.LocationVO;
   public List<LocationVO> locationList(Model model);
   
   public int getTotalCnt(Criteria cri);
-  
+
   }
  

@@ -13,4 +13,6 @@ public class MessageVO {
 	private String send_time;
 	private String readYN;
 	
+	private String member_no;
+	
 }
