@@ -24,4 +24,9 @@ public class ClassVO {
 	private String nickname;
 	private String exercise_name;
 	
+	// 추가
+	private String province;
+	private String city;
+	private String district;
+	
 }

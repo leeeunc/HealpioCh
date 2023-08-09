@@ -31,13 +31,15 @@
 	float: left;
 	width: 500px;
 	height: 400px;
-	padding-left: 30px;
+	padding-left: 60px;
+	padding-top: 30px;
+	padding-bottom: 60px;
 }
 .form-intro-img{
 	position: relative;
 	float: left;
 	width: 500px;
-	height: 400px;
+	height: 370px;
 	padding-top: 30px;
 	padding-bottom: 30px;
 }
@@ -79,6 +81,11 @@
 #teacher_contentDiv{
 	padding: 70px;
 	padding-top: 10px;
+}
+#mapContainer{
+	position: relative;
+	padding: 70px;
+	padding-top: 33px;
 }
 #reviewDiv{
 	padding: 70px;
