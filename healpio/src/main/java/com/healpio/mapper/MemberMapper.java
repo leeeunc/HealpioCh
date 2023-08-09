@@ -17,6 +17,9 @@ public interface MemberMapper {
 	
 	public List<MemberVO> findId(String email);
 	
-	public MemberVO findPw(String email, String member_name);
+	public MemberVO findPw(MemberVO memberVo);
+	
+	public int updatePw(MemberVO memberVo);
+
 
 }

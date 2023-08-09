@@ -11,13 +11,20 @@ public class MailConfig {
     @Bean
     public JavaMailSender javaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost("your-smtp-server-host");
-        mailSender.setPort(587); // SMTP 포트 번호
+        // Set your mail sender properties here
+        mailSender.setHost("your-mail-host");
+        mailSender.setPort(587);
         mailSender.setUsername("your-username");
         mailSender.setPassword("your-password");
-
-        // 기타 설정 (SSL 등)
+        
+        // Other properties...
 
         return mailSender;
     }
 }
+
+
+
+
+
+

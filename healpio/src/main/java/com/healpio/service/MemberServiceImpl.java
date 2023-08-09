@@ -213,10 +213,22 @@ public class MemberServiceImpl implements MemberService{
 	
 
 	@Override
-    public boolean checkUser(String userEmail, String userName) {
-        MemberVO member = memberMapper.findPw(userEmail, userName);
+    public boolean checkUser(MemberVO memberVo) {
+        MemberVO member = memberMapper.findPw(memberVo);
         return member != null; // 회원 정보가 존재하면 true, 존재하지 않으면 false를 반환
     }
+
+
+
+	@Override
+	public int updatePw(MemberVO memberVo) {
+		
+		memberVo.setMember_pw(encoder.encode(memberVo.getMember_pw()));
+
+		int res = memberMapper.updatePw(memberVo);				
+		
+		return res;
+	}
 
 
 }

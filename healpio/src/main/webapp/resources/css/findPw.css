@@ -1,0 +1,62 @@
+	*{
+    margin: 0px auto;
+    padding: 0px;
+    box-sizing: border-box;
+    text-decoration: none;
+    
+      }
+
+      
+        #wrap_container{
+        /*  border : 1px solid black; */
+          width: 600px;
+          height: 700px;
+          margin: auto;
+          padding : 50px;             
+          background-color: rgba(128, 128, 128, 0.068);
+        }
+        
+        .findPw_title{
+        	padding:35px;
+        
+        }
+        
+        .findPw_subject{
+        	padding:40px;
+        	color: #ac2925;
+        	
+        }
+        
+        .form-group{
+        	width : 100%;
+        	height : 40px;
+        /*	border : 1px solid red; */
+        	padding-right : 200px;
+        }
+        
+        #userId {
+        	border : 1px solid black;
+        	width : 70%;
+        	height : 95%;
+        	padding-right : 0px;
+        	float: right;
+        }
+        
+        #userEmail {
+        	border : 1px solid black;
+        	width : 70%;
+        	height : 95%;
+        	padding-right : 0px;
+        	float: right;
+        }
+        
+        #userName {
+        	border : 1px solid black;
+        	width : 70%;
+        	height : 95%;
+        	padding-right : 0px;
+        	float: right;
+        
+        }
+        	
+        

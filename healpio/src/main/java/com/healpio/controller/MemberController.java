@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.healpio.service.MailService;
 import com.healpio.service.MemberService;
 import com.healpio.service.MessageService;
 import com.healpio.vo.MemberVO;
@@ -32,7 +34,13 @@ public class MemberController{
 	
 	@Autowired
 	MessageService messageService;
-
+	
+	@Autowired
+	MailService mailService;
+	
+	@Autowired
+	BCryptPasswordEncoder encoder;
+	
 	@GetMapping("/login/naver")
 	public void naverLogin() {
 
@@ -206,27 +214,42 @@ public class MemberController{
 	 public Map<String, Object> findPwAction(@RequestBody MemberVO memberVo) {
 	     // userEmail과 userName을 사용하여 회원 정보를 조회하여 유효성을 검사하고, 회원 정보가 맞으면 이메일로 임시 비밀번호를 전송
 	     // 회원 정보가 맞지 않다면 에러 메시지를 반환
-
+		 
 	     // 사용자 정보를 확인하는 로직은 데이터베이스에서 이메일과 이름으로 회원 정보를 조회하여 확인합니다.
 	     // 이 부분은 MemberService의 메서드를 호출하여 처리하도록 합니다.
-	     boolean isUserInfoValid = memberService.checkUser(memberVo.getEmail(), memberVo.getMember_name());
+	     boolean isUserInfoValid = memberService.checkUser(memberVo);
 	     
 	     if (isUserInfoValid) {
-	         // 사용자 정보가 맞으면 이메일로 임시 비밀번호 전송
+	         // 임시 비밀번호 생성
 	         String temporaryPassword = RandomPassword(8); // 8자리 임시 비밀번호 생성
-	         memberService.sendTemporaryPasswordByEmail(memberVo.getEmail(), memberVo.getMember_name(),temporaryPassword);
-	         System.out.println(memberVo);
-		     
+	         
+	         // 회원 정보 업데이트
+	        
+	         
+	         memberVo.setMember_pw(temporaryPassword); // 암호화된 비밀번호 설정
+	         System.out.println("memberVo : " + memberVo);
+
+	         int updateResult = memberService.updatePw(memberVo);
+	         
 	         Map<String, Object> response = new HashMap<>();
-	         response.put("check", true);
+	         if(updateResult > 0) {
+	        	 response.put("check", true);
+	         } else {
+	        	 response.put("check", false);
+	         }
+	         
+	         // 임시 비밀번호를 메일로 발송
+	         mailService.findPwSendMail(memberVo.getMember_id(), memberVo.getEmail(), memberVo.getMember_name(), temporaryPassword);
+	         
 	         return response;
 	     } else {
-	         // 사용자 정보가 맞지 않으면 에러 메시지 반환
-	         Map<String, Object> response = new HashMap<>();
-	         response.put("check", false);
-	         return response;
+	    	 Map<String, Object> response = new HashMap<>();
+	    	 response.put("check", false);
+	    	 return response;
 	     }
+	     
 	 }
+	 
 
 	 private String RandomPassword(int length) {
 	     String chars = "abcdefghijklmnopqrstuvwxyz0123456789";
