@@ -127,8 +127,7 @@ function alert(){
 		</div>
 		
 		<form name="writeForm" method="post" enctype="multipart/form-data">		
-			<!-- member_no 받아와야 함!!!!!!!!! -->
-			<input type="hidden" name="member_no" id="member_no" value="M000004">
+			<input type="hidden" name="member_no" id="member_no" value="${memberVo.member_no}">
 			
 			<div class="row g-3" id="form-main-content1">		  
 			  <div class="col-md-8">

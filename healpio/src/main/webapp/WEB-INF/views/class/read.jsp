@@ -12,10 +12,6 @@
 <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.js"></script>
 <script src="https://kit.fontawesome.com/0aadd0de21.js" crossorigin="anonymous"></script>
 <script>
-window.onpopstate = function() {
-	location.href = '/board/list';
-}
-
 function go(url){
 	location.href = url;
 }
@@ -138,9 +134,9 @@ function getReviewList(map){
 	
 	if(map.reviewList.length!=0){		
 		map.reviewList.forEach(reviewVO => {
-			let review = `<table style="width:100%"><tr><td style="width: 85%">`;
+			let review = `<table style="width:100%"><tr><td style="width: 85%"><b>`;
 			review += reviewVO.nickname;
-			review += ` <span style="color: gold"> ★</span>` + reviewVO.review_star;
+			review += `</b> <span style="color: gold"> ★</span>` + reviewVO.review_star;
 			review += `<br>` + reviewVO.review_content + `</td>`;
 			if(member_no.value==reviewVO.member_no){
 				review += `<td>`;
@@ -216,7 +212,11 @@ function showClass_content(class_no){
 <div id="form-intro">
 	<div id="form-intro-img">
 		<c:forEach items="${attachList}" var="attachVO">
-		<img src='/resources/images/${attachVO.filepath}' alt='${classVO.class_title}' class="form-intro-img"><br>
+			<img src=
+				'<c:url value="/display">
+					<c:param name="fileName" value="${attachVO.filepath}"/>
+				</c:url>' 
+			alt='${classVO.class_title}' class="form-intro-img"/>
 		</c:forEach>
 	</div>
 	<div id="form-intro-content">
