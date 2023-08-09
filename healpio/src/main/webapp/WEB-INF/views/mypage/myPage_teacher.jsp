@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="content">
-                            <!-- 이전 강의 내역 -->
+                            <!-- 이전 예약 내역 -->
                             <div class="content-prev-container">
                                 <div class="content-prev">
                                     <div class="content-prev-title"><a>하루 10분! 힐링요가</a></div>
@@ -66,46 +66,7 @@
                                         <button type="button" class="btn btn-primary">리뷰 확인</button>
                                     </div>
                                 </div>
-                                <div class="content-prev">
-                                    <div class="content-prev-title"><a>하루 10분! 힐링요가</a></div>
-                                    <div class="content-prev-info">
-                                        <div class="content-prev-date">2023.07.24 (월) ｜ 오후 7:00</div>
-                                        <div class="content-prev-member">김건우 회원님 ｜ 010-1234-5678</div>
-                                    </div>
-                                    <div class="content-prev-review">
-                                        <button type="button" class="btn btn-primary">리뷰 확인</button>
-                                    </div>
-                                </div>
-                                <div class="content-prev">
-                                    <div class="content-prev-title"><a>하루 10분! 힐링요가</a></div>
-                                    <div class="content-prev-info">
-                                        <div class="content-prev-date">2023.07.24 (월) ｜ 오후 7:00</div>
-                                        <div class="content-prev-member">김건우 회원님 ｜ 010-1234-5678</div>
-                                    </div>
-                                    <div class="content-prev-review">
-                                        <button type="button" class="btn btn-primary">리뷰 확인</button>
-                                    </div>
-                                </div>
-                                <div class="content-prev">
-                                    <div class="content-prev-title"><a>하루 10분! 힐링요가</a></div>
-                                    <div class="content-prev-info">
-                                        <div class="content-prev-date">2023.07.24 (월) ｜ 오후 7:00</div>
-                                        <div class="content-prev-member">김건우 회원님 ｜ 010-1234-5678</div>
-                                    </div>
-                                    <div class="content-prev-review">
-                                        <button type="button" class="btn btn-primary">리뷰 확인</button>
-                                    </div>
-                                </div>
-                                <div class="content-prev">
-                                    <div class="content-prev-title"><a>하루 10분! 힐링요가</a></div>
-                                    <div class="content-prev-info">
-                                        <div class="content-prev-date">2023.07.24 (월) ｜ 오후 7:00</div>
-                                        <div class="content-prev-member">김건우 회원님 ｜ 010-1234-5678</div>
-                                    </div>
-                                    <div class="content-prev-review">
-                                        <button type="button" class="btn btn-primary">리뷰 확인</button>
-                                    </div>
-                                </div>
+                                
                             </div>
 
                             <!-- 예약 확인 -->

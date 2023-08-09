@@ -36,15 +36,21 @@ btnEdit.addEventListener('click',function(){
 });
 
 window.onload = function(){
-	getResList();
+	getList();
 }
 
-function getResList(){
+function getList(){
 	let member_no = document.querySelector('#member_no').value;
 	
 	fetch('/mypage/student/reservation/'+ member_no)
 	.then(response => response.json())
 	.then(map => reservationView(map));
+	
+	fetch('/mypage/student/history/'+ member_no)
+	.then(response => response.json())
+	.then(map => preCourseView(map));
+	
+	
 }
 
 function reservationView(map){
@@ -60,12 +66,38 @@ function reservationView(map){
 		   + '    <div class="content-reservation-title"><a>'+ list.class_title +'</a></div>'
 		   + '    <div class="content-reservation-date">'+ list.reservation_date +' (월) '+ list.reservation_time +'</div>'
 		   + '    <div class="content-reservation-cancel">                            '
-		   + '        <button type="button" class="btn btn-primary">예약취소</button> '
+		   + '        <button type="button" onclick="deleteReservation('+ index +')" id="deleteBtn'+index+'" data-reservation_no = "'+list.reservation_no+'" class="btn btn-primary">예약취소</button> '
 		   + '    </div>                                                              '
 		   + '</div>			                                                       '
 	})     
 	
+	 
+}
+
+function deleteReservation(index){
+	let reservation = document.querySelector('#deleteBtn'+index);
+	let reservation_no = reservation.dataset.reservation_no;
+	fetch('/mypage/deleteReservation/' + reservation_no)
+	.then(response => response.json())
+	.then(res => getResList());
+}
+
+
+function preCourseView(map){
+	let list = map.preCourseList;
+	let preContainer = document.querySelector('.content-prev-container');
+	preContainer.innerHTML = '';
 	
+	list.forEach((list, index) => {
+		preContainer.innerHTML +=
+		'<div class="content-prev">                                             '
+	   + '    <div class="content-prev-title"><a>'+ list.class_title +'</a></div>   '
+	   + '    <div class="content-prev-date">'+ list.reservation_date +' (월) 	'+ list.reservation_time +'</div>     '
+	   + '    <div class="content-prev-cancel">                                  '
+	   + '        <button type="button" class="btn btn-primary">리뷰 작성</button>	'
+	   + '    </div>                                                             '
+       + '</div>                                                                 '
+	})
 }
 
 

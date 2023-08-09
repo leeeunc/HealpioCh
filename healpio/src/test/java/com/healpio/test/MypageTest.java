@@ -75,6 +75,12 @@ public class MypageTest {
 		log.info(list);
 	}
 	
+	@Test
+	public void history() {
+		List<MyReservationVO> list = mapper.getPreviousCourses("M000004");
+		log.info(list);
+	}
+	
 	
 	
 }
