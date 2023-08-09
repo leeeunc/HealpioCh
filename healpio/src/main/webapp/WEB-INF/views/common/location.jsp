@@ -16,45 +16,64 @@
 		//sido option 추가
 		jQuery.each(hangjungdong.sido, function (idx, code) {
 			//append를 이용하여 option 하위에 붙여넣음
-			jQuery('#sido').append(fn_option(code.sido, code.codeNm));
-		});
+			let sel_province = '${param.sel_province}';
+			let selected = code.sido==sel_province?'selected':'';
+			jQuery('#sido').append(fn_option(code.sido, code.codeNm, selected));
+			
+ 			// 검색유지
+			// province값이 파라메터로 전달 된 경우 (검색조건에 있는경우)
+			if(sel_province){
+				// 시구군 옵션 추가
+				addSigugunOptions();
+				console.log("if(sel_province 테스트");
+ 				   
+				// 시구군 선택 - 검색유지
+				  if (jQuery('#sido > option:selected').val() == code.sido){
+						console.log(" if (jQuery('#sido > option:selected').val() == code.sido) 테스트");
+ 						jQuery.each(hangjungdong.sigugun, function (idx, code) {
+ 							console.log(code.sigugun);
+							let sel_city = '${param.sel_city }';
+							let selected = code.sigugun==sel_city?'selected':'';
+			        		jQuery('#sigugun').append(fn_option(code.sigugun, code.codeNm, selected));
 
-		//sido 변경시 시군구 option 추가
+					}); 
+				} 
+			}; 
+		});
+		
+		
+
+		// #sido 값 변경 시 실행되는 코드
 		jQuery('#sido').change(function () {
-			jQuery('#sigugun').show();
-			jQuery('#sigugun').empty();
-			jQuery('#sigugun').append(fn_option('', '선택')); //
-			jQuery.each(hangjungdong.sigugun, function (idx, code) {
-				if (jQuery('#sido > option:selected').val() == code.sido)
-					jQuery('#sigugun').append(fn_option(code.sigugun, code.codeNm));
-			});
-
-			//세종특별자치시 예외처리
-			//옵션값을 읽어 비교
-			if (jQuery('#sido option:selected').val() == '36') {
-				jQuery('#sigugun').hide();
-				//index를 이용해서 selected 속성(attr)추가
-				//기본 선택 옵션이 최상위로 index 0을 가짐
-				jQuery('#sigugun option:eq(1)').attr('selected', 'selected');
-				//trigger를 이용해 change 실행
-				jQuery('#sigugun').trigger('change');
-			}
+			addSigugunOptions();
 		});
 
-		//시군구 변경시 행정동 옵션추가
-		jQuery('#sigugun').change(function () {
-			//option 제거
-			jQuery('#dong').empty();
-			jQuery.each(hangjungdong.dong, function (idx, code) {
-				if (jQuery('#sido > option:selected').val() == code.sido && jQuery('#sigugun > option:selected').val() == code.sigugun)
-					jQuery('#dong').append(fn_option(code.dong, code.codeNm));
-			});
-			//option의 맨앞에 추가
-			jQuery('#dong').prepend(fn_option('', '선택'));
-			//option중 선택을 기본으로 선택
-			jQuery('#dong option:eq("")').attr('selected', 'selected');
-		});
+		
+	    // sigugun 값 변경 시  실행되는 코드
+	    jQuery('#sigugun').change(function () {
+	    	addDongOptions();
+	    });
+	    
+		
+	    // 동 값 변경 시 실행되는 코드
+	    jQuery('#dong').change(function () {
+	    	addDongSelected();
+	    });
 
+		
+	    /* 
+		// 페이지 로드 시 초기 실행	
+		addSigugunOptions();
+
+		 */
+		
+		
+		
+		
+
+
+
+ 		
 
 			var sido = jQuery('#sido option:selected');
 			var sigugun = jQuery('#sigugun option:selected');
@@ -66,6 +85,7 @@
 	
 					var locationName = sido.text(); // 시도 이름
 					jQuery('#province').val(locationName);
+					
 
 				});
 			
@@ -75,6 +95,7 @@
 					
 					var locationName = sigugun.text(); // 시도 시군구 이름
 					jQuery('#city').val(locationName);
+
 
 		
 				});
@@ -86,28 +107,78 @@
 					var locationName = dong.text(); // 시도/시군구/읍면동 이름
 					jQuery('#district').val(locationName);
 
-		
-			/* 		var dongCode = sido.val() + sigugun.val() + dong.val() + '00'; // 숫자코드
-					jQuery('#dongCode').text(dongCode);
-			 */
+
+					
 				});
 				
-
-
-
-			        function getLocationText() {
-			          return $('.location-text').text().trim();
-			        }
 				
 	});
 
-	function fn_option(code, name) {
-		return '<option value="' + code + '">' + name + '</option>';
+   
+   
+// 시군구 옵션을 추가하는 함수
+	function addSigugunOptions() {
+	    jQuery('#sigugun').show();
+	    jQuery('#sigugun').empty();
+	    jQuery('#sigugun').append(fn_option('', '선택'));
+
+	    
+	    jQuery.each(hangjungdong.sigugun, function (idx, code) {
+	        if (jQuery('#sido > option:selected').val() == code.sido)
+	        	
+	             jQuery('#sigugun').append(fn_option(code.sigugun, code.codeNm));
+	        
+
+	    });
+	    
+	 	// 세종특별자치시 예외처리 함수
+	    if (jQuery('#sido option:selected').val() == '36') {
+	        jQuery('#sigugun').hide();
+	        jQuery('#sigugun option:eq(1)').attr('selected', 'selected');
+	        jQuery('#sigugun').trigger('change');
+	    }
 	}
-	function fn_iframe(url) {
-		jQuery('#iframe').attr('src', url);
-	}	 
-	 
+
+
+		// 시군구 옵션을 선택했을 때
+		// 동 옵션을 추가하는 함수
+	function addDongOptions() {
+		 if (jQuery('#sigugun option:selected').val() !== '') {
+	            jQuery('#sigugun option:selected').attr('selected', 'selected');
+	        }
+	        var selectedSigugun = jQuery('#sigugun option:selected');
+	        var sigugunName = selectedSigugun.text();
+	        jQuery('#city').val(sigugunName);
+
+	        jQuery('#dong').empty();
+	        jQuery('#dong').append(fn_option('', '읍면동 선택'));
+	        jQuery.each(hangjungdong.dong, function (idx, code) {
+	            if (selectedSigugun.val() === code.sigugun) {
+	                jQuery('#dong').append(fn_option(code.dong, code.codeNm));
+	            }
+	        });
+	}
+
+	function addDongSelected() {
+	    if (jQuery('#dong option:selected').val() !== '') {
+	        jQuery('#dong option:selected').attr('selected', 'selected');
+	    }
+	    var selectedDong = jQuery('#dong option:selected');
+	    var dongName = selectedDong.text();
+	    jQuery('#district').val(dongName);
+	}
+    
+    
+	
+ 	function fn_option(code, name, selected) {
+ 		
+		return '<option value="' + code + '" '+ selected +'>' + name + '</option>';
+		
+	}
+
+
+
+
 	function filterByLocation(){
 		// 지역 초기화 함수
 	    document.querySelector('#city').value = "";
@@ -115,25 +186,24 @@
 	}
 	
 
+	console.log("provice : " + '${param.sel_province }')
+	console.log("city : " + '${param.sel_city }')
+	console.log("district : " + '${param.sel_district}')
     </script>
   
 </head>
 <body>
+
 
 	<input type="hidden" name="class_no" value="">
 	<input type="hidden" name="pageNo" value="${pageDto.cri.pageNo }">
 	<input type="hidden" name="total" value="${pageDto.total }">
 
 	<div>
-		<select name="province" id="sido" onchange="filterByLocation()"><option value="">시도 선택</option></select>
-		<select name="city" id="sigugun"><option value="">시군구 선택</option></select>
-		<select name="district" id="dong"><option value="">읍면동 선택</option></select>
-		<div>
-<!-- 			 <input type="text" name="province" id="province">
-			 <input type="text" name="city" id="city">
-			 <input type="text" name="district" id="district"> -->
-			<!-- 코드: <span id="dongCode"></span> -->
-		</div>
+		<select name="sel_province" id="sido" onchange="filterByLocation()"><option value="" >시도 선택</option></select>
+		<select name="sel_city" id="sigugun"><option value="">시군구 선택</option></select>
+		<select name="sel_district" id="dong"><option value="">읍면동 선택</option></select>
+
 	</div>
 
 

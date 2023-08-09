@@ -13,6 +13,7 @@ import com.healpio.vo.ClassVO;
 import com.healpio.vo.Criteria;
 import com.healpio.vo.ExerciseVO;
 import com.healpio.vo.LocationVO;
+import com.healpio.vo.MemberVO;
 import com.healpio.vo.PageDto;
 
   
@@ -35,7 +36,11 @@ import com.healpio.vo.PageDto;
 		  model.addAttribute("list", list);
 		  model.addAttribute("totalCnt", totalCnt);
 		  model.addAttribute("pageDto", pageDto);
-		 
+
+		  
+		  BoardScrapVO vo = new BoardScrapVO();
+		  model.addAttribute("boardClass_no", vo.getClass_no());
+		  
 		 return null;
 	 }
 	 
@@ -76,6 +81,8 @@ import com.healpio.vo.PageDto;
 	 public int getTotalCnt(Criteria cri) {
 		 return boardMapper.getTotalCnt(cri);
 	 }
+
+
 
   }
  
