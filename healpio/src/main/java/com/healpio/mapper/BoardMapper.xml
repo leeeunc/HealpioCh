@@ -12,11 +12,12 @@
 		FROM (
 			SELECT ROWNUM RN, A.* 
 				FROM (
-						select c.class_title, m.nickname, e.exercise_name, l.PROVINCE, l.CITY, l.DISTRICT
-                        from class c, member m, exercise e, location l
+						select c.class_title, m.nickname, e.exercise_name, l.PROVINCE, l.CITY, l.DISTRICT, a.uuid, m.teacheryn, c.class_no
+                        from class c, member m, exercise e, location l, attach a
                             where c.class_no = l.class_no
                             and m.member_no = c.member_no
                             and e.exercise_no = c.exercise_no
+                            and c.class_no = a.class_no
 		]]>
 						<include refid="location"></include>
 						<include refid="criteria"></include>
@@ -52,11 +53,12 @@
 		FROM (
 			SELECT ROWNUM RN, A.* 
 				FROM (
-						select c.class_title, m.nickname, e.exercise_name, l.PROVINCE, l.CITY, l.DISTRICT
-                        from class c, member m, exercise e, location l
+						select c.class_title, m.nickname, e.exercise_name, l.PROVINCE, l.CITY, l.DISTRICT, a.uuid, m.teacheryn, c.class_no
+                        from class c, member m, exercise e, location l, attach a
                             where c.class_no = l.class_no
                             and m.member_no = c.member_no
                             and e.exercise_no = c.exercise_no
+                            and c.class_no = a.class_no
 
 		]]>
 						<include refid="location"></include>
@@ -65,6 +67,7 @@
 						) A
 				)
 	</select>
+
 
 	<sql id="criteria">
 		<choose>

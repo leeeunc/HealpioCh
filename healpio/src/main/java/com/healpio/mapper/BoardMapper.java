@@ -2,8 +2,9 @@ package com.healpio.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.healpio.vo.BoardScrapVO;
-import com.healpio.vo.ClassVO;
 import com.healpio.vo.Criteria;
 import com.healpio.vo.ExerciseVO;
 import com.healpio.vo.LocationVO;
@@ -22,7 +23,6 @@ public interface BoardMapper {
 	
 	public int getTotalCnt(Criteria cri);
 	
-
 	
 	
 }

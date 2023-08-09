@@ -1,9 +1,4 @@
-   body {
-        font-family: Arial, sans-serif;
-        line-height: 1.6;
-        margin: 0;
-        padding: 0;
-    }
+
 
     /* 전체 컨테이너 스타일 */
     .pull {
@@ -13,14 +8,6 @@
         border: 1px solid #000;
     }
 
-    /* 헤더 스타일 */
-    .header {
-        height: 10%;
-        border-bottom: 1px solid #ccc; /* 헤더 하단 경계선 추가 */
-        padding: 20px 0; /* 상하 20px, 좌우 0 */
-        display: flex; /* 헤더 영역 안의 요소들을 가로로 정렬 */
-        justify-content: space-between; /* 요소들을 가로로 공간 분할 */
-    }
 
     .header h3 {
         margin: 0; /* 기본 마진 제거 */
@@ -54,14 +41,6 @@
     .location-text {
         color: #007bff; /* 링크 색상 */
         text-decoration: none; /* 밑줄 제거 */
-    }
-
-    /* 푸터 스타일 */
-    .footer {
-        height: 10%;
-        border-top: 1px solid #ccc; /* 푸터 상단 경계선 추가 */
-        padding: 20px 0; /* 상하 20px, 좌우 0 */
-        text-align: center;
     }
 
     /* 버튼 스타일 */
