@@ -67,21 +67,21 @@
     <input type="hidden" name="message_no" id="message_no" class="form-control" value="${param.message_no}">
     <input type="hidden" name="nickname" id="nickname" value="${memberVo.nickname}">
     
-	<div class="mb-3">
-	  <label for="message_title" class="viewLabel">제목</label>
-	  <input name="message_title" id="message_title" 
-	  type="text" class="form-control">
 	</div>
 	<div class="mb-3">
 	  <label for="writer" class="viewLabel">받는 사람</label>
 	  <input type="text" class="form-control" id="send_nick" name="send_nick" readonly value="${param.send_nick}">
 	</div>
+	<div class="mb-3">
+	  <label for="message_title" class="viewLabel">제목</label>
+	  <input name="message_title" id="message_title" 
+	  type="text" class="form-control">
 
 	<div class="mb-3">
 	  <input type="hidden" class="form-control" id="recv_nick" name="recv_nick" value="${param.recv_nick}">
 	</div>
 	<div class="mb-3">
-	  <label for="message_content" class="form-label">내용</label>
+	  <label for="message_content" class="viewLabel">내용</label>
 	  <textarea class="form-control" id="message_content" name="message_content" rows="10"></textarea>
 	</div>
 

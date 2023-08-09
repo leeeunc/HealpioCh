@@ -68,13 +68,18 @@
 
 
 	<div class="mb-3">
+	  <label for="class_title" class="viewLabel">문의할 클래스</label>
+	  <input name="class_title" id="class_title" type="text" class="form-control" readonly value="${param.class_title}">
+	</div>
+
+	<div class="mb-3">
 	  <label for="title" class="viewLabel">제목</label>
 	  <input name="message_title" id="message_title" 
 	  type="text" class="form-control">
 	</div>
 	<div class="mb-3">
-	  <label for="content" class="form-label">내용</label>
-	  <textarea class="form-control" id="message_content" name="message_content" rows="12"></textarea>
+	  <label for="content" class="viewLabel">내용</label>
+	  <textarea class="form-control" id="message_content" name="message_content" rows="10"></textarea>
 	</div>
 
 	<div class="btnWrap">

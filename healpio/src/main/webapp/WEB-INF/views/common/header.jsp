@@ -54,6 +54,11 @@
     </script>
     
     <style>
+    
+    header{
+    	/* background-color: #E4EAF6; */
+    }
+    
     .form-control-dark {
   border-color: var(--bs-gray);
 }
@@ -77,7 +82,6 @@
   padding-bottom: 1rem;
   margin-left: 120px;
   margin-top: 50px;
-  overflow-x: auto;
   text-align: center;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
@@ -177,7 +181,7 @@
           <input type="hidden" value="${memberVo.nickname }" id="nickname">
           
           <c:if test="${memberVo == null}">
-            	<a href="../login/login"><img src='../resources/images/icon/header/icon_user.png'></a>
+            	<a href="../login/login"><img style="margin-left:150px;" src='../resources/images/icon/header/icon_user.png'></a>
        	  </c:if>
        	  <c:if test="${memberVo != null}">
        		<c:if test="${memberVo.teacheryn == 'Y'}">

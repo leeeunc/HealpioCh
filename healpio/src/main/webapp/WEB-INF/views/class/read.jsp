@@ -256,7 +256,7 @@ function showReservation(){
 			</c:if>			
 		</div>
 	　　문의하기
-	<i class="fa-regular fa-envelope" style="color: #588ce0" onclick="window.open('/message/send?member_no=${classVO.member_no}', ' ','width=500, height=570'); return false"></i><br><br><br>
+	<i class="fa-regular fa-envelope" style="color: #588ce0" onclick="window.open('/message/send?member_no=${classVO.member_no}&class_title=${classVO.class_title }', ' ','width=500, height=570'); return false"></i><br><br><br>
 	<c:if test="${memberVo.member_no eq classVO.member_no}">
 	<div id="onlyWriter">
 		<button type="button" class="btn btn-danger" onclick="go('/class/edit?class_no=${classVO.class_no}&member_no=${classVO.member_no}')">수정</button>

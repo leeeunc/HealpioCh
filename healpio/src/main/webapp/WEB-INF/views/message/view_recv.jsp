@@ -61,13 +61,13 @@
 			  <input type="hidden" name="newUnreadCnt" id="newUnreadCnt" value="${newUnreadCnt }">	
 			  
 			  
-	    	<div class="mb-3">
-			  <label for="message_title" class="viewLabel">제목</label>
-			  <input name="message_title" id="message_title" type="text" class="form-control" readonly value="${msg.message_title}">
-			</div>
 			<div class="mb-3">
 			  <label for="send_nick" class="viewLabel">보낸 사람</label>
 			  <input type="text" class="form-control" id="send_nick" name="send_nick" readonly value="${msg.send_nick}">
+			</div>
+	    	<div class="mb-3">
+			  <label for="message_title" class="viewLabel">제목</label>
+			  <input name="message_title" id="message_title" type="text" class="form-control" readonly value="${msg.message_title}">
 			</div>
 			<div class="mb-3">
 			  <label for="message_content" class="viewLabel">내용</label>
