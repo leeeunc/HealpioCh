@@ -52,13 +52,14 @@ public class ReviewController {
 		return reviewService.getList(class_no, criteria);
 	}
 	
-	@GetMapping("sorting")
+	@GetMapping("sort")
 	@ResponseBody
-	public Map<String, Object> getSortingCriteria(String sortingCriteria, String class_no, Model model) {
+	public Map<String, Object> sortReview(String option, int page, String class_no, Model model) {
 		Criteria_review criteria = new Criteria_review();
-		if("highest".equals(sortingCriteria)){
+		criteria.setPageno(page);
+		if("highest".equals(option)){
 			return reviewService.getListHighest(class_no, criteria);
-		} else if("lowest".equals(sortingCriteria)) {
+		} else if("lowest".equals(option)) {
 			return reviewService.getListLowest(class_no, criteria);
 		} else {			
 			return reviewService.getList(class_no, criteria);

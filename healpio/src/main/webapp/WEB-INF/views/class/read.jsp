@@ -12,6 +12,10 @@
 <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.js"></script>
 <script src="https://kit.fontawesome.com/0aadd0de21.js" crossorigin="anonymous"></script>
 <script>
+window.onpopstate = function() {
+	location.href = '/board/list';
+}
+
 function go(url){
 	location.href = url;
 }
@@ -32,28 +36,24 @@ function fetchGet(url, callback){
 	}
 }
 
-function scrap(class_no){
-	fetchGet('/class/scrap?class_no=' + class_no, getFullheart);
+function scrap(class_no, member_no){
+	if(!member_no){
+		alert("로그인 후 이용 가능합니다.");
+	} else{
+		fetchGet('/class/scrap?class_no=' + class_no + '&member_no=' + member_no, getFullheart);		
+	}
 }
 
-function cancelScrap(class_no){
-	fetchGet('/class/cancelScrap?class_no=' + class_no, getEmptyheart);
+function cancelScrap(class_no, member_no){
+	fetchGet('/class/cancelScrap?class_no=' + class_no + '&member_no=' + member_no, getEmptyheart);
 }
 
 function getFullheart(map){
-	if(map.result=='success'){
-		scrapDiv.innerHTML = `이 강의 찜하기 <i class="fa-solid fa-heart" style="color: #ff6666" onclick="cancelScrap('${classVO.class_no}')"></i>`;
-	} else {
-		alert(map.result);
-	}
+	scrapDiv.innerHTML = `이 강의 찜하기 <i class="fa-solid fa-heart" style="color: #ff6666" onclick="cancelScrap('${classVO.class_no}', '${memberVo.member_no}')"></i>`;
 }
 
 function getEmptyheart(map){
-	if(map.result=='success'){
-		scrapDiv.innerHTML = `이 강의 찜하기 <i class="fa-regular fa-heart" style="color: #ff6666" onclick="scrap('${classVO.class_no}')"></i>`;
-	} else {
-		alert(map.result);
-	}
+	scrapDiv.innerHTML = `이 강의 찜하기 <i class="fa-regular fa-heart" style="color: #ff6666" onclick="scrap('${classVO.class_no}', '${memberVo.member_no}')"></i>`;
 }
 
 $(function(){	
@@ -78,7 +78,6 @@ $(function(){
         }
     });
     
-
     $('.avgScore').score({
         editable:false,
         display:{
@@ -99,7 +98,7 @@ function showTeacher_content(class_no){
 	reservationDiv.style.display = 'none';
 }
 
-function showReview(class_no){
+function showReview(class_no, page){
 	class_contentBtn.classList.remove('form-menu-button-clicked');
 	teacher_contentBtn.classList.remove('form-menu-button-clicked');
 	reviewBtn.classList.add('form-menu-button-clicked');
@@ -111,31 +110,32 @@ function showReview(class_no){
 	fetchGet('/review/list?class_no=' + class_no, getReviewList);
 }
 
-function sorting(sortingCriteria, class_no){
-	fetchGet('/review/sorting?sortingCriteria=' + sortingCriteria + '&class_no=' + class_no, getReviewList);
+function sortReview(option, page, class_no){
+	fetchGet('/review/sort?option=' + option + '&page=' + page + '&class_no=' + class_no, getReviewList);
 }
 
 function getReviewList(map){
 	reviewDiv.innerHTML = ``;
 	reviewDiv.innerHTML += `<h5 style="display:inline"><b>리뷰 <span style="color: gold">★</span>` +  map.avgScore + `</b></h5> (` + map.reviewCount + `명 참여)`;
-	console.log(map.sortingCriteria);
-	let sortingCriteria1 = "";
-	let sortingCriteria2 = "";
-	let sortingCriteria3 = "";
-	if("highest"===map.sortingCriteria){
-		sortingCriteria2 = "selected";
-	} else if("lowest"===map.sortingCriteria){
-		sortingCriteria3 = "selected";
+	
+	let option1 = "";
+	let option2 = "";
+	let option3 = "";
+	if("highest"===map.sortingOption){
+		option2 = "selected";
+	} else if("lowest"===map.sortingOption){
+		option3 = "selected";
 	} else{
-		sortingCriteria1 = "selected";
+		option1 = "selected";
 	}
 	let reviewSort = 
-		`<select class="form-select form-select-sm" style="width:120px; float:right;" id="sortingCriteria" name="sortingCriteria" onchange="sorting(this.value, '${classVO.class_no}');">
-		  <option value="latest"` + sortingCriteria1 + `>최신순</option>
-		  <option value="highest"` + sortingCriteria2 + `>별점높은순</option>
-		  <option value="lowest"` + sortingCriteria3 + `>별점낮은순</option>
+		`<select class="form-select form-select-sm" style="width:120px; float:right;" id="option" name="option" onchange="sortReview(this.value, 1, '${classVO.class_no}');">
+		  <option value="latest"` + option1 + `>최신순</option>
+		  <option value="highest"` + option2 + `>별점높은순</option>
+		  <option value="lowest"` + option3 + `>별점낮은순</option>
 		</select><br><br>`;
 	reviewDiv.innerHTML += reviewSort;
+	
 	if(map.reviewList.length!=0){		
 		map.reviewList.forEach(reviewVO => {
 			let review = `<table style="width:100%"><tr><td style="width: 85%">`;
@@ -152,9 +152,37 @@ function getReviewList(map){
 			reviewDiv.innerHTML += review;
 		})
 		
-		let pageblock = ``;
+		let pageblock = 
+			`<nav>
+			  <ul class="pagination justify-content-center">`;
+		if(map.pageDto.prev){
+			pageblock +=
+				`<li class="page-item" onclick="sortReview('` + map.sortingOption + `', '` + (map.pageDto.startno-1) + `', '${classVO.class_no}')">
+			      <a class="page-link" href="#" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>`;
+		}
+		for(var i=map.pageDto.startno; i<=map.pageDto.endno; i++){
+			pageblock +=
+				`<li class="page-item" onclick="sortReview('` + map.sortingOption + `', ` + i + `, '${classVO.class_no}')">
+					<a class="page-link" style="color: black;" href="#">` + i + `</a>
+				</li>`;
+		}
+		if(map.pageDto.next){
+			pageblock +=
+				`<li class="page-item" onclick="sortReview('` + map.sortingOption + `', '` + (map.pageDto.endno+1) + `', '${classVO.class_no}')">
+			      <a class="page-link" href="#" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li>`;
+		}
+		pageblock +=		    
+			  `</ul>
+			</nav>`;
+		reviewDiv.innerHTML += pageblock;
 	} else {
-		reviewDiv.innerHTML += `등록된 리뷰가 없습니다.<br><br><br>`;
+		reviewDiv.innerHTML += `등록된 리뷰가 없습니다.`;
 	}
 }
 
@@ -199,18 +227,20 @@ function showClass_content(class_no){
 		<div id="scrapDiv" style="display:inline;">
 			이 강의 찜하기
 			<c:if test="${scrapYN==0}">
-			<i class="fa-regular fa-heart" style="color: #ff6666" onclick="scrap('${classVO.class_no}')"></i>
+			<i class="fa-regular fa-heart" style="color: #ff6666" onclick="scrap('${classVO.class_no}', '${memberVo.member_no}')"></i>
 			</c:if>
 			<c:if test="${scrapYN>0}">
-			<i class="fa-solid fa-heart" style="color: #ff6666" onclick="cancelScrap('${classVO.class_no}')"></i>
+			<i class="fa-solid fa-heart" style="color: #ff6666" onclick="cancelScrap('${classVO.class_no}', '${memberVo.member_no}')"></i>
 			</c:if>			
 		</div>
 	　　문의하기
-	<i class="fa-regular fa-envelope" style="color: #588ce0" onclick="window.open('/message/send?=${classVO.member_no}', ' ','width=500, height=570'); return false"></i><br><br><br>
+	<i class="fa-regular fa-envelope" style="color: #588ce0" onclick="window.open('/message/send?member_no=${classVO.member_no}', ' ','width=500, height=570'); return false"></i><br><br><br>
+	<c:if test="${memberVo.member_no eq classVO.member_no}">
 	<div id="onlyWriter">
-		<button type="button" class="btn btn-danger" onclick="go('/class/edit?class_no=${classVO.class_no}')">수정</button>
-		<button type="button" class="btn btn-secondary" onclick="go('/class/delete?class_no=${classVO.class_no}')">삭제</button>
+		<button type="button" class="btn btn-danger" onclick="go('/class/edit?class_no=${classVO.class_no}&member_no=${classVO.member_no}')">수정</button>
+		<button type="button" class="btn btn-secondary" onclick="go('/class/delete?class_no=${classVO.class_no}&member_no=${classVO.member_no}')">삭제</button>
 	</div>
+	</c:if>
 	</div>
 </div>
 
@@ -239,37 +269,22 @@ function showClass_content(class_no){
 
 <!-- 리뷰 -->
 <div id="reviewDiv" style="display:none;">
-	<!-- 리뷰 페이지 유지시 필요 -->
-	<input type="text" id="page" name="page">
 
 </div>
+<!-- 리뷰 수정,삭제시 필요 -->	
+<input type="hidden" name="member_no" id="member_no" value="${memberVo.member_no}">
+<%--
 <form action="/review/write">
 	<!-- 리뷰쓰기(삭제 예정) -->
 	<button type="submit" id="reviewWriteBtn">리뷰쓰기</button>
 	<!-- 리뷰 작성시 필요 -->	
 	<input type="text" name="class_no" id="class_no" value="${classVO.class_no}">
 	<!-- 리뷰 작성,수정,삭제시 필요 -->	
-	<input type="text" name="member_no" id="member_no" value="M000002">
+<input type="hidden" name="member_no" id="member_no" value="${memberVo.member_no}">
 </form>
-
+ --%>
 <div id="reservationDiv" style="display:none">
-<nav>
-  <ul class="pagination pagination-sm justify-content-center">
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li class="page-item"><a class="page-link" style="color: black;" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" style="color: black;" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" style="color: black;" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
+
 </div>
 </div>
 </div>
