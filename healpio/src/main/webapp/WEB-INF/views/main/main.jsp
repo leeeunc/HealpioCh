@@ -45,14 +45,14 @@
             <a href='http://naver.com'><img src='../resources/images/class/thum/volleyball1.jpg'></a>
         </div>
         <div class='newClassTextList'>
-            <a href='http://naver.com'>당신의 한계를 뛰어넘는 도전</a>
-            <a href='http://naver.com'>더 강하게! 건강한 생활과 멋진 동료들</a>
-            <a href='http://naver.com'>네트 위의 환상적인 순간들</a>
+            <a href='http://naver.com' class="text-black text-decoration-none">당신의 한계를 뛰어넘는 도전</a>
+            <a href='http://naver.com' class="text-black text-decoration-none">더 강하게! 건강한 생활과 멋진 동료들</a>
+            <a href='http://naver.com' class="text-black text-decoration-none">네트 위의 환상적인 순간들</a>
         </div>
         <div class='newExplTextList'>
-            <a href='http://naver.com'>강사 누구누구 &nbsp;&nbsp;|&nbsp;&nbsp; 클라이밍</a>
-            <a href='http://naver.com'>강사 누구누구 &nbsp;&nbsp;|&nbsp;&nbsp; 유도</a>
-            <a href='http://naver.com'>강사 누구누구 &nbsp;&nbsp;|&nbsp;&nbsp; 배구</a>
+            <a href='http://naver.com' class="text-black text-decoration-none">강사 누구누구 &nbsp;&nbsp;|&nbsp;&nbsp; 클라이밍</a>
+            <a href='http://naver.com' class="text-black text-decoration-none">강사 누구누구 &nbsp;&nbsp;|&nbsp;&nbsp; 유도</a>
+            <a href='http://naver.com' class="text-black text-decoration-none">강사 누구누구 &nbsp;&nbsp;|&nbsp;&nbsp; 배구</a>
         </div>
     </div>
 
