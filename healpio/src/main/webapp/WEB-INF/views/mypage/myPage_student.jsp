@@ -107,16 +107,13 @@
                                     <div class="info-back-container">
                                         <div><h3>내 정보</h3></div>
                                         <div class="mb-3">
+                                            <label class="form-label">이름</label>
+                                            <input type="text" class="form-control info-control" name="member_name" value="${memberVO.member_name}" readonly/>
+                                        </div>
+                                        
+                                        <div class="mb-3">
                                             <label class="form-label">닉네임</label>
                                             <input type="text" class="form-control info-control" name="nickname" value="${memberVO.nickname}" readonly/>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">비밀번호</label>
-                                            <input type="password" class="form-control info-control" name="member_pw"  value="${memberVO.member_pw }" readonly />
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">비밀번호 확인</label>
-                                            <input type="password" class="form-control info-control"  value="${memberVO.member_pw}" readonly/>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">전화번호</label>
@@ -126,13 +123,21 @@
                                             <label class="form-label">이메일</label>
                                             <input type="email" class="form-control info-control" name="email" value="${memberVO.email }" readonly/>
                                         </div>
+                                        <div class="mb-3 password">
+                                            <label class="form-label">비밀번호 변경</label>
+                                            <input type="password" class="form-control info-control" name="member_pw"  value="" readonly />
+                                        </div>
+                                        <div class="mb-3 passwordCheck">
+                                            <label class="form-label">비밀번호 확인</label>
+                                            <input type="password" class="form-control info-control"  value="" readonly/>
+                                        </div>
                                         <div id='editBox'>
                                         	
                                             <input id='btnEdit' class="btn btn-primary edit" type="button" value="수정하기" />
                                             <input id='btnGoEdit' class="btn btn-primary goEdit" type="submit" value="수정" />
-                                            <input id='btnGoDelete' class="btn btn-primary goDelete" onclick="location.href='/mypage/student?member_no=M000002'" type="button" value="취소" />
+                                            <input id='btnGoDelete' class="btn btn-primary goDelete" onclick="location.href='/mypage/student?member_no=M000004'" type="button" value="취소" />
                                         </div>
-                                        <input type="hidden" id="member_no" name="member_no" value="M000004">
+                                        <input type="hidden" id="member_no" name="member_no" value="M000013">
                                         <input type="hidden" name="teacheryn" value="N">
                          
                                     </div>
@@ -143,6 +148,47 @@
                 </div>
             </section>
             
+		     <!-- 비밀번호 확인 모달창 -->       
+		     <div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h1 class="modal-title fs-5" id="exampleModalLabel">비밀번호 확인</h1>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+			        <form method="post" action="/mypage/passwordCheck">
+			          <div class="">
+			            <label for="password-input-box" class="col-form-label">비밀번호 입력해주세요.</label>
+			            <input type="password" class="form-control" id="password-input-box">
+			          </div>		         
+			        </form>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+			        <button type="button" id="pwCheckBtn" class="btn btn-primary">비밀번호 확인</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			
+			<!-- 일반 모달창 -->
+			<div class="modal" tabindex="-1" id="myModal">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="myModal-title">제목</h5>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+			        <p class="myModal-body-text">내용</p>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary myModalBtn-secondary" data-bs-dismiss="modal">확인</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
 	
         
       <!--
