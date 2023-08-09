@@ -24,13 +24,12 @@ public interface MypageMapper {
 	public List<MyReservationVO> getReservationList(String member_no); 
 	public List<MyReservationVO> resCheckList(String member_no);
 	
-	// 예약확인(teacher)
-	
-	
 	
 	public int reservationDelete(String reservation_no);
 	
-	public List<MyReservationVO> getHistory(String member_no);
+	public List<MyReservationVO> getPreviousCourses(String member_no);
+	
+	public List<MyReservationVO> getPreviousBookings(String member_no);
 	
 	
 }

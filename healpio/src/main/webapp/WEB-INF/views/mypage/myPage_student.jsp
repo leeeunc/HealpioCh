@@ -65,27 +65,7 @@
                                         <button type="button" class="btn btn-primary">리뷰 작성</button>
                                     </div>
                                 </div>
-                                <div class="content-prev">
-                                    <div class="content-prev-title"><a>하루 10분! 힐링요가</a></div>
-                                    <div class="content-prev-date">2023.07.24 (월) 오후 7:00</div>
-                                    <div class="content-prev-cancel">
-                                        <button type="button" class="btn btn-primary">리뷰 작성</button>
-                                    </div>
-                                </div>
-                                <div class="content-prev">
-                                    <div class="content-prev-title"><a>하루 10분! 힐링요가</a></div>
-                                    <div class="content-prev-date">2023.07.24 (월) 오후 7:00</div>
-                                    <div class="content-prev-cancel">
-                                        <button type="button" class="btn btn-primary">리뷰작성</button>
-                                    </div>
-                                </div>
-                                <div class="content-prev">
-                                    <div class="content-prev-title"><a>하루 10분! 힐링요가</a></div>
-                                    <div class="content-prev-date">2023.07.24 (월) 오후 7:00</div>
-                                    <div class="content-prev-cancel">
-                                        <button type="button" class="btn btn-primary">리뷰작성</button>
-                                    </div>
-                                </div>
+                                
                             </div>
 
                             <!-- 예약 내역 -->

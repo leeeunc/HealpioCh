@@ -35,9 +35,9 @@ public class MypageSerivceImpl implements MypageService{
 	}
 
 	@Override
-	public List<MyReservationVO> getHistory(String member_no) {
+	public List<MyReservationVO> getPreviousCourses(String member_no) {
 		// TODO Auto-generated method stub
-		return mypageMapper.getHistory(member_no);
+		return mypageMapper.getPreviousCourses(member_no);
 	}
 
 	@Override
@@ -62,6 +62,12 @@ public class MypageSerivceImpl implements MypageService{
 	public List<MyReservationVO> resCheckList(String member_no) {
 		// TODO Auto-generated method stub
 		return mypageMapper.resCheckList(member_no);
+	}
+
+	@Override
+	public List<MyReservationVO> getPreviousBookings(String member_no) {
+		// TODO Auto-generated method stub
+		return mypageMapper.getPreviousBookings(member_no);
 	}
 
 }

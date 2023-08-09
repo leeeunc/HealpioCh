@@ -60,11 +60,11 @@
 	
 	<select id="getReservationList" resultType="com.healpio.vo.MyReservationVO" >
     	<![CDATA[
-    	select R.reservation_no, c.class_title, reservation_date, reservation_time
-		from class c, reservation R
-		WHERE C.class_no = R.class_no
-		AND R.MEMBER_NO = #{member_no}
-		and to_char(sysdate,'YYYY-MM-DD') <= reservation_date
+	    	select R.reservation_no, c.class_title, reservation_date, reservation_time
+			from class c, reservation R
+			WHERE C.class_no = R.class_no
+			AND R.MEMBER_NO = #{member_no}
+			and to_char(sysdate,'YYYY-MM-DD') <= reservation_date
 	 	]]>	
 		
 		
@@ -78,12 +78,12 @@
     
     <select resultType="com.healpio.vo.MyReservationVO" id="resCheckList" >
     <![CDATA[
-    SELECT R.reservation_no, c.class_title, m.nickname, m.phonenumber, reservation_date, reservation_time
-	FROM CLASS C
-	INNER JOIN RESERVATION R ON C.CLASS_NO = R.CLASS_NO
-	INNER JOIN MEMBER M ON R.MEMBER_NO = M.MEMBER_NO
-	WHERE C.MEMBER_NO = #{member_no}
-	and to_char(sysdate,'YYYY-MM-DD') <= reservation_date
+	    SELECT R.reservation_no, c.class_title, m.nickname, m.phonenumber, reservation_date, reservation_time
+		FROM CLASS C
+		INNER JOIN RESERVATION R ON C.CLASS_NO = R.CLASS_NO
+		INNER JOIN MEMBER M ON R.MEMBER_NO = M.MEMBER_NO
+		WHERE C.MEMBER_NO = #{member_no}
+		and to_char(sysdate,'YYYY-MM-DD') <= reservation_date
 	]]>	
     </select>
     
@@ -101,20 +101,40 @@
     	DELETE FROM RESERVATION WHERE reservation_no = #{reservation_no}
     </delete>
     
-    <select id="getHistory" resultType="com.healpio.vo.MyReservationVO">
+    <select id="getPreviousCourses" resultType="com.healpio.vo.MyReservationVO">
     	<![CDATA[
-    	select R.reservation_no,c.class_title, to_char(reservation_date,'yyyy-mm-dd') reservation_date , R.reservation_time
-		from class c, reservation R
-		WHERE C.class_no = R.class_no
-		AND R.MEMBER_NO = 'M000004'
-        and TO_CHAR(SYSDATE,'YYYY-MM-DD') >= TO_CHAR(reservation_date,'YYYY-MM-DD')
+	    	select R.reservation_no, c.class_title, reservation_date, reservation_time
+			from class c, reservation R
+			WHERE C.class_no = R.class_no
+			AND R.MEMBER_NO = #{member_no}
+			and to_char(sysdate,'YYYY-MM-DD') >= reservation_date
         ]]>
     </select>
     
-    <resultMap type="com.healpio.vo.MyReservationVO" id="getHistory">
+    <resultMap type="com.healpio.vo.MyReservationVO" id="getPreviousCourses">
     	<result property="reservation_no" column="R.reservation_no"/>	
         <result property="class_title" column="c.class_title"/>
         <result property="reservation_date" column="reservation_date"/>
         <result property="reservation_time" column="R.reservation_time"/>
+    </resultMap>
+    
+    <select id="getPreviousBookings" resultType="com.healpio.vo.MyReservationVO">
+    	<![CDATA[
+	    	SELECT R.reservation_no, c.class_title, m.nickname, m.phonenumber, reservation_date, reservation_time
+			FROM CLASS C
+			INNER JOIN RESERVATION R ON C.CLASS_NO = R.CLASS_NO
+			INNER JOIN MEMBER M ON R.MEMBER_NO = M.MEMBER_NO
+			WHERE C.MEMBER_NO = #{member_no}
+			and to_char(sysdate,'YYYY-MM-DD') >= reservation_date
+        ]]>
+    </select>
+    
+    <resultMap type="com.healpio.vo.MyReservationVO" id="getPreviousBookings">
+    	<result property="reservation_no" column="R.reservation_no"/>	
+        <result property="class_title" column="c.class_title"/>
+        <result property="nickname" column="m.nickname"/>
+        <result property="phonenumber" column="m.phonenumber"/>
+        <result property="reservation_date" column="reservation_date"/>
+        <result property="reservation_time" column="reservation_time"/>
     </resultMap>
 </mapper>
