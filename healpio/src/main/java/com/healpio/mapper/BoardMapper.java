@@ -14,7 +14,10 @@ public interface BoardMapper {
 
 
 	public List<BoardScrapVO> getList(Criteria cri);
-
+	
+	/*
+	 * public List<BoardScrapVO> scrapList(Criteria cri);
+	 */
 	public List<ExerciseVO> exerciseList(Criteria cri);
 	
 	public List<LocationVO> provinceList();

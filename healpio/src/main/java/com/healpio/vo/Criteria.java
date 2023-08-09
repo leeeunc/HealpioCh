@@ -14,6 +14,8 @@ public class Criteria {
 	private String city;
 	private String district;
 	
+	private String class_no;
+	
 	
 	private int pageNo = 1;		// 요청 페이지 번호
 	private int amount = 6; 	// 한페이지당 게시물수

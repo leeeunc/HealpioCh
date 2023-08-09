@@ -45,8 +45,14 @@ import com.healpio.vo.PageDto;
 	 }
 	 
 
-	 
-	 
+	/*
+	 * @Override public List<BoardScrapVO> scrapList(Criteria cri, Model model){
+	 * List<BoardScrapVO> list = boardMapper.scrapList(cri);
+	 * model.addAttribute("boardScrap", list);
+	 * 
+	 * 
+	 * return null; }
+	 */
 	 
 	 @Override
 	 public List<ExerciseVO> exerciseList(Criteria cri,Model model){

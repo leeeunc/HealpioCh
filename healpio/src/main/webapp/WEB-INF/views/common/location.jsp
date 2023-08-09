@@ -179,11 +179,17 @@
 
 
 
-	function filterByLocation(){
+	function filterByProvince(){
 		// 지역 초기화 함수
 	    document.querySelector('#city').value = "";
 	    document.querySelector('#district').value = "";
 	}
+	
+	function filterByCity(){
+		// 지역 초기화 함수
+	    document.querySelector('#district').value = "";
+	}
+	
 	
 
 	console.log("provice : " + '${param.sel_province }')
@@ -195,13 +201,9 @@
 <body>
 
 
-	<input type="hidden" name="class_no" value="">
-	<input type="hidden" name="pageNo" value="${pageDto.cri.pageNo }">
-	<input type="hidden" name="total" value="${pageDto.total }">
-
 	<div>
-		<select name="sel_province" id="sido" onchange="filterByLocation()"><option value="" >시도 선택</option></select>
-		<select name="sel_city" id="sigugun"><option value="">시군구 선택</option></select>
+		<select name="sel_province" id="sido" onclick="filterByProvince()"><option value="" >시도 선택</option></select>
+		<select name="sel_city" id="sigugun" onclick="filterByCity()"><option value="">시군구 선택</option></select>
 		<select name="sel_district" id="dong"><option value="">읍면동 선택</option></select>
 
 	</div>

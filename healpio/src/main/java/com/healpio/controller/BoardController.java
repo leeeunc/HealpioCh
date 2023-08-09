@@ -30,5 +30,8 @@ public class BoardController {
 		boardService.exerciseList(cri, model);
 		boardService.provinceList(model);
 		boardService.locationList(model);
+		/*
+		 * boardService.scrapList(cri, model);
+		 */
 	}
 }

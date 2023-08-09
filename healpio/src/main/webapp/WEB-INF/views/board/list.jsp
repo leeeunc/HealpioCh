@@ -24,6 +24,7 @@
 	
 	    <div  class='pull' >
 		<input type="text" name="member_no" value="${memberVo.member_no }">
+		<input type="text" name="teacheryn" class="teacheryn" value="${memberVo.teacheryn }">
 		
 
 	        <div class='header'>
@@ -53,16 +54,21 @@
 			  <c:forEach items="${list}" var="li" varStatus="status">
 				<div class="contentbox">
 				<a href="/class/read?class_no=${li.class_no}">
-				 ${li.uuid } <br>
+ 				<img src=
+					"<c:url value="/display">
+					<c:param name="fileName" value="${li.uuid }"/>
+					</c:url>" 
+				alt="${li.class_title}" class="form-intro-img"/> 
+				
+				<br>
 				</a >	  
 				      ${li.class_title}<br>
 					  ------------------------------------------<br>
-					 ${li.nickname } | ${li.teacheryn } ${li.class_no }
+					 ${li.nickname } |
 					 <a class="exercise-text">${li.exercise_name }</a> |
 					 <a class="province-text">${li.province }</a> <a class="city-text">${li.city }</a> <a class="district-text">${li.district }</a>
 				</div>
 			  </c:forEach>
-	
 	 		</div>
 	 	
 			<div class="footer">
@@ -73,9 +79,7 @@
 			</div>
 			
 	     </div>
-	
-	        시티 : ${param.sel_city}<br>
-	    시도 : ${param.sel_province }
+
 	     <%@ include file="../common/footer.jsp" %>
 	</body>
 	</html>
