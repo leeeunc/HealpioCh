@@ -11,6 +11,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.js"></script>
 <script src="https://kit.fontawesome.com/0aadd0de21.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=99b2ce67f1c87e618b22c2e335a745a6&libraries=services"></script>
 <script>
 function go(url){
 	location.href = url;
@@ -83,13 +84,41 @@ $(function(){
     });    
 });
 
-function showTeacher_content(class_no){
+function showClass_content(){
+	class_contentBtn.classList.add('form-menu-button-clicked');
+	teacher_contentBtn.classList.remove('form-menu-button-clicked');
+	locationBtn.classList.remove('form-menu-button-clicked');
+	reviewBtn.classList.remove('form-menu-button-clicked');
+	reservationBtn.classList.remove('form-menu-button-clicked');
+	class_contentDiv.style.display = '';
+	teacher_contentDiv.style.display = 'none';
+	locationDiv.style.display = 'none';
+	reviewDiv.style.display = 'none';
+	reservationDiv.style.display = 'none';
+}
+
+function showTeacher_content(){
 	class_contentBtn.classList.remove('form-menu-button-clicked');
 	teacher_contentBtn.classList.add('form-menu-button-clicked');
+	locationBtn.classList.remove('form-menu-button-clicked');
 	reviewBtn.classList.remove('form-menu-button-clicked');
 	reservationBtn.classList.remove('form-menu-button-clicked');
 	class_contentDiv.style.display = 'none';
 	teacher_contentDiv.style.display = '';
+	locationDiv.style.display = 'none';
+	reviewDiv.style.display = 'none';
+	reservationDiv.style.display = 'none';
+}
+
+function showLocation(){
+	class_contentBtn.classList.remove('form-menu-button-clicked');
+	teacher_contentBtn.classList.remove('form-menu-button-clicked');
+	locationBtn.classList.add('form-menu-button-clicked');
+	reviewBtn.classList.remove('form-menu-button-clicked');
+	reservationBtn.classList.remove('form-menu-button-clicked');
+	class_contentDiv.style.display = 'none';
+	teacher_contentDiv.style.display = 'none';
+	locationDiv.style.display = '';
 	reviewDiv.style.display = 'none';
 	reservationDiv.style.display = 'none';
 }
@@ -97,10 +126,12 @@ function showTeacher_content(class_no){
 function showReview(class_no, page){
 	class_contentBtn.classList.remove('form-menu-button-clicked');
 	teacher_contentBtn.classList.remove('form-menu-button-clicked');
+	locationBtn.classList.remove('form-menu-button-clicked');
 	reviewBtn.classList.add('form-menu-button-clicked');
 	reservationBtn.classList.remove('form-menu-button-clicked');
 	class_contentDiv.style.display = 'none';
 	teacher_contentDiv.style.display = 'none';
+	locationDiv.style.display = 'none';
 	reviewDiv.style.display = '';
 	reservationDiv.style.display = 'none';
 	fetchGet('/review/list?class_no=' + class_no, getReviewList);
@@ -185,23 +216,14 @@ function getReviewList(map){
 function showReservation(){
 	class_contentBtn.classList.remove('form-menu-button-clicked');
 	teacher_contentBtn.classList.remove('form-menu-button-clicked');
+	locationBtn.classList.remove('form-menu-button-clicked');
 	reviewBtn.classList.remove('form-menu-button-clicked');
 	reservationBtn.classList.add('form-menu-button-clicked');
 	class_contentDiv.style.display = 'none';
 	teacher_contentDiv.style.display = 'none';
+	locationDiv.style.display = 'none';
 	reviewDiv.style.display = 'none';
 	reservationDiv.style.display = '';
-}
-
-function showClass_content(class_no){
-	class_contentBtn.classList.add('form-menu-button-clicked');
-	teacher_contentBtn.classList.remove('form-menu-button-clicked');
-	reviewBtn.classList.remove('form-menu-button-clicked');
-	reservationBtn.classList.remove('form-menu-button-clicked');
-	class_contentDiv.style.display = '';
-	teacher_contentDiv.style.display = 'none';
-	reviewDiv.style.display = 'none';
-	reservationDiv.style.display = 'none';
 }
 </script>
 </head>
@@ -245,8 +267,9 @@ function showClass_content(class_no){
 </div>
 
 <div id="form-menu">
-	<button type="button" class="form-menu-button form-menu-button-clicked" id="class_contentBtn" onclick="showClass_content('${classVO.class_no}')">강의 소개</button>
-	<button type="button" class="form-menu-button" id="teacher_contentBtn" onclick="showTeacher_content('${classVO.class_no}')">강사 소개</button>
+	<button type="button" class="form-menu-button form-menu-button-clicked" id="class_contentBtn" onclick="showClass_content()">강의 소개</button>
+	<button type="button" class="form-menu-button" id="teacher_contentBtn" onclick="showTeacher_content()">강사 소개</button>
+	<button type="button" class="form-menu-button" id="locationBtn" onclick="showLocation()">위치</button>
 	<button type="button" class="form-menu-button" id="reviewBtn" onclick="showReview('${classVO.class_no}')">리뷰</button>
 	<button type="button" class="form-menu-button" id="reservationBtn" onclick="showReservation()">예약</button>
 </div>
@@ -267,6 +290,46 @@ function showClass_content(class_no){
 	${classVO.teacher_content}
 </div>
 
+<!-- 위치 -->
+<div id="locationDiv" style="display:none;">
+<div id="mapContainer">
+	<h5 style="margin: 0px; display:inline;"><b>위치　</b></h5><i class="fa-solid fa-location-dot"></i>${classVO.province} ${classVO.city} ${classVO.district}<br><br>
+	<div id="map" style="width:1060px;height:600px;"></div>
+<script>
+locationBtn.addEventListener('click', function(){
+	
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+	// 지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
+	
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch(province.value + city.value + district.value, function(result, status) {
+	
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === kakao.maps.services.Status.OK) {
+	    	 console.log(province.value + city.value + district.value);
+	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	    } 
+	});    
+})
+</script>
+</div>
+</div>
+<input type="hidden" name="province" id="province" value="${classVO.province}">
+<input type="hidden" name="city" id="city" value="${classVO.city}">
+<input type="hidden" name="district" id="district" value="${classVO.district}">
+
 <!-- 리뷰 -->
 <div id="reviewDiv" style="display:none;">
 
@@ -283,6 +346,8 @@ function showClass_content(class_no){
 <input type="text" name="member_no" id="member_no" value="${memberVo.member_no}">
 </form>
  --%>
+ 
+<!-- 예약 -->
 <div id="reservationDiv" style="display:none">
 
 </div>

@@ -59,6 +59,15 @@ public class BoardTest {
 		
 	}
 	
+	/*
+	 * @Test public void scrapList() { assumeNotNull(boardMapper); Criteria cri =
+	 * new Criteria(); cri.setClass_no("C000032"); List<BoardScrapVO> list =
+	 * boardMapper.scrapList(cri);
+	 * 
+	 * 
+	 * log.info(list); }
+	 */
+	
 	  @Test 
 	  public void exerciseTest() {
 		  assumeNotNull(boardMapper);
