@@ -3,6 +3,7 @@ package com.healpio.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.healpio.mapper.MypageMapper;
@@ -15,6 +16,9 @@ public class MypageSerivceImpl implements MypageService{
 	
 	@Autowired
 	MypageMapper mypageMapper;
+	
+	@Autowired
+	BCryptPasswordEncoder encoder;
 	
 	@Override
 	public List<ViewScrapVO> getScrapList(String member_no) {
@@ -48,7 +52,7 @@ public class MypageSerivceImpl implements MypageService{
 
 	@Override
 	public int myInfoEdit(MemberVO vo) {
-		// TODO Auto-generated method stub
+		vo.setMember_pw(encoder.encode(vo.getMember_pw()));
 		return mypageMapper.myInfoEdit(vo);
 	}
 
@@ -68,6 +72,18 @@ public class MypageSerivceImpl implements MypageService{
 	public List<MyReservationVO> getPreviousBookings(String member_no) {
 		// TODO Auto-generated method stub
 		return mypageMapper.getPreviousBookings(member_no);
+	}
+
+	@Override
+	public Boolean passwordCheck(MemberVO vo) {
+		String password = mypageMapper.getPassword(vo.getMember_no());
+		Boolean res = encoder.matches(vo.getMember_pw(), password);
+		
+		
+		return res;
+		
+		
+		
 	}
 
 }

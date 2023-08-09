@@ -81,6 +81,14 @@ public class MypageTest {
 		log.info(list);
 	}
 	
+	@Test
+	public void getPassword() {
+		MemberVO vo = new MemberVO();
+		vo.setMember_no("M000004");
+		String password = mapper.getPassword(vo.getMember_no());
+		log.info(password);
+	}
+	
 	
 	
 }

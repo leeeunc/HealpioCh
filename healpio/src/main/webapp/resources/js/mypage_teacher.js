@@ -1,3 +1,11 @@
+const passwordModal = new bootstrap.Modal('#passwordModal', {
+		  keyboard: false
+		})
+
+const mypageModal = new bootstrap.Modal('#myModal', {
+	keyboard: false
+})
+
 function showContent(contentType) {
     console.log(contentType);
 
@@ -103,4 +111,61 @@ function preBooksView(map){
 		    +'</div>	                                                                       '
 		
 	})
+}
+
+
+//모달창 제어
+btnEdit.addEventListener('click',function(){
+	passwordModal.show();
+
+});
+
+
+pwCheckBtn.addEventListener('click',function(){
+	
+	let member_no = document.querySelector('#member_no').value;
+	let member_pw = document.querySelector('#password-input-box').value;
+	
+	passwordModal.hide();
+	
+	fetch('/mypage/passwordCheck'
+			, {method : 'post'
+				, headers : {'Content-Type' : 'application/json'}
+				, body : JSON.stringify({
+				    member_no: member_no,
+				    member_pw: member_pw,
+				  })
+			})
+		// 5. 응답처리
+		.then(response => response.json())
+		.then(map => passwordCheck(map));
+			
+		
+})
+
+function passwordCheck(map){
+	let res = map.passwordCheck;
+	console.log(res);
+	
+	if(res === true){
+		document.querySelector('#btnEdit').style.display = 'none';
+	    document.querySelector('#btnGoEdit').style.display = 'inline-block';
+	    document.querySelector('#btnGoDelete').style.display = 'inline-block';
+	    document.querySelector('.password').style.display = 'block';
+	    document.querySelector('.passwordCheck').style.display = 'block';
+	    
+	    let inputs = document.getElementsByClassName('info-control');
+	    
+	    console.log(inputs);
+
+	    for(let i = 0; i < inputs.length; i++){
+	        inputs[i].readOnly = false;
+	        
+	    }
+	  }else{
+		mypageModal.show();
+		document.querySelector('.myModal-title').innerHTML = '비밀번호 인증 실패';
+		document.querySelector('.myModal-body-text').innerHTML = '비밀번호가 일치하지 않습니다.';
+	
+    }
 }

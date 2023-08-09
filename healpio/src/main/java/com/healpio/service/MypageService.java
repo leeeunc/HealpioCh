@@ -28,4 +28,6 @@ public interface MypageService {
 	public List<MyReservationVO> getPreviousCourses(String member_no);
 	
 	public List<MyReservationVO> getPreviousBookings(String member_no);
+	
+	public Boolean passwordCheck(MemberVO vo);
 }
