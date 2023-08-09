@@ -61,7 +61,11 @@ public class ClassServiceImpl implements ClassService {
 	public void getOne(String class_no, String member_no, Model model) {
 		model.addAttribute("classVO", classMapper.getOne(class_no));
 		model.addAttribute("attachList", attachMapper.getList(class_no));
-		model.addAttribute("scrapYN", classMapper.scrapYN(class_no, member_no));
+		if(!"".equals(member_no)) {
+			model.addAttribute("scrapYN", classMapper.scrapYN(class_no, member_no));			
+		} else {
+			model.addAttribute("scrapYN", 0);
+		}
 	}
 
 	@Override

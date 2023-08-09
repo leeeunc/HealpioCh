@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="/resources/css/write.css">
 <script src="https://kit.fontawesome.com/0aadd0de21.js" crossorigin="anonymous"></script>
 <script>
-window.addEventListener('load', function(){
+window.addEventListener('load', function(){	
 	writeBtn.addEventListener('click', function(e){
 		// 기본 이벤트(새로고침) 제거
 		e.preventDefault();
