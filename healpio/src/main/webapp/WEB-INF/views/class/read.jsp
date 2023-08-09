@@ -280,7 +280,7 @@ function showClass_content(class_no){
 	<!-- 리뷰 작성시 필요 -->	
 	<input type="text" name="class_no" id="class_no" value="${classVO.class_no}">
 	<!-- 리뷰 작성,수정,삭제시 필요 -->	
-<input type="hidden" name="member_no" id="member_no" value="${memberVo.member_no}">
+<input type="text" name="member_no" id="member_no" value="${memberVo.member_no}">
 </form>
  --%>
 <div id="reservationDiv" style="display:none">
