@@ -1,54 +1,174 @@
+/* Reset and Common Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: #000 !important;
+    text-decoration: none !important;
+    font-weight: normal !important;
+}
+
+.pull {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 1400px;
+    background-color: #f5f5f5; /* 변경: 연한 회색 */
+    padding: 15px;
+    border-radius: 30px;
+}
 
 
-    /* 전체 컨테이너 스타일 */
-    .pull {
-        width: 800pt; /* 전체 화면의 80% 차지 */
-        height: 500pt;
-        margin: 0 auto; /* 가운데 정렬 */
-        border: 1px solid #000;
-    }
+/* 헤더 스타일 */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #e1e1e1; /* 변경: 진한 회색 */
+    border: solid 1px #c0d0d8;
+    border-radius: 30px;
+    margin-bottom: 20px;
+    color: #fff; /* 변경: 헤더 텍스트 색상 */
+}
+
+.header select {
+    font-size: 16px;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    color: #000; /* 변경: 선택 옵션 텍스트 색상 */
+}
+
+.header .searchForm {
+    flex-grow: 1; /* 남은 공간 활용 */
+    margin: 0 15px; /* 좌우 여백 설정 */
+    color: #000; /* 변경: 검색 폼 텍스트 색상 */
+}
+
+.header .searchForm input[type='text'] {
+    font-size: 16px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.header .searchForm button {
+    font-size: 16px;
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* 수정된 헤더 타이틀 스타일 */
+.class_title-text {
+    display: block;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333; /* 원하는 색상으로 변경 */
+    text-decoration: none;
+    margin-bottom: 10px;
+}
 
 
-    .header h3 {
-        margin: 0; /* 기본 마진 제거 */
-    }
 
-    .header select {
-        margin-left: 10px; /* 셀렉트 박스들 사이의 간격 추가 */
-    }
 
-    /* 메인 스타일 */
-    .main {
-        height: 80%;
-        display: flex; /* 컨텐츠 박스들을 가로로 정렬 */
-        flex-wrap: wrap; /* 화면이 작아질 때 컨텐츠 박스들이 아래로 자동으로 내려감 */
-        justify-content: space-between; /* 컨텐츠 박스들을 가로로 공간 분할 */
-        border: 1px solid #000;
-    }
 
-    .contentbox {
-        width: 30%; /* 컨텐츠 박스의 너비 */
-        margin-bottom: 20px; /* 컨텐츠 박스들 사이의 간격 추가 */
-        padding: 10px; /* 안쪽 여백 */
-    }
 
-    .contentbox img {
-        width: 100%; /* 이미지 너비 100% */
-        height: auto; /* 이미지 비율 유지 */
-    }
+/* Main Content Styles */
+.main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
 
-    .exercise-text,
-    .location-text {
-        color: #007bff; /* 링크 색상 */
-        text-decoration: none; /* 밑줄 제거 */
-    }
+.contentbox {
+    width: calc(33.33% - 20px);
+    margin: 10px;
+    padding: 10px;
+    border: solid 1px #c0d0d8;
+    border-radius: 10px;
+}
 
-    /* 버튼 스타일 */
-    .regBtn {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
+.form-intro-img {
+    width: 100%; /* 이미지 너비를 100%로 설정하여 부모 요소에 맞게 조절 */
+    max-height: 400px; /* 최대 높이를 설정하여 비율 유지 */
+    object-fit: cover; /* 이미지 비율 유지하면서 가득 채우기 */
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.contentbox {
+    width: calc(33.33% - 20px);
+    margin: 10px;
+    padding: 10px;
+    border: solid 1px #c0d0d8;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.exercise-text,
+.province-text,
+.city-text,
+.district-text {
+    font-size: 14px;
+    font-weight: bold;
+    color: #007bff;
+    margin-right: 5px;
+
+}
+
+/* Footer Styles */
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 15px 30px;
+    background-color: #e1e1e1;
+    border: solid 1px #c0d0d8;
+    border-radius: 30px;
+}
+
+
+
+.class_title-text {
+    display: block;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333; /* 원하는 색상으로 변경 */
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+/* 등록하기 버튼 스타일 */
+.regBtn {
+    padding: 5px 10px; /* 크기 조정 */
+    background-color: #777; /* 변경: 진한 회색 */
+    border-color: #777; /* 변경: 진한 회색 */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right; /* 오른쪽 정렬 */
+    transition: background-color 0.3s, color 0.3s; /* 효과를 부드럽게 전환하기 위한 설정 */
+    margin-top: 10px; /* 위 여백 조정 */
+}
+
+
+/* 등록하기 버튼 스타일 수정 (호버 및 포커스 시) */
+.regBtn:hover,
+.regBtn:focus {
+    color: #fff;
+    background-color: #555; /* 변경: 더 진한 회색 */
+    border-color: #555; /* 변경: 더 진한 회색 */
+}

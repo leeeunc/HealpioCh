@@ -37,22 +37,9 @@ import com.healpio.vo.PageDto;
 		  model.addAttribute("totalCnt", totalCnt);
 		  model.addAttribute("pageDto", pageDto);
 
-		  
-		  BoardScrapVO vo = new BoardScrapVO();
-		  model.addAttribute("boardClass_no", vo.getClass_no());
-		  
 		 return null;
 	 }
 	 
-
-	/*
-	 * @Override public List<BoardScrapVO> scrapList(Criteria cri, Model model){
-	 * List<BoardScrapVO> list = boardMapper.scrapList(cri);
-	 * model.addAttribute("boardScrap", list);
-	 * 
-	 * 
-	 * return null; }
-	 */
 	 
 	 @Override
 	 public List<ExerciseVO> exerciseList(Criteria cri,Model model){
@@ -87,8 +74,14 @@ import com.healpio.vo.PageDto;
 	 public int getTotalCnt(Criteria cri) {
 		 return boardMapper.getTotalCnt(cri);
 	 }
+	/*
+	 * @Override public int scrapList(String class_no) {
+	 * 
+	 * return boardMapper.scrapList(class_no); }
+	 */
 
-
+	 
+	 
 
   }
  

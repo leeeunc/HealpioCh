@@ -12,8 +12,11 @@
 		FROM (
 			SELECT ROWNUM RN, A.* 
 				FROM (
-						select c.class_title, m.nickname, e.exercise_name, l.PROVINCE, l.CITY, l.DISTRICT, a.uuid, m.teacheryn, c.class_no
-                        from class c, member m, exercise e, location l, attach a
+						select 
+							c.class_title, m.nickname, e.exercise_name
+							, l.PROVINCE, l.CITY, l.DISTRICT
+							, m.teacheryn, c.class_no, a.uploadpath||a.uuid||'_'||a.filename boardFile
+                         from class c, member m, exercise e, location l, attach a
                             where c.class_no = l.class_no
                             and c.member_no = m.member_no
                             and c.exercise_no = e.exercise_no
@@ -53,8 +56,11 @@
 		FROM (
 			SELECT ROWNUM RN, A.* 
 				FROM (
-						select c.class_title, m.nickname, e.exercise_name, l.PROVINCE, l.CITY, l.DISTRICT, a.uuid, m.teacheryn, c.class_no
-                        from class c, member m, exercise e, location l, attach a
+						select 
+							c.class_title, m.nickname, e.exercise_name
+							, l.PROVINCE, l.CITY, l.DISTRICT
+							, m.teacheryn, c.class_no, a.uploadpath||a.uuid||'_'||a.filename boardFile
+                         from class c, member m, exercise e, location l, attach a
                             where c.class_no = l.class_no
                             and c.member_no = m.member_no
                             and c.exercise_no = e.exercise_no
@@ -68,30 +74,12 @@
 				)
 	</select>
 
-<!-- 
-	<select id="scrapList" resultType="com.healpio.vo.BoardScrapVO">
-		<![CDATA[
-    		SELECT count(*) 
-		FROM (
-			SELECT ROWNUM RN, A.* 
-				FROM (
-						select c.class_title, m.nickname, e.exercise_name, l.PROVINCE, l.CITY, l.DISTRICT, a.uuid, m.teacheryn, c.class_no
-                        from class c, member m, exercise e, location l, attach a, scrap s
-                            where c.class_no = l.class_no
-                            and c.member_no = m.member_no
-                            and c.exercise_no = e.exercise_no
-                            and c.class_no = a.class_no
-                            and c.class_no = s.class_no
-                            and s.class_no = #{class_no}
-		]]>
-						<include refid="location"></include>
-						<include refid="criteria"></include>
-						ORDER BY c.class_no DESC 
-						) A
-				)
-		 WHERE RN BETWEEN #{startNo} AND #{endNo} 
+	<select id="scrapList" resultType="int">
+		select count(*) 
+		from class c, scrap s
+		where c.class_no = s.class_no
+		and s.class_no = #{class_no}
 	</select>
- -->
 
 
 	<sql id="criteria">

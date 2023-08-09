@@ -20,9 +20,6 @@ import com.healpio.vo.MemberVO;
   
   public List<BoardScrapVO> getList(Criteria cri,Model model);
 
-	/*
-	 * public List<BoardScrapVO> scrapList(Criteria cri, Model model);
-	 */	  
   public List<ExerciseVO> exerciseList(Criteria cri,Model model);
   
   public List<LocationVO> provinceList(Model model);
@@ -30,6 +27,8 @@ import com.healpio.vo.MemberVO;
   public List<LocationVO> locationList(Model model);
   
   public int getTotalCnt(Criteria cri);
+  
+	/* public int scrapList(String class_no); */
 
   }
  
