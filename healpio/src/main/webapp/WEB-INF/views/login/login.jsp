@@ -22,11 +22,11 @@
                 <legend>로그인</legend>
                 <div class="line id">
                     <label for="id" class="sound">아이디</label>
-                    <input type="text" id="id" name="id" class="input_txt" placeholder="아이디" value="min2580" />
+                    <input type="text" id="id" name="id" class="input_txt" placeholder="아이디"/>
                 </div>
                 <div class="line pw">
                     <label for="pw" class="sound">비밀번호</label>
-                    <input type="password" id="pw" name="pw" class="input_txt" placeholder="비밀번호" value="1234" />
+                    <input type="password" id="pw" name="pw" class="input_txt" placeholder="비밀번호"/>
                 </div>
                 <button type="submit" class="login_btn">로그인</button> 
             </fieldset>

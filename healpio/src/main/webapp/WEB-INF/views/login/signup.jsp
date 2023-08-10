@@ -21,7 +21,7 @@
     <form action='/login/signup' method='post'>
         <div id='signup_id'>
             <h5>아이디</h5>
-            <input type="text" name="signUpId" id="signUpId" value="min2580">
+            <input type="text" name="signUpId" id="signUpId">
             <input type="button" id="idCheck" value="중복확인">
            <div id="signupMsg"></div> <!-- 중복확인 메시지를 표시할 div -->
            
@@ -30,25 +30,25 @@
         
         <div id='signup_pw'>
             <h5>비밀번호</h5>
-            <input type="password" name="signUpPw" id="signUpPw" value="1234"><br>
+            <input type="password" name="signUpPw" id="signUpPw"><br>
             <div id="signupMsg_pw"></div> <!-- 중복확인 메시지를 표시할 div -->
         </div> 
         <div id='signup_name'>
             <h5>이름</h5>
-            <input type="text" name="signUpName" id="signUpName" value="민영찬">
+            <input type="text" name="signUpName" id="signUpName">
         </div> 
         <div id='signup_nick'>
             <h5>닉네임</h5>
-            <input type="text" name="signUpNick" id="signUpNick" value="짠돌이">
+            <input type="text" name="signUpNick" id="signUpNick">
             <div id="signupMsg_nick"></div> <!-- 중복확인 메시지를 표시할 div -->
         </div> 
         <div id='signup_email'>
             <h5>이메일</h5>
-            <input type="email" name="signUpEmail" id="signUpEmail" placeholder=' example@example.com' value="abc@naver.com">
+            <input type="email" name="signUpEmail" id="signUpEmail" placeholder=' example@example.com'>
         </div> 
         <div id='signup_phone'>
             <h5>전화번호</h5>
-            <input type="text" name="signUpPhone" id="signUpPhone" placeholder=' 하이픈(-)을 제외한 숫자만 입력' value="01088889999">
+            <input type="text" name="signUpPhone" id="signUpPhone" placeholder=' 하이픈(-)을 제외한 숫자만 입력'>
         </div>  
 
 
