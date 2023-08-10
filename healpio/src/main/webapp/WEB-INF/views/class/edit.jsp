@@ -167,7 +167,7 @@ function changeAttach(){
 			  <jsp:include page="./location.jsp"/>
 			  <div class="contents col-md-5">
 			  	<label for="sido" class="form-label"><b>강의 지역</b></label>
-				<select class="form-select form-select-sm" id="sido"><option value=""></option></select>
+				<select class="form-select form-select-sm" id="sido"><option value="">선택</option></select>
 			  </div>
 			  <div class="contents col-md-3">
 			  	<label for="sigugun" class="form-label">　</label>

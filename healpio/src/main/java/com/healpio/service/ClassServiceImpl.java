@@ -79,7 +79,7 @@ public class ClassServiceImpl implements ClassService {
 
 	@Override
 	public void getLocation(String class_no, Model model) {
-		model.addAttribute("LocationVO", classMapper.getLocation(class_no));		
+		model.addAttribute("locationVO", classMapper.getLocation(class_no));		
 	}
 
 	@Override
