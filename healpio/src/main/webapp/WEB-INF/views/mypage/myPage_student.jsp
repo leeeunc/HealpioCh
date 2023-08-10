@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>마이페이지</title>
 
-        <meta name="description" content="운동강사와 회원의 매칭서비스" />
+        <meta name="description" content="운동강사와 회원의 매칭서비스"/>
         <meta name="keywords" content="matching service" />
         <meta
             name="viewport"
@@ -35,7 +35,9 @@
 			
             <section>
                 <div class="inner">
+               
                     <div class="inner-container">
+
                         <div class="side-menu">
                             <div class="side-menu-container">
                                 <div class="user-logo">
@@ -85,16 +87,19 @@
                                 <ul class="scrap-list">
                                 	<c:forEach items="${scrapList }" var="scrapVo">
 	                                    <li class="scrap-card">
-	                                        <div class="scrap-img"><img alt="필라테스" src="../resources/images/logo/필라테스1.jpg"></div>
+	                                        <img class="scrap-img" alt="필라테스" src="../resources/images/필라테스4.jpg">
 	                                        <div class="scrap-info-container">
-	                                            <div class="scrap-title">${scrapVo.class_title}</div>
+	                                            <div class="scrap-title"><a href="/class/read?class_no=${scrapVo.class_no}">${scrapVo.class_title}</a></div>
 	                                            <div class="scrap-lecture-info">
 	                                                <div class="scrap-teacher">${scrapVo.nickname} </div>
 	                                                <div class="scrap-sports">${scrapVo.exercise_name} </div>
-	                                                <div class="scrap-address">${scrapVo.address} </div>
 	                                            </div>
-	
-	                                            <div class="scrap-like">하트</div>
+	                                            <div class="scrap-address">${scrapVo.address} </div>
+												
+												<div class="scrap-like-container">
+													<div class="scrap-like"><i class="fa-solid fa-heart" style="color: #ff6666"></i></div>
+												</div>
+	                                            
 	                                        </div>
 	                                    </li>
                                     </c:forEach>
@@ -125,19 +130,19 @@
                                         </div>
                                         <div class="mb-3 password">
                                             <label class="form-label">비밀번호 변경</label>
-                                            <input type="password" class="form-control info-control" name="member_pw"  value="" readonly />
+                                            <input type="password" class="form-control info-control" id="member_pw1" name="member_pw"  value="" readonly />
                                         </div>
                                         <div class="mb-3 passwordCheck">
                                             <label class="form-label">비밀번호 확인</label>
-                                            <input type="password" class="form-control info-control"  value="" readonly/>
+                                            <input type="password" class="form-control info-control" id="member_pw2"  value="" readonly/>
                                         </div>
                                         <div id='editBox'>
                                         	
                                             <input id='btnEdit' class="btn btn-primary edit" type="button" value="수정하기" />
                                             <input id='btnGoEdit' class="btn btn-primary goEdit" type="submit" value="수정" />
-                                            <input id='btnGoDelete' class="btn btn-primary goDelete" onclick="location.href='/mypage/student?member_no=M000004'" type="button" value="취소" />
+                                            <input id='btnGoDelete' class="btn btn-primary goDelete" onclick="location.href='/mypage/student?member_no=${member_no}'" type="button" value="취소" />
                                         </div>
-                                        <input type="hidden" id="member_no" name="member_no" value="M000013">
+                                        <input type="hidden" id="member_no" name="member_no" value="${member_no}">
                                         <input type="hidden" name="teacheryn" value="N">
                          
                                     </div>
@@ -184,7 +189,8 @@
 			        <p class="myModal-body-text">내용</p>
 			      </div>
 			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary myModalBtn-secondary" data-bs-dismiss="modal">확인</button>
+			        <button type="button" class="btn btn-secondary myModalBtn-secondary" data-bs-dismiss="modal">취소</button>
+			        <button type="button" class="btn btn-primary myModalBtn-primary">확인</button>
 			      </div>
 			    </div>
 			  </div>

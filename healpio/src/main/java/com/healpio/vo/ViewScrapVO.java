@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class ViewScrapVO {
+	private String class_no;
 	private String exercise_name;
 	private String class_title;
 	private String nickname; //강사 닉네임

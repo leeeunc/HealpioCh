@@ -105,8 +105,8 @@ public class MypageController {
 	@ResponseBody
 	@GetMapping("deleteReservation/{reservation_no}")
 	public Map<String, Object> deleteReservation(@PathVariable("reservation_no") String reservation_no) {
-		int res = mypageService.reservationDelete(reservation_no);
 		Map<String, Object> map = new HashMap<String, Object>();
+		int res = mypageService.reservationDelete(reservation_no);
 		String msg = "";
 		if(res > 0) {
 			msg = "예약이 취소되었습니다.";

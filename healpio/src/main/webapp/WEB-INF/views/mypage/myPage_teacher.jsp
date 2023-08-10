@@ -49,7 +49,7 @@
                                 <div class="checkReservation">
                                     <a onclick="showContent('reservation')">예약 확인</a>
                                 </div>
-                                <div class="history"><a onclick="showContent('prev')">이전 강의 내역</a></div>
+                                <div class="history"><a onclick="showContent('prev')">이전 예약 내역</a></div>
                             </div>
                         </div>
 
@@ -90,14 +90,16 @@
                                 <ul class="register-list">
                                 	<c:forEach items="${registerList }" var="registerVo">
 	                                    <li class="register-card">
-	                                        <div class="register-img"></div>
+	                                		<img class="register-img" alt="필라테스" src="../resources/images/필라테스4.jpg">
 	                                        <div class="register-info-container">
-	                                            <div class="register-title">${registerVo.class_title}</div>
+	                                        
+	                                            <div class="register-title"><a href="/class/read?class_no=${registerVo.class_no}">${registerVo.class_title}</a></div>
 	                                            <div class="register-lecture-info">
 	                                                <div class="register-teacher">${registerVo.nickname}</div>
 	                                                <div class="register-sports">${registerVo.exercise_name}</div>
-	                                                <div class="register-address">${registerVo.address}</div>
+	                                                
 	                                            </div>
+	                                            <div class="register-address">${registerVo.address}</div>
 	                                        </div>
 	                                    </li>
 	                                 </c:forEach>
@@ -129,18 +131,18 @@
                                         </div>
                                         <div class="mb-3 password">
                                             <label class="form-label ">비밀번호 변경</label>
-                                            <input type="password" class="form-control info-control" name="member_pw" value=""  readonly/>
+                                            <input type="password" class="form-control info-control" id="member_pw1" name="member_pw" value=""  readonly/>
                                         </div>
                                         <div class="mb-3 passwordCheck">
                                             <label class="form-label ">비밀번호 확인</label>
-                                            <input type="password" class="form-control info-control" value="" readonly/>
+                                            <input type="password" class="form-control info-control" id="member_pw2" value="" readonly/>
                                         </div>
                                         <div id='editBox'>
                                             <input id='btnEdit' class="btn btn-primary edit" type="button" value="수정하기" />
                                             <input id='btnGoEdit' class="btn btn-primary goEdit" type="submit" value="수정" />
-                                            <input id='btnGoDelete' class="btn btn-primary goDelete" onclick="location.href='/mypage/teacher?member_no=M000003'" type="button" value="취소" />
+                                            <input id='btnGoDelete' class="btn btn-primary goDelete" onclick="location.href='/mypage/teacher?member_no=${member_no}'" type="button" value="취소" />
                                         </div>
-                                        <input type="hidden" id="member_no" name="member_no" value="M000007">
+                                        <input type="hidden" id="member_no" name="member_no" value="${member_no}">
                                         <input type="hidden" name="teacheryn" value="Y">
                                     </div>
                                 </form>
@@ -187,7 +189,8 @@
 			        <p class="myModal-body-text">내용</p>
 			      </div>
 			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary myModalBtn-secondary" data-bs-dismiss="modal">확인</button>
+			        <button type="button" class="btn btn-secondary myModalBtn-secondary" data-bs-dismiss="modal">취소</button>
+			      	<button type="button" class="btn btn-primary myModalBtn-primary">확인</button>
 			      </div>
 			    </div>
 			  </div>
