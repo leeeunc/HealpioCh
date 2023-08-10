@@ -59,7 +59,7 @@
 		flex: 1 0 auto; /* flex 요소의 성장, 수축, 기본크기 설정 */
 		margin: 0.5em; /* 버튼의 마진 */
 		width: 60px;   /* 버튼의 너비 */
-		height: 40px;  /* 버튼의 높이 */
+		height: 45px;  /* 버튼의 높이 */
   	  	overflow: hidden; /* 컨텐츠가 버튼 크기를 넘어갈 경우, 넘어간 부분 숨김 */
 		text-overflow: ellipsis; /* 컨텐츠가 버튼 크기를 넘어갈 경우, 넘어간 부분을 "..."로 표시 */
 	}
@@ -217,7 +217,7 @@
 	
 	button {
 	  width: 100px; /* 버튼 폭을 100px로 조절 */
-	  height: 50px; /* 버튼 높이를 50px로 조절 */
+	  height: 60px; /* 버튼 높이를 60px로 조절 */
 	  display: inline-block; /* 추가된 코드: 인라인 블록 요소로 변경 */
 	  margin: 10px; /* 추가된 코드: 마진을 추가하여 버튼 사이에 간격을 줌 */
 	}
