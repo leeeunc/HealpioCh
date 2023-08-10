@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +11,10 @@
     <link href="../resources/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
+    /*  .container{
+    	background-color: #E4EAF6;
+    } */
+    
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -79,7 +83,7 @@
 
 
 
-    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../resources/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

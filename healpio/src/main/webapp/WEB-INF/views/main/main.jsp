@@ -26,14 +26,14 @@
     <div class='iconWrap'>
         <div class='iconText'>운동 바로가기</div>
         <div class='iconList'>
-            <a href='http://naver.com'><img src='../resources/images/icon/quick_button/icon_health.png'></a>
-            <a href='http://naver.com'><img src='../resources/images/icon/quick_button/icon_crossfit.png'></a>
-            <a href='http://naver.com'><img src='../resources/images/icon/quick_button/icon_climbing.png'></a>
-            <a href='http://naver.com'><img src='../resources/images/icon/quick_button/icon_swim.png'></a>
-            <a href='http://naver.com'><img src='../resources/images/icon/quick_button/icon_yoga.png'></a>
-            <a href='http://naver.com'><img src='../resources/images/icon/quick_button/icon_badminton.png'></a>
-            <a href='http://naver.com'><img src='../resources/images/icon/quick_button/icon_taekwondo.png'></a>
-            <a href='http://naver.com'><img src='../resources/images/icon/quick_button/icon_ski.png'></a>
+            <a href='http://localhost:8080/board/list?exercise_name=%ED%97%AC%EC%8A%A4'><img src='../resources/images/icon/quick_button/icon_health.png'></a>
+            <a href='http://localhost:8080/board/list?exercise_name=%ED%81%AC%EB%A1%9C%EC%8A%A4%ED%95%8F'><img src='../resources/images/icon/quick_button/icon_crossfit.png'></a>
+            <a href='http://localhost:8080/board/list?exercise_name=%ED%81%B4%EB%9D%BC%EC%9D%B4%EB%B0%8D'><img src='../resources/images/icon/quick_button/icon_climbing.png'></a>
+            <a href='http://localhost:8080/board/list?exercise_name=%EC%88%98%EC%98%81'><img src='../resources/images/icon/quick_button/icon_swim.png'></a>
+            <a href='http://localhost:8080/board/list?exercise_name=%EC%9A%94%EA%B0%80'><img src='../resources/images/icon/quick_button/icon_yoga.png'></a>
+            <a href='http://localhost:8080/board/list?exercise_name=%EB%B0%B0%EB%93%9C%EB%AF%BC%ED%84%B4'><img src='../resources/images/icon/quick_button/icon_badminton.png'></a>
+            <a href='http://localhost:8080/board/list?exercise_name=%ED%83%9C%EA%B6%8C%EB%8F%84'><img src='../resources/images/icon/quick_button/icon_taekwondo.png'></a>
+            <a href='http://localhost:8080/board/list?exercise_name=%EC%8A%A4%ED%82%A4'><img src='../resources/images/icon/quick_button/icon_ski.png'></a>
         </div>
     </div>
 
