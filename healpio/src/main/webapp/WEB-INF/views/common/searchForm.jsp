@@ -8,11 +8,16 @@
 <title>Insert title here</title>
 
 <style type="text/css">
+.col-sm-6 .form-control {
+    width: 400px; /* 원하는 가로 크기로 조정 */
+    max-width: 100%; /* 가로 최대 크기 설정 */
+    box-sizing: border-box; /* 패딩과 테두리를 포함한 크기 계산 */
+}
 /* 버튼 스타일 */
 .btnSearch {
     color: #fff;
     background-color: #777; /* 변경: 진한 회색 */
-    border-color: #777; /* 변경: 진한 회색 */
+    border: none; /* 변경: 진한 회색 */
     width: 100px; /* 버튼 너비 조정 */
     height: 40px; /* 버튼 높이 조정 */
     border-radius: 8px;
