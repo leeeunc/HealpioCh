@@ -73,11 +73,11 @@
         #findId_login{
         /*	border : 1px solid black; */
         	height : 40px;
-        	width : 90%;
+        	width : 100%;
         }
         
         .btn_findId{
-        	width : 50%;
+        	width : 45%;
         	height : 100%;
         	font-size : 20px;
         	color : white;
@@ -88,7 +88,7 @@
         }
         
         .login_btn1 {
-            width : 48%;
+            width : 45%;
         	height : 100%;
         	font-size : 20px;
         	color : white;
