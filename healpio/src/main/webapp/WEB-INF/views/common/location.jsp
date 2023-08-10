@@ -13,7 +13,11 @@
  .location-select {
     display: flex;
     gap: 10px; /* 선택 옵션 사이 간격 설정 */
+    float: left; /* 왼쪽으로 이동 */
+    margin-right: 50px; /* 두 요소 간격 설정 */
 }
+
+
  </style>
  
    <script>

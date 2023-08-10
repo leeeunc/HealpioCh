@@ -57,11 +57,9 @@
 					<c:param name="fileName" value="${li.boardFile }"/>
 					</c:url>" 
 				alt="${li.class_title}" class="form-intro-img"/> 
-				 
-				<br>
+				     <a class="class_title-text"> ${li.class_title} </a>
 				</a >	  				
-				     <a class="class_title-text"> ${li.class_title} </a><br>
-					  ------------------------------------------<br>
+					  --------------------------------------------------------<br>
 					 ${li.nickname } | 
 					 <a class="exercise-text">${li.exercise_name }</a> |
 					 <a class="province-text">${li.province }</a><a class="city-text">${li.city }</a><a class="district-text">${li.district }</a>
@@ -71,9 +69,10 @@
 	 		</div>
 
 			<div class="footer">
-	            <button class="regBtn"   onclick="classWirte()">등록하기</button>
 		        <!-- 페이지 번호 출력 -->
 		        <jsp:include page="/WEB-INF/views/common/pageNavi.jsp" />
+	            <button class="regBtn"   onclick="classWirte()">등록하기</button>
+
 		        <%-- <%@ include file="../common/pageNavi.jsp" %> --%>
 			</div>
 			

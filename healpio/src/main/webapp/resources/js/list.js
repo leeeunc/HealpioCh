@@ -53,3 +53,6 @@ function teacherynDisplay() {
     	  history.replaceState({}, null, location.pathname);
     	  }
      }
+     
+     
+     

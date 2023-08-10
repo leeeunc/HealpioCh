@@ -88,11 +88,13 @@ a {
 .main {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+     justify-content: flex-start;
+    align-items: stretch; /* 아이템의 높이를 동일하게 맞춤 */
 }
 
 .contentbox {
     width: calc(33.33% - 20px);
+    margin-bottom: 20px;
     margin: 10px;
     padding: 10px;
     border: solid 1px #c0d0d8;
@@ -141,6 +143,7 @@ a {
 
 
 
+
 .class_title-text {
     display: block;
     font-size: 28px;
@@ -152,16 +155,16 @@ a {
 
 /* 등록하기 버튼 스타일 */
 .regBtn {
-    padding: 5px 10px; /* 크기 조정 */
+    width: 120px; /* 고정된 너비 설정 */
+    height: 50px; /* 고정된 높이 설정 */
     background-color: #777; /* 변경: 진한 회색 */
     border-color: #777; /* 변경: 진한 회색 */
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    float: right; /* 오른쪽 정렬 */
     transition: background-color 0.3s, color 0.3s; /* 효과를 부드럽게 전환하기 위한 설정 */
-    margin-top: 10px; /* 위 여백 조정 */
+
 }
 
 
