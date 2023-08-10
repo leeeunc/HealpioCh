@@ -35,10 +35,10 @@ function fetchGet(url, callback){
 
 function scrap(class_no, member_no){
 	if(!member_no){
-		const myModal = new bootstrap.Modal('#myModal', {
+		const scrapModal = new bootstrap.Modal('#scrapModal', {
 			keyboard: false
 		})
-		myModal.show();
+		scrapModal.show();
 	} else{
 		fetchGet('/class/scrap?class_no=' + class_no + '&member_no=' + member_no, getFullheart);		
 	}
@@ -229,8 +229,7 @@ function showReservation(){
 	reservationDiv.style.display = '';
 }
 
-window.addEventListener('load', function(){
-	
+window.addEventListener('load', function(){	
 	const prevBtn = document.querySelector('#prev');
 	const nextBtn = document.querySelector('#next');
 	const carousel = document.querySelector('.carousel');
@@ -253,7 +252,6 @@ window.addEventListener('load', function(){
 		carousel.style.left = -500 * index + 'px';
 	});
 })
-
 </script>
 </head>
 <body>
@@ -294,7 +292,7 @@ window.addEventListener('load', function(){
 			</c:if>
 			
 			<!-- 로그인 안 한 상태에서 찜 누르면 모달창 열기 -->
-			<div id="myModal" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div id="scrapModal" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			  <div class="modal-dialog">
 			    <div class="modal-content">
 			      <div class="modal-header">
@@ -314,7 +312,7 @@ window.addEventListener('load', function(){
 		</div>
 		
 		　　문의하기
-		<i class="fa-regular fa-envelope" style="color: #588ce0" onclick="window.open('/message/send?member_no=${classVO.member_no}&class_title=${classVO.class_title }', ' ','width=500, height=570'); return false"></i><br><br>
+		<i class="fa-regular fa-envelope" style="color: #588ce0" onclick="window.open('/message/send?member_no=${classVO.member_no}&class_title=${classVO.class_title }', ' ','width=500, height=570'); return false"></i><br><br><br>
 		<c:if test="${memberVo.member_no eq classVO.member_no}">
 		<div id="onlyWriter">
 			<button type="button" class="btn btn-danger" onclick="go('/class/edit?class_no=${classVO.class_no}&member_no=${classVO.member_no}')">수정</button>
@@ -351,7 +349,7 @@ window.addEventListener('load', function(){
 <!-- 위치 -->
 <div id="locationDiv" style="display:none;">
 <div id="mapContainer">
-	<h5 style="margin: 0px; display:inline;"><b>위치　</b></h5><i class="fa-solid fa-location-dot"></i>${classVO.province} ${classVO.city} ${classVO.district}<br><br>
+	<h5 style="margin: 0px; display:inline;"><b>위치 </b></h5><i class="fa-solid fa-location-dot" style="color: #588ce0;"></i>${classVO.province} ${classVO.city} ${classVO.district}<br><br>
 	<div id="map" style="width:1040px;height:516px;"></div>
 <script>
 locationBtn.addEventListener('click', function(){	
