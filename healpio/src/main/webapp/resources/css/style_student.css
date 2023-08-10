@@ -74,14 +74,17 @@ header {
 */
 
 section {
-    width: 100%;
+    width: 1600px;
     background-color: #fff;
+    margin: 0px auto;
 }
 
 .side-menu {
-    width: 300px;
+	width: 300px;
     height: 1124px;
     margin-top: 90px;
+   
+
 }
 
 .side-menu-container {
@@ -234,7 +237,7 @@ footer {
     flex-wrap: wrap;
     list-style: none;
     padding: 1rem 0;
-    margin-left: 4rem;
+    margin-left: 5rem;
     overflow: hidden;
 }
 
@@ -243,7 +246,7 @@ footer {
 }
 
 .scrap-card {
-    width: 350px;
+    width: 320px;
 
     box-shadow: 10px 10px 10px 0px rgba(25, 42, 70, 0.2);
 
@@ -257,9 +260,7 @@ footer {
     width: 100%;
     height: 280px;
     border-radius: 8px 8px 0px 0px;
-    background-image: url('/image/logo/KakaoTalk_20230727_145442348\ \(1\).png');
-    background-repeat: no-repeat;
-    background-size: cover;
+   
 }
 
 .scrap-info-container {
@@ -279,12 +280,11 @@ footer {
 
 
 .scrap-title {
+	display : inline-block;
     font-size: 1.3rem;
     font-size: bold;
     color: #545e6f;
-	
-	
-    width: 100%;
+	width: 100%;
     white-space: nowrap;
     overflow: hidden;
 
@@ -293,15 +293,13 @@ footer {
 }
 
 .scrap-address{
-    width: 160px;
-    white-space: nowrap;
+	white-space: nowrap;
     overflow: hidden;
 
     text-overflow: ellipsis;
 }
 
 .scrap-teacher{
-    width: 60px;
     white-space: nowrap;
     overflow: hidden;
 
@@ -309,19 +307,24 @@ footer {
 }
 
 .scrap-sports{
-    width: 90px;
     white-space: nowrap;
     overflow: hidden;
-
-    text-overflow: ellipsis;
+ 	text-overflow: ellipsis;
+ 	margin-left: 8rem;
 }
 
 
-
+.scrap-like-container{
+	width: 100%;
+	display: flex;
+	flex-direction: row-reverse;
+	
+}
 
 .scrap-like {
-    width: 100%;
+    width: 17px;
     padding-top: 0.5rem;
+    
 }
 /*
 .scrap-sports {
@@ -341,7 +344,7 @@ footer {
 }
 
 .content-reservation {
-    width: 100%;
+    width: 1200px;
     height: 80px;
     display: flex;
     flex-direction: coulmn;
@@ -359,6 +362,10 @@ footer {
     font-weight: bold;
 }
 
+.content-reservation-title a{
+	padding-left: 5rem;
+}
+
 .content-reservation-info {
     display: inline-block;
 }
@@ -371,7 +378,7 @@ footer {
 }
 
 .content-prev {
-    width: 100%;
+    width: 1200px;
     height: 80px;
     display: flex;
     justify-content: space-around;
@@ -383,8 +390,13 @@ footer {
 }
 
 .content-prev-title {
+	width: 250px;
     font-size: 1.2rem;
     font-weight: bold;
+}
+
+.content-prev-title a{
+	padding-left: 5rem;
 }
 
 /*

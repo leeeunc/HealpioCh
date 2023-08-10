@@ -75,8 +75,9 @@ header {
 */
 
 section {
-    width: 100%;
+    width: 1600px;
     background-color: #fff;
+    margin: 0px auto;
 }
 
 .side-menu {
@@ -246,7 +247,7 @@ footer {
 }
 
 .register-card {
-    width: 350px;
+    width: 320px;
 
     box-shadow: 10px 10px 10px 0px rgba(25, 42, 70, 0.2);
 
@@ -260,9 +261,6 @@ footer {
     width: 100%;
     height: 280px;
     border-radius: 8px 8px 0px 0px;
-    background-image: url('/image/logo/KakaoTalk_20230727_145442348\ \(1\).png');
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 
 .register-info-container {
@@ -274,16 +272,16 @@ footer {
     width: 100%;
     display: flex;
     height: 40px;
-     padding-top: 0.5rem;
+    padding-top: 0.5rem;
 }
 
 
 .register-title {
+    display : inline-block;
     font-size: 1.3rem;
     font-size: bold;
     color: #545e6f;
-
-    width: 100%;
+	width: 100%;
     white-space: nowrap;
     overflow: hidden;
 
@@ -291,34 +289,28 @@ footer {
 }
 
 .register-address{
-    width: 160px;
-    white-space: nowrap;
+   	white-space: nowrap;
     overflow: hidden;
 
     text-overflow: ellipsis;
 }
 
 .register-teacher{
-    width: 60px;
-    white-space: nowrap;
+	white-space: nowrap;
     overflow: hidden;
 
     text-overflow: ellipsis;
+    
 }
 
 .register-sports{
-    width: 90px;
     white-space: nowrap;
     overflow: hidden;
-
-    text-overflow: ellipsis;
+	text-overflow: ellipsis;
+    margin-left: 8rem;
 }
 
 
-.register-like {
-    width: 100%;
-    padding-top: 0.5rem;
-}
 
 
 /* reservation */
@@ -329,7 +321,7 @@ footer {
 }
 
 .content-reservation {
-    width: 100%;
+    width: 1200px;
     height: 100px;
     display: flex;
     justify-content: space-around;
@@ -347,7 +339,16 @@ footer {
 }
 
 .content-reservation-info div {
+	
     display: block;
+}
+
+.content-reservation-info{
+	width: 300px;
+}
+
+.content-reservation-title a{
+	padding-left: 5rem;
 }
 
 /* prev */
@@ -358,7 +359,7 @@ footer {
 }
 
 .content-prev {
-    width: 100%;
+    width: 1200px;
     height: 100px;
     display: flex;
     justify-content: space-around;
@@ -370,13 +371,24 @@ footer {
 }
 
 .content-prev-title {
+	width: 250px;
     font-size: 1.2rem;
     font-weight: bold;
 }
 
 .content-prev-info div {
+	
     display: block;
 }
+
+.content-prev-info{
+	width: 300px;
+}
+
+.content-prev-title a{
+	padding-left: 5rem;
+}
+
 
 /*
 .content-info {

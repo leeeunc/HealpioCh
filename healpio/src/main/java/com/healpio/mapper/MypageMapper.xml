@@ -24,7 +24,7 @@
 
 	
 	<select id="getScrapList" resultType="com.healpio.vo.ViewScrapVO">
-		SELECT M.NICKNAME , C.CLASS_TITLE, E.EXERCISE_NAME,  L.PROVINCE|| ' ' ||L.CITY || ' ' ||L.DISTRICT address, A.uploadpath class_attach
+		SELECT C.class_no, M.NICKNAME , C.CLASS_TITLE, E.EXERCISE_NAME,  L.PROVINCE|| ' ' ||L.CITY || ' ' ||L.DISTRICT address, A.uploadpath class_attach
 		from SCRAP S
 		INNER JOIN CLASS C ON S.CLASS_NO = C.CLASS_NO
 		INNER JOIN MEMBER M ON C.MEMBER_NO = M.MEMBER_NO
@@ -35,6 +35,7 @@
 		WHERE S.MEMBER_NO = #{member_no}
 	</select>
 	<resultMap type="com.healpio.vo.ViewScrapVO" id="getScrapList">
+		<result property="class_no" column="C.class_no"/>
         <result property="exercise_name" column="E.EXERCISE_NAME"/>
         <result property="class_title" column="C.CLASS_TITLE"/>
         <result property="nickname" column="M.NICKNAME"/>
@@ -43,7 +44,7 @@
     </resultMap>
     
     <select id="getRegisterList" resultType="com.healpio.vo.ViewScrapVO">
-		select M.NICKNAME, C.CLASS_TITLE, E.EXERCISE_NAME, L.PROVINCE|| ' ' ||L.CITY || ' ' ||L.DISTRICT address, A.uploadpath class_attach
+		select C.CLASS_NO,M.NICKNAME, C.CLASS_TITLE, E.EXERCISE_NAME, L.PROVINCE|| ' ' ||L.CITY || ' ' ||L.DISTRICT address, A.uploadpath class_attach
 		from CLASS C
 		INNER JOIN MEMBER M ON C.MEMBER_NO = M.MEMBER_NO
 		INNER JOIN EXERCISE E ON C.EXERCISE_NO = E.EXERCISE_NO
@@ -51,7 +52,8 @@
 		INNER JOIN ATTACH A ON C.CLASS_NO = A.CLASS_NO
 		WHERE C.MEMBER_NO = #{member_no}
 	</select>
-	<resultMap type="com.healpio.vo.ViewScrapVO" id="getResisterList">
+	<resultMap type="com.healpio.vo.ViewScrapVO" id="getRegisterList">
+		<result property="class_no" column="C.CLASS_NO"/>
         <result property="exercise_name" column="E.EXERCISE_NAME"/>
         <result property="class_title" column="C.CLASS_TITLE"/>
         <result property="nickname" column="M.NICKNAME"/>
@@ -61,7 +63,7 @@
 	
 	<select id="getReservationList" resultType="com.healpio.vo.MyReservationVO" >
     	<![CDATA[
-	    	select R.reservation_no, c.class_title, reservation_date, reservation_time
+	    	select C.class_no, R.reservation_no, c.class_title, reservation_date|| ' ' || '(' || TO_CHAR(to_date(reservation_date), 'dy')||')' reservation_date, reservation_time
 			from class c, reservation R
 			WHERE C.class_no = R.class_no
 			AND R.MEMBER_NO = #{member_no}
@@ -71,6 +73,7 @@
 		
     </select>
     <resultMap type="com.healpio.vo.MyReservationVO" id="getReservationList">
+    	<result property="class_no" column="C.class_no"/>
     	<result property="reservation_no" column="R.reservation_no"/>	
         <result property="class_title" column="c.class_title"/>
         <result property="reservation_date" column="reservation_date"/>
@@ -79,7 +82,7 @@
     
     <select resultType="com.healpio.vo.MyReservationVO" id="resCheckList" >
     <![CDATA[
-	    SELECT R.reservation_no, c.class_title, m.nickname, m.phonenumber, reservation_date, reservation_time
+	    SELECT C.class_no, R.reservation_no, c.class_title, m.nickname, m.phonenumber, reservation_date|| ' ' || '(' || TO_CHAR(to_date(reservation_date), 'dy')||')' reservation_date, reservation_time
 		FROM CLASS C
 		INNER JOIN RESERVATION R ON C.CLASS_NO = R.CLASS_NO
 		INNER JOIN MEMBER M ON R.MEMBER_NO = M.MEMBER_NO
@@ -89,6 +92,7 @@
     </select>
     
     <resultMap type="com.healpio.vo.MyReservationVO" id="resCheckList">
+    	<result property="class_no" column="C.class_no"/>
     	<result property="reservation_no" column="R.reservation_no"/>	
         <result property="class_title" column="c.class_title"/>
         <result property="nickname" column="m.nickname"/>
@@ -104,7 +108,7 @@
     
     <select id="getPreviousCourses" resultType="com.healpio.vo.MyReservationVO">
     	<![CDATA[
-	    	select R.reservation_no, c.class_title, reservation_date, reservation_time
+	    	select C.class_no, R.reservation_no, c.class_title, reservation_date|| ' ' || '(' || TO_CHAR(to_date(reservation_date), 'dy')||')' reservation_date, reservation_time
 			from class c, reservation R
 			WHERE C.class_no = R.class_no
 			AND R.MEMBER_NO = #{member_no}
@@ -113,6 +117,7 @@
     </select>
     
     <resultMap type="com.healpio.vo.MyReservationVO" id="getPreviousCourses">
+    	<result property="class_no" column="C.class_no"/>
     	<result property="reservation_no" column="R.reservation_no"/>	
         <result property="class_title" column="c.class_title"/>
         <result property="reservation_date" column="reservation_date"/>
@@ -121,7 +126,7 @@
     
     <select id="getPreviousBookings" resultType="com.healpio.vo.MyReservationVO">
     	<![CDATA[
-	    	SELECT R.reservation_no, c.class_title, m.nickname, m.phonenumber, reservation_date, reservation_time
+	    	SELECT C.class_no, R.reservation_no, c.class_title, m.nickname, m.phonenumber, reservation_date|| ' ' || '(' || TO_CHAR(to_date(reservation_date), 'dy')||')' reservation_date, reservation_time
 			FROM CLASS C
 			INNER JOIN RESERVATION R ON C.CLASS_NO = R.CLASS_NO
 			INNER JOIN MEMBER M ON R.MEMBER_NO = M.MEMBER_NO
@@ -131,6 +136,7 @@
     </select>
     
     <resultMap type="com.healpio.vo.MyReservationVO" id="getPreviousBookings">
+    	<result property="class_no" column="C.class_no"/>
     	<result property="reservation_no" column="R.reservation_no"/>	
         <result property="class_title" column="c.class_title"/>
         <result property="nickname" column="m.nickname"/>

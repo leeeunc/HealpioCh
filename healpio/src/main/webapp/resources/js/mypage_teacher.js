@@ -27,22 +27,6 @@ function showContent(contentType) {
     });
 }
 
-btnEdit.addEventListener('click',function(){
-    document.querySelector('#btnEdit').style.display = 'none';
-    document.querySelector('#btnGoEdit').style.display = 'inline-block';
-    document.querySelector('#btnGoDelete').style.display = 'inline-block';
-    
-    let inputs = document.getElementsByClassName('info-control');
-    
-    console.log(inputs);
-
-    for(let i = 0; i < inputs.length; i++){
-        inputs[i].readOnly = false;
-        
-    }
-    
-});
-
 window.onload = function(){
 	getList();
 }
@@ -69,9 +53,9 @@ function reservationView(map){
 		
 		reservation_container.innerHTML +=                                           
 			'<div class="content-reservation">                                                 '
-		   +'    <div class="content-reservation-title"><a>'+list.class_title+'</a></div>       		'
+		   +'    <div class="content-reservation-title"><a href="/class/read?class_no='+list.class_no+'">'+list.class_title+'</a></div>       		'
 		   +'    <div class="content-reservation-info">                                        '
-		   +'        <div class="content-reservation-date">'+ list.reservation_date +' (월) '+ list.reservation_time +'</div>  		'
+		   +'        <div class="content-reservation-date">'+ list.reservation_date +' '+ list.reservation_time +'</div>  		'
 		   +'        <div class="content-reservation-member">'+list.nickname+' 회원님 ｜ '+list.phonenumber+'</div>		'
 		   +'    </div>                                                                        '
 		   +'    <div class="content-reservation-cancel">                                      '
@@ -86,9 +70,31 @@ function reservationView(map){
 function deleteReservation(index){
 	let reservation = document.querySelector('#deleteBtn'+index);
 	let reservation_no = reservation.dataset.reservation_no;
-	fetch('/mypage/deleteReservation/' + reservation_no)
-	.then(response => response.json())
-	.then(res => getResList());
+	
+	document.querySelector('.myModal-title').innerHTML = '예약 취소';
+	document.querySelector('.myModal-body-text').innerHTML = '정말 이 회원님의 예약을 취소하시겠습니까?';
+	mypageModal.show();
+	
+	let primaryBtn = document.querySelector('.myModalBtn-primary');
+	
+	
+	primaryBtn.addEventListener('click',function(){
+		document.querySelector('.myModal-title').innerHTML = '예약 취소';
+		document.querySelector('.myModal-body-text').innerHTML = '예약이 취소되었습니다.';
+		
+		fetch('/mypage/deleteReservation/' + reservation_no)
+		.then(response => response.json())
+		.then(res => getList());
+		
+		mypageModal.show();
+		
+		primaryBtn.addEventListener('click',function(){
+			mypageModal.hide();
+		})
+		
+	})
+	
+	getList();
 }
 
 function preBooksView(map){
@@ -98,17 +104,17 @@ function preBooksView(map){
 	
 	list.forEach((list, index) => {
 		preContainer.innerHTML +=
-		
-			 '<div class="content-prev">                                                    '
-		    +'    <div class="content-prev-title"><a>'+list.class_title+'</a></div>          '
-		    +'    <div class="content-prev-info">                                           '
-		    +'        <div class="content-prev-date">'+ list.reservation_date +' (월) '+ list.reservation_time +'</div>     '
-		    +'        <div class="content-prev-member">'+list.nickname+' 회원님 ｜ '+list.phonenumber+'</div> '
-		    +'    </div>                                                                    '
-		    +'    <div class="content-prev-review">                                         '
-		    +'        <button type="button" class="btn btn-primary">리뷰 확인</button>      '
-		    +'    </div>                                                                    '
-		    +'</div>	                                                                       '
+			`<div class="content-prev">
+			    <div class="content-prev-title"><a href="/class/read?class_no=${list.class_no}">${list.class_title}</a></div>
+			    <div class="content-prev-info">
+			        <div class="content-prev-date">${list.reservation_date} ${list.reservation_time}</div>
+			        <div class="content-prev-member">${list.nickname} 회원님 ｜ ${list.phonenumber}</div>
+			    </div>
+			    <div class="content-prev-review">
+			        <button type="button" class="btn btn-primary" onclick="location.href='/class/read?class_no=${list.class_no}'">리뷰 확인</button>
+			    </div>
+			</div>
+			`;
 		
 	})
 }
@@ -126,7 +132,7 @@ pwCheckBtn.addEventListener('click',function(){
 	let member_no = document.querySelector('#member_no').value;
 	let member_pw = document.querySelector('#password-input-box').value;
 	
-	passwordModal.hide();
+	
 	
 	fetch('/mypage/passwordCheck'
 			, {method : 'post'
@@ -139,7 +145,8 @@ pwCheckBtn.addEventListener('click',function(){
 		// 5. 응답처리
 		.then(response => response.json())
 		.then(map => passwordCheck(map));
-			
+	
+		passwordModal.hide();		
 		
 })
 
@@ -164,8 +171,20 @@ function passwordCheck(map){
 	    }
 	  }else{
 		mypageModal.show();
+		document.querySelector('.myModalBtn-primary').style.display='none';
 		document.querySelector('.myModal-title').innerHTML = '비밀번호 인증 실패';
 		document.querySelector('.myModal-body-text').innerHTML = '비밀번호가 일치하지 않습니다.';
 	
     }
 }
+
+document.getElementById('btnGoEdit').addEventListener('click', function(e) {
+    var pw1 = document.getElementById('member_pw1').value;
+    var pw2 = document.getElementById('member_pw2').value;
+    
+    if (pw1 !== pw2) {
+        alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+        e.preventDefault(); // 폼 제출을 막음
+    }
+    
+});
