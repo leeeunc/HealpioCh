@@ -13,17 +13,27 @@
 
 	<div class="container">
 		<div>
-		<h1>예약이 완료 되었습니다</h1>
+			<h1>예약이 완료 되었습니다</h1>
 		</div>
+    <div>
+        <table id="calendar"></table>
         <div>
-            <table id="calendar"></table>
-            <h2>강좌명 : </h2>
-            <h2>강사명 : </h2>
+            <p>Date: <span id="reservationDate">${date}</span></p>
+            <p>Time: <span id="reservationTime">${time}</span></p>
+            <p>Class Number: <span id="classNo">${class_no}</span></p>
+            <p>Max Count: <span id="maxCount">${maxcount}</span></p>
         </div>
+        	<input type="text" id="selectedClass" name="class_no" value="${class_no}">
+			<input type="text" id="selectedMaxcount" name="maxcount" value="${maxcount}">
+			<input type="text" id="selectedMember" name="member_no" value="${member_no}">
+        	
+	        <h2>강좌명 : ${class_title}</h2>
+	        <h2>강사명 : ${member_name}</h2>
+   	 	</div>
         <div>
         <div id="time-selection">
-        	<h2>날짜 : <%= request.getParameter("date") %></h2>
-            <h2>시간 : <%= request.getParameter("time") %></h2>
+        	<h2>날짜 : ${date}</h2>
+            <h2>시간 : ${time}</h2>
         </div>
         </div>
     </div>
