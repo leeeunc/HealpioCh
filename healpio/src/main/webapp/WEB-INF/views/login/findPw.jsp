@@ -38,24 +38,20 @@
                             <input type="text" class="userName" id="userName" 
                             placeholder="가입시 등록한 이름을 입력하세요." value="양성준">
                         </div>
+                        <div class="text-center small mt-2" id="checkMsg" style="color: red"></div>
                         
                         <br>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success btn-block" id="checkEmail">보내기 </button>&nbsp;
-                    <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"
-                    onclick = "location.href='/login/login'"><span class="glyphicon glyphicon-remove"></span> 취소
-                    </button>
-                    </div>
+                <div class="findPw_submit">
+                    <button type="button" class="checkEmail" id="checkEmail">보내기 </button>&nbsp;
+                    <button type="button" class="returnlogin" id="returnlogin"
+                    onclick = "location.href='/login/login'">취소</button>
+                   </div>
 				</form>
         </div>
            
       
 <script>
-    $('.modal').on('hidden.bs.modal', function (e) {
-        console.log('modal close');
-        $(this).find('form')[0].reset();
-        $("#checkMsg").text(""); // 메시지 초기화
-    });
+$(document).ready(function () {
 
     $("#checkEmail").click(function () {
         let userId = $("#userId").val();
@@ -83,7 +79,7 @@
             }
         });
     });
-
+});
 </script>
 
 <%@ include file="../common/footer.jsp" %>
