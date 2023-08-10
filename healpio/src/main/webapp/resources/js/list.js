@@ -22,7 +22,7 @@ function teacherynDisplay() {
 
         if (teacheryn.value.trim() === 'Y') {
             regBtn.style.display = 'block';
-        } else if (teacheryn.value.trim() === 'N') {
+        } else if (teacheryn.value.trim() != 'Y') {
             regBtn.style.display = 'none';
         }
 
