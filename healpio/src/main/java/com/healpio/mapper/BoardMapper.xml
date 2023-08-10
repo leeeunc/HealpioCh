@@ -93,7 +93,7 @@
 		</choose>
 		
 		<choose>
-			<when test="exercise_name != null and exercise_name != ''">
+			<when test="exercise_name != null and exercise_name != 'all'">
 				and e.exercise_name like '%'||#{exercise_name}||'%'
 			</when>
 		</choose>
@@ -107,7 +107,7 @@
    			<when test="city != null and city!= ''">
 		      	and city like '%'||#{city}||'%'
 		    </when>
-			<when test="province != null and province != ''">
+			<when test="province != null and province != '시도 선택'">
 		      	and province like '%'||#{province}||'%'
 		    </when>
 		</choose>

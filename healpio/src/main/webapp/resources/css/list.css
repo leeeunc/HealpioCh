@@ -103,7 +103,7 @@ a {
 
 .form-intro-img {
     width: 100%; /* 이미지 너비를 100%로 설정하여 부모 요소에 맞게 조절 */
-    max-height: 400px; /* 최대 높이를 설정하여 비율 유지 */
+    max-height: 300px; /* 최대 높이를 설정하여 비율 유지 */
     object-fit: cover; /* 이미지 비율 유지하면서 가득 채우기 */
     border-radius: 5px;
     margin-bottom: 10px;
@@ -161,7 +161,7 @@ a {
     border-color: #777; /* 변경: 진한 회색 */
     color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s; /* 효과를 부드럽게 전환하기 위한 설정 */
 

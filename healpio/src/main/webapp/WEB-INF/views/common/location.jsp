@@ -130,7 +130,7 @@
 	function addSigugunOptions() {
 	    jQuery('#sigugun').show();
 	    jQuery('#sigugun').empty();
-	    jQuery('#sigugun').append(fn_option('', '선택'));
+	    jQuery('#sigugun').append(fn_option('', '시군구 선택'));
 
 	    
 	    jQuery.each(hangjungdong.sigugun, function (idx, code) {

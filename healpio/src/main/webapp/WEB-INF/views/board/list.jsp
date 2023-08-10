@@ -31,7 +31,7 @@
 	            <input type="hidden" value="${pageDto.total}">
 				<!-- <select> 요소에 onchange 이벤트를 통해 filterByExercise 함수 호출 -->
 				<select name='sports' onchange="filterByExercise()">
-				  <option value='x'>운동종류</option>
+				  <option value='all'>운동종류</option>
 				  <c:forEach items="${exerciseList}" var="ex">
 				  <option value="${ex.exercise_name}" ${pageDto.cri.exercise_name ==  ex.exercise_name ? 'selected' : '' }>${ex.exercise_name}</option>
 				  </c:forEach>
@@ -42,8 +42,8 @@
 				<jsp:include page="/WEB-INF/views/common/searchForm.jsp" />
 	 			
 	            <select name='array' >
-	                <option value='x'>인기순</option>
 	                <option value='ko'>최신순</option>
+	                <option value='x'>인기순</option>
 	            </select>
 	        </div>
 	
@@ -56,10 +56,11 @@
 					"<c:url value="/display">
 					<c:param name="fileName" value="${li.boardFile }"/>
 					</c:url>" 
-				alt="${li.class_title}" class="form-intro-img"/> 
+				alt="${li.class_title}" class="form-intro-img"
+					width="300" height="300"/> 
 				     <a class="class_title-text"> ${li.class_title} </a>
 				</a >	  				
-					  --------------------------------------------------------<br>
+					  <hr>
 					 ${li.nickname } | 
 					 <a class="exercise-text">${li.exercise_name }</a> |
 					 <a class="province-text">${li.province }</a><a class="city-text">${li.city }</a><a class="district-text">${li.district }</a>
