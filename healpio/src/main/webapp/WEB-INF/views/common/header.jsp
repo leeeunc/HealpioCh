@@ -56,7 +56,7 @@
     <style>
     
     header{
-    	/* background-color: #E4EAF6; */
+    	background-color: #E4EAF6;
     }
     
     .form-control-dark {
@@ -92,6 +92,7 @@
   width: 35%;
   
 }
+
 .message{
   margin-left: 120px;
 }
@@ -173,8 +174,8 @@
         </a>
         <div class='nav-text'>
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 mb-md-0">
-            <li><a href="#" class="nav-link px-2 text-black">헬스 파이오니어스</a></li>
-            <li><a href="../board/list" class="nav-link px-2 text-black">운동 강사 찾기</a></li>
+            <li><a href="../intro" class="nav-link px-2 text-black fw-bold">헬스 파이오니어스</a></li>
+            <li><a href="../board/list" class="nav-link px-2 text-black fw-bold">내게 맞는 운동 찾기</a></li>
           </ul>
         </div>
         
@@ -229,7 +230,7 @@
 </main>
 
 
-    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../resources/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     
 </body>
