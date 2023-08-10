@@ -7,7 +7,7 @@
 }
 #container{
     width: 100%;
-	height: 963px; 
+	height: 920px; 
     margin: auto;
 }
 #form{
@@ -15,7 +15,7 @@
 	width: 1200px;
 	heigth: 840px;
 	margin: auto;
-	top: 60px;
+	top: 40px;
 }
 #form-img{
 	position: relative;
@@ -49,15 +49,15 @@
 	float: left;
 	padding: 20px;
 	padding-top:5px;
-	width: 68%;
+	width: 67%;
 }
 #form-main-content2{
 	position: relative;
 	float: left;
 	padding-left: 35px;
 	padding-top: 5px;
-	width: 32%;
+	width: 33%;
 }
 .margin{
-	margin-bottom: 3px;
+	margin-bottom: 5px;
 }

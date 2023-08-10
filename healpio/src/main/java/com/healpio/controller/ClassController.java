@@ -62,13 +62,18 @@ public class ClassController {
 	}
 	
 	@GetMapping("read")
-	public void read(String class_no, HttpSession session, Model model) {
+	public String read(String class_no, HttpSession session, Model model) {
 		MemberVO memberVo = (MemberVO)session.getAttribute("memberVo");
 		if(memberVo!=null) {
-			classService.getOne(class_no, memberVo.getMember_no(), model);			
+			classService.getOne(class_no, memberVo.getMember_no(), model);
 		} else {
 			classService.getOne(class_no, "", model);
 		}
+		// '존재하지 않는 글입니다.' 메시지가 모델에 저장되어 있으면
+		if(model.containsAttribute("message")){
+			return "/class/message";
+		}
+		return "/class/read";
 	}
 	
 	@GetMapping("edit")

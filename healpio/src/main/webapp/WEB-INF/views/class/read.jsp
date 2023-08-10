@@ -35,7 +35,10 @@ function fetchGet(url, callback){
 
 function scrap(class_no, member_no){
 	if(!member_no){
-		alert("로그인 후 이용 가능합니다.");
+		const myModal = new bootstrap.Modal('#myModal', {
+			keyboard: false
+		})
+		myModal.show();
 	} else{
 		fetchGet('/class/scrap?class_no=' + class_no + '&member_no=' + member_no, getFullheart);		
 	}
@@ -169,7 +172,7 @@ function getReviewList(map){
 			review += reviewVO.nickname;
 			review += `</b> <span style="color: gold"> ★</span>` + reviewVO.review_star;
 			review += `<br>` + reviewVO.review_content + `</td>`;
-			if(member_no.value==reviewVO.member_no){
+			if(document.querySelector('#member_no').value==reviewVO.member_no){
 				review += `<td>`;
 				review += `<button type="button" class="btn btn-secondary btn-sm" style="float:right; margin:1px;" onclick="go('/review/delete?review_no=` + reviewVO.review_no + `')">삭제</button>`;
 				review += `<button type="button" class="btn btn-danger btn-sm" style="float:right; margin:1px;" onclick="go('/review/edit?review_no=` + reviewVO.review_no + `')">수정</button>`;
@@ -225,6 +228,32 @@ function showReservation(){
 	reviewDiv.style.display = 'none';
 	reservationDiv.style.display = '';
 }
+
+window.addEventListener('load', function(){
+	
+	const prevBtn = document.querySelector('#prev');
+	const nextBtn = document.querySelector('#next');
+	const carousel = document.querySelector('.carousel');
+
+	let index = 0;
+
+	prevBtn.addEventListener('click', () => {
+		if(index==0){
+			return;
+		}
+		index--;	   
+		carousel.style.left = -500 * index + 'px';
+	});
+
+	nextBtn.addEventListener('click', () => {
+		if(index==${attachList.size()-1}) {
+			return;
+		}
+		index++;
+		carousel.style.left = -500 * index + 'px';
+	});
+})
+
 </script>
 </head>
 <body>
@@ -233,6 +262,7 @@ function showReservation(){
 <div id="form">
 <div id="form-intro">
 	<div id="form-intro-img">
+	<div class="carousel">
 		<c:forEach items="${attachList}" var="attachVO">
 			<img src=
 				'<c:url value="/display">
@@ -241,6 +271,12 @@ function showReservation(){
 			alt='${classVO.class_title}' class="form-intro-img"/>
 		</c:forEach>
 	</div>
+	</div>
+	<c:if test="${attachList.size()!=1}">
+	<button id="prev" type="button">&lang;</button>
+    <button id="next" type="button">&rang;</button>
+    </c:if>
+    
 	<div id="form-intro-content">
 		<h2><b>${classVO.class_title}</b></h2>
 		${classVO.nickname} | ${classVO.exercise_name}<br><br>
@@ -248,21 +284,43 @@ function showReservation(){
 		<hr>
 		<div id="scrapDiv" style="display:inline;">
 			이 강의 찜하기
+			<!-- 찜 안한 상태이면 빈 하트 보여주기 -->
 			<c:if test="${scrapYN==0}">
 			<i class="fa-regular fa-heart" style="color: #ff6666" onclick="scrap('${classVO.class_no}', '${memberVo.member_no}')"></i>
 			</c:if>
+			<!-- 찜 상태이면  꽉 찬 하트 보여주기 -->
 			<c:if test="${scrapYN>0}">
 			<i class="fa-solid fa-heart" style="color: #ff6666" onclick="cancelScrap('${classVO.class_no}', '${memberVo.member_no}')"></i>
-			</c:if>			
+			</c:if>
+			
+			<!-- 로그인 안 한 상태에서 찜 누르면 모달창 열기 -->
+			<div id="myModal" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h1 class="modal-title fs-5" id="exampleModalLabel">알림</h1>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+			      	로그인 후 이용 가능합니다.
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+			        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+			      </div>
+			    </div>
+			  </div>
+			</div>			
 		</div>
-	　　문의하기
-	<i class="fa-regular fa-envelope" style="color: #588ce0" onclick="window.open('/message/send?member_no=${classVO.member_no}&class_title=${classVO.class_title }', ' ','width=500, height=570'); return false"></i><br><br><br>
-	<c:if test="${memberVo.member_no eq classVO.member_no}">
-	<div id="onlyWriter">
-		<button type="button" class="btn btn-danger" onclick="go('/class/edit?class_no=${classVO.class_no}&member_no=${classVO.member_no}')">수정</button>
-		<button type="button" class="btn btn-secondary" onclick="go('/class/delete?class_no=${classVO.class_no}&member_no=${classVO.member_no}')">삭제</button>
-	</div>
-	</c:if>
+		
+		　　문의하기
+		<i class="fa-regular fa-envelope" style="color: #588ce0" onclick="window.open('/message/send?member_no=${classVO.member_no}&class_title=${classVO.class_title }', ' ','width=500, height=570'); return false"></i><br><br>
+		<c:if test="${memberVo.member_no eq classVO.member_no}">
+		<div id="onlyWriter">
+			<button type="button" class="btn btn-danger" onclick="go('/class/edit?class_no=${classVO.class_no}&member_no=${classVO.member_no}')">수정</button>
+			<button type="button" class="btn btn-secondary" onclick="go('/class/delete?class_no=${classVO.class_no}&member_no=${classVO.member_no}')">삭제</button>
+		</div>
+		</c:if>
 	</div>
 </div>
 
@@ -294,10 +352,9 @@ function showReservation(){
 <div id="locationDiv" style="display:none;">
 <div id="mapContainer">
 	<h5 style="margin: 0px; display:inline;"><b>위치　</b></h5><i class="fa-solid fa-location-dot"></i>${classVO.province} ${classVO.city} ${classVO.district}<br><br>
-	<div id="map" style="width:1060px;height:600px;"></div>
+	<div id="map" style="width:1040px;height:516px;"></div>
 <script>
-locationBtn.addEventListener('click', function(){
-	
+locationBtn.addEventListener('click', function(){	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -311,11 +368,9 @@ locationBtn.addEventListener('click', function(){
 	var geocoder = new kakao.maps.services.Geocoder();
 	
 	// 주소로 좌표를 검색합니다
-	geocoder.addressSearch(province.value + city.value + district.value, function(result, status) {
-	
+	geocoder.addressSearch(province.value + city.value + district.value, function(result, status) {	
 	    // 정상적으로 검색이 완료됐으면 
 	     if (status === kakao.maps.services.Status.OK) {
-	    	 console.log(province.value + city.value + district.value);
 	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 	
 	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
