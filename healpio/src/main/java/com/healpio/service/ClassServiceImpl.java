@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.healpio.mapper.AttachMapper;
 import com.healpio.mapper.ClassMapper;
+import com.healpio.mapper.ReservationMapper;
 import com.healpio.mapper.ReviewMapper;
 import com.healpio.vo.ClassVO;
 import com.healpio.vo.Criteria_review;
@@ -31,6 +32,9 @@ public class ClassServiceImpl implements ClassService {
 	
 	@Autowired
 	ReviewMapper reviewMapper;
+	
+	@Autowired
+	ReservationMapper reservationMapper;
 
 	@Override
 	public void getExerciseList(Model model) {
@@ -59,12 +63,17 @@ public class ClassServiceImpl implements ClassService {
 
 	@Override
 	public void getOne(String class_no, String member_no, Model model) {
-		model.addAttribute("classVO", classMapper.getOne(class_no));
-		model.addAttribute("attachList", attachMapper.getList(class_no));
-		if(!"".equals(member_no)) {
-			model.addAttribute("scrapYN", classMapper.scrapYN(class_no, member_no));			
+		ClassVO classVO = classMapper.getOne(class_no);
+		if(classVO!=null) {
+			model.addAttribute("classVO", classVO);
+			model.addAttribute("attachList", attachMapper.getList(class_no));
+			if(!"".equals(member_no)) {
+				model.addAttribute("scrapYN", classMapper.scrapYN(class_no, member_no));			
+			} else {
+				model.addAttribute("scrapYN", 0);
+			}
 		} else {
-			model.addAttribute("scrapYN", 0);
+			model.addAttribute("message", "존재하지 않는 글입니다.");
 		}
 	}
 
