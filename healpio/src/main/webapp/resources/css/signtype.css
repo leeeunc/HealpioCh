@@ -38,7 +38,7 @@
         #t_login{
             width: 60%;
             height: 50%;
-            background-image: linear-gradient(to left, red, yellow);
+            background-color:rgb(23, 185, 23);
             font-size: 50px;
             color : white;
             border-radius: 10px;
@@ -48,7 +48,7 @@
         #s_login{
             width: 60%;
             height: 50%;
-            background-image: linear-gradient(to right, rgb(153, 0, 255), rgb(255, 0, 170));
+            background-color:rgb(23, 185, 23);
             font-size: 50px;
             color : white;           
             border-radius: 10px;
