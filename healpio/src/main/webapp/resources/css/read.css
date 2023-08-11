@@ -94,7 +94,7 @@
 	margin-left: 60px;
 	margin-right: 60px;
 	margin-top: 30px;
-	border-top: 1px solid #bbbbbb;
+	border-top: 1px solid #bbb;
 	border-bottom: 1px solid #bbb;
 	position: relative;
 	float: top;
@@ -107,6 +107,7 @@
 	width: 150px;
 	height: 50px;
 	font-weight: 900;
+	border-bottom: 5px solid white;
 }
 .form-menu-button-clicked{
 	color: black; 

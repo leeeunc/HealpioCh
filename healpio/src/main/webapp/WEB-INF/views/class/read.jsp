@@ -139,8 +139,7 @@ function sortReview(option, page, class_no){
 
 function getReviewList(map){
 	reviewDiv.innerHTML = ``;
-	console.log(map.avgScore);
-	reviewDiv.innerHTML += `<h5 style="display:inline"><b>리뷰 <span style="color: gold">★</span>` +  map.avgScore + `</b></h5> (` + map.reviewCount + `명 참여)`;
+	reviewDiv.innerHTML += `<h5 style="display:inline"><b>리뷰 <span style="color: gold">★</span>` +  map.avgScore.toFixed(1) + `</b></h5> (` + map.reviewCount + `명 참여)`;
 	
 	let option1 = "";
 	let option2 = "";
