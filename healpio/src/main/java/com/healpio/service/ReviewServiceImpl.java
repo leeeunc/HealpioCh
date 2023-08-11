@@ -34,7 +34,6 @@ public class ReviewServiceImpl implements ReviewService {
 		map.put("reviewCount", reviewCount);
 		map.put("pageDto", pageDto);
 		map.put("avgScore", reviewMapper.getAvgScore(class_no));
-		System.out.println("============ " + map.get("avgScore"));
 		return map;		
 	}
 

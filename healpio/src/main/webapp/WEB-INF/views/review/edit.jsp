@@ -57,6 +57,7 @@ $(function(){
 		  <label for="exampleFormControlTextarea1" class="form-label">수강 후기를 구체적으로 작성해 주세요. (100자 이내)</label>
 		  <textarea class="form-control" name="review_content" id="review_content" rows="4" maxlength="100" style="resize:none;">${reviewVO.review_content}</textarea>
 		  <input type="hidden" name="review_no" id="review_no" value="${reviewVO.review_no}">
+		  <input type="hidden" name="class_no" id="class_no" value="${reviewVO.class_no}">
 		</div>
       </div>
       <div class="modal-footer">
