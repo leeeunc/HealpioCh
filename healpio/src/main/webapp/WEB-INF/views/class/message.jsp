@@ -33,7 +33,7 @@ window.addEventListener('load', function(){
 		// 모달창 닫기 후 뒤로가기
 		const myModalEl = document.getElementById('myModal')
 		myModalEl.addEventListener('hidden.bs.modal', event=>{
-			if(message.indexOf("오류")>-1 || message.indexOf("존재하지 않는")>-1){
+			if(message.indexOf("오류")>-1 || message.indexOf("존재")>-1){
 				history.go(-1);					
 			} else if(message.indexOf("게시글이 삭제되었습니다.")>-1){
 				location.href='../board/list';
