@@ -73,6 +73,14 @@
 
 	// 달력 생성 함수
 	function renderCalendar(month, year) {
+	    const today = new Date(); // 현재 날짜 가져오기
+	    
+	    // 오늘 날짜의 시간을 무시하고 날짜만 가져오기
+	    const todayDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+	    // 선택된 월의 마지막 날짜로 날짜만 가져오기
+	    const lastDayOfMonth = new Date(year, month + 1, 0);
+
 //		console.log("Rendering calendar for:", month, year); // 추가
 	    let daysInMonth = new Date(year, month + 1, 0).getDate(); // 선택된 월의 일수
 	    let firstDayOfMonth = new Date(year, month, 1).getDay(); // 선택된 월의 첫번째 날짜
@@ -120,9 +128,26 @@
 	        let date = new Date(year, month, parseInt(e.innerText)); // 해당 날짜 구하기
 
 	        let dayOfWeek = date.getDay(); // 해당 날짜의 요일 구하기
-
+	        
+	        // 오늘 날짜 이전이거나 activeDays 배열에 해당 요일이 없다면 리턴
+	        if ((year === today.getFullYear() && month === today.getMonth() && date.getDate() < todayDate.getDate()) ||
+	                (year < today.getFullYear() || (year === today.getFullYear() && month < today.getMonth()))) {
+	                e.classList.add('disabled'); // 이전 날짜와 오늘 이후의 날짜는 비활성화 스타일 추가
+	                return;
+	            }
+	        
+//	        if (year === today.getFullYear() && month === today.getMonth()) {
+//	            if (date.getDate() < todayDate.getDate()) {
+//	                e.classList.add('disabled'); // 오늘 이후의 날짜는 비활성화 스타일 추가
+//	                return;
+//	            }
+//	        }
+	        
+	        
 	        // activeDays 배열에 해당 요일이 없다면 리턴
 	        if (!activeDays.includes(dayOfWeek)) return;
+	        
+	        e.classList.add('selectable'); // 선택 가능한 날짜에 클래스 추가
 
 	        e.addEventListener('click', () => {
 	            if (selectedDay === e) {
@@ -204,7 +229,7 @@
 
 		    for (let i = 8; i <= 22; i++) {
 		      let timeButton = document.createElement('button');
-		      timeButton.className = 'time-button';
+		      timeButton.className = 'timebutton';
 
 		   // 기존에 시간과 인원을 함께 설정하던 부분을 분리합니다.
 		      let timeText = i < 10 ? `0${i}:00` : `${i}:00`;
@@ -241,8 +266,19 @@
 		        }
 		      });
 
-		      timeButtons.push(timeButton); // 배열에 버튼 추가
+		      
 
+		        // 버튼이 비활성화된 경우 색상 변경
+		        if (timeButton.disabled) {
+		            timeButton.classList.add('disabled'); // 클래스 추가
+		        } else {
+		            timeButton.classList.remove('disabled'); // 클래스 제거
+		        }
+		      
+		      
+		      
+		      timeButtons.push(timeButton); // 배열에 버튼 추가
+		      
 		      // 배열에 4개의 버튼이 담겼으면 이를 새로운 행(div)에 배치
 		      if (timeButtons.length === 4) {
 		        let row = document.createElement('div');
@@ -333,4 +369,8 @@
 	        modal.style.display = "none";
 	    }
     }
+    
+
+
+
     
