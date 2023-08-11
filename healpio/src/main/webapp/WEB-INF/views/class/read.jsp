@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Health Pioneers</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <link rel="stylesheet" href="/resources/css/read.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -42,11 +42,11 @@ function cancelScrap(class_no, member_no){
 }
 
 function getFullheart(map){
-	scrapDiv.innerHTML = `이 강의 찜하기 <i class="fa-solid fa-heart" style="color: #ff6666" onclick="cancelScrap('${classVO.class_no}', '${memberVo.member_no}')"></i>`;
+	scrapDiv.innerHTML = `<hr>이 강의 찜하기 <i class="fa-solid fa-heart" style="color: #ff6666; cursor: pointer;" onclick="cancelScrap('${classVO.class_no}', '${memberVo.member_no}')"></i>`;
 }
 
 function getEmptyheart(map){
-	scrapDiv.innerHTML = `이 강의 찜하기 <i class="fa-regular fa-heart" style="color: #ff6666" onclick="scrap('${classVO.class_no}', '${memberVo.member_no}')"></i>`;
+	scrapDiv.innerHTML = `<hr>이 강의 찜하기 <i class="fa-regular fa-heart" style="color: #ff6666; cursor: pointer;" onclick="scrap('${classVO.class_no}', '${memberVo.member_no}')"></i>`;
 }
 
 $(function(){	
@@ -139,6 +139,7 @@ function sortReview(option, page, class_no){
 
 function getReviewList(map){
 	reviewDiv.innerHTML = ``;
+	console.log(map.avgScore);
 	reviewDiv.innerHTML += `<h5 style="display:inline"><b>리뷰 <span style="color: gold">★</span>` +  map.avgScore + `</b></h5> (` + map.reviewCount + `명 참여)`;
 	
 	let option1 = "";
@@ -289,16 +290,16 @@ window.addEventListener('load', function(){
 			이 강의 찜하기
 			<!-- 찜 안한 상태이면 빈 하트 보여주기 -->
 			<c:if test="${scrapYN==0}">
-			<i class="fa-regular fa-heart" style="color: #ff6666" onclick="scrap('${classVO.class_no}', '${memberVo.member_no}')"></i>
+			<i class="fa-regular fa-heart" style="color: #ff6666; cursor: pointer;" onclick="scrap('${classVO.class_no}', '${memberVo.member_no}')"></i>
 			</c:if>
 			<!-- 찜 상태이면  꽉 찬 하트 보여주기 -->
 			<c:if test="${scrapYN>0}">
-			<i class="fa-solid fa-heart" style="color: #ff6666" onclick="cancelScrap('${classVO.class_no}', '${memberVo.member_no}')"></i>
+			<i class="fa-solid fa-heart" style="color: #ff6666; cursor: pointer;" onclick="cancelScrap('${classVO.class_no}', '${memberVo.member_no}')"></i>
 			</c:if>	
 		</div>
 		
 		　　문의하기
-		<i class="fa-regular fa-envelope" style="color: #588ce0" onclick="window.open('/message/send?member_no=${classVO.member_no}&class_title=${classVO.class_title }', ' ','width=500, height=570'); return false"></i>
+		<i class="fa-regular fa-envelope" style="color: #588ce0; cursor: pointer;" onclick="window.open('/message/send?member_no=${classVO.member_no}&class_title=${classVO.class_title }', ' ','width=500, height=570'); return false"></i>
 		</c:if>
 		
 		<!-- 게시글 작성자에게만 수정,삭제 버튼 출력 -->
