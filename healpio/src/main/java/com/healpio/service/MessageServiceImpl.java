@@ -75,6 +75,8 @@ public class MessageServiceImpl implements MessageService {
 		MessageVO message = messageMapper.getRecvOne(message_no);
 		
 		model.addAttribute("msg", message);
+
+		messageMapper.readCheck(message_no);
 		
 		int newUnreadCnt = messageMapper.getUnreadCnt(member);
 		model.addAttribute("newUnreadCnt", newUnreadCnt);
