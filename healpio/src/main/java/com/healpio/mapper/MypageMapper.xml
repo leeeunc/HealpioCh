@@ -24,44 +24,67 @@
 
 	
 	<select id="getScrapList" resultType="com.healpio.vo.ViewScrapVO">
-		SELECT DISTINCT S.scrap_no, C.class_no, M.NICKNAME , C.CLASS_TITLE, E.EXERCISE_NAME,  L.PROVINCE|| ' ' ||L.CITY || ' ' ||L.DISTRICT address, A.uploadpath|| A.uuid||'_'||A.filename class_attach
-		from SCRAP S
-		INNER JOIN CLASS C ON S.CLASS_NO = C.CLASS_NO
-		INNER JOIN MEMBER M ON C.MEMBER_NO = M.MEMBER_NO
-		INNER JOIN EXERCISE E ON C.EXERCISE_NO = E.EXERCISE_NO
-		INNER JOIN LOCATION L ON C.CLASS_NO = L.CLASS_NO
-		INNER JOIN ATTACH A ON C.CLASS_NO = A.CLASS_NO
-		
-		WHERE S.MEMBER_NO = #{member_no}
-		order by S.scrap_no asc
+		SELECT x.scrap_no, x.class_no, x.NICKNAME, x.CLASS_TITLE, x.EXERCISE_NAME, x.address, x.class_attach
+		FROM (
+		    SELECT
+		        S.scrap_no,
+		        C.class_no,
+		        M.NICKNAME,
+		        C.CLASS_TITLE,
+		        E.EXERCISE_NAME,
+		        L.PROVINCE || ' ' || L.CITY || ' ' || L.DISTRICT AS address,
+		        A.uploadpath || A.uuid || '_' || A.filename AS class_attach,
+		        ROW_NUMBER() OVER(PARTITION BY C.CLASS_NO ORDER BY S.scrap_no ASC) AS rn
+		    FROM SCRAP S
+		    INNER JOIN CLASS C ON S.CLASS_NO = C.CLASS_NO
+		    INNER JOIN MEMBER M ON C.MEMBER_NO = M.MEMBER_NO
+		    INNER JOIN EXERCISE E ON C.EXERCISE_NO = E.EXERCISE_NO
+		    INNER JOIN LOCATION L ON C.CLASS_NO = L.CLASS_NO
+		    INNER JOIN ATTACH A ON C.CLASS_NO = A.CLASS_NO
+		    WHERE S.MEMBER_NO = #{member_no}
+		) x
+		WHERE x.rn = 1
+		ORDER BY x.scrap_no ASC
+
 	</select>
 	<resultMap type="com.healpio.vo.ViewScrapVO" id="getScrapList">
-		<result property="class_no" column="C.class_no"/>
-        <result property="exercise_name" column="E.EXERCISE_NAME"/>
-        <result property="class_title" column="C.CLASS_TITLE"/>
-        <result property="nickname" column="M.NICKNAME"/>
-        <result property="address" column="address"/>
-        <result property="class_attach" column="class_attach"/>
+		<result property="class_no" column="x.class_no"/>
+        <result property="exercise_name" column="x.EXERCISE_NAME"/>
+        <result property="class_title" column="x.CLASS_TITLE"/>
+        <result property="nickname" column="x.NICKNAME"/>
+        <result property="address" column="x.address"/>
+        <result property="class_attach" column="x.class_attach"/>
     </resultMap>
     
     <select id="getRegisterList" resultType="com.healpio.vo.ViewScrapVO">
-		select DISTINCT C.CLASS_NO,M.NICKNAME, C.CLASS_TITLE, E.EXERCISE_NAME, L.PROVINCE|| ' ' ||L.CITY || ' ' ||L.DISTRICT address,  A.uploadpath|| A.uuid||'_'||A.filename class_attach
-		from CLASS C
-		INNER JOIN MEMBER M ON C.MEMBER_NO = M.MEMBER_NO
-		INNER JOIN EXERCISE E ON C.EXERCISE_NO = E.EXERCISE_NO
-		INNER JOIN LOCATION L ON C.CLASS_NO = L.CLASS_NO
-		INNER JOIN ATTACH A ON C.CLASS_NO = A.CLASS_NO
-		WHERE C.MEMBER_NO = #{member_no}
-		order by C.CLASS_NO ASC
+		SELECT DISTINCT x.CLASS_NO, x.NICKNAME, x.CLASS_TITLE, x.EXERCISE_NAME, x.address, x.class_attach
+		FROM (
+		    SELECT
+		        C.CLASS_NO,
+		        M.NICKNAME,
+		        C.CLASS_TITLE,
+		        E.EXERCISE_NAME,
+		        L.PROVINCE || ' ' || L.CITY || ' ' || L.DISTRICT AS address,
+		        A.uploadpath || A.uuid || '_' || A.filename AS class_attach,
+		        ROW_NUMBER() OVER(PARTITION BY C.CLASS_NO ORDER BY C.CLASS_NO ASC) AS rn
+		    FROM CLASS C
+		    INNER JOIN MEMBER M ON C.MEMBER_NO = M.MEMBER_NO
+		    INNER JOIN EXERCISE E ON C.EXERCISE_NO = E.EXERCISE_NO
+		    INNER JOIN LOCATION L ON C.CLASS_NO = L.CLASS_NO
+		    INNER JOIN ATTACH A ON C.CLASS_NO = A.CLASS_NO
+		    WHERE C.MEMBER_NO = #{member_no}
+		) x
+		WHERE x.rn = 1
+		ORDER BY x.CLASS_NO ASC
 		
 	</select>
 	<resultMap type="com.healpio.vo.ViewScrapVO" id="getRegisterList">
-		<result property="class_no" column="C.CLASS_NO"/>
-        <result property="exercise_name" column="E.EXERCISE_NAME"/>
-        <result property="class_title" column="C.CLASS_TITLE"/>
-        <result property="nickname" column="M.NICKNAME"/>
-        <result property="address" column="address"/>
-        <result property="class_attach" column="class_attach"/>
+		<result property="class_no" column="x.CLASS_NO"/>
+        <result property="exercise_name" column="x.EXERCISE_NAME"/>
+        <result property="class_title" column="x.CLASS_TITLE"/>
+        <result property="nickname" column="x.NICKNAME"/>
+        <result property="address" column="x.address"/>
+        <result property="class_attach" column="x.class_attach"/>
     </resultMap>
 	
 	<select id="getReservationList" resultType="com.healpio.vo.MyReservationVO" >
@@ -76,7 +99,7 @@
 		
     </select>
     <resultMap type="com.healpio.vo.MyReservationVO" id="getReservationList">
-    	<result property="class_no" column="C.class_no"/>
+    	<result property="class_no" column="x.CLASS_NO"/>
     	<result property="reservation_no" column="R.reservation_no"/>	
         <result property="class_title" column="c.class_title"/>
         <result property="reservation_date" column="reservation_date"/>
