@@ -16,7 +16,8 @@
 	    font-family: 'Roboto', sans-serif;
 	}
 	.intro_container{
-		margin-top: 30px;
+		width: 1400px;
+		margin: 30px auto;
 	}
     #intro_img{
         float: left;
