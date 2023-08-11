@@ -51,8 +51,8 @@
 			  
 			  
 			<div class="mb-3">
-			  <label for="writer" class="viewLabel">보낸 사람</label>
-			  <input type="text" class="form-control" id="send_nick" name="send_nick" readonly value="${msg.send_nick}">
+			  <label for="writer" class="viewLabel">받는 사람</label>
+			  <input type="text" class="form-control" id="recv_nick" name="recv_nick" readonly value="${msg.recv_nick}">
 			</div>
 			<div class="mb-3">
 			  <label for="message_title" class="viewLabel">제목</label>

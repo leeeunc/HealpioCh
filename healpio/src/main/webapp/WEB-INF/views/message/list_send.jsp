@@ -28,7 +28,7 @@
 	
 <form name="list_recv" method="post">
 	<input type="hidden" name="pageNo" value="${pageDto.cri.pageNo }">
-	<input type="hidden" name="name" value="${memberVo.nickname }">
+	<input type="hidden" name="nickname" value="${memberVo.nickname }">
 	
 	<div class="listWrap">
 		<div class="list-group w-auto">
@@ -37,7 +37,7 @@
 	      	<div class="d-flex gap-2 w-100 justify-content-between">
 	        	<div>
 	         	 <h6 class="mb-0">${send.message_title }</h6>
-	         	 <p class="mb-0 opacity-75">${send.send_nick }</p>
+	         	 <p class="mb-0 opacity-75">${send.recv_nick }</p>
 	        	</div>
 	       	 <small class="opacity-50 text-nowrap">${send.send_time }</small>
 	      	</div>

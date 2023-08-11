@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/navbar-fixed/">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/a2debf6ac3.js" crossorigin="anonymous"></script>
 <style>
   h3{
         text-align: center;
@@ -18,7 +19,27 @@
     .listWrap{
     	margin: 20px;
     }
+    .readY{
+    	background-color: rgb(240, 240, 240);
+    }
 </style>
+<script>
+window.onload = function(){
+	
+	var list_recv = document.getElementsByClassName('list_recv');
+	
+	var readYN = document.getElementsByName('readYN');
+	var newMsg = document.getElementsByClassName('newMsg');
+	
+	for (var i = 0; i < list_recv.length; i++){
+	    if (readYN[i].value == 'Y'){
+	        list_recv[i].classList.add('readY');
+	        newMsg[i].style.display = 'none';
+	    }
+	}
+
+}
+</script>
 </head>
 <body>
 	<h3>받은 쪽지함</h3>
@@ -32,10 +53,13 @@
 	<div class="listWrap">
 		<div class="list-group w-auto">
 		<c:forEach items="${list}" var="recv">
-	    	<a onclick="location.href='/message/view_recv?message_no=${recv.message_no}&nickname=${memberVo.nickname }'" href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+			<input type="hidden" name="readYN" value="${recv.readYN }">
+	    	<a onclick="location.href='/message/view_recv?message_no=${recv.message_no}&nickname=${memberVo.nickname }'" href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3 list_recv" aria-current="true">
 	      	<div class="d-flex gap-2 w-100 justify-content-between">
 	        	<div>
-	         	 <h6 class="mb-0">${recv.message_title }</h6>
+	         	 <h6 class="mb-0">${recv.message_title } 
+	         	 <span class="newMsg"><i class="fa-solid fa-n" style="color: #b81c00; font-size:10px;"></i></span></h6>
+	      	
 	         	 <p class="mb-0 opacity-75">${recv.send_nick }</p>
 	        	</div>
 	       	 <small class="opacity-50 text-nowrap">${recv.send_time }</small>
