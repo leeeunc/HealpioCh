@@ -33,8 +33,8 @@ public class ReviewServiceImpl implements ReviewService {
 		map.put("sortingOption", "latest");
 		map.put("reviewCount", reviewCount);
 		map.put("pageDto", pageDto);
-		System.out.println(pageDto);
 		map.put("avgScore", reviewMapper.getAvgScore(class_no));
+		System.out.println("============ " + map.get("avgScore"));
 		return map;		
 	}
 

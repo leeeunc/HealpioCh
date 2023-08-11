@@ -29,12 +29,12 @@ public class ReviewMapperTest {
 //		reviewVO.setReview_star(5);
 //		reviewMapper.insert(reviewVO);
 //	}
-	
-	@Test
-	public void getList() {
-		Criteria_review criteria = new Criteria_review();
-		reviewMapper.getList("C000029", criteria);
-	}
+//	
+//	@Test
+//	public void getList() {
+//		Criteria_review criteria = new Criteria_review();
+//		reviewMapper.getList("C000029", criteria);
+//	}
 //	
 //	@Test
 //	public void getListHighest() {
@@ -48,13 +48,13 @@ public class ReviewMapperTest {
 //		reviewMapper.getListLowest("C000029", criteria);
 //	}
 //	
-//	@Test
-//	public void getAvgScore() {
-//		reviewMapper.getAvgScore("C000072");
-//	}
+	@Test
+	public void getAvgScore() {
+		reviewMapper.getAvgScore("C000127");
+	}
 //	
 //	@Test
-//	public void getAvgScore() {
+//	public void getReviewCount() {
 //		reviewMapper.getReviewCount("C000072");
 //	}
 //	
