@@ -38,6 +38,13 @@ function teacherynDisplay() {
 		document.querySelector('#exercise_name').value = document.querySelector('select[name="sports"]').value;
 		
 	}
+
+	function filterByarray() {
+		console.log("array테스트")
+		// 운동 종류를 검색필드에 저장
+		document.querySelector('#dependsArray').value = document.querySelector('select[name="array"]').value;
+		
+	}
 		
 	
 	function go(pageNum){

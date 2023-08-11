@@ -17,4 +17,6 @@ public class BoardScrapVO {
 	private String uploadpath;
 	private String filename;
 	private String boardFile;
+	private int scrapCount;
+
 }

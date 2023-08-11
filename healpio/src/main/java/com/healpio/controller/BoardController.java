@@ -31,6 +31,7 @@ public class BoardController {
 		boardService.provinceList(model);
 		boardService.locationList(model);
 
-		/* boardService.scrapList(class_no); */
 	}
+	
+	
 }
