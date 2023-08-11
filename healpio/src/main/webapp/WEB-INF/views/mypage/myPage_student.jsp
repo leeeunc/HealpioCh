@@ -87,7 +87,12 @@
                                 <ul class="scrap-list">
                                 	<c:forEach items="${scrapList }" var="scrapVo">
 	                                    <li class="scrap-card">
-	                                        <img class="scrap-img" alt="필라테스" src="../resources/images/필라테스4.jpg">
+	                                    
+	                                        <img class="scrap-img" 
+	                                        src='<c:url value="/display">
+												 	<c:param name="fileName" value="${scrapVo.class_attach}"/>
+												</c:url>'  
+												>
 	                                        <div class="scrap-info-container">
 	                                            <div class="scrap-title"><a href="/class/read?class_no=${scrapVo.class_no}">${scrapVo.class_title}</a></div>
 	                                            <div class="scrap-lecture-info">

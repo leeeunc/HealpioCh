@@ -24,7 +24,7 @@
 
 	
 	<select id="getScrapList" resultType="com.healpio.vo.ViewScrapVO">
-		SELECT C.class_no, M.NICKNAME , C.CLASS_TITLE, E.EXERCISE_NAME,  L.PROVINCE|| ' ' ||L.CITY || ' ' ||L.DISTRICT address, A.uploadpath class_attach
+		SELECT DISTINCT S.scrap_no, C.class_no, M.NICKNAME , C.CLASS_TITLE, E.EXERCISE_NAME,  L.PROVINCE|| ' ' ||L.CITY || ' ' ||L.DISTRICT address, A.uploadpath|| A.uuid||'_'||A.filename class_attach
 		from SCRAP S
 		INNER JOIN CLASS C ON S.CLASS_NO = C.CLASS_NO
 		INNER JOIN MEMBER M ON C.MEMBER_NO = M.MEMBER_NO
@@ -33,6 +33,7 @@
 		INNER JOIN ATTACH A ON C.CLASS_NO = A.CLASS_NO
 		
 		WHERE S.MEMBER_NO = #{member_no}
+		order by S.scrap_no asc
 	</select>
 	<resultMap type="com.healpio.vo.ViewScrapVO" id="getScrapList">
 		<result property="class_no" column="C.class_no"/>
@@ -44,13 +45,15 @@
     </resultMap>
     
     <select id="getRegisterList" resultType="com.healpio.vo.ViewScrapVO">
-		select C.CLASS_NO,M.NICKNAME, C.CLASS_TITLE, E.EXERCISE_NAME, L.PROVINCE|| ' ' ||L.CITY || ' ' ||L.DISTRICT address, A.uploadpath class_attach
+		select DISTINCT C.CLASS_NO,M.NICKNAME, C.CLASS_TITLE, E.EXERCISE_NAME, L.PROVINCE|| ' ' ||L.CITY || ' ' ||L.DISTRICT address,  A.uploadpath|| A.uuid||'_'||A.filename class_attach
 		from CLASS C
 		INNER JOIN MEMBER M ON C.MEMBER_NO = M.MEMBER_NO
 		INNER JOIN EXERCISE E ON C.EXERCISE_NO = E.EXERCISE_NO
 		INNER JOIN LOCATION L ON C.CLASS_NO = L.CLASS_NO
 		INNER JOIN ATTACH A ON C.CLASS_NO = A.CLASS_NO
 		WHERE C.MEMBER_NO = #{member_no}
+		order by C.CLASS_NO ASC
+		
 	</select>
 	<resultMap type="com.healpio.vo.ViewScrapVO" id="getRegisterList">
 		<result property="class_no" column="C.CLASS_NO"/>

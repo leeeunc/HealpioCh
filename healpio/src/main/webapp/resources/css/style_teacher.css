@@ -310,9 +310,6 @@ footer {
     margin-left: 8rem;
 }
 
-
-
-
 /* reservation */
 .content-reservation-container {
     width: 100%;
@@ -336,6 +333,10 @@ footer {
 	width: 250px;
     font-size: 1.2rem;
     font-weight: bold;
+}
+
+.content-reservation-title a{
+	padding-left: 5rem;
 }
 
 .content-reservation-info div {
