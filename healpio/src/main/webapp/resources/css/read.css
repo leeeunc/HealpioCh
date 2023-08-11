@@ -27,24 +27,25 @@
 	height: 400px;
 }
 #form-intro-img{
+	border-radius: 5px;
 	display: flex;
 	position: relative;
 	float: left;
 	width: 500px;
-	max-height: 360px;
+	max-height: 330px;
 	margin-left: 60px;
-	margin-top: 30px;
+	margin-top: 60px;
 	overflow: hidden;
 }
 .carousel{
 	display: flex;
+	left: 0px;
 	transition: left 0.5s ease-out;
 }
 .form-intro-img{
 	position: relative;
 	float: left;
 	width: 500px;
-	margin-top: 30px;
 	object-fit: cover;
 }
 #prev {

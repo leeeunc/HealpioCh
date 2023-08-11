@@ -34,14 +34,7 @@ function fetchGet(url, callback){
 }
 
 function scrap(class_no, member_no){
-	if(!member_no){
-		const scrapModal = new bootstrap.Modal('#scrapModal', {
-			keyboard: false
-		})
-		scrapModal.show();
-	} else{
-		fetchGet('/class/scrap?class_no=' + class_no + '&member_no=' + member_no, getFullheart);		
-	}
+	fetchGet('/class/scrap?class_no=' + class_no + '&member_no=' + member_no, getFullheart);
 }
 
 function cancelScrap(class_no, member_no){
@@ -171,14 +164,14 @@ function getReviewList(map){
 			let review = `<table style="width:100%"><tr><td style="width: 85%"><b>`;
 			review += reviewVO.nickname;
 			review += `</b> <span style="color: gold"> ★</span>` + reviewVO.review_star;
-			review += `<br>` + reviewVO.review_content + `</td>`;
+			review += `<br>` + reviewVO.review_content  + `<br><span style="font-size: 0.9em; color: #aaa">` +reviewVO.review_regdate + `</span>`+ `</td>`;
 			if(document.querySelector('#member_no').value==reviewVO.member_no){
 				review += `<td>`;
 				review += `<button type="button" class="btn btn-secondary btn-sm" style="float:right; margin:1px;" onclick="go('/review/delete?review_no=` + reviewVO.review_no + `')">삭제</button>`;
 				review += `<button type="button" class="btn btn-danger btn-sm" style="float:right; margin:1px;" onclick="go('/review/edit?review_no=` + reviewVO.review_no + `')">수정</button>`;
 				review += `</td>`;
 			}
-			review += `</tr></table><br><br>`;
+			review += `</tr></table><br>`;
 			reviewDiv.innerHTML += review;
 		})
 		
@@ -237,16 +230,13 @@ window.addEventListener('load', function(){
 	let index = 0;
 
     let interval = setInterval(function(){
-        imgChange();
-    }, 2000)
-
-    function imgChange(){
-        index++;
+    	index++;
         if (index>${attachList.size()-1}) {
             index = 0;
         };        
-        carousel.style.left= -500 * index + 'px';
-    }
+        carousel.style.left = -500 * index + 'px';
+    }, 2000)
+
 
 	prevBtn.addEventListener('click', () => {
 		if(index==0){
@@ -304,26 +294,7 @@ window.addEventListener('load', function(){
 			<!-- 찜 상태이면  꽉 찬 하트 보여주기 -->
 			<c:if test="${scrapYN>0}">
 			<i class="fa-solid fa-heart" style="color: #ff6666" onclick="cancelScrap('${classVO.class_no}', '${memberVo.member_no}')"></i>
-			</c:if>
-			
-			<!-- 로그인 안 한 상태에서 찜 누르면 모달창 열기 -->
-			<div id="scrapModal" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h1 class="modal-title fs-5" id="exampleModalLabel">알림</h1>
-			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			      </div>
-			      <div class="modal-body">
-			      	로그인 후 이용 가능합니다.
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-			        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-			      </div>
-			    </div>
-			  </div>
-			</div>			
+			</c:if>	
 		</div>
 		
 		　　문의하기
@@ -352,9 +323,9 @@ window.addEventListener('load', function(){
 <!-- 강의 소개 -->
 <div id="class_contentDiv" style="white-space: pre-line;">
 	<h5 style="margin: 0px"><b>강의 소개</b></h5>
-	${classVO.class_content}<br><br><br>
+	${classVO.class_content}<br><br>
 	<h5 style="margin: 0px"><b>최대 수강 인원</b></h5>
-	${classVO.class_maxcount}명<br><br><br>
+	${classVO.class_maxcount}명<br><br>
 	<h5 style="margin: 0px"><b>수강료</b></h5>
 	${classVO.class_price}
 </div>
@@ -369,7 +340,7 @@ window.addEventListener('load', function(){
 <div id="locationDiv" style="display:none;">
 <div id="mapContainer">
 	<h5 style="margin: 0px; display:inline;"><b>위치 </b></h5><i class="fa-solid fa-location-dot" style="color: #588ce0;"></i>${classVO.province} ${classVO.city} ${classVO.district}<br><br>
-	<div id="map" style="width:1040px;height:516px;"></div>
+	<div id="map" style="width:1040px;height:510px;"></div>
 <script>
 locationBtn.addEventListener('click', function(){	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

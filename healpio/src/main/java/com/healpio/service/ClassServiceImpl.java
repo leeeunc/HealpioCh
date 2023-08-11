@@ -32,9 +32,6 @@ public class ClassServiceImpl implements ClassService {
 	
 	@Autowired
 	ReviewMapper reviewMapper;
-	
-	@Autowired
-	ReservationMapper reservationMapper;
 
 	@Override
 	public void getExerciseList(Model model) {
@@ -101,6 +98,10 @@ public class ClassServiceImpl implements ClassService {
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public int delete(String class_no, Criteria_review criteria, Model model) {
+		if(classMapper.getReservation(class_no)>0) {
+			return 0;
+		}
+		
 		// 첨부파일 삭제
 		attachService.delete(class_no);
 		

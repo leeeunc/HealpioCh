@@ -77,4 +77,8 @@
   <delete id="deleteLocation">
   	delete from location where class_no = #{class_no}
   </delete>
+  
+  <select id="getReservation" resultType="int">
+  	select count(*) from reservation where class_no = #{class_no}
+  </select>
 </mapper>
