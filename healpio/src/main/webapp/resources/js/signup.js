@@ -133,6 +133,7 @@ window.addEventListener('load', function() {
 
       let signUpId = document.getElementById('signUpId').value;
       let signUpPw = document.getElementById('signUpPw').value;
+      let signUpPwCheck = document.getElementById('signUpPwCheck').value;
       let signUpName = document.getElementById('signUpName').value;
       let signUpNick = document.getElementById('signUpNick').value;
       let signUpPhone = document.getElementById('signUpPhone').value;
@@ -140,7 +141,7 @@ window.addEventListener('load', function() {
       let teacheryn = document.getElementById('teacheryn').value;
 	
       // 입력값 검사
-      if (!signUpId || !signUpPw || !signUpName || !signUpNick || !signUpPhone || !signUpEmail) {
+      if (!signUpId || !signUpPw || !signUpPwCheck || !signUpName || !signUpNick || !signUpPhone || !signUpEmail) {
     	  showAlert('모든 정보를 입력해주세요.');
           return;
       }
@@ -149,6 +150,12 @@ window.addEventListener('load', function() {
       if (idCheckRes.value !== '1') {
           signupMsg.innerHTML = '아이디 중복체크를 해주세요';
           return;
+      }
+      
+      // 비밀번호 확인 체크
+      if(signupMsg_pwCheck.innerHTML !== '비밀번호가 일치합니다.'){
+    	  showAlert('비밀번호가 일치하지 않습니다.');
+    	  return;
       }
       
    // 닉네임 중복체크 확인
@@ -224,6 +231,21 @@ window.addEventListener('load', function() {
       signupMsg_pw.innerHTML = '비밀번호는 영문과 숫자 조합으로 6~12글자여야 합니다.';
     } else {
       signupMsg_pw.innerHTML = '';
+    }
+  });
+  
+//비밀번호 확인 입력란 요소 가져오기
+  const signUpPwCheckInput = document.getElementById('signUpPwCheck');  
+  
+//비밀번호 확인 입력란에 입력 내용이 변경될 때 이벤트 처리
+  signUpPwCheckInput.addEventListener('input', function() {
+	const signUpPw = signUpPwInput.value;  
+    const signUpPwCheck = signUpPwCheckInput.value;
+    
+    if (signUpPw === signUpPwCheck) {
+      signupMsg_pwCheck.innerHTML = '비밀번호가 일치합니다.';
+    } else {
+      signupMsg_pwCheck.innerHTML = '비밀번호가 일치하지 않습니다.';
     }
   });
 

@@ -32,6 +32,11 @@
             <h5>비밀번호</h5>
             <input type="password" name="signUpPw" id="signUpPw"><br>
             <div id="signupMsg_pw"></div> <!-- 중복확인 메시지를 표시할 div -->
+        </div>
+        <div id='signup_pwCheck'>
+            <h5>비밀번호확인</h5>
+            <input type="password" name="signUpPwCheck" id="signUpPwCheck"><br>
+            <div id="signupMsg_pwCheck"></div> <!-- 일치하는 지를 표시할 div -->
         </div> 
         <div id='signup_name'>
             <h5>이름</h5>
