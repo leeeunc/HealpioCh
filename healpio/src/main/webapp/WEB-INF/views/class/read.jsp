@@ -421,7 +421,7 @@ locationBtn.addEventListener('click', function(){
  
 <!-- 예약 -->
 <div id="reservationDiv" style="display:none">
-
+	<jsp:include page="../reservation/reservation.jsp"/>
 </div>
 </div>
 </div>

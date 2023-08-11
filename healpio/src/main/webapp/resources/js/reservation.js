@@ -210,10 +210,13 @@
 		      let timeText = i < 10 ? `0${i}:00` : `${i}:00`;
 		      
 		        // 해당 시간에 대한 reservation_count 값을 찾는 코드
-		        let reservationCountForTime = currentCapacity.find(item => item.reservation_time === timeText)?.reservation_count || 0;
+		      let reservationCountForTime = currentCapacity.find(item => item.reservation_time === timeText)?.reservation_count || 0;
 
+		      
 		        timeButton.textContent = `${timeText}\n(${reservationCountForTime}/${maxCapacity}명)`;
 		        timeButton.dataset.time = timeText;
+		        console.log(currentCapacity);
+		        console.log(reservationCountForTime);
 		      
 		      // 버튼을 비활성화/활성화할 때 데이터 속성에서 시간을 가져옵니다.
 		      timeButton.disabled = !(availableTimes.includes(timeButton.dataset.time) && selectedDay) || (reservationCountForTime >= maxCapacity);

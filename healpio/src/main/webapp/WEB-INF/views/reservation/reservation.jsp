@@ -18,11 +18,17 @@
         </div>
     </div>
     <form id="reservationForm" action="/reservation/confirm" method="POST">
-		    <input type="text" id="selectedDate" name="date" value="${reservationVO.reservation_date}">
-		    <input type="text" id="selectedTime" name="time" value="${reservationVO.reservation_time}">
-		    <input type="text" id="selectedClass" name="class_no" value="${classVO.class_no}">
-		    <input type="text" id="selectedMaxcount" name="maxcount" value="${classVO.class_maxcount}">
-		    <input type="text" id="selectedMember" name="member_no" value="${classVO.member_no}">
+		    <input type="hidden" id="selectedDate" name="date" value="${reservationVO.reservation_date}">
+		    <input type="hidden" id="selectedTime" name="time" value="${reservationVO.reservation_time}">
+		    <input type="hidden" id="selectedClass" name="class_no" value="${classVO.class_no}">
+		    <input type="hidden" id="selectedMaxcount" name="maxcount" value="${classVO.class_maxcount}">
+		    <input type="hidden" id="selectedMember" name="member_no" value="${classVO.member_no}">
+		    <input type="hidden" id="selectedMember" name="member_no" value="${classVO.class_title}">
+		    <input type="hidden" id="selectedMember" name="member_no" value="${classVO.class_content}">
+		    <input type="hidden" id="selectedMember" name="member_no" value="${classVO.class_introduce}">
+		    <input type="hidden" id="selectedMember" name="member_no" value="${classVO.teacher_content}">
+		    <input type="hidden" id="selectedMember" name="member_no" value="${classVO.nickname}">
+		    <input type="hidden" id="selectedMember" name="member_no" value="${classVO.exercise_name}">
     	<div>
 	        <button id="reserve" type="submit" disabled>예약하기</button>
 	    </div>

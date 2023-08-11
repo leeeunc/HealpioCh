@@ -32,8 +32,11 @@ public interface ReservationMapper {
     
     public int getMaxReservationCountForClass(String class_no);
     
-    public List<ReservationVO> getReservationCountsByDateAndTimes(@Param("class_no") String class_no, @Param("reservation_date") String reservation_date);
+    public List<ReservationVO> getReservationCountsByDateAndTimes(@Param("class_no") String class_no, @Param("reservation_date") String reservation_date, @Param("availableTimes") List<String> availableTimes);
 
     public int increaseReservationCountIfNotMax(ReservationVO reservation);
+    
+    public ReservationVO getReservationByDetails(@Param("classNo") String classNo, @Param("reservation_date") String reservationDate, @Param("reservation_time") String reservationTime);
+
 
 }
