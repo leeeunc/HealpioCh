@@ -111,7 +111,7 @@ public class ClassController {
 		if(classService.delete(class_no, criteria, model)>0) {
 			model.addAttribute("message", "게시글이 삭제되었습니다.");			
 		} else {
-			model.addAttribute("message", "삭제 중 오류가 발생하였습니다.");
+			model.addAttribute("message", "예약 내역이 존재하여 게시글을 삭제할 수 없습니다.");
 		}			
 		return "/class/message";
 	}
