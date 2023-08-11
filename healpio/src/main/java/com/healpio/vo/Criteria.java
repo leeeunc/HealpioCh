@@ -9,7 +9,8 @@ public class Criteria {
 	private String searchWord;	// 검색어
 	
 	private String exercise_name; // 운동 이름
-
+	private String dependsArray; // 정렬
+	
 	private String province;
 	private String city;
 	private String district;

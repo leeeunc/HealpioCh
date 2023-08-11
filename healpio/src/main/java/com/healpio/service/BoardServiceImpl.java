@@ -1,7 +1,9 @@
 
   package com.healpio.service;
   
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,10 +35,19 @@ import com.healpio.vo.PageDto;
 		  int totalCnt = boardMapper.getTotalCnt(cri);
 		  PageDto pageDto = new PageDto(cri, totalCnt); 
 		 
+		  Map<String, Integer> scrapCountMap = new HashMap<String, Integer>();
+		  for(BoardScrapVO board : list) {
+			  String class_no = board.getClass_no();
+			  int count = boardMapper.scrapList(class_no);
+			  scrapCountMap.put(class_no, count);
+		  }
+		  
 		  model.addAttribute("list", list);
 		  model.addAttribute("totalCnt", totalCnt);
 		  model.addAttribute("pageDto", pageDto);
 
+		  model.addAttribute("scrapCountMap", scrapCountMap);
+		  
 		 return null;
 	 }
 	 
@@ -74,11 +85,7 @@ import com.healpio.vo.PageDto;
 	 public int getTotalCnt(Criteria cri) {
 		 return boardMapper.getTotalCnt(cri);
 	 }
-	/*
-	 * @Override public int scrapList(String class_no) {
-	 * 
-	 * return boardMapper.scrapList(class_no); }
-	 */
+	 
 
 	 
 	 

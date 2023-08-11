@@ -49,7 +49,7 @@
 	    <select name="searchField" class="form-select" 
 	    		aria-label="Default select example">
 		  <option value="c.class_title" ${pageDto.cri.searchField == 'c.class_title' ? 'selected' : ''}>제목</option>
-		  <option value="m.nickname" ${pageDto.cri.searchField == 'm.nickname' ? 'selected' : ''}>닉네임</option> 
+		  <option value="m.nickname" ${pageDto.cri.searchField == 'm.nickname' ? 'selected' : ''}>강사명</option> 
 		</select>
 		
 	  </div>
@@ -60,6 +60,7 @@
 	    		value="${pageDto.cri.searchWord }">
 	    		
 	   		 <input type="hidden" id="exercise_name" name="exercise_name" value="${pageDto.cri.exercise_name }">
+	   		 <input type="hidden" id="dependsArray" name="dependsArray" value="${pageDto.cri.dependsArray }">
 	   		 
 			 <input type="hidden" name="province" id="province" value="${pageDto.cri.province }">
 			 <input type="hidden" name="city" id="city" value="${pageDto.cri.city }">

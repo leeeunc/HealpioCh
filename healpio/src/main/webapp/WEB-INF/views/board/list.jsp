@@ -8,6 +8,7 @@
 	<title>Insert title here</title>
 	
 		<link href="../resources/css/list.css" rel="stylesheet"> 
+		<script src="https://kit.fontawesome.com/0aadd0de21.js" crossorigin="anonymous"></script>
 	<script>
 	function classWirte() {
 	  window.location.href = '/class/write?member_no=${memberVo.member_no }';
@@ -31,7 +32,7 @@
 	            <input type="hidden" value="${pageDto.total}">
 				<!-- <select> 요소에 onchange 이벤트를 통해 filterByExercise 함수 호출 -->
 				<select name='sports' onchange="filterByExercise()">
-				  <option value='all'>운동종류</option>
+				  <option value='all'>운동 전체선택</option>
 				  <c:forEach items="${exerciseList}" var="ex">
 				  <option value="${ex.exercise_name}" ${pageDto.cri.exercise_name ==  ex.exercise_name ? 'selected' : '' }>${ex.exercise_name}</option>
 				  </c:forEach>
@@ -41,9 +42,9 @@
 	           
 				<jsp:include page="/WEB-INF/views/common/searchForm.jsp" />
 	 			
-	            <select name='array' >
-	                <option value='ko'>최신순</option>
-	                <option value='x'>인기순</option>
+	            <select name='array' onclick="filterByarray()">
+	                <option value='recently' ${pageDto.cri.dependsArray == 'recently' ? 'selected' : '' }>최신순</option>
+	                <option value='like' ${pageDto.cri.dependsArray == 'like' ? 'selected' : '' }>인기순</option>
 	            </select>
 	        </div>
 	
@@ -58,12 +59,16 @@
 					</c:url>" 
 				alt="${li.class_title}" class="form-intro-img"
 					width="300" height="300"/> 
-				     <a class="class_title-text"> ${li.class_title} </a>
 				</a >	  				
+				     <span class="class_title-text">
+					    <a href="/class/read?class_no=${li.class_no}">${li.class_title}</a>
+					 </span>
 					  <hr>
 					 ${li.nickname } | 
 					 <a class="exercise-text">${li.exercise_name }</a> |
 					 <a class="province-text">${li.province }</a><a class="city-text">${li.city }</a><a class="district-text">${li.district }</a>
+					 <br>
+					 <i class="fa-solid fa-heart" style="color: #ff6666" ></i> ${scrapCountMap[li.class_no]}
 				</div>
 		        
 			  </c:forEach>
