@@ -8,25 +8,35 @@
 	
 	<select id="getList" resultType="com.healpio.vo.BoardScrapVO">
 		<![CDATA[
-    		SELECT * 
-		FROM (
-			SELECT ROWNUM RN, A.* 
-				FROM (
-						select 
-							c.class_title, m.nickname, e.exercise_name
-							, l.PROVINCE, l.CITY, l.DISTRICT
-							, m.teacheryn, c.class_no, a.uploadpath||a.uuid||'_'||a.filename boardFile
-                         from class c, member m, exercise e, location l, attach a
-                            where c.class_no = l.class_no
-                            and c.member_no = m.member_no
-                            and c.exercise_no = e.exercise_no
-                            and c.class_no = a.class_no
+                SELECT *
+    FROM(
+    SELECT ROWNUM RN, B.*
+    FROM (
+        SELECT A.*, COALESCE(s.scrapCount, 0) AS scrapCount
+        FROM (
+            select 
+                c.class_title, m.nickname, e.exercise_name
+                , l.PROVINCE, l.CITY, l.DISTRICT
+                , m.teacheryn, c.class_no, a.uploadpath||a.uuid||'_'||a.filename boardFile
+             from class c, member m, exercise e, location l, attach a
+                where c.class_no = l.class_no
+                and c.member_no = m.member_no
+                and c.exercise_no = e.exercise_no
+                and c.class_no = a.class_no
+                
 		]]>
 						<include refid="location"></include>
 						<include refid="criteria"></include>
 						ORDER BY c.class_no DESC 
 						) A
-				)
+									LEFT JOIN (
+			            SELECT class_no, COUNT(*) AS scrapCount
+			            FROM scrap
+			            GROUP BY class_no
+			        ) s ON A.class_no = s.class_no
+		<include refid="array"></include>
+    ) B
+    )
 		 WHERE RN BETWEEN #{startNo} AND #{endNo} 
 	</select>
 
@@ -52,30 +62,38 @@
 	
 	<select id="getTotalCnt" resultType="int">
 		<![CDATA[
-    		SELECT count(*) 
-		FROM (
-			SELECT ROWNUM RN, A.* 
-				FROM (
-						select 
-							c.class_title, m.nickname, e.exercise_name
-							, l.PROVINCE, l.CITY, l.DISTRICT
-							, m.teacheryn, c.class_no, a.uploadpath||a.uuid||'_'||a.filename boardFile
-                         from class c, member m, exercise e, location l, attach a
-                            where c.class_no = l.class_no
-                            and c.member_no = m.member_no
-                            and c.exercise_no = e.exercise_no
-                            and c.class_no = a.class_no
-
+                SELECT count(*)
+    FROM(
+    SELECT ROWNUM RN, B.*
+    FROM (
+        SELECT A.*, COALESCE(s.scrapCount, 0) AS scrapCount
+        FROM (
+            select 
+                c.class_title, m.nickname, e.exercise_name
+                , l.PROVINCE, l.CITY, l.DISTRICT
+                , m.teacheryn, c.class_no, a.uploadpath||a.uuid||'_'||a.filename boardFile
+             from class c, member m, exercise e, location l, attach a
+                where c.class_no = l.class_no
+                and c.member_no = m.member_no
+                and c.exercise_no = e.exercise_no
+                and c.class_no = a.class_no
 		]]>
 						<include refid="location"></include>
 						<include refid="criteria"></include>
 						ORDER BY c.class_no DESC 
 						) A
-				)
+									LEFT JOIN (
+			            SELECT class_no, COUNT(*) AS scrapCount
+			            FROM scrap
+			            GROUP BY class_no
+			        ) s ON A.class_no = s.class_no
+		<include refid="array"></include>
+    ) B
+    )
 	</select>
 
 	<select id="scrapList" resultType="int">
-		select count(*) 
+		select count(*) as scrapCount
 		from class c, scrap s
 		where c.class_no = s.class_no
 		and s.class_no = #{class_no}
@@ -120,7 +138,18 @@
 	</sql>
 
 	
-	
+	<sql id="array">
+		<choose>
+   			<when test="dependsArray == 'recently'">
+		      	order by A.class_no DESC
+		    </when>
+   			<when test="dependsArray == 'like'">
+		      	ORDER BY SCRAPCOUNT DESC, s.class_no DESC
+		    </when>
+		</choose>
+
+		
+	</sql>
 	
  </mapper>
 
