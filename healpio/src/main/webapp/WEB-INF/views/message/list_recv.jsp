@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/navbar-fixed/">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<script src="https://kit.fontawesome.com/a2debf6ac3.js" crossorigin="anonymous"></script>
 <style>
   h3{
         text-align: center;
@@ -58,7 +57,7 @@ window.onload = function(){
 	      	<div class="d-flex gap-2 w-100 justify-content-between">
 	        	<div>
 	         	 <h6 class="mb-0">${recv.message_title } 
-	         	 <span class="newMsg"><i class="fa-solid fa-n" style="color: #b81c00; font-size:10px;"></i></span></h6>
+	         	 <span class="newMsg" style="color: #b81c00; font-size:10px;">new!</span></h6>
 	      	
 	         	 <p class="mb-0 opacity-75">${recv.send_nick }</p>
 	        	</div>
