@@ -44,7 +44,7 @@
     	SELECT class_time FROM class WHERE class_no = #{class_no}
 	</select>
 	
-	<!-- 해당 클래스에 대한 현재 예약 수와 최대 예약 수를 가져오는 쿼리 &lt; 크다  &gt; 작다 표현식 -->
+	<!-- 해당 클래스에 대한 현재 예약 수와 최대 예약 수를 가져오는 쿼리 &lt; 작다 <,  &gt; > 크다 표현식 -->
 	<select id="getMaxReservationCountForClass" resultType="int">
 	    SELECT class_maxcount FROM class WHERE class_no = #{class_no}
 	</select>
@@ -76,6 +76,15 @@
 	    AND reservation_time = #{reservation_time}
 	    AND reservation_count &gt; 0
 	</update>
+	
+	<select id="getReservationByDetails" resultType="com.healpio.vo.ReservationVO">
+	    SELECT * FROM reservation
+	    WHERE class_no = #{classNo}
+	    AND reservation_date = #{reservation_date}
+	    AND reservation_time = #{reservation_time}
+	    AND ROWNUM &lt;= 1
+	</select>
+	
 
 	
 

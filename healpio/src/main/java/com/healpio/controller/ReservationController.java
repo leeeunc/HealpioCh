@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -92,7 +93,6 @@ public class ReservationController {
         // 예약 객체를 생성하고 필요한 값들을 설정합니다.
         ReservationVO reservation = new ReservationVO();
         
-        
         List<Integer> activeDays = reservationService.getActiveDays(class_no);
         model.addAttribute("activeDays", activeDays);
         
@@ -101,7 +101,7 @@ public class ReservationController {
         reservation.setReservation_date(date);
         reservation.setReservation_time(time);
         reservation.setReservation_maxcount(classInfo.getClass_maxcount()); // 예약 최대 수량을 ClassVO에서 가져온다면
-
+        
         // TODO: 여기에서 reservation_regdate를 현재 시간으로 설정해주셔야 합니다.
         // 예: reservation.setReservation_regdate(new Date());
 
@@ -112,8 +112,20 @@ public class ReservationController {
         redirectAttributes.addAttribute("maxcount", classInfo.getClass_maxcount());
         
         // reservationService를 통해 예약 정보를 저장합니다.
-        reservationService.insertReservation(reservation);
-        reservationService.increaseReservationCountIfNotMax(reservation);
+//        reservationService.insertReservation(reservation);
+//        reservationService.increaseReservationCountIfNotMax(reservation);
+        
+        // 먼저 해당 예약이 이미 있는지 확인
+        ReservationVO existingReservation = reservationMapper.getReservationByDetails(reservation.getClassNo(), reservation.getReservation_date(), reservation.getReservation_time());
+
+        if (existingReservation != null) {
+        	reservation.setReservation_count(1);  // 처음 예약이므로 카운트를 1로 설정
+            // 이미 예약이 있다면, 카운트를 업데이트
+            reservationMapper.increaseReservationCountIfNotMax(reservation);
+        } else {
+            // 예약이 없다면, 새로운 예약을 추가
+            reservationMapper.insertReservation(reservation);
+        }
         
         // 로그를 출력하여 예약 정보를 확인합니다.
         log.info(reservation);
@@ -124,18 +136,6 @@ public class ReservationController {
         // 예약 확인 페이지로 리다이렉트합니다.
         return "redirect:/reservation/confirm";
     }
-    
-//    @GetMapping("/activeDays")
-//    @ResponseBody
-//    public List<Integer> getClassDays(String class_no) {
-//        return reservationService.getActiveDays(class_no);
-//    }
-//    
-//    @GetMapping("/availableTimes")
-//    @ResponseBody
-//    public List<String> getClassTimes(@RequestParam String classNo) {
-//        return reservationService.getClassTimes(classNo);
-//    }
     
     @GetMapping("/classDetails")
     @ResponseBody
@@ -152,6 +152,9 @@ public class ReservationController {
 //        System.out.println(reservation_date);
         
         List<ReservationVO> currentCapacity = reservationService.getReservationCountsByDateAndTimes(class_no, reservation_date, availableTimes);
+        
+        System.out.println("Returned Reservations: " + currentCapacity);
+
         
 //        Set<String> key = currentCapacity.keySet();
 //        System.out.println("key +++++++++++++++" + key);
