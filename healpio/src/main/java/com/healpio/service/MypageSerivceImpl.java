@@ -23,7 +23,9 @@ public class MypageSerivceImpl implements MypageService{
 	@Override
 	public List<ViewScrapVO> getScrapList(String member_no) {
 		// TODO Auto-generated method stub
-		return mypageMapper.getScrapList(member_no);
+		List<ViewScrapVO> scrapList = mypageMapper.getScrapList(member_no);
+		
+		return scrapList;
 	}
 
 	@Override

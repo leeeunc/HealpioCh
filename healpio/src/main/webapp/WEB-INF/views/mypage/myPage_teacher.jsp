@@ -90,7 +90,10 @@
                                 <ul class="register-list">
                                 	<c:forEach items="${registerList }" var="registerVo">
 	                                    <li class="register-card">
-	                                		<img class="register-img" alt="필라테스" src="../resources/images/필라테스4.jpg">
+	                                		<img class="register-img" alt="필라테스" 
+	                                		src='<c:url value="/display">
+												 	<c:param name="fileName" value="${registerVo.class_attach}"/>
+												</c:url>'>
 	                                        <div class="register-info-container">
 	                                        
 	                                            <div class="register-title"><a href="/class/read?class_no=${registerVo.class_no}">${registerVo.class_title}</a></div>
