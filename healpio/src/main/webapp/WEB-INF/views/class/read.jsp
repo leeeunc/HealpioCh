@@ -236,6 +236,18 @@ window.addEventListener('load', function(){
 
 	let index = 0;
 
+    let interval = setInterval(function(){
+        imgChange();
+    }, 2000)
+
+    function imgChange(){
+        index++;
+        if (index>${attachList.size()-1}) {
+            index = 0;
+        };        
+        carousel.style.left= -500 * index + 'px';
+    }
+
 	prevBtn.addEventListener('click', () => {
 		if(index==0){
 			return;
@@ -279,8 +291,11 @@ window.addEventListener('load', function(){
 		<h2><b>${classVO.class_title}</b></h2>
 		${classVO.nickname} | ${classVO.exercise_name}<br><br>
 		<h6><i class="fa-solid fa-quote-left" style="color:#aaa"></i> <i>${classVO.class_introduce}</i> <i class="fa-solid fa-quote-right" style="color:#aaa"></i></h6><br>
-		<hr>
+		
+		<!-- 학생에게만 찜,문의하기 버튼 출력 -->
+		<c:if test="${memberVo.teacheryn=='N'}">
 		<div id="scrapDiv" style="display:inline;">
+			<hr>
 			이 강의 찜하기
 			<!-- 찜 안한 상태이면 빈 하트 보여주기 -->
 			<c:if test="${scrapYN==0}">
@@ -312,8 +327,12 @@ window.addEventListener('load', function(){
 		</div>
 		
 		　　문의하기
-		<i class="fa-regular fa-envelope" style="color: #588ce0" onclick="window.open('/message/send?member_no=${classVO.member_no}&class_title=${classVO.class_title }', ' ','width=500, height=570'); return false"></i><br><br><br>
+		<i class="fa-regular fa-envelope" style="color: #588ce0" onclick="window.open('/message/send?member_no=${classVO.member_no}&class_title=${classVO.class_title }', ' ','width=500, height=570'); return false"></i>
+		</c:if>
+		
+		<!-- 게시글 작성자에게만 수정,삭제 버튼 출력 -->
 		<c:if test="${memberVo.member_no eq classVO.member_no}">
+		<hr>
 		<div id="onlyWriter">
 			<button type="button" class="btn btn-danger" onclick="go('/class/edit?class_no=${classVO.class_no}&member_no=${classVO.member_no}')">수정</button>
 			<button type="button" class="btn btn-secondary" onclick="go('/class/delete?class_no=${classVO.class_no}&member_no=${classVO.member_no}')">삭제</button>
@@ -332,7 +351,7 @@ window.addEventListener('load', function(){
 
 <!-- 강의 소개 -->
 <div id="class_contentDiv" style="white-space: pre-line;">
-	<h5 style="margin: 0px"><b>강의 내용</b></h5>
+	<h5 style="margin: 0px"><b>강의 소개</b></h5>
 	${classVO.class_content}<br><br><br>
 	<h5 style="margin: 0px"><b>최대 수강 인원</b></h5>
 	${classVO.class_maxcount}명<br><br><br>
@@ -391,7 +410,7 @@ locationBtn.addEventListener('click', function(){
 <input type="hidden" name="member_no" id="member_no" value="${memberVo.member_no}">
 <%--
 <form action="/review/write">
-	<!-- 리뷰쓰기(삭제 예정) -->
+	<!-- 리뷰쓰기 -->
 	<button type="submit" id="reviewWriteBtn">리뷰쓰기</button>
 	<!-- 리뷰 작성시 필요 -->	
 	<input type="text" name="class_no" id="class_no" value="${classVO.class_no}">
