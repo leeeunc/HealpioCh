@@ -31,7 +31,8 @@
     <body>
     
 			<%@ include file="../common/header.jsp" %>
-			
+			<input type="hidden" id="member_no" name="member_no" value="${member_no }">
+            
 			
             <section>
                 <div class="inner">
@@ -113,45 +114,88 @@
 
                             <!-- 내 정보 -->
                             <div class="content-info">
-                                <form class="info-back" method='post' action="/mypage/edit">
-                                    <div class="info-back-container">
-                                        <div><h3>내 정보</h3></div>
-                                        <div class="mb-3">
-                                            <label class="form-label">이름</label>
-                                            <input type="text" class="form-control info-control" name="member_name" value="${memberVO.member_name}" readonly/>
-                                        </div>
-                                        
-                                        <div class="mb-3">
-                                            <label class="form-label">닉네임</label>
-                                            <input type="text" class="form-control info-control" name="nickname" value="${memberVO.nickname}" readonly/>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">전화번호</label>
-                                            <input type="text" class="form-control info-control" name="phonenumber"  value="${memberVO.phonenumber }" readonly/>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">이메일</label>
-                                            <input type="email" class="form-control info-control" name="email" value="${memberVO.email }" readonly/>
-                                        </div>
-                                        <div class="mb-3 password">
-                                            <label class="form-label">비밀번호 변경</label>
-                                            <input type="password" class="form-control info-control" id="member_pw1" name="member_pw"  value="" readonly />
-                                        </div>
-                                        <div class="mb-3 passwordCheck">
-                                            <label class="form-label">비밀번호 확인</label>
-                                            <input type="password" class="form-control info-control" id="member_pw2"  value="" readonly/>
-                                        </div>
-                                        <div id='editBox'>
-                                        	
-                                            <input id='btnEdit' class="btn btn-primary edit" type="button" value="수정하기" />
-                                            <input id='btnGoEdit' class="btn btn-primary goEdit" type="submit" value="수정" />
-                                            <input id='btnGoDelete' class="btn btn-primary goDelete" onclick="location.href='/mypage/student?member_no=${member_no}'" type="button" value="취소" />
-                                        </div>
-                                        <input type="hidden" id="member_no" name="member_no" value="${member_no}">
-                                        <input type="hidden" name="teacheryn" value="N">
-                         
-                                    </div>
-                                </form>
+                            
+                            	<div class="info-container info-container1">
+						            <div class="info-title">휴대전화</div>
+						            <form method="post" action="#" onsubmit="">
+							            <table class="info-table">
+							                <tr>
+							                    <th>휴대폰</th>
+							                    <td>
+							                    	<input type="text" class='phonenumber-input' id="phonenumber" name="phonenumber"  value="${memberVO.phonenumber }" readonly><button id="phonenumber-Check-Btn">본인인증</button>
+							                    	<div class="phonenumber-check-box">
+														<input class="phonenumber-check-input" disabled="disabled" maxlength="6">
+														<button class="phonenumber-check-button">인증확인</button>
+														<span id="phonenumber-check-warn"></span>
+													</div>
+													
+							                    </td>
+							                </tr>	
+							            </table>
+							        	<div class="btn-container">
+							        		<button id="phoneEdit" type="button" class="btn btn-primary">변경하기</button>
+							        		<input id='phonenumberEdit' class="btn btn-primary" type="submit" value="수정" />
+	                                        <input id='phonenumberCancle' class="btn btn-primary btnCancle" onclick="location.href='/mypage/student?member_no=${member_no}'" type="button" value="취소" />
+							        	</div>
+							        	<input type="hidden" name="member_no" value="${member_no }">
+							       
+						       		</form>
+						        </div>
+                            
+                                <div class="info-container info-container1">
+						            <div class="info-title">이메일 변경</div>
+						            <form method="post" action="/mypage/emailEdit" onsubmit="return myEmailValidate()">
+							            <table class="info-table">
+							                <tr>
+							                    <th>이메일</th>
+							                    <td>
+							                    	<input type="text" class="info-input" id="userEmail" name="email"  value="${memberVO.email }" readonly><button id="mail-Check-Btn">본인인증</button>
+							                    	<div class="mail-check-box">
+														<input class="mail-check-input" disabled="disabled" maxlength="6">
+														<button class="mail-check-button">인증확인</button>
+						
+													</div>
+													<span id="mail-check-warn"></span>
+							                    </td>
+							                </tr>	
+							            </table>
+							        	<div class="btn-container">
+							        		<button id='btnInfoEdit' type="button" class="btn btn-primary">변경하기</button>
+							        		<input id='btnGoEdit' class="btn btn-primary goEdit" type="submit" value="수정" />
+	                                        <input id='btnCancle' class="btn btn-primary btnCancle" onclick="location.href='/mypage/student?member_no=${member_no}'" type="button" value="취소" />
+							        	</div>
+							        	<input type="hidden" name="member_no" value="${member_no }">
+							            <input type="hidden" name="teacheryn" value="N">
+						       		</form>
+						        </div>
+						
+						        <div class="info-container info-container2">
+						            <div class="info-title">비밀번호 변경</div>
+						            <form method="post" action="/mypage/passwordEdit" onsubmit="return myPasswordValidate()">
+							            <table class="info-table">
+							                <tr>
+							                    <th>비밀번호 입력</th>
+							                    <td><input type="password" id="password" name="member_pw" onkeyup="myPasswordValidate()" readonly><div id="passwordError"></div></td>
+							                </tr>
+							                <tr>
+							                    <th>비밀번호 확인</th>
+							                    <td><input type="password" id="passwordCheck" onkeyup="myPasswordValidate()" readonly><div id="passwordCheckError"></div></td>
+							                </tr>
+							                
+							            </table>
+							            
+							            <div class="btn-container">
+							            	<button id='btnPwEdit' type="submit" class="btn btn-primary" >변경하기</button>
+							            	<input id='btnGoPwEdit' class="btn btn-primary btnGoEdit" type="submit" onclick="submitForm()" value="수정" />
+	                                        <input id='btnPwCancle' class="btn btn-primary btnCancle" onclick="location.href='/mypage/student?member_no=${member_no}'" type="button" value="취소" />
+							            </div>
+							            <input type="hidden" id="member_no" name="member_no" value="${member_no }">	
+							            <input type="hidden" name="teacheryn" value="N">
+						            </form>
+						            
+						        </div>
+						        
+						        
                             </div>
                         </div>
                     </div>

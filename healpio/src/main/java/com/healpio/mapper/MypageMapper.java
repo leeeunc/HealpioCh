@@ -13,6 +13,13 @@ public interface MypageMapper {
 	
 	public int myInfoEdit(MemberVO vo);
 	
+	// 비밀번호 변경
+	public int myPasswordEdit(MemberVO vo);
+	
+	// 이메일 변경
+	public int myEmailEdit(MemberVO vo);
+	
+	
 	// 내가 찜한 강의(student)
 	public List<ViewScrapVO> getScrapList(String member_no);
 	
