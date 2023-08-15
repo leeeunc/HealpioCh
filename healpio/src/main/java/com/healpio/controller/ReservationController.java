@@ -119,11 +119,11 @@ public class ReservationController {
         ReservationVO existingReservation = reservationMapper.getReservationByDetails(reservation.getClassNo(), reservation.getReservation_date(), reservation.getReservation_time());
 
         if (existingReservation != null) {
-        	reservation.setReservation_count(1);  // 처음 예약이므로 카운트를 1로 설정
             // 이미 예약이 있다면, 카운트를 업데이트
             reservationMapper.increaseReservationCountIfNotMax(reservation);
         } else {
-            // 예약이 없다면, 새로운 예약을 추가
+        	reservation.setReservation_count(1);  // 처음 예약이므로 카운트를 1로 설정
+        	// 예약이 없다면, 새로운 예약을 추가
             reservationMapper.insertReservation(reservation);
         }
         

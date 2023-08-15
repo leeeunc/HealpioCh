@@ -112,7 +112,7 @@ public class ReservationServiceTest {
         // mockReservations.put("09:00", 0); 
 
         // Mockito mock 설정
-        when(reservationMapper.getReservationCountsByDateAndTimes(classNo, reservationDate)).thenReturn(mockReservations);
+        when(reservationMapper.getReservationCountsByDateAndTimes(classNo, reservationDate, availableTimes)).thenReturn(mockReservations);
         
         // When
         List<ReservationVO> actualReservations = reservationService.getReservationCountsByDateAndTimes(classNo, reservationDate, availableTimes);

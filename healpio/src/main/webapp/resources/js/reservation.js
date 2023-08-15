@@ -12,11 +12,9 @@
 	
 	window.addEventListener('load', fetchClassDetails);
 	
-	document.addEventListener("DOMContentLoaded", fetchClassDetails); // 중복 호출 제거
-	
-//	document.addEventListener("DOMContentLoaded", function() {
-//		fetchClassDetails();  // 데이터를 먼저 가져옵니다.
-//	});
+	document.addEventListener("DOMContentLoaded", function() {
+		fetchClassDetails();  // 데이터를 먼저 가져옵니다.
+	});
 	
 	// URL에서 class_no 값을 추출하는 함수
 	function getParamsFromURL() {
@@ -45,7 +43,6 @@
 	            })
 	            .then(data => {
 	                activeDays = data.activeDays;
-//	                availableTimes = data.availableTimes;
 	                availableTimes = data.availableTimes[0].split(',');
 	                currentCapacity = data.currentCapacity;
 	                maxCapacity = data.maxCapacity;
@@ -63,7 +60,6 @@
 
     
     function initializePage() {
-    	console.log("initializePage started!"); // 추가
         renderCalendar(now.getMonth(), now.getFullYear(), activeDays);
         renderTimeSelection(); // 예약 시간 설정
         resetSelections(); // 달력과 시간 선택을 초기화합니다.
@@ -165,8 +161,6 @@
 	                let yyyy = date.getFullYear(); // 연도를 가져옴.
 	                selectedDate = yyyy + '-' + mm + '-' + dd; // 연-월-일 형태의 문자열로 합침.
 
-	                console.log("selectedDate======" + selectedDate); // 결과 출력.
-	                
 	                // 선택된 날짜 input박스 value값에 넣기
 	                document.querySelector('#selectedDate').value = selectedDate;
 
@@ -234,14 +228,20 @@
 		   // 기존에 시간과 인원을 함께 설정하던 부분을 분리합니다.
 		      let timeText = i < 10 ? `0${i}:00` : `${i}:00`;
 		      
-		        // 해당 시간에 대한 reservation_count 값을 찾는 코드
-		      let reservationCountForTime = currentCapacity.find(item => item.reservation_time === timeText)?.reservation_count || 0;
-
+		   // 해당 시간에 대한 reservation_count 값을 찾는 코드 (옵셔널체이닝 오류)
+//		      let reservationCountForTime = currentCapacity.find(item => item.reservation_time === timeText)?.reservation_count||0;
+//			     옵셔널 체이닝은 ES2020 이후의 기능이므로, STS3 같은 구버전 IDE에서는 지원하지 않을 수 있습니다.
+		      // 옵셔널 체이닝(Optional Chaining)은 JavaScript에서 ES2020(또는 ES11)에서 도입된 새로운 문법입니다.
+		      // 이 문법은 객체의 속성에 접근할 때 해당 속성이나 중간 경로의 객체가 존재하지 않아도 오류를 발생시키지 않고 undefined를 반환해주는 방식으로 작동합니다.
 		      
-		        timeButton.textContent = `${timeText}\n(${reservationCountForTime}/${maxCapacity}명)`;
-		        timeButton.dataset.time = timeText;
-		        console.log(currentCapacity);
-		        console.log(reservationCountForTime);
+		      
+		      let reservationCountForTime = 0;
+		      if (currentCapacity.find(item => item.reservation_time === timeText)) {
+		          reservationCountForTime = currentCapacity.find(item => item.reservation_time === timeText).reservation_count;
+		      }
+		      timeButton.textContent = `${timeText}\n(${reservationCountForTime}/${maxCapacity}명)`;
+		      timeButton.dataset.time = timeText;
+
 		      
 		      // 버튼을 비활성화/활성화할 때 데이터 속성에서 시간을 가져옵니다.
 		      timeButton.disabled = !(availableTimes.includes(timeButton.dataset.time) && selectedDay) || (reservationCountForTime >= maxCapacity);
@@ -304,9 +304,6 @@
 		      timeSelection.appendChild(row);
 		    }
 		  }
-
-
-
 
     // 예약하기 버튼에 대한 이벤트 설정 함수
     function attachReservationListener() {
