@@ -107,19 +107,31 @@ public class ReservationServiceImpl implements ReservationService {
     
     @Override
     public List<ReservationVO> getReservationCountsByDateAndTimes(String class_no, String reservation_date, List<String> availableTimes) {
-    	System.out.println("=====class_no=====" + class_no);
-    	System.out.println("=====reservation_date=====" + reservation_date);
-    	System.out.println("=====availableTimes=====" + availableTimes);
-    	List<ReservationVO> actualReservations = reservationMapper.getReservationCountsByDateAndTimes(class_no, reservation_date, availableTimes);
+        System.out.println("=====class_no=====" + class_no);
+        System.out.println("=====reservation_date=====" + reservation_date);
+        System.out.println("=====availableTimes=====" + availableTimes);
+        List<ReservationVO> actualReservations = reservationMapper.getReservationCountsByDateAndTimes(class_no, reservation_date, availableTimes);
         System.out.println("actualReservations" + actualReservations);
-//    	if(actualReservations != null) {
-//    		for(String time : availableTimes) {
-//    			actualReservations.putIfAbsent(time, 0);  // 만약 해당 시간에 예약이 없으면 0명으로 설정
-//    		}
-//    	}
+
+        // `availableTimes`에서 각 시간에 대해 해당 시간의 예약이 있는지 확인
+        for (String time : availableTimes) {
+            boolean timeExists = false;
+            for (ReservationVO res : actualReservations) {
+                if (res.getReservation_time().equals(time)) {
+                    timeExists = true;
+                    break;
+                }
+            }
+            // 해당 시간에 예약이 없으면 0명으로 예약된 것으로 간주하고 목록에 추가
+            if (!timeExists) {
+                ReservationVO emptyRes = new ReservationVO();
+                emptyRes.setReservation_time(time);
+                emptyRes.setReservation_count(1);
+                actualReservations.add(emptyRes);
+            }
+        }
+
         return actualReservations;
     }
-
-
 
 }

@@ -57,7 +57,6 @@
 	    GROUP BY reservation_time
 	</select>
 
-	
 	<update id="increaseReservationCountIfNotMax">
 	    UPDATE reservation 
 	    SET reservation_count = reservation_count + 1 

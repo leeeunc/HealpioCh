@@ -13,8 +13,8 @@ public class ReservationVO {
 	private String reservation_date;
 	private String reservation_time;
 	private Date reservation_regdate;
-	private int reservation_count;
-	private int reservation_maxcount;
+	private int reservation_count = 0;
+	private int reservation_maxcount = 0;
 	
     public String getMemberNo() {
         return member_no;

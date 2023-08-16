@@ -12,8 +12,6 @@
 	
 	window.addEventListener('load', fetchClassDetails);
 	
-	document.addEventListener("DOMContentLoaded", fetchClassDetails); // 중복 호출 제거
-	
 //	document.addEventListener("DOMContentLoaded", function() {
 //		fetchClassDetails();  // 데이터를 먼저 가져옵니다.
 //	});
@@ -45,7 +43,6 @@
 	            })
 	            .then(data => {
 	                activeDays = data.activeDays;
-//	                availableTimes = data.availableTimes;
 	                availableTimes = data.availableTimes[0].split(',');
 	                currentCapacity = data.currentCapacity;
 	                maxCapacity = data.maxCapacity;
@@ -63,7 +60,6 @@
 
     
     function initializePage() {
-    	console.log("initializePage started!"); // 추가
         renderCalendar(now.getMonth(), now.getFullYear(), activeDays);
         renderTimeSelection(); // 예약 시간 설정
         resetSelections(); // 달력과 시간 선택을 초기화합니다.
@@ -165,8 +161,6 @@
 	                let yyyy = date.getFullYear(); // 연도를 가져옴.
 	                selectedDate = yyyy + '-' + mm + '-' + dd; // 연-월-일 형태의 문자열로 합침.
 
-	                console.log("selectedDate======" + selectedDate); // 결과 출력.
-	                
 	                // 선택된 날짜 input박스 value값에 넣기
 	                document.querySelector('#selectedDate').value = selectedDate;
 
@@ -234,14 +228,20 @@
 		   // 기존에 시간과 인원을 함께 설정하던 부분을 분리합니다.
 		      let timeText = i < 10 ? `0${i}:00` : `${i}:00`;
 		      
-		        // 해당 시간에 대한 reservation_count 값을 찾는 코드
-		      let reservationCountForTime = currentCapacity.find(item => item.reservation_time === timeText)?.reservation_count || 0;
-
+		   // 해당 시간에 대한 reservation_count 값을 찾는 코드 (옵셔널체이닝 오류)
+//		      let reservationCountForTime = currentCapacity.find(item => item.reservation_time === timeText)?.reservation_count||0;
+//			     옵셔널 체이닝은 ES2020 이후의 기능이므로, STS3 같은 구버전 IDE에서는 지원하지 않을 수 있습니다.
+		      // 옵셔널 체이닝(Optional Chaining)은 JavaScript에서 ES2020(또는 ES11)에서 도입된 새로운 문법입니다.
+		      // 이 문법은 객체의 속성에 접근할 때 해당 속성이나 중간 경로의 객체가 존재하지 않아도 오류를 발생시키지 않고 undefined를 반환해주는 방식으로 작동합니다.
 		      
-		        timeButton.textContent = `${timeText}\n(${reservationCountForTime}/${maxCapacity}명)`;
-		        timeButton.dataset.time = timeText;
-		        console.log(currentCapacity);
-		        console.log(reservationCountForTime);
+		      
+		      let reservationCountForTime = 0;
+		      if (currentCapacity.find(item => item.reservation_time === timeText)) {
+		          reservationCountForTime = currentCapacity.find(item => item.reservation_time === timeText).reservation_count;
+		      }
+		      timeButton.textContent = `${timeText}\n(${reservationCountForTime}/${maxCapacity}명)`;
+		      timeButton.dataset.time = timeText;
+
 		      
 		      // 버튼을 비활성화/활성화할 때 데이터 속성에서 시간을 가져옵니다.
 		      timeButton.disabled = !(availableTimes.includes(timeButton.dataset.time) && selectedDay) || (reservationCountForTime >= maxCapacity);
@@ -269,11 +269,12 @@
 		      
 
 		        // 버튼이 비활성화된 경우 색상 변경
-		        if (timeButton.disabled) {
-		            timeButton.classList.add('disabled'); // 클래스 추가
-		        } else {
-		            timeButton.classList.remove('disabled'); // 클래스 제거
-		        }
+		      	if (reservationCountForTime >= maxCapacity) {
+		    	    timeButton.classList.add('disabled'); // 클래스 추가
+		    	} else {
+		    	    timeButton.classList.remove('disabled'); // 클래스 제거
+		    	}
+
 		      
 		      
 		      
@@ -304,10 +305,13 @@
 		      timeSelection.appendChild(row);
 		    }
 		  }
-
-
-
-
+	  
+	  
+	// 학생 여부 판단 함수
+	  function isStudent(teacheryn) {
+	      return teacheryn === 'N';
+	  }
+ 
     // 예약하기 버튼에 대한 이벤트 설정 함수
     function attachReservationListener() {
         // 예약하기 버튼에 클릭 이벤트 추가
@@ -317,18 +321,24 @@
             let selectedDate = document.querySelector('#selectedDate').value; // 선택된 날짜 값을 가져오는 로직
             let selectedTime = document.querySelector('#selectedTime').value; // 선택된 시간 값을 가져오는 로직
 
-            document.querySelector('input[name="date"]').value = selectedDate;
-            document.querySelector('input[name="time"]').value = selectedTime;
-        	
-            let currentYear = now.getFullYear(); // 현재 연도 가져오기
-            let currentMonth = now.getMonth() + 1; // 현재 월 가져오기(JavaScript에서는 월이 0부터 시작하므로 1을 더해준다)
-            // 모달에 표시할 텍스트 설정
-            document.getElementById('confirmation-text').innerHTML = `예약하시겠습니까? <br> ${currentYear}년 ${currentMonth}월 ${selectedDay.innerText}일 ${selectedTime}에 예약하시려면 '예'를 클릭하세요.`;
-            document.getElementById('modal').style.display = 'block'; // 모달 표시
-            // 모달창 배경 보이기
-            document.getElementById('myModal').style.display = 'block';
-            // 모달창 내용물도 보이기
-            document.getElementById('modal-content').style.display = 'block';
+            // 학생 여부 판단
+            let teacherynInput = document.querySelector('.teacheryn');
+            let isStudentMember = isStudent(teacherynInput.value.trim());
+
+            if (isStudentMember) {
+                document.querySelector('input[name="date"]').value = selectedDate;
+                document.querySelector('input[name="time"]').value = selectedTime;
+
+                let currentYear = now.getFullYear();
+                let currentMonth = now.getMonth() + 1;
+                document.getElementById('confirmation-text').innerHTML = `예약하시겠습니까? <br> ${currentYear}년 ${currentMonth}월 ${selectedDay.innerText}일 ${selectedTime}에 예약하시려면 '예'를 클릭하세요.`;
+                document.getElementById('modal').style.display = 'block';
+                document.getElementById('myModal').style.display = 'block';
+                document.getElementById('modal-content').style.display = 'block';
+            } else {
+                // 학생이 아닐 경우 예약이 불가능하다는 메시지를 표시하거나 다른 처리를 수행합니다.
+                alert('학생만 예약할 수 있습니다.');
+            }
         });
     }
 
@@ -349,26 +359,50 @@
         });
     }
 
-    // 모달창 가져오기
-    var modal = document.getElementById("myModal");
-    // 모달을 여는 버튼 가져오기
-    var btn = document.getElementById("reserve");
-    // 모달을 닫는 버튼(엑스) 가져오기
-    var span = document.getElementsByClassName("close")[0];
-    // 사용자가 버튼을 클릭하면 모달창 열기
-    btn.onclick = function() {
-      modal.style.display = "block";
+//    // 모달창 가져오기
+//    var modal = document.getElementById("myModal");
+//    // 모달을 여는 버튼 가져오기
+//    var btn = document.getElementById("reserve");
+//    // 모달을 닫는 버튼(엑스) 가져오기
+//    var span = document.getElementsByClassName("close")[0];
+//    // 사용자가 버튼을 클릭하면 모달창 열기
+//    btn.onclick = function() {
+//      modal.style.display = "block";
+//    }
+//    // 사용자가 엑스(x)를 클릭하면 모달창 닫기
+//    span.onclick = function() {
+//      modal.style.display = "none";
+//    }
+//    // 사용자가 모달창 외부를 클릭하면 모달창 닫기
+//    window.onclick = function(event) {
+//	    if (event.target == modal) {
+//	        modal.style.display = "none";
+//	    }
+//    }
+    
+ // 사용자가 버튼을 클릭하면 모달창 열기
+    btn.onclick = () => openModal();
+
+    // 모달을 여는 함수 정의
+    function openModal() {
+        modal.style.display = "block";
     }
+
+    // 모달을 닫는 함수 정의
+    function closeModal() {
+        modal.style.display = "none";
+    }
+
     // 사용자가 엑스(x)를 클릭하면 모달창 닫기
-    span.onclick = function() {
-      modal.style.display = "none";
-    }
+    span.onclick = closeModal;
+
     // 사용자가 모달창 외부를 클릭하면 모달창 닫기
-    window.onclick = function(event) {
-	    if (event.target == modal) {
-	        modal.style.display = "none";
-	    }
-    }
+    window.onclick = (event) => {
+        if (event.target == modal) {
+            closeModal();
+        }
+    };
+
     
 
 

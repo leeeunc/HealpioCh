@@ -8,6 +8,9 @@
     <title>Document</title>
     <link href="../resources/css/reservation.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css' rel='stylesheet' />
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js'></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js'></script>
 </head>
 <body>
     <div class="container">
@@ -29,6 +32,8 @@
 		    <input type="hidden" id="selectedMember" name="member_no" value="${classVO.teacher_content}">
 		    <input type="hidden" id="selectedMember" name="member_no" value="${classVO.nickname}">
 		    <input type="hidden" id="selectedMember" name="member_no" value="${classVO.exercise_name}">
+    		<input type="hidden" name="member_no" value="${memberVo.member_no }">
+			<input type="hidden" name="teacheryn" class="teacheryn" value="${memberVo.teacheryn }">
     	<div>
 	        <button id="reserve" type="submit" disabled>예약하기</button>
 	    </div>

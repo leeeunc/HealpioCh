@@ -84,9 +84,9 @@
 	
 	/* 버튼이 비활성화된 경우의 스타일 */
 	#time-selection button.disabled {
-	    background-color: #400040; /* 원하는 색상으로 변경 */
-	    color: #80ff00; /* 원하는 색상으로 변경 */
-	    cursor: not-allowed; /* 커서 스타일 변경 */
+	    background-color: #400040 !important; /* 원하는 색상으로 변경 */
+	    color: #80ff00 !important; /* 원하는 색상으로 변경 */
+	    cursor: not-allowed !important; /* 커서 스타일 변경 */
 	}
 	
 	/* 예약 버튼 스타일 */
