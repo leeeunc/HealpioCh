@@ -89,6 +89,15 @@ public class MypageTest {
 		log.info(password);
 	}
 	
+	@Test
+	public void myPasswordEdit() {
+		MemberVO vo = new MemberVO();
+		vo.setMember_no("M000002");
+		vo.setMember_pw("12345");
+		int res = service.myPasswordEdit(vo);
+		log.info(res);
+	}
+	
 	
 	
 }

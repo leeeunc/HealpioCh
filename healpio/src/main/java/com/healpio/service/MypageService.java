@@ -15,6 +15,10 @@ public interface MypageService {
 	
 	public int myInfoEdit(MemberVO vo);
 	
+	public int myPasswordEdit(MemberVO vo);
+	
+	public int myEmailEdit(MemberVO vo);
+	
 	public List<ViewScrapVO> getScrapList(String member_no);
 	
 	public List<ViewScrapVO> getRegisterList(String member_no);
@@ -30,4 +34,5 @@ public interface MypageService {
 	public List<MyReservationVO> getPreviousBookings(String member_no);
 	
 	public Boolean passwordCheck(MemberVO vo);
+	
 }

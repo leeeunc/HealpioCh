@@ -20,6 +20,20 @@
 		email = #{email}
 		WHERE member_no = #{member_no}
 	</update>
+		
+	<update id="myPasswordEdit">
+		UPDATE member
+		SET
+		member_pw = #{member_pw}
+		WHERE member_no = #{member_no}
+	</update>
+	
+	<update id="myEmailEdit">
+		UPDATE member
+		SET
+		email = #{email}
+		WHERE member_no = #{member_no}
+	</update>
 	
 
 	

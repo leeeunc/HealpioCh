@@ -120,71 +120,43 @@ function preBooksView(map){
 }
 
 
-//모달창 제어
-btnEdit.addEventListener('click',function(){
-	passwordModal.show();
-
-});
-
-
-pwCheckBtn.addEventListener('click',function(){
-	
-	let member_no = document.querySelector('#member_no').value;
-	let member_pw = document.querySelector('#password-input-box').value;
+function myPasswordValidate(){
+	let password = document.querySelector('#password').value;
+	let passwordCheck = document.querySelector('#passwordCheck').value;
+	let passwordError = document.querySelector('#passwordError');
+	let passwordCheckError = document.querySelector('#passwordCheckError');
+	let btnPwEdit = document.querySelector('#btnPwEdit');
 	
 	
-	
-	fetch('/mypage/passwordCheck'
-			, {method : 'post'
-				, headers : {'Content-Type' : 'application/json'}
-				, body : JSON.stringify({
-				    member_no: member_no,
-				    member_pw: member_pw,
-				  })
-			})
-		// 5. 응답처리
-		.then(response => response.json())
-		.then(map => passwordCheck(map));
-	
-		passwordModal.hide();		
-		
-})
-
-function passwordCheck(map){
-	let res = map.passwordCheck;
-	console.log(res);
-	
-	if(res === true){
-		document.querySelector('#btnEdit').style.display = 'none';
-	    document.querySelector('#btnGoEdit').style.display = 'inline-block';
-	    document.querySelector('#btnGoDelete').style.display = 'inline-block';
-	    document.querySelector('.password').style.display = 'block';
-	    document.querySelector('.passwordCheck').style.display = 'block';
-	    
-	    let inputs = document.getElementsByClassName('info-control');
-	    
-	    console.log(inputs);
-
-	    for(let i = 0; i < inputs.length; i++){
-	        inputs[i].readOnly = false;
-	        
-	    }
-	  }else{
-		mypageModal.show();
-		document.querySelector('.myModalBtn-primary').style.display='none';
-		document.querySelector('.myModal-title').innerHTML = '비밀번호 인증 실패';
-		document.querySelector('.myModal-body-text').innerHTML = '비밀번호가 일치하지 않습니다.';
-	
-    }
+	 let passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,12}$/;
+     if (!passwordPattern.test(password)) {
+    	 passwordError.style.color = 'red';
+         passwordError.innerHTML = "비밀번호는 영문과 숫자 조합으로 6~12글자여야 합니다.";
+         btnPwEdit.disabled = 'true';
+         return false;
+     } else {
+    	 passwordError.style.color = '#3CB371'
+         passwordError.innerHTML = "<i class='fa-solid fa-circle-check'></i>";
+     }
+     
+     // 비밀번호 확인 검사
+     if (password !== passwordCheck || passwordCheck == '') {
+    	 passwordCheckError.style.color = 'red'
+    	 passwordCheckError.innerHTML = "비밀번호가 일치하지 않습니다.";
+    	 btnPwEdit.disabled = 'true';
+         return false;
+     } else {
+    	 passwordCheckError.style.color = '#3CB371'
+    	 passwordCheckError.innerHTML = "<i class='fa-solid fa-circle-check'></i>";
+     }
+     
+     if(passwordPattern.test(password) && password === passwordCheck){
+    	 btnPwEdit.disabled = '';
+     }
+     
+      return true;
 }
 
-document.getElementById('btnGoEdit').addEventListener('click', function(e) {
-    var pw1 = document.getElementById('member_pw1').value;
-    var pw2 = document.getElementById('member_pw2').value;
-    
-    if (pw1 !== pw2) {
-        alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
-        e.preventDefault(); // 폼 제출을 막음
-    }
-    
-});
+function submitForm(){
+	 alert("비밀번호가 변경되었습니다.");
+}	

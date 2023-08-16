@@ -88,4 +88,24 @@ public class MypageSerivceImpl implements MypageService{
 		
 	}
 
+	@Override
+	public int myPasswordEdit(MemberVO vo) {
+		vo.setMember_pw(encoder.encode(vo.getMember_pw()));
+		int res = mypageMapper.myPasswordEdit(vo);
+		
+		
+		
+		
+		return res;
+		
+	}
+
+	@Override
+	public int myEmailEdit(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return mypageMapper.myEmailEdit(vo);
+	}
+
+	
+
 }
