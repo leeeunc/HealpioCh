@@ -8,9 +8,6 @@
     <title>Document</title>
     <link href="../resources/css/reservation.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css' rel='stylesheet' />
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js'></script>
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js'></script>
 </head>
 <body>
     <div class="container">
@@ -25,13 +22,12 @@
 		    <input type="hidden" id="selectedTime" name="time" value="${reservationVO.reservation_time}">
 		    <input type="hidden" id="selectedClass" name="class_no" value="${classVO.class_no}">
 		    <input type="hidden" id="selectedMaxcount" name="maxcount" value="${classVO.class_maxcount}">
-		    <input type="hidden" id="selectedMember" name="member_no" value="${classVO.member_no}">
-		    <input type="hidden" id="selectedMember" name="member_no" value="${classVO.class_title}">
-		    <input type="hidden" id="selectedMember" name="member_no" value="${classVO.class_content}">
-		    <input type="hidden" id="selectedMember" name="member_no" value="${classVO.class_introduce}">
-		    <input type="hidden" id="selectedMember" name="member_no" value="${classVO.teacher_content}">
-		    <input type="hidden" id="selectedMember" name="member_no" value="${classVO.nickname}">
-		    <input type="hidden" id="selectedMember" name="member_no" value="${classVO.exercise_name}">
+		    <input type="hidden" id="selectedMember" name="class_title" value="${classVO.class_title}">
+		    <input type="hidden" id="selectedMember" name="class_content" value="${classVO.class_content}">
+		    <input type="hidden" id="selectedMember" name="class_introduce" value="${classVO.class_introduce}">
+		    <input type="hidden" id="selectedMember" name="teacher_content" value="${classVO.teacher_content}">
+		    <input type="hidden" id="selectedMember" name="nickname" value="${classVO.nickname}">
+		    <input type="hidden" id="selectedMember" name="exercise_name" value="${classVO.exercise_name}">
     		<input type="hidden" name="member_no" value="${memberVo.member_no }">
 			<input type="hidden" name="teacheryn" class="teacheryn" value="${memberVo.teacheryn }">
     	<div>
