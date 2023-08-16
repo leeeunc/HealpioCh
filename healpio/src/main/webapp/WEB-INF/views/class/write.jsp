@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="/resources/css/write.css">
 <script src="https://kit.fontawesome.com/0aadd0de21.js" crossorigin="anonymous"></script>
 <script>
-window.addEventListener('load', function(){	
+window.addEventListener('load', function(){		
 	writeBtn.addEventListener('click', function(e){
 		// 기본 이벤트(새로고침) 제거
 		e.preventDefault();
@@ -75,6 +75,12 @@ window.addEventListener('load', function(){
 			return;
 		}
 		
+		if(!teacher_content.value){
+			alert();
+			teacher_content.focus();
+			return;
+		}
+		
 		let class_dayCount = 0;
 		let class_day = document.getElementsByName('class_day');
 		for(var i=0; i<class_day.length; i++){
@@ -111,6 +117,19 @@ function alert(){
 	setTimeout(() => {
 		alertDiv.style.visibility='hidden';
 	  }, 800)
+}
+
+function previewImg(input) {
+	const popup = window.open('', '_blank', 'width=530px, height=339px, left=340px, top=160px');
+	
+    popup.document.write('<title>이미지 미리보기 500*330</title>');
+    for (let i=0; i<input.files.length; i++) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            popup.document.write('<img src="' + e.target.result + '" style="width: 500px; height: 330px; object-fit: cover;"><br>');
+        };
+        reader.readAsDataURL(input.files[i]);
+    }
 }
 </script>
 </head>
@@ -170,7 +189,7 @@ function alert(){
 			  		  
 			  <div class="col-md-9">
 				<label for="files" class="form-label"><b>대표 사진</b></label>
-				<input class="form-control form-control-sm" type="file" name="files" id="files" multiple>
+				<input class="form-control form-control-sm" type="file" name="files" id="files" onchange="previewImg(this)" multiple>
 			  </div>
 			  
 			  <div class="col-md-12">

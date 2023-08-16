@@ -343,28 +343,58 @@ window.addEventListener('load', function(){
 	<div id="map" style="width:1040px;height:510px;"></div>
 <script>
 locationBtn.addEventListener('click', function(){	
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-    };  
+	let xhr = new XMLHttpRequest();
+    xhr.open('get', '/resources/json/HangJeongDong_ver20230701.geojson');
+    xhr.send();
+    xhr.onreadystatechange = function(){
+      if(xhr.readyState===4 && xhr.status===200){
+        var hangjeongdong = JSON.parse(xhr.responseText);
+        for(let i=0; i<hangjeongdong.features.length; i++){
+          if(hangjeongdong.features[i].properties.adm_nm==(province.value + ' ' + city.value.replace(" ", "") + ' ' + district.value)){
+            var polygonPath = [];
+            for(let j=0; j<hangjeongdong.features[i].geometry.coordinates[0][0].length; j++){
+              polygonPath.push(new kakao.maps.LatLng(hangjeongdong.features[i].geometry.coordinates[0][0][j][1], hangjeongdong.features[i].geometry.coordinates[0][0][j][0]));
+            }
+          }
+        }        
+        
+        // 지도에 표시할 다각형을 생성합니다
+        var polygon = new kakao.maps.Polygon({
+            path:polygonPath, // 그려질 다각형의 좌표 배열입니다
+            strokeWeight: 3, // 선의 두께입니다
+            strokeColor: '#39DE2A', // 선의 색깔입니다
+            strokeOpacity: 0.8, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+            strokeStyle: 'solid', // 선의 스타일입니다
+            fillColor: '#A2FF99', // 채우기 색깔입니다
+            fillOpacity: 0.7 // 채우기 불투명도 입니다
+        });
+        
+        // 지도에 다각형을 표시합니다
+        polygon.setMap(map);    
+      }
+    }
 
-	// 지도를 생성합니다    
-	var map = new kakao.maps.Map(mapContainer, mapOption); 
-	
-	// 주소-좌표 변환 객체를 생성합니다
-	var geocoder = new kakao.maps.services.Geocoder();
-	
-	// 주소로 좌표를 검색합니다
-	geocoder.addressSearch(province.value + city.value + district.value, function(result, status) {	
-	    // 정상적으로 검색이 완료됐으면 
-	     if (status === kakao.maps.services.Status.OK) {
-	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-	
-	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-	        map.setCenter(coords);
-	    } 
-	});    
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+        mapOption = { 
+            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+            level: 5 // 지도의 확대 레벨
+        };  
+    
+    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+    	
+    // 주소-좌표 변환 객체를 생성합니다
+    var geocoder = new kakao.maps.services.Geocoder();
+    
+    // 주소로 좌표를 검색합니다
+    geocoder.addressSearch(province.value + city.value + district.value, function(result, status) {	
+      // 정상적으로 검색이 완료됐으면 
+      if (status === kakao.maps.services.Status.OK) {
+          var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+  
+          // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+          map.setCenter(coords);
+      } 
+    });   
 })
 </script>
 </div>

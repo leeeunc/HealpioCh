@@ -81,6 +81,12 @@ window.addEventListener('load', function(){
 			alert();
 			class_price.focus();
 			return;
+		}		
+		
+		if(!teacher_content.value){
+			alert();
+			teacher_content.focus();
+			return;
 		}
 		
 		let class_dayCount = 0;
