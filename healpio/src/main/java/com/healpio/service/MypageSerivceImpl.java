@@ -106,6 +106,12 @@ public class MypageSerivceImpl implements MypageService{
 		return mypageMapper.myEmailEdit(vo);
 	}
 
+	@Override
+	public int myPhonenumberEdit(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return mypageMapper.myPhonenumberEdit(vo);
+	}
+
 	
 
 }

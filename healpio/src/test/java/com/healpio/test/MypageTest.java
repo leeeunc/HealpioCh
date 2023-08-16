@@ -98,6 +98,15 @@ public class MypageTest {
 		log.info(res);
 	}
 	
+	@Test
+	public void phonenumberEdit() {
+		MemberVO vo = new MemberVO();
+		vo.setMember_no("M000013");
+		vo.setPhonenumber("01081208867");
+		int res = mapper.myPhonenumberEdit(vo);
+		log.info(res);
+	}
+	
 	
 	
 }

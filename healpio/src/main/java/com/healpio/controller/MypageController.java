@@ -127,6 +127,27 @@ public class MypageController {
 		
 	}
 	
+	@PostMapping("phonenumberEdit")
+	public String phonenumberEdit(MemberVO vo, RedirectAttributes rttr) {
+		int res = mypageService.myPhonenumberEdit(vo);
+		log.info("=========================================================" + res);
+		if(res > 0) {
+			rttr.addAttribute("member_no", vo.getMember_no());
+			
+			if(vo.getTeacheryn().equals("Y")) {
+				
+				return "redirect:/mypage/teacher";
+			}else {
+				return "redirect:/mypage/student";
+			}
+		}else{
+			rttr.addAttribute("errorMsg", "전화번호 변경 중 에러가 발생하였습니다.");
+			return "/";
+		}
+		
+		
+	}
+	
 	@ResponseBody
 	@GetMapping("student/reservation/{member_no}")
 	public Map<String, Object> studentReservation(@PathVariable("member_no") String member_no) {
