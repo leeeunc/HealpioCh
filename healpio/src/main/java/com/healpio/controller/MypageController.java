@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.healpio.service.MailSendService;
 import com.healpio.service.MypageService;
+import com.healpio.service.SendSmsService;
 import com.healpio.vo.MemberVO;
 import com.healpio.vo.MyReservationVO;
 import com.healpio.vo.ScrapVO;
@@ -30,6 +32,9 @@ public class MypageController {
 	
 	@Autowired
 	MypageService mypageService;
+	
+	@Autowired
+	private MailSendService mailService;
 	
 	@GetMapping("student")
 	public String student(MemberVO vo, Model model) {
@@ -73,7 +78,49 @@ public class MypageController {
 				return "redirect:/mypage/student";
 			}
 		}else{
-			rttr.addAttribute("msg", "수정 중 에러가 발생하였습니다.");
+			rttr.addAttribute("msg", "개인정보 수정 중 에러가 발생하였습니다.");
+			return "/";
+		}
+		
+		
+	}
+	
+	@PostMapping("passwordEdit")
+	public String passwordEdit(MemberVO vo, RedirectAttributes rttr) {
+		int res = mypageService.myPasswordEdit(vo);
+		log.info("=========================================================" + res);
+		if(res > 0) {
+			rttr.addAttribute("member_no", vo.getMember_no());
+			
+			if(vo.getTeacheryn().equals("Y")) {
+				
+				return "redirect:/mypage/teacher";
+			}else {
+				return "redirect:/mypage/student";
+			}
+		}else{
+			rttr.addAttribute("errorMsg", "비밀번호 변경 중 에러가 발생하였습니다.");
+			return "/";
+		}
+		
+		
+	}
+	
+	@PostMapping("emailEdit")
+	public String emailEdit(MemberVO vo, RedirectAttributes rttr) {
+		int res = mypageService.myEmailEdit(vo);
+		log.info("=========================================================" + res);
+		if(res > 0) {
+			rttr.addAttribute("member_no", vo.getMember_no());
+			
+			if(vo.getTeacheryn().equals("Y")) {
+				
+				return "redirect:/mypage/teacher";
+			}else {
+				return "redirect:/mypage/student";
+			}
+		}else{
+			rttr.addAttribute("errorMsg", "이메일 변경 중 에러가 발생하였습니다.");
 			return "/";
 		}
 		
@@ -150,6 +197,37 @@ public class MypageController {
 		
 		return map;
  		
+	}
+	
+	@ResponseBody
+	@GetMapping("sendSms")
+	public Map<String, String> sendSms(String phonenumber){
+		SendSmsService sendSms = new SendSmsService();
+		Map<String,String> map = new HashMap<String, String>();
+		try {
+			String number = sendSms.sendMassage("01081208867");
+			map.put("number", number);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("msg", "문자 전송 중 에러가 발생하였습니다.");
+		}
+		
+		
+		return map;
+		
+ 		
+	}
+	
+	
+	
+	//이메일 인증
+	@GetMapping("mailCheck")
+	@ResponseBody
+	public String mailCheck(String email) {
+		System.out.println("이메일 인증 요청이 들어옴!");
+		System.out.println("이메일 인증 이메일 : " + email);
+		return mailService.joinEmail(email);
 	}
 	
 	

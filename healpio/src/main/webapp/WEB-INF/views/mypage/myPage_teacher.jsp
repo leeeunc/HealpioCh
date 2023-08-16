@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
     <head>
@@ -113,42 +114,55 @@
 
                             <!-- 내 정보 -->
                             <div class="content-info">
-                                <form class="info-back" method="post" action="/mypage/edit">
-                                    <div class="info-back-container">
-                                        <div><h3>내 정보</h3></div>
-                                        <div class="mb-3">
-                                            <label class="form-label">이름</label>
-                                            <input type="text" class="form-control info-control" name="member_name" value="${memberVO.member_name}" readonly/>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">닉네임</label>
-                                            <input type="text" class="form-control info-control" name="nickname" value="${memberVO.nickname}" readonly/>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">전화번호</label>
-                                            <input type="text" class="form-control info-control" name="phonenumber" value="${memberVO.phonenumber }" readonly/>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">이메일</label>
-                                            <input type="email" class="form-control info-control" name="email" value="${memberVO.email }" readonly/>
-                                        </div>
-                                        <div class="mb-3 password">
-                                            <label class="form-label ">비밀번호 변경</label>
-                                            <input type="password" class="form-control info-control" id="member_pw1" name="member_pw" value=""  readonly/>
-                                        </div>
-                                        <div class="mb-3 passwordCheck">
-                                            <label class="form-label ">비밀번호 확인</label>
-                                            <input type="password" class="form-control info-control" id="member_pw2" value="" readonly/>
-                                        </div>
-                                        <div id='editBox'>
-                                            <input id='btnEdit' class="btn btn-primary edit" type="button" value="수정하기" />
-                                            <input id='btnGoEdit' class="btn btn-primary goEdit" type="submit" value="수정" />
-                                            <input id='btnGoDelete' class="btn btn-primary goDelete" onclick="location.href='/mypage/teacher?member_no=${member_no}'" type="button" value="취소" />
-                                        </div>
-                                        <input type="hidden" id="member_no" name="member_no" value="${member_no}">
-                                        <input type="hidden" name="teacheryn" value="Y">
-                                    </div>
-                                </form>
+                                <div class="info-container1">
+						            <div class="info-title">회원정보</div>
+						            <table class="info-table1">
+						                <tr>
+						                    <th>이메일</th>
+						                    <td><input type="text" class="info-input" name="email"  value="${memberVO.email }" readonly></td>
+						                </tr>
+						                <tr>
+						                    <th>닉네임</th>
+						                    <td><input type="text" class="info-input" name="nickname" value="${memberVO.nickname }"  readonly></td>
+						                </tr>
+						                <tr>
+						                    <th>이름</th>
+						                    <td><input type="text" class="info-input" name="member_name" value="${memberVO.member_name }" readonly></td>
+						                </tr>
+						                <tr>
+						                    <th>휴대폰</th>
+						                    <td><input type="text" class="info-input" name="phonenumber" value="${memberVO.phonenumber }" readonly></td>
+						                </tr>
+						                <tr>
+						                    <th>구분</th>
+						                    <td>강사</td>
+						                </tr>
+						               
+						            </table>
+						        	<div class="btn-container"><button id='btnEdit' type="button" class="btn btn-primary">Primary</button></div>
+						        </div>
+						
+						        <div class="info-container2">
+						            <div class="info-title">비밀번호 변경</div>
+						            <form method="post" action="/mypage/passwordEdit" onsubmit="return myPasswordValidate()">
+							            <table class="info-table2">
+							                <tr>
+							                    <th>비밀번호 입력</th>
+							                    <td><input type="password" id="password" name="member_pw" onkeyup="myPasswordValidate()" ><div id="passwordError"></div></td>
+							                </tr>
+							                <tr>
+							                    <th>비밀번호 확인</th>
+							                    <td><input type="password" id="passwordCheck" onkeyup="myPasswordValidate()"><div id="passwordCheckError"></div></td>
+							                </tr>
+							                
+							            </table>
+							            
+							            <div class="btn-container"><button id='btnPwEdit' type="submit" class="btn btn-primary" onclick="submitForm()">변경하기</button></div>
+							            <input type="hidden" id="member_no" name="member_no" value="${member_no }">
+							            <input type="hidden" name="teacheryn" value="Y">
+						            </form>
+						            
+						        </div>
                             </div>
                         </div>
                     </div>

@@ -129,6 +129,207 @@ function preCourseView(map){
 }
 
 
+document.querySelector('#btnInfoEdit').addEventListener('click', function(){
+	let info_input = document.querySelectorAll('.info-input');
+	document.querySelector('#btnInfoEdit').style.display = 'none';
+	document.querySelector('#btnGoEdit').style.display = 'inline-block';
+	document.querySelector('#btnCancle').style.display = 'inline-block';
+	document.querySelector('#mail-Check-Btn').style.display = 'inline-block';
+	
+	for(let i = 0; i < info_input.length; i++){
+	    info_input[i].style.border='1px solid black';
+	    info_input[i].readOnly = '';
+	    
+	}
+	
+})
+
+// 휴대번호 변경
+document.querySelector('#phoneEdit').addEventListener('click',function(){
+	document.querySelector('.phonenumber-input').style.border = '1px solid black';
+	
+	document.querySelector('#phonenumber-Check-Btn').style.display = 'inline-block';
+	document.querySelector('.phonenumber-check-box').style.display = 'block';
+	
+	document.querySelector('#phoneEdit').style.display = 'none';
+	document.querySelector('#phonenumberEdit').style.display = 'inline-block';
+	document.querySelector('#phonenumberCancle').style.display = 'inline-block';
+	
+	document.querySelector('.phonenumber-input').readOnly = '';
+	
+})
+
+
+
+document.querySelector('#phonenumber-Check-Btn').addEventListener('click', function(){
+	let phonenumber = document.querySelector('#phonenumber').value;
+	let resultMsg = document.querySelector	('#phonenumber-check-warn');
+	
+	fetch("/mypage/sendSms?phonenumber="+phonenumber)
+	.then(response => response.json())
+	.then(map => {
+		
+		alert("인증번호가 전송되었습니다.");
+		document.querySelector('.phonenumber-check-input').disabled = false;
+		document.querySelector('.phonenumber-check-button').addEventListener('click', function(){
+			let inputCode = document.querySelector('.phonenumber-check-input').value;
+			
+			if(map.number == inputCode){
+				document.querySelector('.phonenumber-check-button').style.display = 'none';
+				resultMsg.style.color = '#3CB371';
+		        resultMsg.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+			}else{
+				resultMsg.innerHTML = '인증번호가 불일치 합니다. 다시 확인해주세요!';
+		        resultMsg.style.color = 'red';
+			}
+		})
+	})
+	
+	
+})
+
+
+
+
+// 기본이벤트 제거
+document.querySelector('#phonenumber-Check-Btn').addEventListener('click', function(e){
+	e.preventDefault();
+})
+document.querySelector('.phonenumber-check-button').addEventListener('click', function(e){
+	e.preventDefault();
+})
+
+// 이메일 변경
+
+let mailCheckBtn = document.querySelector('#mail-Check-Btn');
+let checkInput = document.querySelector('.mail-check-input');
+
+mailCheckBtn.addEventListener('click', function(){
+	let email = document.querySelector('#userEmail').value;
+	document.querySelector('.mail-check-input').style.display='block';
+	document.querySelector('.mail-check-button').style.display='inline-block';
+	document.querySelector('#mail-check-warn').innerHTML = '인증번호 6자리를 입력해주세요.';
+	
+	fetch("/mypage/mailCheck?email="+email)
+	.then(response => {
+	        if (!response.ok) {
+	            throw new Error('Network response was not ok');
+	        }
+	        return response.text();
+	    })
+	.then(data => {
+		console.log("data : " + data);
+		checkInput.disabled = false;
+		code = data;
+		alert('인증번호가 전송되었습니다.');
+	})
+	
+	
+})
+
+document.querySelector('.mail-check-button').addEventListener('click', function() {
+    let inputCode = checkInput.value;
+    let resultMsg = document.getElementById('mail-check-warn');
+    let userEmail = document.getElementById('userEamil');
+  
+    
+    if (inputCode === code) {
+    	resultMsg.style.color = '#3CB371';
+        resultMsg.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+      
+        mailCheckBtn.disabled = true;
+        userEmail.readOnly = true;
+        
+        
+        userEmailSelect.onfocus = function() {
+            this.initialSelect = this.selectedIndex;
+        };
+        userEmailSelect.onchange = function() {
+            this.selectedIndex = this.initialSelect;
+        };
+    } else {
+        resultMsg.innerHTML = '인증번호가 불일치 합니다. 다시 확인해주세요!';
+        resultMsg.style.color = 'red';
+    }
+
+})
+
+
+// 기본이벤트 제거
+document.querySelector('#mail-Check-Btn').addEventListener('click', function(e){
+	e.preventDefault();
+})
+document.querySelector('.mail-check-button').addEventListener('click', function(e){
+	e.preventDefault();
+})
+
+function myEmailValidate(){
+	let resultMsg = document.getElementById('mail-check-warn').innerHTML;
+	if(resultMsg == '<i class="fa-solid fa-circle-check"></i>'){
+		alert('이메일이 수정되었습니다.');
+		return true;
+	}else{
+		alert('이메일 또는 인증번호를 다시 확인해주세요.');
+		return false;
+	}
+}
+
+
+// 비밀번호 변경
+document.querySelector('#btnPwEdit').addEventListener('click',function(){
+	document.querySelector('#btnPwEdit').style.display = 'none';
+	document.querySelector('#btnGoPwEdit').style.display = 'inline-block';
+	document.querySelector('#btnPwCancle').style.display = 'inline-block';
+	
+	document.querySelector('#password').readOnly = '';
+	document.querySelector('#passwordCheck').readOnly = '';
+})
+ 
+
+function myPasswordValidate(){
+	let password = document.querySelector('#password').value;
+	let passwordCheck = document.querySelector('#passwordCheck').value;
+	let passwordError = document.querySelector('#passwordError');
+	let passwordCheckError = document.querySelector('#passwordCheckError');
+	let btnPwEdit = document.querySelector('.btnGoEdit');
+	
+	
+	 let passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,12}$/;
+     if (!passwordPattern.test(password)) {
+    	 passwordError.style.color = 'red';
+         passwordError.innerHTML = "비밀번호는 영문과 숫자 조합으로 6~12글자여야 합니다.";
+         btnPwEdit.disabled = 'true';
+         return false;
+     } else {
+    	 passwordError.style.color = '#3CB371'
+         passwordError.innerHTML = "<i class='fa-solid fa-circle-check'></i>";
+     }
+     
+     // 비밀번호 확인 검사
+     if (password !== passwordCheck || passwordCheck == '') {
+    	 passwordCheckError.style.color = 'red'
+    	 passwordCheckError.innerHTML = "비밀번호가 일치하지 않습니다.";
+    	 btnPwEdit.disabled = 'true';
+         return false;
+     } else {
+    	 passwordCheckError.style.color = '#3CB371'
+    	 passwordCheckError.innerHTML = "<i class='fa-solid fa-circle-check'></i>";
+     }
+     
+     if(passwordPattern.test(password) && password === passwordCheck){
+    	 btnPwEdit.disabled = '';
+     }
+     
+      return true;
+}
+
+function submitForm(){
+	 alert("비밀번호가 변경되었습니다.");
+}
+
+
+
+/*
 // 모달창 제어
 btnEdit.addEventListener('click',function(){
 	
@@ -196,7 +397,7 @@ document.getElementById('btnGoEdit').addEventListener('click', function(e) {
     
 });
 
-
+*/
 
 
 
