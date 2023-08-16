@@ -375,7 +375,7 @@ table.info-table td {
 
 .scrap-title {
 	display : inline-block;
-    font-size: 1.3rem;
+	font-size: 1.3rem;
     font-size: bold;
     color: #545e6f;
 	width: 100%;
@@ -420,6 +420,10 @@ table.info-table td {
     padding-top: 0.5rem;
     
 }
+
+.scrap-title-font{
+	font-weight: bold;
+}
 /*
 .scrap-sports {
     padding-left: 0.5rem;
@@ -432,6 +436,7 @@ table.info-table td {
 
 /* reservation */
 .content-reservation-container {
+	
     width: 100%;
     height: 100%;
     margin-top: 11rem;
@@ -462,6 +467,16 @@ table.info-table td {
 
 .content-reservation-info {
     display: inline-block;
+}
+
+.reservation-title{
+	width: 85%;
+	font-size: x-large;
+	font-weight: bold;
+	border-bottom: 3px solid #ccc;
+	margin-left: 5rem;
+	padding-bottom: 1.5rem;
+	
 }
 
 /* prev */
@@ -509,6 +524,16 @@ table.info-table td {
 
 .content-prev-container {
     display: none;
+}
+
+.prev-title{
+	width: 85%;
+	font-size: x-large;
+	font-weight: bold;
+	border-bottom: 3px solid #ccc;
+	margin-left: 5rem;
+	padding-bottom: 1.5rem;
+	
 }
 
 .nav ul {

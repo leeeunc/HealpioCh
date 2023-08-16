@@ -53,7 +53,7 @@ function reservationView(map){
 	let list = map.student_resList;
 	
 	let reservation_container = document.querySelector('.content-reservation-container');
-	reservation_container.innerHTML = '';
+	reservation_container.innerHTML = '<div class="reservation-title">예약 확인</div>';
 	
 	list.forEach((list, index) => {
 		
@@ -110,7 +110,7 @@ function preCourseView(map){
 	let preContainer = document.querySelector('.content-prev-container');
 	let member_no = document.querySelector('#member_no').value;
 	let reviewUrl = '/review/write?member_no=' + member_no + '&class_no=';
-	preContainer.innerHTML = '';
+	preContainer.innerHTML = '<div class="prev-title">이전 예약 내역</div>';
 	
 	
 	
@@ -157,24 +157,25 @@ document.querySelector('#phoneEdit').addEventListener('click',function(){
 	
 	document.querySelector('.phonenumber-input').readOnly = '';
 	
-})
+});
 
+let phone_check_number = '000000';
 
 
 document.querySelector('#phonenumber-Check-Btn').addEventListener('click', function(){
 	let phonenumber = document.querySelector('#phonenumber').value;
-	let resultMsg = document.querySelector	('#phonenumber-check-warn');
+	let resultMsg = document.querySelector('#phonenumber-check-warn');
 	
 	fetch("/mypage/sendSms?phonenumber="+phonenumber)
 	.then(response => response.json())
 	.then(map => {
-		
 		alert("인증번호가 전송되었습니다.");
+		phone_check_number = map.number;
 		document.querySelector('.phonenumber-check-input').disabled = false;
 		document.querySelector('.phonenumber-check-button').addEventListener('click', function(){
 			let inputCode = document.querySelector('.phonenumber-check-input').value;
 			
-			if(map.number == inputCode){
+			if(phone_check_number == inputCode){
 				document.querySelector('.phonenumber-check-button').style.display = 'none';
 				resultMsg.style.color = '#3CB371';
 		        resultMsg.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
@@ -187,6 +188,21 @@ document.querySelector('#phonenumber-Check-Btn').addEventListener('click', funct
 	
 	
 })
+
+function myPhonenumberValidate(){
+	let inputCode = document.querySelector('.phonenumber-check-input').value
+	let resultMsg = document.querySelector('#phonenumber-check-warn');
+	
+	
+	if(resultMsg.innerHTML === '<i class="fa-solid fa-circle-check"></i>' && phone_check_number === inputCode){
+		alert('전화번호가 변경되었습니다.');
+		return true;
+	}else{
+		alert('인증번호를 다시 확인해주세요.');
+		return false;
+	}
+	
+}
 
 
 

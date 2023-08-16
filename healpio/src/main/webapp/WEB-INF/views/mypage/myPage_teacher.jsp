@@ -71,20 +71,22 @@
                             </div>
 
                             <!-- 예약 확인 -->
-                            <div class="content-reservation-container">
-                                <div class="content-reservation">
-                                    <div class="content-reservation-title"><a>하루 10분! 힐링요가</a></div>
-                                    <div class="content-reservation-info">
-                                        <div class="content-reservation-date">2023.07.24 (월) ｜ 오후 7:00</div>
-                                        <div class="content-reservation-member">김건우 회원님 ｜ 010-1234-5678</div>
-                                    </div>
-                                    <div class="content-reservation-cancel">
-                                        <button type="button" class="btn btn-primary">예약취소</button>
-                                    </div>
-                                </div>
-
-                         
-                            </div>
+                            
+	                        <div class="content-reservation-container">
+	                            
+	                           		<div class="content-reservation">
+	                                    <div class="content-reservation-title"><a>하루 10분! 힐링요가</a></div>
+	                                    <div class="content-reservation-info">
+	                                        <div class="content-reservation-date">2023.07.24 (월) ｜ 오후 7:00</div>
+	                                        <div class="content-reservation-member">김건우 회원님 ｜ 010-1234-5678</div>
+	                                    </div>
+	                                    <div class="content-reservation-cancel">
+	                                        <button type="button" class="btn btn-primary">예약취소</button>
+	                                    </div>
+	                                </div>
+	
+	                         
+	                         </div>
 
                             <!-- 등록강의목록 -->
                             <div class="content-register-container">
@@ -100,7 +102,7 @@
 	                                            <div class="register-title"><a href="/class/read?class_no=${registerVo.class_no}">${registerVo.class_title}</a></div>
 	                                            <div class="register-lecture-info">
 	                                                <div class="register-teacher">${registerVo.nickname}</div>
-	                                                <div class="register-sports">${registerVo.exercise_name}</div>
+	                                             
 	                                                
 	                                            </div>
 	                                            <div class="register-address">${registerVo.address}</div>
@@ -114,51 +116,108 @@
 
                             <!-- 내 정보 -->
                             <div class="content-info">
-                                <div class="info-container1">
-						            <div class="info-title">회원정보</div>
-						            <table class="info-table1">
-						                <tr>
-						                    <th>이메일</th>
-						                    <td><input type="text" class="info-input" name="email"  value="${memberVO.email }" readonly></td>
-						                </tr>
-						                <tr>
-						                    <th>닉네임</th>
-						                    <td><input type="text" class="info-input" name="nickname" value="${memberVO.nickname }"  readonly></td>
-						                </tr>
-						                <tr>
-						                    <th>이름</th>
-						                    <td><input type="text" class="info-input" name="member_name" value="${memberVO.member_name }" readonly></td>
-						                </tr>
-						                <tr>
-						                    <th>휴대폰</th>
-						                    <td><input type="text" class="info-input" name="phonenumber" value="${memberVO.phonenumber }" readonly></td>
-						                </tr>
-						                <tr>
-						                    <th>구분</th>
-						                    <td>강사</td>
-						                </tr>
-						               
-						            </table>
-						        	<div class="btn-container"><button id='btnEdit' type="button" class="btn btn-primary">Primary</button></div>
+								<div class="info-container info-container1">
+						            <div class="info-title">개인정보</div>
+						            <form method="post">
+							            <table class="info-table">
+							                <tr>
+							                    <th>이름</th>
+							                    <td>${memberVO.member_name}</td>
+							                </tr>
+							                 <tr>
+							                    <th>닉네임</th>
+							                    <td>${memberVO.nickname}</td>
+							                </tr>	
+							                 <tr>
+							                    <th>구분</th>
+							                    <td>강사</td>
+							                </tr>		
+							            </table>
+							        	<div class="btn-container">
+							        		
+							        	</div>	
+							        	<input type="hidden" name="member_no" value="${member_no }">
+							        	<input type="hidden" name="teacheryn" value="Y">
+							       
+						       		</form>
+						        </div>
+                            
+                            	<div class="info-container info-container1">
+						            <div class="info-title">휴대전화</div>
+						            <form method="post" action="/mypage/phonenumberEdit" onsubmit="return myPhonenumberValidate()">
+							            <table class="info-table">
+							                <tr>
+							                    <th>휴대폰</th>
+							                    <td>
+							                    	<input type="text" class='phonenumber-input' id="phonenumber" name="phonenumber"  value="${memberVO.phonenumber }" readonly><button id="phonenumber-Check-Btn">본인인증</button>
+							                    	<div class="phonenumber-check-box">
+														<input class="phonenumber-check-input" disabled="disabled" maxlength="6">
+														<button class="phonenumber-check-button">인증확인</button>
+														<span id="phonenumber-check-warn"></span>
+													</div>
+													
+							                    </td>
+							                </tr>	
+							            </table>
+							        	<div class="btn-container">
+							        		<button id="phoneEdit" type="button" class="btn btn-primary">변경하기</button>
+							        		<input id='phonenumberEdit' class="btn btn-primary" type="submit" value="수정" />
+	                                        <input id='phonenumberCancle' class="btn btn-primary btnCancle" onclick="location.href='/mypage/teacher?member_no=${member_no}'" type="button" value="취소" />
+							        	</div>
+							        	<input type="hidden" name="member_no" value="${member_no }">
+							        	<input type="hidden" name="teacheryn" value="Y">
+							       
+						       		</form>
+						        </div>
+                            
+                                <div class="info-container info-container1">
+						         	<div class="info-title">이메일</div>
+						            <form method="post" action="/mypage/emailEdit" onsubmit="return myEmailValidate()">
+							            <table class="info-table">
+							                <tr>
+							                    <th>이메일</th>
+							                    <td>
+							                    	<input type="text" class="info-input" id="userEmail" name="email"  value="${memberVO.email }" readonly><button id="mail-Check-Btn">본인인증</button>
+							                    	<div class="mail-check-box">
+														<input class="mail-check-input" disabled="disabled" maxlength="6">
+														<button class="mail-check-button">인증확인</button>
+						
+													</div>
+													<span id="mail-check-warn"></span>
+							                    </td>
+							                </tr>	
+							            </table>
+							        	<div class="btn-container">
+							        		<button id='btnInfoEdit' type="button" class="btn btn-primary">변경하기</button>
+							        		<input id='btnGoEdit' class="btn btn-primary goEdit" type="submit" value="수정" />
+	                                        <input id='btnCancle' class="btn btn-primary btnCancle" onclick="location.href='/mypage/teacher?member_no=${member_no}'" type="button" value="취소" />
+							        	</div>
+							        	<input type="hidden" name="member_no" value="${member_no }">
+							            <input type="hidden" name="teacheryn" value="Y">
+						       		</form>
 						        </div>
 						
-						        <div class="info-container2">
+						        <div class="info-container info-container2">
 						            <div class="info-title">비밀번호 변경</div>
 						            <form method="post" action="/mypage/passwordEdit" onsubmit="return myPasswordValidate()">
-							            <table class="info-table2">
+							            <table class="info-table">
 							                <tr>
 							                    <th>비밀번호 입력</th>
-							                    <td><input type="password" id="password" name="member_pw" onkeyup="myPasswordValidate()" ><div id="passwordError"></div></td>
+							                    <td><input type="password" id="password" name="member_pw" onkeyup="myPasswordValidate()" readonly><div id="passwordError"></div></td>
 							                </tr>
 							                <tr>
 							                    <th>비밀번호 확인</th>
-							                    <td><input type="password" id="passwordCheck" onkeyup="myPasswordValidate()"><div id="passwordCheckError"></div></td>
+							                    <td><input type="password" id="passwordCheck" onkeyup="myPasswordValidate()" readonly><div id="passwordCheckError"></div></td>
 							                </tr>
 							                
 							            </table>
 							            
-							            <div class="btn-container"><button id='btnPwEdit' type="submit" class="btn btn-primary" onclick="submitForm()">변경하기</button></div>
-							            <input type="hidden" id="member_no" name="member_no" value="${member_no }">
+							            <div class="btn-container">
+							            	<button id='btnPwEdit' type="submit" class="btn btn-primary" >변경하기</button>
+							            	<input id='btnGoPwEdit' class="btn btn-primary btnGoEdit" type="submit" onclick="submitForm()" value="수정" />
+	                                        <input id='btnPwCancle' class="btn btn-primary btnCancle" onclick="location.href='/mypage/teacher?member_no=${member_no}'" type="button" value="취소" />
+							            </div>
+							            <input type="hidden" id="member_no" name="member_no" value="${member_no }">	
 							            <input type="hidden" name="teacheryn" value="Y">
 						            </form>
 						            

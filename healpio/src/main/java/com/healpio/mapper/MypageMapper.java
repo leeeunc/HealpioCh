@@ -13,6 +13,10 @@ public interface MypageMapper {
 	
 	public int myInfoEdit(MemberVO vo);
 	
+	// 전화번호 변경
+	public int myPhonenumberEdit(MemberVO vo);
+	
+	
 	// 비밀번호 변경
 	public int myPasswordEdit(MemberVO vo);
 	

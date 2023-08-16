@@ -49,7 +49,7 @@
                                     />
                                 </div>
                                 <!-- onclick 속성 수정 -->
-                                <div class="myInformation"><a onclick="showContent('info')">내 정보</a></div>
+                                <div class="myInformation"><a onclick="showContent('info')">내 정보 관리</a></div>
                                 <div class="scrap"><a onclick="showContent('scrap')">내가 찜한 강좌</a></div>
                                 <div class="checkReservation">
                                     <a onclick="showContent('reservation')">예약 확인</a>
@@ -95,10 +95,10 @@
 												</c:url>'  
 												>
 	                                        <div class="scrap-info-container">
-	                                            <div class="scrap-title"><a href="/class/read?class_no=${scrapVo.class_no}">${scrapVo.class_title}</a></div>
+	                                            <div class="scrap-title"><a class='scrap-title-font' href="/class/read?class_no=${scrapVo.class_no}">${scrapVo.class_title}</a></div>
 	                                            <div class="scrap-lecture-info">
 	                                                <div class="scrap-teacher">${scrapVo.nickname} </div>
-	                                                <div class="scrap-sports">${scrapVo.exercise_name} </div>
+	                                           
 	                                            </div>
 	                                            <div class="scrap-address">${scrapVo.address} </div>
 												
@@ -115,9 +115,35 @@
                             <!-- 내 정보 -->
                             <div class="content-info">
                             
+                            <div class="info-container info-container1">
+						            <div class="info-title">개인정보</div>
+						            <form method="post">
+							            <table class="info-table">
+							                <tr>
+							                    <th>이름</th>
+							                    <td>${memberVO.member_name}</td>
+							                </tr>
+							                 <tr>
+							                    <th>닉네임</th>
+							                    <td>${memberVO.nickname}</td>
+							                </tr>	
+							                 <tr>
+							                    <th>구분</th>
+							                    <td>학생</td>
+							                </tr>		
+							            </table>
+							        	<div class="btn-container">
+							        		
+							        	</div>	
+							        	<input type="hidden" name="member_no" value="${member_no }">
+							        	<input type="hidden" name="teacheryn" value="N">
+							       
+						       		</form>
+						        </div>
+                            
                             	<div class="info-container info-container1">
 						            <div class="info-title">휴대전화</div>
-						            <form method="post" action="#" onsubmit="">
+						            <form method="post" action="/mypage/phonenumberEdit" onsubmit="return myPhonenumberValidate()">
 							            <table class="info-table">
 							                <tr>
 							                    <th>휴대폰</th>
@@ -138,12 +164,13 @@
 	                                        <input id='phonenumberCancle' class="btn btn-primary btnCancle" onclick="location.href='/mypage/student?member_no=${member_no}'" type="button" value="취소" />
 							        	</div>
 							        	<input type="hidden" name="member_no" value="${member_no }">
+							        	<input type="hidden" name="teacheryn" value="N">
 							       
 						       		</form>
 						        </div>
                             
                                 <div class="info-container info-container1">
-						            <div class="info-title">이메일 변경</div>
+						         	<div class="info-title">이메일</div>
 						            <form method="post" action="/mypage/emailEdit" onsubmit="return myEmailValidate()">
 							            <table class="info-table">
 							                <tr>

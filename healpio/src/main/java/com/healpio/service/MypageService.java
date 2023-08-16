@@ -19,6 +19,8 @@ public interface MypageService {
 	
 	public int myEmailEdit(MemberVO vo);
 	
+	public int myPhonenumberEdit(MemberVO vo);
+	
 	public List<ViewScrapVO> getScrapList(String member_no);
 	
 	public List<ViewScrapVO> getRegisterList(String member_no);

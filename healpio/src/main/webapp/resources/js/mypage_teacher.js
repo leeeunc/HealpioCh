@@ -47,7 +47,7 @@ function reservationView(map){
 	let list = map.teacher_resList;
 	
 	let reservation_container = document.querySelector('.content-reservation-container');
-	reservation_container.innerHTML = '';
+	reservation_container.innerHTML = '<div class="reservation-title">예약 확인</div>';
 	
 	list.forEach((list, index) => {
 		
@@ -100,7 +100,7 @@ function deleteReservation(index){
 function preBooksView(map){
 	let list = map.preBooksList;
 	let preContainer = document.querySelector('.content-prev-container');
-	preContainer.innerHTML = '';
+	preContainer.innerHTML = '<div class="prev-title">이전 예약 내역</div>';
 	
 	list.forEach((list, index) => {
 		preContainer.innerHTML +=
@@ -120,12 +120,186 @@ function preBooksView(map){
 }
 
 
+document.querySelector('#btnInfoEdit').addEventListener('click', function(){
+	let info_input = document.querySelectorAll('.info-input');
+	document.querySelector('#btnInfoEdit').style.display = 'none';
+	document.querySelector('#btnGoEdit').style.display = 'inline-block';
+	document.querySelector('#btnCancle').style.display = 'inline-block';
+	document.querySelector('#mail-Check-Btn').style.display = 'inline-block';
+	
+	for(let i = 0; i < info_input.length; i++){
+	    info_input[i].style.border='1px solid black';
+	    info_input[i].readOnly = '';
+	    
+	}
+	
+})
+
+
+// 휴대번호 변경
+document.querySelector('#phoneEdit').addEventListener('click',function(){
+	document.querySelector('.phonenumber-input').style.border = '1px solid black';
+	
+	document.querySelector('#phonenumber-Check-Btn').style.display = 'inline-block';
+	document.querySelector('.phonenumber-check-box').style.display = 'block';
+	
+	document.querySelector('#phoneEdit').style.display = 'none';
+	document.querySelector('#phonenumberEdit').style.display = 'inline-block';
+	document.querySelector('#phonenumberCancle').style.display = 'inline-block';
+	
+	document.querySelector('.phonenumber-input').readOnly = '';
+	
+});
+
+let phone_check_number = '000000';
+
+
+document.querySelector('#phonenumber-Check-Btn').addEventListener('click', function(){
+	let phonenumber = document.querySelector('#phonenumber').value;
+	let resultMsg = document.querySelector('#phonenumber-check-warn');
+	
+	fetch("/mypage/sendSms?phonenumber="+phonenumber)
+	.then(response => response.json())
+	.then(map => {
+		alert("인증번호가 전송되었습니다.");
+		phone_check_number = map.number;
+		document.querySelector('.phonenumber-check-input').disabled = false;
+		document.querySelector('.phonenumber-check-button').addEventListener('click', function(){
+			let inputCode = document.querySelector('.phonenumber-check-input').value;
+			
+			if(phone_check_number == inputCode){
+				document.querySelector('.phonenumber-check-button').style.display = 'none';
+				resultMsg.style.color = '#3CB371';
+		        resultMsg.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+			}else{
+				resultMsg.innerHTML = '인증번호가 불일치 합니다. 다시 확인해주세요!';
+		        resultMsg.style.color = 'red';
+			}
+		})
+	})
+	
+	
+})
+
+function myPhonenumberValidate(){
+	let inputCode = document.querySelector('.phonenumber-check-input').value
+	let resultMsg = document.querySelector('#phonenumber-check-warn');
+	
+	
+	if(resultMsg.innerHTML === '<i class="fa-solid fa-circle-check"></i>' && phone_check_number === inputCode){
+		alert('전화번호가 변경되었습니다.');
+		return true;
+	}else{
+		alert('인증번호를 다시 확인해주세요.');
+		return false;
+	}
+	
+}
+
+
+
+
+// 기본이벤트 제거
+document.querySelector('#phonenumber-Check-Btn').addEventListener('click', function(e){
+	e.preventDefault();
+})
+document.querySelector('.phonenumber-check-button').addEventListener('click', function(e){
+	e.preventDefault();
+})
+
+// 이메일 변경
+
+let mailCheckBtn = document.querySelector('#mail-Check-Btn');
+let checkInput = document.querySelector('.mail-check-input');
+
+mailCheckBtn.addEventListener('click', function(){
+	let email = document.querySelector('#userEmail').value;
+	document.querySelector('.mail-check-input').style.display='block';
+	document.querySelector('.mail-check-button').style.display='inline-block';
+	document.querySelector('#mail-check-warn').innerHTML = '인증번호 6자리를 입력해주세요.';
+	
+	fetch("/mypage/mailCheck?email="+email)
+	.then(response => {
+	        if (!response.ok) {
+	            throw new Error('Network response was not ok');
+	        }
+	        return response.text();
+	    })
+	.then(data => {
+		console.log("data : " + data);
+		checkInput.disabled = false;
+		code = data;
+		alert('인증번호가 전송되었습니다.');
+	})
+	
+	
+})
+
+document.querySelector('.mail-check-button').addEventListener('click', function() {
+    let inputCode = checkInput.value;
+    let resultMsg = document.getElementById('mail-check-warn');
+    let userEmail = document.getElementById('userEamil');
+  
+    
+    if (inputCode === code) {
+    	resultMsg.style.color = '#3CB371';
+        resultMsg.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+      
+        mailCheckBtn.disabled = true;
+        userEmail.readOnly = true;
+        
+        
+        userEmailSelect.onfocus = function() {
+            this.initialSelect = this.selectedIndex;
+        };
+        userEmailSelect.onchange = function() {
+            this.selectedIndex = this.initialSelect;
+        };
+    } else {
+        resultMsg.innerHTML = '인증번호가 불일치 합니다. 다시 확인해주세요!';
+        resultMsg.style.color = 'red';
+    }
+
+})
+
+
+// 기본이벤트 제거
+document.querySelector('#mail-Check-Btn').addEventListener('click', function(e){
+	e.preventDefault();
+})
+document.querySelector('.mail-check-button').addEventListener('click', function(e){
+	e.preventDefault();
+})
+
+function myEmailValidate(){
+	let resultMsg = document.getElementById('mail-check-warn').innerHTML;
+	if(resultMsg == '<i class="fa-solid fa-circle-check"></i>'){
+		alert('이메일이 수정되었습니다.');
+		return true;
+	}else{
+		alert('이메일 또는 인증번호를 다시 확인해주세요.');
+		return false;
+	}
+}
+
+
+// 비밀번호 변경
+document.querySelector('#btnPwEdit').addEventListener('click',function(){
+	document.querySelector('#btnPwEdit').style.display = 'none';
+	document.querySelector('#btnGoPwEdit').style.display = 'inline-block';
+	document.querySelector('#btnPwCancle').style.display = 'inline-block';
+	
+	document.querySelector('#password').readOnly = '';
+	document.querySelector('#passwordCheck').readOnly = '';
+})
+ 
+
 function myPasswordValidate(){
 	let password = document.querySelector('#password').value;
 	let passwordCheck = document.querySelector('#passwordCheck').value;
 	let passwordError = document.querySelector('#passwordError');
 	let passwordCheckError = document.querySelector('#passwordCheckError');
-	let btnPwEdit = document.querySelector('#btnPwEdit');
+	let btnPwEdit = document.querySelector('.btnGoEdit');
 	
 	
 	 let passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,12}$/;
@@ -159,4 +333,4 @@ function myPasswordValidate(){
 
 function submitForm(){
 	 alert("비밀번호가 변경되었습니다.");
-}	
+}

@@ -5,7 +5,7 @@
 <mapper namespace="com.healpio.mapper.MypageMapper">
 
 	<select id="getInfoList" resultType="com.healpio.vo.MemberVO">
-		SELECT member_name, nickname, member_pw, phonenumber, email, TEACHERYN
+		SELECT member_name, nickname, member_pw, REGEXP_REPLACE(phonenumber, '[^0-9]', '') AS phonenumber, email, TEACHERYN
 		FROM MEMBER WHERE MEMBER_NO = #{member_no}
 	</select>	
 	
@@ -20,6 +20,13 @@
 		email = #{email}
 		WHERE member_no = #{member_no}
 	</update>
+	
+	<update id="myPhonenumberEdit">
+		UPDATE member
+		SET phonenumber = REGEXP_REPLACE(#{phonenumber}  , '(\d{3})(\d{4})(\d{4})', '010-\2-\3')
+		WHERE MEMBER_NO = #{member_no}
+	</update>
+	
 		
 	<update id="myPasswordEdit">
 		UPDATE member
@@ -105,7 +112,7 @@
     	<![CDATA[
 	    	select C.class_no, R.reservation_no, c.class_title, reservation_date|| ' ' || '(' || TO_CHAR(to_date(reservation_date), 'dy')||')' reservation_date, reservation_time
 			from class c, reservation R
-			WHERE C.class_no = R.class_no
+			WHERE C.class_no = R.class_no	
 			AND R.MEMBER_NO = #{member_no}
 			and to_char(sysdate,'YYYY-MM-DD') <= reservation_date
 	 	]]>	
