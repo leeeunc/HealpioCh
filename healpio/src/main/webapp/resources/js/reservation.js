@@ -12,9 +12,9 @@
 	
 	window.addEventListener('load', fetchClassDetails);
 	
-	document.addEventListener("DOMContentLoaded", function() {
-		fetchClassDetails();  // 데이터를 먼저 가져옵니다.
-	});
+//	document.addEventListener("DOMContentLoaded", function() {
+//		fetchClassDetails();  // 데이터를 먼저 가져옵니다.
+//	});
 	
 	// URL에서 class_no 값을 추출하는 함수
 	function getParamsFromURL() {
@@ -269,11 +269,12 @@
 		      
 
 		        // 버튼이 비활성화된 경우 색상 변경
-		        if (timeButton.disabled) {
-		            timeButton.classList.add('disabled'); // 클래스 추가
-		        } else {
-		            timeButton.classList.remove('disabled'); // 클래스 제거
-		        }
+		      	if (reservationCountForTime >= maxCapacity) {
+		    	    timeButton.classList.add('disabled'); // 클래스 추가
+		    	} else {
+		    	    timeButton.classList.remove('disabled'); // 클래스 제거
+		    	}
+
 		      
 		      
 		      
@@ -304,7 +305,13 @@
 		      timeSelection.appendChild(row);
 		    }
 		  }
-
+	  
+	  
+	// 학생 여부 판단 함수
+	  function isStudent(teacheryn) {
+	      return teacheryn === 'N';
+	  }
+ 
     // 예약하기 버튼에 대한 이벤트 설정 함수
     function attachReservationListener() {
         // 예약하기 버튼에 클릭 이벤트 추가
@@ -314,18 +321,24 @@
             let selectedDate = document.querySelector('#selectedDate').value; // 선택된 날짜 값을 가져오는 로직
             let selectedTime = document.querySelector('#selectedTime').value; // 선택된 시간 값을 가져오는 로직
 
-            document.querySelector('input[name="date"]').value = selectedDate;
-            document.querySelector('input[name="time"]').value = selectedTime;
-        	
-            let currentYear = now.getFullYear(); // 현재 연도 가져오기
-            let currentMonth = now.getMonth() + 1; // 현재 월 가져오기(JavaScript에서는 월이 0부터 시작하므로 1을 더해준다)
-            // 모달에 표시할 텍스트 설정
-            document.getElementById('confirmation-text').innerHTML = `예약하시겠습니까? <br> ${currentYear}년 ${currentMonth}월 ${selectedDay.innerText}일 ${selectedTime}에 예약하시려면 '예'를 클릭하세요.`;
-            document.getElementById('modal').style.display = 'block'; // 모달 표시
-            // 모달창 배경 보이기
-            document.getElementById('myModal').style.display = 'block';
-            // 모달창 내용물도 보이기
-            document.getElementById('modal-content').style.display = 'block';
+            // 학생 여부 판단
+            let teacherynInput = document.querySelector('.teacheryn');
+            let isStudentMember = isStudent(teacherynInput.value.trim());
+
+            if (isStudentMember) {
+                document.querySelector('input[name="date"]').value = selectedDate;
+                document.querySelector('input[name="time"]').value = selectedTime;
+
+                let currentYear = now.getFullYear();
+                let currentMonth = now.getMonth() + 1;
+                document.getElementById('confirmation-text').innerHTML = `예약하시겠습니까? <br> ${currentYear}년 ${currentMonth}월 ${selectedDay.innerText}일 ${selectedTime}에 예약하시려면 '예'를 클릭하세요.`;
+                document.getElementById('modal').style.display = 'block';
+                document.getElementById('myModal').style.display = 'block';
+                document.getElementById('modal-content').style.display = 'block';
+            } else {
+                // 학생이 아닐 경우 예약이 불가능하다는 메시지를 표시하거나 다른 처리를 수행합니다.
+                alert('학생만 예약할 수 있습니다.');
+            }
         });
     }
 
@@ -346,26 +359,50 @@
         });
     }
 
-    // 모달창 가져오기
-    var modal = document.getElementById("myModal");
-    // 모달을 여는 버튼 가져오기
-    var btn = document.getElementById("reserve");
-    // 모달을 닫는 버튼(엑스) 가져오기
-    var span = document.getElementsByClassName("close")[0];
-    // 사용자가 버튼을 클릭하면 모달창 열기
-    btn.onclick = function() {
-      modal.style.display = "block";
+//    // 모달창 가져오기
+//    var modal = document.getElementById("myModal");
+//    // 모달을 여는 버튼 가져오기
+//    var btn = document.getElementById("reserve");
+//    // 모달을 닫는 버튼(엑스) 가져오기
+//    var span = document.getElementsByClassName("close")[0];
+//    // 사용자가 버튼을 클릭하면 모달창 열기
+//    btn.onclick = function() {
+//      modal.style.display = "block";
+//    }
+//    // 사용자가 엑스(x)를 클릭하면 모달창 닫기
+//    span.onclick = function() {
+//      modal.style.display = "none";
+//    }
+//    // 사용자가 모달창 외부를 클릭하면 모달창 닫기
+//    window.onclick = function(event) {
+//	    if (event.target == modal) {
+//	        modal.style.display = "none";
+//	    }
+//    }
+    
+ // 사용자가 버튼을 클릭하면 모달창 열기
+    btn.onclick = () => openModal();
+
+    // 모달을 여는 함수 정의
+    function openModal() {
+        modal.style.display = "block";
     }
+
+    // 모달을 닫는 함수 정의
+    function closeModal() {
+        modal.style.display = "none";
+    }
+
     // 사용자가 엑스(x)를 클릭하면 모달창 닫기
-    span.onclick = function() {
-      modal.style.display = "none";
-    }
+    span.onclick = closeModal;
+
     // 사용자가 모달창 외부를 클릭하면 모달창 닫기
-    window.onclick = function(event) {
-	    if (event.target == modal) {
-	        modal.style.display = "none";
-	    }
-    }
+    window.onclick = (event) => {
+        if (event.target == modal) {
+            closeModal();
+        }
+    };
+
     
 
 
