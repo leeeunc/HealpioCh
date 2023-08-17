@@ -122,7 +122,7 @@ function alert(){
 function previewImg(input) {
 	const popup = window.open('', '_blank', 'width=530px, height=348px, left=340px, top=160px');
 	
-    popup.document.write('<title>이미지 미리보기 500*330 (500*330으로 등록됩니다.)</title>');
+    popup.document.write('<title>이미지 미리보기 (500*330으로 등록됩니다.)</title>');
     for (let i=0; i<input.files.length; i++) {
         const reader = new FileReader();
         reader.onload = function(e) {
