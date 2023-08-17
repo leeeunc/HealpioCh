@@ -65,7 +65,7 @@
 		    WHERE S.MEMBER_NO = #{member_no}
 		) x
 		WHERE x.rn = 1
-		ORDER BY x.scrap_no ASC
+		ORDER BY x.scrap_no DESC
 
 	</select>
 	<resultMap type="com.healpio.vo.ViewScrapVO" id="getScrapList">
@@ -96,7 +96,7 @@
 		    WHERE C.MEMBER_NO = #{member_no}
 		) x
 		WHERE x.rn = 1
-		ORDER BY x.CLASS_NO ASC
+		ORDER BY x.CLASS_NO DESC
 		
 	</select>
 	<resultMap type="com.healpio.vo.ViewScrapVO" id="getRegisterList">
@@ -115,6 +115,7 @@
 			WHERE C.class_no = R.class_no	
 			AND R.MEMBER_NO = #{member_no}
 			and to_char(sysdate,'YYYY-MM-DD') <= reservation_date
+			order by reservation_no desc
 	 	]]>	
 		
 		
@@ -135,6 +136,7 @@
 		INNER JOIN MEMBER M ON R.MEMBER_NO = M.MEMBER_NO
 		WHERE C.MEMBER_NO = #{member_no}
 		and to_char(sysdate,'YYYY-MM-DD') <= reservation_date
+		order by reservation_no desc
 	]]>	
     </select>
     
@@ -160,6 +162,7 @@
 			WHERE C.class_no = R.class_no
 			AND R.MEMBER_NO = #{member_no}
 			and to_char(sysdate,'YYYY-MM-DD') >= reservation_date
+			order by reservation_no desc
         ]]>
     </select>
     
@@ -179,6 +182,7 @@
 			INNER JOIN MEMBER M ON R.MEMBER_NO = M.MEMBER_NO
 			WHERE C.MEMBER_NO = #{member_no}
 			and to_char(sysdate,'YYYY-MM-DD') >= reservation_date
+			order by reservation_no desc
         ]]>
     </select>
     

@@ -300,8 +300,8 @@ document.querySelector('#btnPwEdit').addEventListener('click',function(){
 	document.querySelector('#btnGoPwEdit').style.display = 'inline-block';
 	document.querySelector('#btnPwCancle').style.display = 'inline-block';
 	
-	document.querySelector('#password').readOnly = '';
-	document.querySelector('#passwordCheck').readOnly = '';
+	document.querySelector('#password').disabled = false;
+	document.querySelector('#passwordCheck').disabled = false;
 })
  
 

@@ -226,7 +226,7 @@ public class MypageController {
 		SendSmsService sendSms = new SendSmsService();
 		Map<String,String> map = new HashMap<String, String>();
 		try {
-			String number = sendSms.sendMassage("01081208867");
+			String number = sendSms.sendMassage(phonenumber);
 			map.put("number", number);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
