@@ -28,5 +28,7 @@ import com.healpio.vo.MemberVO;
   
   public int getTotalCnt(Criteria cri);
 
+  public List<BoardScrapVO> attach(Model model);
+  
   }
  

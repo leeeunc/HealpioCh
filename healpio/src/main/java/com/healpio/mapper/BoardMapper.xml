@@ -17,17 +17,25 @@
             select 
                 c.class_title, m.nickname, e.exercise_name
                 , l.PROVINCE, l.CITY, l.DISTRICT
-                , m.teacheryn, c.class_no, a.uploadpath||a.uuid||'_'||a.filename boardFile
-             from class c, member m, exercise e, location l, attach a
-                where c.class_no = l.class_no
-                and c.member_no = m.member_no
-                and c.exercise_no = e.exercise_no
-                and c.class_no = a.class_no
-                
+                , m.teacheryn, c.class_no, MAX(a.uploadpath||a.uuid||'_'||a.filename) boardFile, c.class_price
+            FROM class c
+            INNER JOIN member m ON c.member_no = m.member_no
+            INNER JOIN exercise e ON c.exercise_no = e.exercise_no
+            INNER JOIN location l ON c.class_no = l.class_no
+            INNER JOIN attach a ON c.class_no = a.class_no
+            WHERE c.class_no IN (
+                SELECT DISTINCT a.class_no
+                FROM class c
+                INNER JOIN attach a ON c.class_no = a.class_no
+                )
+            GROUP BY 
+                c.class_title, m.nickname, e.exercise_name
+                , l.PROVINCE, l.CITY, l.DISTRICT
+                , m.teacheryn, c.class_no, c.class_price
+                having 1=1
 		]]>
 						<include refid="location"></include>
 						<include refid="criteria"></include>
-						ORDER BY c.class_no DESC 
 						) A
 									LEFT JOIN (
 			            SELECT class_no, COUNT(*) AS scrapCount
@@ -71,16 +79,25 @@
             select 
                 c.class_title, m.nickname, e.exercise_name
                 , l.PROVINCE, l.CITY, l.DISTRICT
-                , m.teacheryn, c.class_no, a.uploadpath||a.uuid||'_'||a.filename boardFile
-             from class c, member m, exercise e, location l, attach a
-                where c.class_no = l.class_no
-                and c.member_no = m.member_no
-                and c.exercise_no = e.exercise_no
-                and c.class_no = a.class_no
+                , m.teacheryn, c.class_no, MAX(a.uploadpath||a.uuid||'_'||a.filename) boardFile, c.class_price
+            FROM class c
+            INNER JOIN member m ON c.member_no = m.member_no
+            INNER JOIN exercise e ON c.exercise_no = e.exercise_no
+            INNER JOIN location l ON c.class_no = l.class_no
+            INNER JOIN attach a ON c.class_no = a.class_no
+            WHERE c.class_no IN (
+                SELECT DISTINCT a.class_no
+                FROM class c
+                INNER JOIN attach a ON c.class_no = a.class_no
+                )
+            GROUP BY 
+                c.class_title, m.nickname, e.exercise_name
+                , l.PROVINCE, l.CITY, l.DISTRICT
+                , m.teacheryn, c.class_no, c.class_price
+                having 1=1
 		]]>
 						<include refid="location"></include>
 						<include refid="criteria"></include>
-						ORDER BY c.class_no DESC 
 						) A
 									LEFT JOIN (
 			            SELECT class_no, COUNT(*) AS scrapCount
@@ -98,6 +115,13 @@
 		where c.class_no = s.class_no
 		and s.class_no = #{class_no}
 	</select>
+
+	<select id="attach" resultType="com.healpio.vo.BoardScrapVO" >
+	    select a.uploadpath||a.uuid||'_'||a.filename boardFile, a.class_no
+        from class c, attach a
+        where c.class_no = a.class_no
+	</select>
+
 
 
 	<sql id="criteria">
@@ -140,15 +164,14 @@
 	
 	<sql id="array">
 		<choose>
-   			<when test="dependsArray == 'recently'">
+   			<when test="dependsArray == 'recently' or dependsArray =='' or dependsArray == null "> 
 		      	order by A.class_no DESC
 		    </when>
    			<when test="dependsArray == 'like'">
-		      	ORDER BY SCRAPCOUNT DESC, s.class_no DESC
+		      	ORDER BY SCRAPCOUNT DESC, a.class_no DESC
 		    </when>
 		</choose>
 
-		
 	</sql>
 	
  </mapper>

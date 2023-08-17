@@ -25,5 +25,7 @@ public interface BoardMapper {
 	
 	public int scrapList(String class_no);
 	
+	public List<BoardScrapVO> attach();
+	
 	
 }

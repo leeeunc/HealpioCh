@@ -9,11 +9,17 @@
 	
 		<link href="../resources/css/list.css" rel="stylesheet"> 
 		<script src="https://kit.fontawesome.com/0aadd0de21.js" crossorigin="anonymous"></script>
+		
+		    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		
+		
 	<script>
 	function classWirte() {
 	  window.location.href = '/class/write?member_no=${memberVo.member_no }';
 	}
 	</script>
+	
+	
 	
 		<script src="../resources/js/list.js"></script>
 	</head>
@@ -48,31 +54,33 @@
 	            </select>
 	        </div>
 	
-	        <div class='main'>
-	
-			  <c:forEach items="${list}" var="li" varStatus="status">
-				<div class="contentbox">
-				<a href="/class/read?class_no=${li.class_no}">
- 				<img src=
-					"<c:url value="/display">
-					<c:param name="fileName" value="${li.boardFile }"/>
-					</c:url>" 
-				alt="${li.class_title}" class="form-intro-img"
-					width="300" height="300"/> 
-				</a >	  				
-				     <span class="class_title-text">
-					    <a href="/class/read?class_no=${li.class_no}">${li.class_title}</a>
-					 </span>
-					  <hr>
-					 ${li.nickname } | 
-					 <a class="exercise-text">${li.exercise_name }</a> |
-					 <a class="province-text">${li.province }</a><a class="city-text">${li.city }</a><a class="district-text">${li.district }</a>
-					 <br>
-					 <i class="fa-solid fa-heart" style="color: #ff6666" ></i> ${scrapCountMap[li.class_no]}
-				</div>
-		        
-			  </c:forEach>
-	 		</div>
+<div class="main">
+    <c:forEach items="${list}" var="li" varStatus="status">
+        <div class="contentbox">
+           <a href="/class/read?class_no=${li.class_no}">
+              <img src="<c:url value="/display">
+                   <c:param name="fileName" value="${li.boardFile}"/>
+                   </c:url>" 
+                   onerror="this.onerror=null;this.src='../resources/images/noimg.png';"
+                   class="form-intro-img"
+                   width="300" height="300"/> 
+           </a>
+           <span class="class_title-text">
+               <a href="/class/read?class_no=${li.class_no}">${li.class_title}</a>
+           </span>
+           <hr>
+           ${li.nickname} |  
+           <a class="exercise-text">${li.exercise_name}</a> |
+           <a class="province-text">${li.province}</a><a class="city-text">${li.city}</a><a class="district-text">${li.district}</a>
+           <br>
+           <div class="heart-array">
+           ${li.class_price} 
+           <i class="fa-solid fa-heart" ><span class="scrap-count"> ${scrapCountMap[li.class_no]}</span></i>
+           </div>
+        </div>
+    </c:forEach>
+</div>
+
 
 			<div class="footer">
 		        <!-- 페이지 번호 출력 -->
