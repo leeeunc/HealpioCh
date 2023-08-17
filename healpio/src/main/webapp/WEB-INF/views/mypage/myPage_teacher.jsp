@@ -203,11 +203,11 @@
 							            <table class="info-table">
 							                <tr>
 							                    <th>비밀번호 입력</th>
-							                    <td><input type="password" id="password" name="member_pw" onkeyup="myPasswordValidate()" readonly><div id="passwordError"></div></td>
+							                    <td><input type="password" id="password" name="member_pw" onkeyup="myPasswordValidate()" disabled><div id="passwordError"></div></td>
 							                </tr>
 							                <tr>
 							                    <th>비밀번호 확인</th>
-							                    <td><input type="password" id="passwordCheck" onkeyup="myPasswordValidate()" readonly><div id="passwordCheckError"></div></td>
+							                    <td><input type="password" id="passwordCheck" onkeyup="myPasswordValidate()" disabled><div id="passwordCheckError"></div></td>
 							                </tr>
 							                
 							            </table>

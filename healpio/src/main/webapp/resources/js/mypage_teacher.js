@@ -79,6 +79,7 @@ function deleteReservation(index){
 	
 	
 	primaryBtn.addEventListener('click',function(){
+
 		document.querySelector('.myModal-title').innerHTML = '예약 취소';
 		document.querySelector('.myModal-body-text').innerHTML = '예약이 취소되었습니다.';
 		
@@ -291,8 +292,8 @@ document.querySelector('#btnPwEdit').addEventListener('click',function(){
 	document.querySelector('#btnGoPwEdit').style.display = 'inline-block';
 	document.querySelector('#btnPwCancle').style.display = 'inline-block';
 	
-	document.querySelector('#password').readOnly = '';
-	document.querySelector('#passwordCheck').readOnly = '';
+	document.querySelector('#password').disabled = false;
+	document.querySelector('#passwordCheck').disabled = false;
 })
  
 
