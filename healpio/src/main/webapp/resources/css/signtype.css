@@ -38,7 +38,7 @@
         #t_login{
             width: 60%;
             height: 50%;
-            background-color:rgb(23, 185, 23);
+            background-color:#4285f4;
             font-size: 50px;
             color : white;
             border-radius: 10px;
@@ -48,7 +48,7 @@
         #s_login{
             width: 60%;
             height: 50%;
-            background-color:rgb(23, 185, 23);
+            background-color:#4285f4;
             font-size: 50px;
             color : white;           
             border-radius: 10px;
