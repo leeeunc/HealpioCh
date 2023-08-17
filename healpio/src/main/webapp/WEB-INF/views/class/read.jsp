@@ -187,10 +187,17 @@ function getReviewList(map){
 			    </li>`;
 		}
 		for(var i=map.pageDto.startno; i<=map.pageDto.endno; i++){
-			pageblock +=
-				`<li class="page-item" onclick="sortReview('` + map.sortingOption + `', ` + i + `, '${classVO.class_no}')">
-					<a class="page-link" style="color: black;" href="#">` + i + `</a>
-				</li>`;
+			if(map.pageDto.criteria.pageno==i){
+				pageblock +=
+					`<li class="page-item" onclick="sortReview('` + map.sortingOption + `', ` + i + `, '${classVO.class_no}')">
+						<a class="page-link" style="color: white; background-color: #777; border: 1px solid #777;" href="#">` + i + `</a>
+					</li>`;
+			} else{
+				pageblock +=
+					`<li class="page-item" onclick="sortReview('` + map.sortingOption + `', ` + i + `, '${classVO.class_no}')">
+						<a class="page-link" style="color: black;" href="#">` + i + `</a>
+					</li>`;
+			}
 		}
 		if(map.pageDto.next){
 			pageblock +=
