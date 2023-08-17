@@ -114,6 +114,25 @@ public class BoardTest {
 		  
 	  }
 	 
+	  @Test
+	  public void attach() {
+			
+			assumeNotNull(boardMapper);
+			 
+			List<BoardScrapVO> list = boardMapper.attach();
+			
+			list.forEach(board ->{
+				log.info("BoardScrapVO====================");
+				log.info(board.getBoardFile());
+				log.info(board.getClass_no());
+				
+			});
+			
+			
+		  
+		  
+	  }
+	  
 	/*
 	 * @Test public void memberCheck() { assumeNotNull(boardMapper);
 	 * 
