@@ -168,10 +168,12 @@ document.querySelector('#phonenumber-Check-Btn').addEventListener('click', funct
 			let inputCode = document.querySelector('.phonenumber-check-input').value;
 			
 			if(phone_check_number == inputCode){
-				document.querySelector('.phonenumber-check-button').style.display = 'none';
+				//document.querySelector('.phonenumber-check-button').style.display = 'none';
 				resultMsg.style.color = '#3CB371';
 		        resultMsg.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+		        alert('인증되었습니다.');
 			}else{
+				alert('이메일 또는 인증번호를 확인해주세요.');
 				resultMsg.innerHTML = '인증번호가 불일치 합니다. 다시 확인해주세요!';
 		        resultMsg.style.color = 'red';
 			}
@@ -214,7 +216,7 @@ let checkInput = document.querySelector('.mail-check-input');
 
 mailCheckBtn.addEventListener('click', function(){
 	let email = document.querySelector('#userEmail').value;
-	document.querySelector('.mail-check-input').style.display='block';
+	document.querySelector('.mail-check-input').style.display='inline-block';
 	document.querySelector('.mail-check-button').style.display='inline-block';
 	document.querySelector('#mail-check-warn').innerHTML = '인증번호 6자리를 입력해주세요.';
 	

@@ -144,14 +144,14 @@
                             	<div class="info-container info-container1">
 						            <div class="info-title">휴대전화</div>
 						            <form method="post" action="/mypage/phonenumberEdit" onsubmit="return myPhonenumberValidate()">
-							            <table class="info-table">
+							            <table class="info-table">	
 							                <tr>
 							                    <th>휴대폰</th>
 							                    <td>
 							                    	<input type="text" class='phonenumber-input' id="phonenumber" name="phonenumber"  value="${memberVO.phonenumber }" readonly><button id="phonenumber-Check-Btn">본인인증</button>
 							                    	<div class="phonenumber-check-box">
 														<input class="phonenumber-check-input" disabled="disabled" maxlength="6">
-														<button class="phonenumber-check-button">인증확인</button>
+														<button class="phonenumber-check-button check-btn">인증확인</button>
 														<span id="phonenumber-check-warn"></span>
 													</div>
 													
@@ -178,8 +178,9 @@
 							                    <td>
 							                    	<input type="text" class="info-input" id="userEmail" name="email"  value="${memberVO.email }" readonly><button id="mail-Check-Btn">본인인증</button>
 							                    	<div class="mail-check-box">
-														<input class="mail-check-input" disabled="disabled" maxlength="6">
+														<input class="mail-check-input " disabled="disabled" maxlength="6">
 														<button class="mail-check-button">인증확인</button>
+														
 						
 													</div>
 													<span id="mail-check-warn"></span>

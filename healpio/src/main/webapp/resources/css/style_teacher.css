@@ -77,7 +77,6 @@ header {
 section {
     width: 1600px;
     background-color: #fff;
-    margin: 0px auto;
 }
 
 .side-menu {
@@ -128,62 +127,15 @@ section {
     background-color: #fff;
 }
 
-/*
-
-footer {
-    width: 100%;
-    height: 124px;
-    padding-top: 120px;
+.side-menu{
+	padding-left: 3rem;
 }
-
-.footer-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    background-color: #eee;
-}
-
-.footer-logo {
-    margin-left: 2rem;
-}
-
-.footer-box1 {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-}
-
-.footer-slogan {
-    margin-left: 2rem;
-}
-
-.footer-box2 {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-.footer-box2 img {
-    display: inline-block;
-    margin: 0 1.5rem;
-}
-
-.footer-proposal {
-    width: 170px;
-    font-size: 20px;
-}
-
-*/
 
 /* 내 정보*/
 .content-info {
     width: 100%;
     height: 100%;
+    padding-left: 5rem;	
 }
 
 .info-container {
@@ -256,11 +208,10 @@ table.info-table td {
 #mail-Check-Btn{
 	display: none;
 	margin-left: 0.5rem;
+	border: 1px solid black;
+	border-radius: 3px;
 }
 
-.mail-check-box{
-	display: flex;
-}
 
 .mail-check-input{
 	margin-top: 0.5rem;
@@ -269,6 +220,8 @@ table.info-table td {
 
 .mail-check-button{
 	display: none;
+	border: 1px solid black;
+	border-radius: 3px;
 	
 }
 
@@ -310,14 +263,21 @@ table.info-table td {
 }
 
 #phonenumber-Check-Btn{
-	margin-left : 0.5rem;
 	display: none;
+	margin-left: 0.5rem;
+	border: 1px solid black;
+	border-radius: 3px;
 }
 
 .phonenumber-check-box{
 	display: none;
+	margin-top: 0.5rem;
 }
 
+.phonenumber-check-button{
+	border: 1px solid black;
+	border-radius: 3px;
+}
 
 /* register */
 .content-register-container {
@@ -330,7 +290,7 @@ table.info-table td {
     flex-wrap: wrap;
     list-style: none;
     padding: 1rem 0;
-    margin-left: 5rem;
+    padding-left: 10rem;
     overflow: hidden;
 }
 
@@ -406,7 +366,8 @@ table.info-table td {
 .content-reservation-container {
     width: 100%;
     height: 100%;
-    margin-top: 11rem;
+    margin-top: 7rem;
+    padding-left: 5rem;
 }
 
 .content-reservation {
@@ -458,7 +419,8 @@ table.info-table td {
 .content-prev-container {
     width: 100%;
     height: 100%;
-    margin-top: 11rem;
+    margin-top: 7rem;
+    padding-left: 5rem;
 }
 
 .content-prev {
@@ -530,6 +492,10 @@ table.info-table td {
 
 .nav{
 	display: block;
+}
+
+.check-btn{
+	
 }
 
 @media screen and (max-width: 1150px) {
