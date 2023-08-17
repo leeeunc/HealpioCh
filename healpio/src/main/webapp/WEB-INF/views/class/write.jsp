@@ -120,13 +120,13 @@ function alert(){
 }
 
 function previewImg(input) {
-	const popup = window.open('', '_blank', 'width=530px, height=339px, left=340px, top=160px');
+	const popup = window.open('', '_blank', 'width=530px, height=348px, left=340px, top=160px');
 	
-    popup.document.write('<title>이미지 미리보기 500*330</title>');
+    popup.document.write('<title>이미지 미리보기 (500*330으로 등록됩니다.)</title>');
     for (let i=0; i<input.files.length; i++) {
         const reader = new FileReader();
         reader.onload = function(e) {
-            popup.document.write('<img src="' + e.target.result + '" style="width: 500px; height: 330px; object-fit: cover;"><br>');
+            popup.document.write('<img src="' + e.target.result + '" style="width: 500px; height: 330px; object-fit: cover;"><br><br>');
         };
         reader.readAsDataURL(input.files[i]);
     }
@@ -199,7 +199,7 @@ function previewImg(input) {
 			  
 			  <div class="col-md-12">
 				<label for="class_content" class="form-label"><b>강의 소개 (상세)</b></label>
-				<textarea class="form-control form-control-sm" name="class_content" id="class_content" rows="4" maxlength="1000" placeholder="강의 목표, 강의 내용, 강의 대상 등을 작성해 주세요." style="resize:none;"></textarea>
+				<textarea class="form-control form-control-sm" name="class_content" id="class_content" rows="5" maxlength="1000" placeholder="강의 목표, 강의 내용, 강의 대상 등을 작성해 주세요." style="resize:none;"></textarea>
 			  </div>		  
 			  		  		  
 			  <div class="col-md-12">
@@ -209,7 +209,7 @@ function previewImg(input) {
 			  
 			  <div class="col-md-12">
 				<label for="teacher_content" class="form-label"><b>강사 소개</b></label>
-				<textarea class="form-control form-control-sm" name="teacher_content" id="teacher_content" rows="4" maxlength="1000" placeholder="학력, 경력, 수상 이력 등을 작성해 주세요." style="resize:none;"></textarea>
+				<textarea class="form-control form-control-sm" name="teacher_content" id="teacher_content" rows="3" maxlength="1000" placeholder="학력, 경력, 수상 이력 등을 작성해 주세요." style="resize:none;"></textarea>
 			  </div>
 			</div>
 			
