@@ -94,8 +94,17 @@
 	            </th>
 	        </tr>
 	        <tr>
-	            <th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th>
-	        </tr>`;
+                <th class="sun">일</th>
+		        <th>월</th>
+		        <th>화</th>
+		        <th>수</th>
+		        <th>목</th>
+		        <th>금</th>
+		        <th class="sat">토</th>
+	        </tr>
+            <tr id="separator-row">
+            	<td colspan="7"></td>
+	    	</tr>`;
 	
 	    let calendar = document.querySelector('#calendar'); // 달력 엘리먼트 선택
 	    calendar.innerHTML = calendarHeader; // 달력 헤더 설정

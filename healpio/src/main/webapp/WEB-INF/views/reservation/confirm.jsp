@@ -1,53 +1,101 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../path-to-your/common-style.css">
+    <!-- Link to your common CSS file -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Insert title here</title>
+    <style>
+        /* Additional styles specific to this page */
+        #confirmation-container {
+            text-align: center; /* Center the content */
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 800px;
+        }
+
+        .confirmation-heading {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .confirmation-button-container {
+            text-align: center; /* Center the buttons */
+            margin-top: 10px;
+        }
+
+        .confirmation-button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .confirmation-button:hover {
+            background-color: #555;
+        }
+    </style>
 </head>
 <body>
 <%@ include file="../common/header.jsp" %>
 <c:set var="classVO" value="${ClassVO}" />
 
-	<div class="container">
-		<div>
-			<h1>예약이 완료 되었습니다</h1>
-		</div>
-    	<div>
-        	<input type="hidden" id="selectedClass" name="class_no" value="${classInfo.class_no}">
-			<input type="hidden" id="selectedMaxcount" name="maxcount" value="${classInfo.class_maxcount}">
-			<input type="hidden" id="selectedMember" name="member_no" value="${classInfo.member_no}">
-            <h2>강좌명 : ${classInfo.class_title}</h2>
-       		<h2>강사명 : ${classInfo.nickname}</h2>
-       		<h2>운동명 : ${classInfo.class_price}</h2>
-       		<h2>강사소개 : ${classInfo.class_introduce}</h2>
-       		<h2>강사내용 : ${classInfo.teacher_content}</h2>
-       		<h2>가격 : ${classInfo.class_price}</h2>
-       		<h2>최대인원 : ${classInfo.class_maxcount}</h2>
-   	 	</div>
-        <div>
-        <div id="time-selection">
-        	<h2>날짜 : ${date}</h2>
-            <h2>시간 : ${time}</h2>
-        </div>
-        </div>
+<div id="confirmation-container">
+    <div class="confirmation-heading">
+        예약이 완료 되었습니다
     </div>
-    <div>
-		<c:if test="${memberVo != null}">
-		    <c:if test="${memberVo.teacheryn == 'Y'}">
-		        <button onclick="window.location.href='../mypage/teacher?member_no=${memberVo.member_no }'">예약확인</button>
-		    </c:if>
-		    <c:if test="${memberVo.teacheryn == 'N'}">
-		        <button onclick="window.location.href='../mypage/student?member_no=${memberVo.member_no }'">예약확인</button>
-		    </c:if>
-		</c:if>
+    <table>
+        <tr>
+            <th>강좌명</th>
+            <th>강사명</th>
+        </tr>
+        <tr>
+            <td>${classInfo.class_title}</td>
+            <td>${classInfo.nickname}</td>
+        </tr>
+        <tr>
+            <th>날짜</th>
+            <th>시간</th>
+        </tr>
+        <tr>
+            <td>${date}</td>
+            <td>${time}</td>
+        </tr>
+    </table>
+    <div class="confirmation-button-container">
+        <c:if test="${memberVo != null}">
+            <c:if test="${memberVo.teacheryn == 'Y'}">
+                <button class="confirmation-button" onclick="window.location.href='../mypage/teacher?member_no=${memberVo.member_no }'">예약확인</button>
+            </c:if>
+            <c:if test="${memberVo.teacheryn == 'N'}">
+                <button class="confirmation-button" onclick="window.location.href='../mypage/student?member_no=${memberVo.member_no }'">예약확인</button>
+            </c:if>
+        </c:if>
+        <button class="confirmation-button" onclick="window.location.href='http://localhost:8080/class/read?class_no=${class_no}'">돌아가기</button>
     </div>
-	<button onclick="window.location.href='http://localhost:8080/class/read?class_no=${class_no}'">돌아가기</button>
-    
+</div>
+
 <%@ include file="../common/footer.jsp" %>
-<script src="../resources/js/confirm.js"></script>    
+<script src="../resources/js/confirm.js"></script>
 </body>
 </html>
