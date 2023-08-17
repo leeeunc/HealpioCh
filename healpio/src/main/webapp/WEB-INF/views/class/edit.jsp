@@ -131,6 +131,19 @@ function changeAttach(){
 	attachDiv.innerHTML = '';
 	files.style.display = 'block';
 }
+
+function previewImg(input) {
+	const popup = window.open('', '_blank', 'width=530px, height=348px, left=340px, top=160px');
+	
+    popup.document.write('<title>이미지 미리보기 (500*330으로 등록됩니다.)</title>');
+    for (let i=0; i<input.files.length; i++) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            popup.document.write('<img src="' + e.target.result + '" style="width: 500px; height: 330px; object-fit: cover;"><br><br>');
+        };
+        reader.readAsDataURL(input.files[i]);
+    }
+}
 </script>
 </head>
 <body>
@@ -194,7 +207,7 @@ function changeAttach(){
 			  		  
 			  <div class="col-md-9">
 				<label for="files" class="form-label"><b>대표 사진</b></label>
-				<input class="form-control form-control-sm" type="file" name="files" id="files" multiple style="display:none;" onchange="changeAttach()">
+				<input class="form-control form-control-sm" type="file" name="files" id="files" multiple style="display:none;" onchange="javascript: previewImg(this); changeAttach();">
   				
   				<c:if test="${attachList.size()!=1}">
   					<div class="input-group mb-3 input-group-sm mb-3" id="attachDiv">
@@ -219,7 +232,7 @@ function changeAttach(){
 			  
 			  <div class="col-md-12">
 				<label for="class_content" class="form-label"><b>강의 소개 (상세)</b></label>
-				<textarea class="form-control form-control-sm" name="class_content" id="class_content" rows="4" maxlength="1000" placeholder="강의 목표, 강의 내용, 강의 대상 등을 작성해 주세요." style="resize:none;">${classVO.class_content}</textarea>
+				<textarea class="form-control form-control-sm" name="class_content" id="class_content" rows="5" maxlength="1000" placeholder="강의 목표, 강의 내용, 강의 대상 등을 작성해 주세요." style="resize:none;">${classVO.class_content}</textarea>
 			  </div>		  
 			  		  		  
 			  <div class="col-md-12">
@@ -229,7 +242,7 @@ function changeAttach(){
 			  
 			  <div class="col-md-12">
 				<label for="teacher_content" class="form-label"><b>강사 소개</b></label>
-				<textarea class="form-control form-control-sm" name="teacher_content" id="teacher_content" rows="4" maxlength="1000" placeholder="학력, 경력, 수상 이력 등을 작성해 주세요." style="resize:none;">${classVO.teacher_content}</textarea>
+				<textarea class="form-control form-control-sm" name="teacher_content" id="teacher_content" rows="3" maxlength="1000" placeholder="학력, 경력, 수상 이력 등을 작성해 주세요." style="resize:none;">${classVO.teacher_content}</textarea>
 			  </div>
 			</div>
 			

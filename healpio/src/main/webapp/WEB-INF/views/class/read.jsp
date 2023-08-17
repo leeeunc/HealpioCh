@@ -231,7 +231,7 @@ window.addEventListener('load', function(){
 
     let interval = setInterval(function(){
     	index++;
-        if (index>${attachList.size()-1}) {
+        if(index>${attachList.size()-1}){
             index = 0;
         };        
         carousel.style.left = -500 * index + 'px';
@@ -350,12 +350,48 @@ locationBtn.addEventListener('click', function(){
       if(xhr.readyState===4 && xhr.status===200){
         var hangjeongdong = JSON.parse(xhr.responseText);
         for(let i=0; i<hangjeongdong.features.length; i++){
-          if(hangjeongdong.features[i].properties.adm_nm==(province.value + ' ' + city.value.replace(" ", "") + ' ' + district.value)){
-            var polygonPath = [];
-            for(let j=0; j<hangjeongdong.features[i].geometry.coordinates[0][0].length; j++){
-              polygonPath.push(new kakao.maps.LatLng(hangjeongdong.features[i].geometry.coordinates[0][0][j][1], hangjeongdong.features[i].geometry.coordinates[0][0][j][0]));
-            }
+          if(province.value=='강원도'){
+        	  province.value='강원특별자치도';
           }
+		  if(city.value=='세종특별자치시'){
+        	  city.value='세종시';
+          }
+		  if(district.value.includes('제1동')){
+        	  district.value = district.value.replace('제1동', '1동');
+          } 
+		  if(district.value.includes('제2동')){
+			  district.value = district.value.replace('제2동', '2동');
+          } 
+		  if(district.value.includes('제3동')){
+			  district.value = district.value.replace('제3동', '3동');
+          } 
+		  if(district.value.includes('제4동')){
+			  district.value = district.value.replace('제4동', '4동');
+          } 
+		  if(district.value.includes('제5동')){
+			  district.value = district.value.replace('제5동', '5동');
+          } 
+		  if(district.value.includes('제6동')){
+			  district.value = district.value.replace('제6동', '6동');
+          } 
+		  if(district.value.includes('제7동')){
+			  district.value = district.value.replace('제7동', '7동');
+          } 
+		  if(district.value.includes('제8동')){
+			  district.value = district.value.replace('제8동', '8동');
+          }
+          if(district.value.includes('.')){
+			  district.value = district.value.replace('.', '·');
+          }
+          if(district.value.includes(',')){
+			  district.value = district.value.replace(',', '·');
+          }
+       	  if(hangjeongdong.features[i].properties.adm_nm==(province.value + ' ' + city.value.replace(' ', '') + ' ' + district.value)){
+              var polygonPath = [];
+              for(let j=0; j<hangjeongdong.features[i].geometry.coordinates[0][0].length; j++){
+                polygonPath.push(new kakao.maps.LatLng(hangjeongdong.features[i].geometry.coordinates[0][0][j][1], hangjeongdong.features[i].geometry.coordinates[0][0][j][0]));
+              }
+          }                    
         }        
         
         // 지도에 표시할 다각형을 생성합니다
@@ -384,7 +420,6 @@ locationBtn.addEventListener('click', function(){
     	
     // 주소-좌표 변환 객체를 생성합니다
     var geocoder = new kakao.maps.services.Geocoder();
-    
     // 주소로 좌표를 검색합니다
     geocoder.addressSearch(province.value + city.value + district.value, function(result, status) {	
       // 정상적으로 검색이 완료됐으면 

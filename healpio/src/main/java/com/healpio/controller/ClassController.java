@@ -41,11 +41,11 @@ public class ClassController {
 		try {
 			if(classService.insert(classVO, locationVO, files)>0) {
 				model.addAttribute("class_no", classVO.getClass_no());
-				model.addAttribute("message", "등록되었습니다.");
+				model.addAttribute("message", "게시글이 등록되었습니다.");
 				return "/class/message";
 			} else {
 				// 사실 여기까지 오지 않는다. 예외 발생시 try-catch문에서 처리한다.
-				model.addAttribute("message", "게시글 등록 중 오류가 발생하였습니다.");
+				model.addAttribute("message", "등록 중 오류가 발생하였습니다.");
 				return "/class/message";
 			}
 		} catch (Exception e) {
@@ -55,7 +55,7 @@ public class ClassController {
 				model.addAttribute("message", e.getMessage());
 			} else {
 				// 들어 있지 않으면 글 등록과 관련된 예외이다.
-				model.addAttribute("message", "게시글 등록 중 오류가 발생하였습니다.");
+				model.addAttribute("message", "등록 중 오류가 발생하였습니다.");
 			}
 			return "/class/message";
 		}
@@ -88,7 +88,7 @@ public class ClassController {
 		try {
 			if(classService.update(classVO, locationVO, files)>0) {
 				model.addAttribute("class_no", classVO.getClass_no());	
-				model.addAttribute("message", "수정되었습니다.");
+				model.addAttribute("message", "게시글이 수정되었습니다.");
 				return "/class/message";
 			} else {
 				model.addAttribute("message", "수정 중 오류가 발생하였습니다.");

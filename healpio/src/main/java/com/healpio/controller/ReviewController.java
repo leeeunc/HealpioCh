@@ -75,7 +75,7 @@ public class ReviewController {
 	public String update(ReviewVO reviewVO, Model model) {
 		if(reviewService.update(reviewVO)>0) {
 			model.addAttribute("class_no", reviewVO.getClass_no());			
-			model.addAttribute("message", "수정하였습니다.");
+			model.addAttribute("message", "수정되었습니다.");
 			return "/class/message";
 		} else {
 			model.addAttribute("message", "수정 중 오류가 발생하였습니다.");
