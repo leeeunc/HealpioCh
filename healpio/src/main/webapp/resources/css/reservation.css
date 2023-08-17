@@ -1,5 +1,5 @@
 	/* 컨테이너 설정 */
-	.container {
+	.reservation-container {
 	    display: flex; /* flexbox 레이아웃 사용으로 아이템들을 행 또는 열로 배치할 수 있습니다. */
 	    /* justify-content: space-around; */ /* 컨테이너 내의 아이템들 사이에 공간 균등하게 배분 */
 	    justify-content: center; /* flex 아이템들이 컨테이너의 시작 부분(왼쪽)에서 시작되도록 합니다. */
@@ -11,12 +11,27 @@
 	    cursor: pointer; /* 마우스 커서 모양을 손가락 모양으로 설정 */
 	    font-size: 2em; /* 폰트 사이즈 설정 */
 	    color: #b8860b; /* 폰트 색상 설정 */
-	    margin: 0 10px; /* 마진 설정 */
+	    margin: 0px 10px; /* 마진 설정 */
+	    padding: 0px 10px; /* 컨테이너의 패딩 */
+	    
+	    display: inline-block;
+	    background-color: #00ff80;
+	    color: #fff;
+	    border: none;
+	    border-radius: 5px;
+	    cursor: pointer;
+	    transition: background-color 0.3s, transform 0.3s;
+	}
+	
+	/* 달력 이동 화살표 스타일 */
+	.nav-arrow:hover {
+	    background-color: #007d00;
+	    transform: translateY(-2px);
 	}
 	
 	/* 달력 스타일 */
 	#calendar {
-	    width: 40%; /* 달력 너비 */
+	    width: 50%; /* 달력 너비 */
 	    text-align: center; /* 텍스트 중앙 정렬 */
 	    margin: 0 auto; /* 상하 마진 없음, 좌우 마진은 자동으로 설정하여 가운데 정렬 */
 	    border-collapse: collapse; /* 테이블 셀 경계선 병합 */
@@ -26,7 +41,8 @@
 	#calendar td {
 	    border: 1px solid #000; /* 테두리 스타일 */
 	    padding: 10px; /* 패딩 */
-	    background-color: #0080c0; /* 배경색 */
+	    background-color: #007d00; /* 배경색 */
+    	transform: translateY(-2px);
 	}
 	
 	/* 달력에서 선택된 날짜 셀 스타일 */
@@ -60,6 +76,7 @@
 		height: 100px;  /* 높이를 100px로 설정 */
 		overflow: auto; /* 내용이 넘치면 스크롤바 표시 */
 		/* background-color: #c0c0c0; */ /* 배경색 */
+		
 	}
 	
 	/* 시간 선택 버튼 스타일 */

@@ -10,9 +10,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <div class="container">
+    <div class="reservation-container">
         <div>
             <table id="calendar"></table>
+        </div>
+        <div id="blank">
         </div>
         <div id="time-selection">
         </div>
