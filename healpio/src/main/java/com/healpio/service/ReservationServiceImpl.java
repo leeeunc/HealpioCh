@@ -1,9 +1,7 @@
 package com.healpio.service;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.healpio.mapper.ReservationMapper;
 import com.healpio.vo.ClassVO;
+import com.healpio.vo.MemberVO;
 import com.healpio.vo.ReservationVO;
 
 @Service
@@ -73,8 +72,8 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public ClassVO getClassDetailsByClassNo(String class_no, String member_no) {
-	    return reservationMapper.getClassDetailsByClassNo(class_no, member_no);
+	public ClassVO getClassDetailsByClassNo(String class_no) {
+	    return reservationMapper.getClassDetailsByClassNo(class_no);
 	}
 
 	@Override
@@ -132,6 +131,11 @@ public class ReservationServiceImpl implements ReservationService {
         }
 
         return actualReservations;
+    }
+    
+    @Override
+    public MemberVO getMemberDetailsByMemberNo(String member_no) {
+        return reservationMapper.getMemberDetailsByMemberNo(member_no);
     }
 
 }

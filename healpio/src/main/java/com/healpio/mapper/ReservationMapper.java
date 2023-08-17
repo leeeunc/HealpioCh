@@ -1,12 +1,12 @@
 package com.healpio.mapper;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.healpio.vo.ClassVO;
+import com.healpio.vo.MemberVO;
 import com.healpio.vo.ReservationVO;
 
 @Mapper
@@ -22,7 +22,7 @@ public interface ReservationMapper {
 
 	public List<ClassVO> getClasses();
 	
-	public ClassVO getClassDetailsByClassNo(@Param("class_no") String class_no, @Param("member_no") String member_no);
+	public ClassVO getClassDetailsByClassNo(String class_no);
 	
 	public ReservationVO getReservationByNo(String reservation_no);
 	
@@ -38,5 +38,6 @@ public interface ReservationMapper {
     
     public ReservationVO getReservationByDetails(@Param("classNo") String classNo, @Param("reservation_date") String reservationDate, @Param("reservation_time") String reservationTime);
 
+    public MemberVO getMemberDetailsByMemberNo(String member_no);
 
 }

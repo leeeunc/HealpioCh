@@ -1,13 +1,8 @@
 package com.healpio.controller;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +18,7 @@ import com.healpio.mapper.ClassMapper;
 import com.healpio.mapper.ReservationMapper;
 import com.healpio.service.ReservationService;
 import com.healpio.vo.ClassVO;
+import com.healpio.vo.MemberVO;
 import com.healpio.vo.ReservationVO;
 
 import lombok.extern.log4j.Log4j;
@@ -39,13 +35,12 @@ public class ReservationController {
     public ReservationController(ReservationService reservationService) {
         this.reservationService = reservationService;
     }
-    
+
     @Autowired
     ClassMapper classMapper;
     
     @Autowired
     ReservationMapper reservationMapper;
-    
     
     // 예약 정보를 받아 예약을 처리하는 메소드
     @PostMapping("/reservation")
@@ -55,7 +50,9 @@ public class ReservationController {
         // 로그를 출력하여 예약 정보를 확인합니다.
         log.info("=====reservation=======" + reservation);
         // 예약 처리가 완료되면, 예약 확인 페이지로 리다이렉트합니다.
-        return "redirect:/reservation/confirm";
+        
+        // 강의 정보 조회에 필요한 파라미터 설정
+         return "redirect:/reservation/confirm";
     }
     
     @GetMapping("/confirm")
@@ -68,13 +65,15 @@ public class ReservationController {
 
         // TODO: 예약 정보를 활용하여 필요한 처리를 수행
         // 예를 들어, 강의 정보를 가져와서 모델에 추가하거나, 예약한 정보를 화면에 표시하는 등의 작업을 수행합니다.
-        ClassVO classInfo = reservationMapper.getClassDetailsByClassNo(class_no, member_no);
+        ClassVO classInfo = reservationMapper.getClassDetailsByClassNo(class_no);
+        
+        MemberVO memberInfo = reservationMapper.getMemberDetailsByMemberNo(member_no);
         
         // 모델에 예약 정보와 강의 정보 추가
         model.addAttribute("date", date);
         model.addAttribute("time", time);
         model.addAttribute("class_no", class_no);
-        model.addAttribute("member_no", member_no);
+        model.addAttribute("member_no", memberInfo.getMember_no());
         model.addAttribute("classInfo", classInfo);
 
         return "reservation/confirm";
@@ -88,7 +87,10 @@ public class ReservationController {
                                     , RedirectAttributes redirectAttributes, Model model) {
 
         // ReservationMapper를 통해 class_no를 기반으로 강의 정보를 가져옵니다.
-        ClassVO classInfo = reservationMapper.getClassDetailsByClassNo(class_no, member_no);
+        ClassVO classInfo = reservationMapper.getClassDetailsByClassNo(class_no);
+        
+        // 회원 정보를 가져오기 위해 reservationMapper를 사용하여 member_no 조회
+        MemberVO memberInfo = reservationMapper.getMemberDetailsByMemberNo(member_no);
 
         // 예약 객체를 생성하고 필요한 값들을 설정합니다.
         ReservationVO reservation = new ReservationVO();
@@ -97,7 +99,7 @@ public class ReservationController {
         model.addAttribute("activeDays", activeDays);
         
         reservation.setClassNo(class_no);
-        reservation.setMemberNo(classInfo.getMember_no()); // ClassVO에서 member_no를 가져와 설정
+        reservation.setMemberNo(memberInfo.getMember_no()); // 회원의 member_no로 설정
         reservation.setReservation_date(date);
         reservation.setReservation_time(time);
         reservation.setReservation_maxcount(classInfo.getClass_maxcount()); // 예약 최대 수량을 ClassVO에서 가져온다면
@@ -105,10 +107,10 @@ public class ReservationController {
         // TODO: 여기에서 reservation_regdate를 현재 시간으로 설정해주셔야 합니다.
         // 예: reservation.setReservation_regdate(new Date());
 
+        redirectAttributes.addAttribute("class_no", class_no);
+        redirectAttributes.addAttribute("member_no", memberInfo.getMember_no());
         redirectAttributes.addAttribute("date", date);
         redirectAttributes.addAttribute("time", time);
-        redirectAttributes.addAttribute("class_no", class_no);
-        redirectAttributes.addAttribute("member_no", member_no);
         redirectAttributes.addAttribute("maxcount", classInfo.getClass_maxcount());
         
         // reservationService를 통해 예약 정보를 저장합니다.
@@ -125,6 +127,7 @@ public class ReservationController {
         	reservation.setReservation_count(1);  // 처음 예약이므로 카운트를 1로 설정
         	// 예약이 없다면, 새로운 예약을 추가
             reservationMapper.insertReservation(reservation);
+            log.info(reservation);
         }
         
         // 로그를 출력하여 예약 정보를 확인합니다.
@@ -144,6 +147,9 @@ public class ReservationController {
         List<String> availableTimes = reservationService.getClassTimes(class_no);
         int maxCapacity = reservationService.getMaxReservationCountForClass(class_no);
         
+        LocalDate currentDate = reservation_date != null ? LocalDate.parse(reservation_date) : LocalDate.now(); // 변경된 부분
+        List<ReservationVO> currentCapacity = reservationService.getReservationCountsByDateAndTimes(class_no, currentDate.toString(), availableTimes);
+
         if(reservation_date == null) {
         	LocalDate now = LocalDate.now();
         	reservation_date = now.toString();
@@ -151,7 +157,7 @@ public class ReservationController {
         
 //        System.out.println(reservation_date);
         
-        List<ReservationVO> currentCapacity = reservationService.getReservationCountsByDateAndTimes(class_no, reservation_date, availableTimes);
+//        List<ReservationVO> currentCapacity = reservationService.getReservationCountsByDateAndTimes(class_no, reservation_date, availableTimes);
         
         System.out.println("Returned Reservations: " + currentCapacity);
 

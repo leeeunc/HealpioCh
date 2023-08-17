@@ -10,18 +10,21 @@
 
 	let buttonStates = {}; // 날짜별 버튼 상태를 저장하는 객체
 	
-	window.addEventListener('load', fetchClassDetails);
+	// 선택된 날짜와 가능한 시간을 기반으로 buttonStates 객체를 설정하는 함수
+	function setButtonStates(selectedDate, availableTimes) {
+		  buttonStates[selectedDate] = availableTimes;
+	}
 	
-//	document.addEventListener("DOMContentLoaded", function() {
-//		fetchClassDetails();  // 데이터를 먼저 가져옵니다.
-//	});
+	document.addEventListener("DOMContentLoaded", function() {
+		fetchClassDetails();  // 데이터를 먼저 가져옵니다.
+	});
 	
 	// URL에서 class_no 값을 추출하는 함수
 	function getParamsFromURL() {
 	    const urlParams = new URLSearchParams(window.location.search);
 	    return {
 	        class_no: urlParams.get('class_no'),
-	        date: urlParams.get('reservation_date')  // 오타 수정
+	        reservation_date: urlParams.get('reservation_date')
 	    };
 	}
 
@@ -30,7 +33,7 @@
 
 	    if (params.class_no) {
 	        let url = `/reservation/classDetails?class_no=${params.class_no}`;
-	        if (params.reservation_date && params.reservation_date !== 'undefined') {
+	        if (params.reservation_date !== 'undefined' && params.reservation_date !== null) { // 변경된 부분
 	            url += `&reservation_date=${params.reservation_date}`;
 	        }
 	        
@@ -48,6 +51,8 @@
 	                maxCapacity = data.maxCapacity;
 	                
 	                console.log(activeDays, availableTimes, maxCapacity, currentCapacity);
+	                console.log(`${params.reservation_date}`);
+	                console.log(`${params.class_no}`);
 	                
 	                initializePage();
 	            })
@@ -57,16 +62,14 @@
 	    }
 	}
 
-
-    
     function initializePage() {
         renderCalendar(now.getMonth(), now.getFullYear(), activeDays);
-        renderTimeSelection(); // 예약 시간 설정
+        renderTimeSelection(selectedDate); // 예약 시간 설정
         resetSelections(); // 달력과 시간 선택을 초기화합니다.
         attachReservationListener(); // 예약하기 버튼 이벤트 설정
         attachModalButtonsListener(); // 모달 버튼 이벤트 설정
     }
-
+    
 	// 달력 생성 함수
 	function renderCalendar(month, year) {
 	    const today = new Date(); // 현재 날짜 가져오기
@@ -115,10 +118,6 @@
 
 	    calendar.innerHTML += calendarBody; // 달력 바디 설정
 	
-	    // 각 일자에 이벤트 리스너 추가
-//	    document.querySelectorAll('#calendar td').forEach((e, i) => {
-//	        if (i < 7 || e.innerText === "") return;
-	    // 각 일자에 이벤트 리스너 추가
 	    document.querySelectorAll('#calendar td').forEach(e => {
 	        if (e.innerText === "") return;
 	        let date = new Date(year, month, parseInt(e.innerText)); // 해당 날짜 구하기
@@ -132,17 +131,8 @@
 	                return;
 	            }
 	        
-//	        if (year === today.getFullYear() && month === today.getMonth()) {
-//	            if (date.getDate() < todayDate.getDate()) {
-//	                e.classList.add('disabled'); // 오늘 이후의 날짜는 비활성화 스타일 추가
-//	                return;
-//	            }
-//	        }
-	        
-	        
 	        // activeDays 배열에 해당 요일이 없다면 리턴
 	        if (!activeDays.includes(dayOfWeek)) return;
-	        
 	        e.classList.add('selectable'); // 선택 가능한 날짜에 클래스 추가
 
 	        e.addEventListener('click', () => {
@@ -165,19 +155,22 @@
 	                document.querySelector('#selectedDate').value = selectedDate;
 
 	                // 모든 예약 시간 선택 버튼을 비활성화
-//	                document.getElementById('time-selection').querySelectorAll('button').forEach(e => {
-//	                    e.disabled = true;
-//	                });
-
+	                document.getElementById('time-selection').querySelectorAll('button').forEach(e => {
+	                    e.disabled = true;
+	                });
+	                
 	                // 선택된 날짜의 예약 시간 선택 버튼을 활성화
-//	                if (buttonStates[selectedDate]) {
-//	                    buttonStates[selectedDate].forEach(time => {
-//	                        document.getElementById(`time-${time}`).disabled = false;
-//	                    });
-//	                }
+	                if (buttonStates[selectedDate]) {
+	                    buttonStates[selectedDate].forEach(time => {
+	                        let timeButton = document.getElementById(`time-${time}`);
+	                        if (timeButton) {
+	                            timeButton.disabled = false;
+	                        }
+	                    });
+	                }
 	            }
-	            
 	            renderTimeSelection(selectedDate);
+	            setButtonStates(selectedDate, availableTimes);
 	        });
 	    });
 
@@ -185,7 +178,7 @@
         document.getElementById('prevMonth').addEventListener('click', () => {
             now.setMonth(now.getMonth() - 1); // 이전 달로 설정
             renderCalendar(now.getMonth(), now.getFullYear()); // 새로운 달력 렌더링
-            renderTimeSelection(); // 예약 시간 재설정
+            renderTimeSelection(selectedDate); // 예약 시간 재설정
             resetSelections(); // 선택된 날짜와 시간 초기화
         });
 
@@ -193,11 +186,24 @@
         document.getElementById('nextMonth').addEventListener('click', () => {
             now.setMonth(now.getMonth() + 1); // 다음 달로 설정
             renderCalendar(now.getMonth(), now.getFullYear()); // 새로운 달력 렌더링
-            renderTimeSelection(); // 예약 시간 재설정
+            renderTimeSelection(selectedDate); // 예약 시간 재설정
             resetSelections(); // 선택된 날짜와 시간 초기화
         });
 	}
 	
+	// 선택된 날짜를 가져오는 함수
+	function getSelectedDate() {
+	    if (selectedDay) {
+	        let selectedDateParts = selectedDay.parentNode.parentNode.querySelector('th:nth-child(2)').textContent.split(' ');
+	        let selectedMonth = Number(selectedDateParts[1].replace('월', '')) - 1;
+	        let selectedYear = Number(selectedDateParts[0].replace('년', ''));
+	        let selectedDate = new Date(selectedYear, selectedMonth, Number(selectedDay.textContent));
+	        return selectedDate;
+	    }
+	    return null;
+	}
+
+	// 달력과 시간 선택을 초기화합니다.
 	function resetSelections() {
 	    if (selectedDay) {
 	        selectedDay.classList.remove('selected');
@@ -208,25 +214,38 @@
 	        selectedTime = null;
 	    }
 	    document.getElementById('reserve').disabled = true;
-	    renderTimeSelection(); // 선택된 날짜와 시간 초기화 후 예약 시간 재설정
+	    renderTimeSelection(selectedDate); // 선택된 날짜와 시간 초기화 후 예약 시간 재설정
 	}
 	
-	
-        
 	// 예약시간버튼 생성 함수
 	  function renderTimeSelection(selectedDate) {
 		    let timeSelection = document.getElementById('time-selection');
 		    timeSelection.innerHTML = '';
-
-		    // 버튼을 4개씩 묶기 위한 빈 배열 생성
+		    console.log('selectedDate:', selectedDate);
+		    
+		    if (!selectedDate) {
+		        return; // 선택된 날짜가 없으면 빠르게 반환합니다.
+		    }
+		    
+		    console.log('buttonStates:', buttonStates);
+		    // 추가: 예약 가능한 시간을 로그로 출력합니다.
+		    console.log('selectedDate:', selectedDate);
+		    console.log('buttonStates[selectedDate]:', buttonStates[selectedDate]);
+		    
+		    // selectedDate에 해당하는 예약 가능한 시간 배열
+		    let availableTimesForSelectedDate = buttonStates[selectedDate] || [];
+		    
 		    let timeButtons = [];
-
-		    for (let i = 8; i <= 22; i++) {
+		    
+//		    for (let i = 8; i <= 22; i++) {
+		    for (let i = 0; i < availableTimes.length; i++) {
 		      let timeButton = document.createElement('button');
 		      timeButton.className = 'timebutton';
 
 		   // 기존에 시간과 인원을 함께 설정하던 부분을 분리합니다.
-		      let timeText = i < 10 ? `0${i}:00` : `${i}:00`;
+//		      let timeText = i < 10 ? `0${i}:00` : `${i}:00`;
+		      let timeText = availableTimes[i]; // 시간을 배열에서 가져오기
+//		      let timeText = availableTimesForSelectedDate[i];
 		      
 		   // 해당 시간에 대한 reservation_count 값을 찾는 코드 (옵셔널체이닝 오류)
 //		      let reservationCountForTime = currentCapacity.find(item => item.reservation_time === timeText)?.reservation_count||0;
@@ -234,14 +253,12 @@
 		      // 옵셔널 체이닝(Optional Chaining)은 JavaScript에서 ES2020(또는 ES11)에서 도입된 새로운 문법입니다.
 		      // 이 문법은 객체의 속성에 접근할 때 해당 속성이나 중간 경로의 객체가 존재하지 않아도 오류를 발생시키지 않고 undefined를 반환해주는 방식으로 작동합니다.
 		      
-		      
 		      let reservationCountForTime = 0;
 		      if (currentCapacity.find(item => item.reservation_time === timeText)) {
 		          reservationCountForTime = currentCapacity.find(item => item.reservation_time === timeText).reservation_count;
 		      }
 		      timeButton.textContent = `${timeText}\n(${reservationCountForTime}/${maxCapacity}명)`;
 		      timeButton.dataset.time = timeText;
-
 		      
 		      // 버튼을 비활성화/활성화할 때 데이터 속성에서 시간을 가져옵니다.
 		      timeButton.disabled = !(availableTimes.includes(timeButton.dataset.time) && selectedDay) || (reservationCountForTime >= maxCapacity);
@@ -265,18 +282,13 @@
 		          document.getElementById('reserve').disabled = false;
 		        }
 		      });
-
 		      
-
 		        // 버튼이 비활성화된 경우 색상 변경
 		      	if (reservationCountForTime >= maxCapacity) {
 		    	    timeButton.classList.add('disabled'); // 클래스 추가
 		    	} else {
 		    	    timeButton.classList.remove('disabled'); // 클래스 제거
 		    	}
-
-		      
-		      
 		      
 		      timeButtons.push(timeButton); // 배열에 버튼 추가
 		      
@@ -305,7 +317,6 @@
 		      timeSelection.appendChild(row);
 		    }
 		  }
-	  
 	  
 	// 학생 여부 판단 함수
 	  function isStudent(teacheryn) {
@@ -339,6 +350,16 @@
                 // 학생이 아닐 경우 예약이 불가능하다는 메시지를 표시하거나 다른 처리를 수행합니다.
                 alert('학생만 예약할 수 있습니다.');
             }
+            
+            if (buttonStates[selectedDate] && buttonStates[selectedDate].length > 0) {
+                // 선택된 날짜에 예약 가능한 시간이 있는 경우
+                document.getElementById('modal-content').style.display = 'block';
+                document.getElementById('myModal').style.display = 'block';
+                document.getElementById('confirmation-text').innerHTML = `예약하시겠습니까? <br> ${currentYear}년 ${currentMonth}월 ${selectedDay.innerText}일 ${selectedTime}에 예약하시려면 '예'를 클릭하세요.`;
+            } else {
+                // 선택된 날짜에 예약 가능한 시간이 없는 경우
+                document.getElementById('time-selection').innerHTML = '해당 날짜에 예약 가능한 시간이 없습니다.';
+            }
         });
     }
 
@@ -348,6 +369,7 @@
         document.getElementById('confirm').addEventListener('click', () => {
 //            location.href = "/reservation/confirm"; // 실제 예약 완료 페이지의 URL로 변경
         	document.getElementById('reservationForm').submit();
+        	closeModal();
         });
 
         // 예약 취소 버튼 클릭 이벤트
@@ -356,15 +378,17 @@
             document.getElementById('modal-content').style.display = 'none';
             // 모달창 배경도 숨기기
             document.getElementById('myModal').style.display = 'none';
+            closeModal();
         });
     }
 
-//    // 모달창 가져오기
-//    var modal = document.getElementById("myModal");
-//    // 모달을 여는 버튼 가져오기
-//    var btn = document.getElementById("reserve");
-//    // 모달을 닫는 버튼(엑스) 가져오기
-//    var span = document.getElementsByClassName("close")[0];
+    // 모달창 가져오기
+    var modal = document.getElementById("myModal");
+    // 모달을 여는 버튼 가져오기
+    var btn = document.getElementById("reserve");
+    // 모달을 닫는 버튼(엑스) 가져오기
+    var span = document.getElementsByClassName("close")[0];
+    
 //    // 사용자가 버튼을 클릭하면 모달창 열기
 //    btn.onclick = function() {
 //      modal.style.display = "block";
@@ -402,9 +426,3 @@
             closeModal();
         }
     };
-
-    
-
-
-
-    

@@ -31,7 +31,7 @@
 	    and class.exercise_no = exercise.exercise_no 
 	    and class_no = #{class_no}
 	</select>
-	
+
 	<select id="getReservationByNo" resultType="com.healpio.vo.ReservationVO">
     	SELECT * FROM reservation WHERE reservation_no = #{reservation_no}
 	</select>
@@ -84,8 +84,11 @@
 	    AND ROWNUM &lt;= 1
 	</select>
 	
-
-	
-
+	<!-- 예약등록 member_no -->
+	<select id="getMemberDetailsByMemberNo" resultType="com.healpio.vo.MemberVO">
+	    SELECT member_no
+	    FROM member
+	    WHERE member_no = #{member_no}
+	</select>
 	
 </mapper>
