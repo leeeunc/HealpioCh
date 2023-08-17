@@ -8,7 +8,7 @@
             font-family:'Noto Sans KR',sans-serif ; text-decoration:none ; font-weight:300 ;
             border:none ; border-radius:0 ; background:none }
             
-        html { font-size:10px }
+        
         body { font-size:1rem ; background-color:#ffffff } 
         
         ul , li , dt , dd , dl , ol { list-style:none }
@@ -27,11 +27,11 @@
         #login_find , #login_sns , #login_sns > li , .sns_btn { width:100% ; box-sizing:border-box  }
 
         #login_container { 
-            min-width:32rem ; max-width:100rem ;
-            margin:auto ; padding:3rem 15% ; 
+            min-width:32rem ; max-width:80rem ;
+            margin:auto ; padding:2rem 21%;     
         }
         #login_container > h1 { 
-            margin-bottom:4rem ;
+            margin-bottom:2rem ;
             font-size:2.6rem ; line-height:3rem ; font-weight:500 ; color:#000000 }
 
         .line , .login_btn , .sns_btn { overflow:hidden ; padding:1rem 2.5rem  ; border-radius:1rem } 
@@ -43,24 +43,26 @@
         
         .input_txt , .login_btn { line-height:2.8rem }
         .input_txt {
-            border:none ; height:2.8rem ; margin-bottom:0.2rem ;
+            border:none ; height:1.8rem ; margin-bottom:0.2rem ;
             font-size:1.4rem ; 
         }
 
         .login_btn {
             background-color:#4285f4 ;
-            font-size:1.8rem ; color:#ffffff ; font-weight:500 ; text-align:center ;
+            font-size:1.8rem ; color:#ffffff ; font-weight:500 ; text-align:1.8rem ;
+            
+            height : 70px;
         }
 
 
 
         /* LOGIN - FIND */
-        #login_find { padding:3.5rem 0 ; overflow:hidden }
+        #login_find { padding:1.5rem 0 ; overflow:hidden }
         #login_find::after { display:block ; content:"" ; clear:both } 
         #login_find > li { display:block ; width:50% }
         #login_find > li:first-child { float:left ; text-align:left }
         #login_find > li:last-child  { float:right ; text-align:right }
-        .find_btn { font-size:1.6rem ; line-height:2rem ; color:#000000 } 
+        .find_btn { font-size:1.2rem ; line-height:2rem ; color:#000000 } 
         .find_btn.find { font-weight:400 }
         .find_btn.join { font-weight:600 }
 

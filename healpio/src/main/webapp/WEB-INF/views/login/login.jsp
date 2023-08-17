@@ -10,10 +10,10 @@
     	<link rel='stylesheet' href='../resources/css/login.css'>
 	
 </head>
-<body>
 <!-- test -->
 <%@ include file="../common/header.jsp" %>
 
+<body>
     <div id="login_container">
         <div id="msg"></div>
         <h1>로그인</h1>
@@ -75,6 +75,6 @@
         <% } %>
     </script>
      
-   <%@ include file="../common/footer.jsp" %>
 </body>
+   <%@ include file="../common/footer.jsp" %>
 </html>
