@@ -37,9 +37,9 @@
 	<bean id="multipartResolver" 
 			class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 	    <property name="defaultEncoding" value="utf-8"></property>
-	    <!-- 1024 * 1024 * 10 bytes  100MB -->
+	    <!-- 1024 * 1024 * 100 bytes  100MB -->
 	    <property name="maxUploadSize" value="104857560"></property>
-	    <!-- 1024 * 1024 * 2 bytes  10MB -->
+	    <!-- 1024 * 1024 * 10 bytes  10MB -->
 	    <property name="maxUploadSizePerFile" value="10485756"></property>
 	    <property name="uploadTempDir" value ="file:/C:/upload/tmp"></property>
 	    <property name="maxInMemorySize" value="104857560"></property>
