@@ -125,10 +125,34 @@ window.addEventListener('load', function() {
 	  // 폼을 제출하기 전에 전화번호에 하이픈을 추가합니다.
 	  addHyphenToPhoneNumber();
 
+	  document.getElementById('signUp').addEventListener('click', function(e) {
+		  // 이벤트 초기화
+		  e.preventDefault();
+		  
+		  // 입력값 가져오기
+		  const signUpId = document.getElementById('signUpId').value;
+		  const signUpPw = document.getElementById('signUpPw').value;
+		  const signUpPwCheck = document.getElementById('signUpPwCheck').value;
+		  
+		  // 유효성 검사 수행
+		  if (!idRegex.test(signUpId)) {
+			  showAlert('아이디 형식을 확인하세요.');
+			  return false;
+		  }
+		  
+		  if (!pwRegex.test(signUpPw)) {
+			  showAlert('비밀번호 형식을 확인하세요.');
+			  return false;
+		  }
+		  
+		  if (signUpPw !== signUpPwCheck) {
+			  showAlert('비밀번호가 일치하지 않습니다.');
+			  return false;
+		  }
+		  register();
+	  });
 	  
-  document.getElementById('signUp').addEventListener('click', function(e) {
-      // 이벤트 초기화
-      e.preventDefault();    
+  function register(){
       
 
       let signUpId = document.getElementById('signUpId').value;
@@ -143,25 +167,25 @@ window.addEventListener('load', function() {
       // 입력값 검사
       if (!signUpId || !signUpPw || !signUpPwCheck || !signUpName || !signUpNick || !signUpPhone || !signUpEmail) {
     	  showAlert('모든 정보를 입력해주세요.');
-          return;
+          return false;
       }
 
       // 아이디 중복체크 확인
       if (idCheckRes.value !== '1') {
           signupMsg.innerHTML = '아이디 중복체크를 해주세요';
-          return;
+          return false;
       }
       
       // 비밀번호 확인 체크
       if(signupMsg_pwCheck.innerHTML !== '비밀번호가 일치합니다.'){
     	  showAlert('비밀번호가 일치하지 않습니다.');
-    	  return;
+    	  return false;
       }
       
    // 닉네임 중복체크 확인
       if (signupMsgNick.innerHTML === '중복된 닉네임입니다.') {
         showAlert('닉네임이 중복되었습니다. 다시 확인해주세요.');
-        return;
+        return false;
       }
 
       let data = {
@@ -196,7 +220,7 @@ window.addEventListener('load', function() {
       .catch((error) => {
           console.error('Error : ', error);
       });
-  });
+  };
   
 //서버로부터 받은 메시지를 이용하여 알림창을 띄우는 함수
   function showAlert(message) {
@@ -233,6 +257,9 @@ window.addEventListener('load', function() {
       signupMsg_pw.innerHTML = '';
     }
   });
+  
+
+  
   
 //비밀번호 확인 입력란 요소 가져오기
   const signUpPwCheckInput = document.getElementById('signUpPwCheck');  
