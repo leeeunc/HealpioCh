@@ -18,5 +18,6 @@ public class BoardScrapVO {
 	private String filename;
 	private String boardFile;
 	private int scrapCount;
+	private String class_price;
 
 }

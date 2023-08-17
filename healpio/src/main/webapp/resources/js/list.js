@@ -4,14 +4,14 @@
 window.onload = function() {
 	teacherynDisplay();
 	
-/*	var provinceValue = sessionStorage.getItem('province');
+	var provinceValue = sessionStorage.getItem('province');
 	var cityValue = sessionStorage.getItem('city');
 	var districtValue = sessionStorage.getItem('district');
 	
 	document.querySelector('#sel_province').value = provinceValue;
 	document.querySelector('#sel_city').value = cityValue;
 	document.querySelector('#sel_district').value = districtValue;
-	*/
+	
 
 }
 
@@ -61,5 +61,6 @@ function teacherynDisplay() {
     	  }
      }
      
-     
-     
+
+     // 이미지
+

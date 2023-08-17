@@ -87,6 +87,15 @@ import com.healpio.vo.PageDto;
 	 }
 	 
 
+	 public List<BoardScrapVO> attach(Model model) {
+		 List<BoardScrapVO> list = boardMapper.attach();
+		 
+		 model.addAttribute("attachList", list);
+		 
+		 return null;
+		 
+		 
+	 }
 	 
 	 
 
