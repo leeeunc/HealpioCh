@@ -176,6 +176,10 @@ a {
     color: #333; /* 원하는 색상으로 변경 */
     text-decoration: none;
     margin-bottom: 10px;
+    
+    text-overflow: ellipsis;
+  	white-space: nowrap;
+  	overflow: hidden;
 }
 
 /* 등록하기 버튼 스타일 */

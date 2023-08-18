@@ -41,7 +41,6 @@
 				  if (jQuery('#sido > option:selected').val() == code.sido){
 						console.log(" if (jQuery('#sido > option:selected').val() == code.sido) 테스트");
  						jQuery.each(hangjungdong.sigugun, function (idx, code) {
- 							console.log(code.sigugun);
 							let sel_city = '${param.sel_city }';
 							let selected = code.sigugun==sel_city?'selected':'';
 			        		jQuery('#sigugun').append(fn_option(code.sigugun, code.codeNm, selected));
