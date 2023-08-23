@@ -31,7 +31,7 @@ public class BoardController {
 		boardService.provinceList(model);
 		boardService.locationList(model);
 		boardService.attach(model);
-
+		// 8/23 테스트
 	}
 	
 	
